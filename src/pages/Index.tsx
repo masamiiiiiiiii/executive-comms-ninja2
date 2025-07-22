@@ -39,10 +39,10 @@ const Index = () => {
             className="mb-6 hover:bg-secondary"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
-            新しい分析を開始
+            Start New Analysis
           </Button>
           <AnalysisResults 
-            videoTitle="CEO インタビュー - 企業戦略について"
+            videoTitle="CEO Interview - Corporate Strategy Discussion"
             videoUrl={youtubeUrl}
           />
         </div>
@@ -55,10 +55,10 @@ const Index = () => {
       <div className="container mx-auto px-4 py-16">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-            AI Video Analysis
+            Executive Comms Ninja
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            YouTube動画からリーダーの表情・感情・メッセージ効果を分析し、B2Bコミュニケーションを最適化
+            Analyze executive presence, emotions, and message effectiveness from YouTube videos to optimize B2B communications
           </p>
         </div>
 
@@ -68,10 +68,10 @@ const Index = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <PlayCircle className="h-6 w-6 text-primary" />
-                動画分析を開始
+                Start Video Analysis
               </CardTitle>
               <CardDescription>
-                YouTube URLを入力して、リーダーのプレゼンテーション分析を開始してください
+                Enter a YouTube URL to begin analyzing executive presentation skills
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -87,12 +87,9 @@ const Index = () => {
                   disabled={!youtubeUrl || analyzing}
                   className="min-w-[100px]"
                 >
-                  {analyzing ? "分析中..." : "分析開始"}
+                  {analyzing ? "Analyzing..." : "Analyze"}
                 </Button>
               </div>
-              <p className="text-sm text-muted-foreground">
-                無料版: 1分まで | 有料版: 無制限の動画分析
-              </p>
             </CardContent>
           </Card>
 
@@ -102,12 +99,12 @@ const Index = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-lg">
                   <Brain className="h-5 w-5 text-primary" />
-                  表情・感情分析
+                  Facial & Emotion Analysis
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground">
-                  AI技術により表情、視線、ジェスチャーから自信度・信頼性を数値化
+                  AI-powered analysis of facial expressions, eye contact, and gestures to quantify confidence and credibility
                 </p>
               </CardContent>
             </Card>
@@ -116,12 +113,12 @@ const Index = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-lg">
                   <BarChart3 className="h-5 w-5 text-primary" />
-                  メッセージ効果測定
+                  Message Impact Assessment
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground">
-                  音声トーン・話速・一貫性から聴衆への影響力を評価
+                  Evaluate audience influence through voice tone, speaking pace, and message consistency analysis
                 </p>
               </CardContent>
             </Card>
@@ -130,12 +127,12 @@ const Index = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-lg">
                   <Users className="h-5 w-5 text-primary" />
-                  B2B特化レポート
+                  B2B Specialized Reports
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground">
-                  企業コミュニケーションに特化した改善提案とベンチマーク
+                  Corporate communication-focused improvement recommendations and executive benchmarking
                 </p>
               </CardContent>
             </Card>

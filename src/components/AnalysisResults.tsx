@@ -38,11 +38,11 @@ const AnalysisResults = ({ videoTitle, videoUrl }: AnalysisResultsProps) => {
 
   // レーダーチャート用感情データ（5角形）
   const emotionRadarData = [
-    { subject: "自信", A: 82, fullMark: 100 },
-    { subject: "信頼性", A: 75, fullMark: 100 },
-    { subject: "熱意", A: 88, fullMark: 100 },
-    { subject: "落ち着き", A: 71, fullMark: 100 },
-    { subject: "親しみやすさ", A: 79, fullMark: 100 }
+    { subject: "Confidence", A: 82, fullMark: 100 },
+    { subject: "Trust", A: 75, fullMark: 100 },
+    { subject: "Enthusiasm", A: 88, fullMark: 100 },
+    { subject: "Composure", A: 71, fullMark: 100 },
+    { subject: "Approachability", A: 79, fullMark: 100 }
   ];
 
   // データソース情報
@@ -51,98 +51,98 @@ const AnalysisResults = ({ videoTitle, videoUrl }: AnalysisResultsProps) => {
     authenticity: "Facial Expression Analysis Engine",
     engagement: "Speech Pattern Recognition",
     clarity: "Natural Language Processing",
-    emotion: "Microsoft Face API + 自社感情分析モデル"
+    emotion: "Microsoft Face API + Proprietary Emotion Analysis Model"
   };
 
   // タイムラインデータ（キャプチャ画像付き）
   const timelineData = [
     { 
       time: "0:15", 
-      event: "強い視線接触", 
+      event: "Strong Eye Contact", 
       score: 85, 
       type: "positive",
       thumbnail: "/placeholder.svg",
-      analysis: "カメラとの視線接触が3.2秒持続。信頼感を醸成する理想的な長さ。",
-      annotation: { x: 45, y: 32, label: "視線" }
+      analysis: "Sustained eye contact with camera for 3.2 seconds. Ideal duration for building trust.",
+      annotation: { x: 45, y: 32, label: "Eye Contact" }
     },
     { 
       time: "0:45", 
-      event: "ジェスチャー効果的", 
+      event: "Effective Gestures", 
       score: 78, 
       type: "positive",
       thumbnail: "/placeholder.svg",
-      analysis: "手のジェスチャーがメッセージを強調。オープンハンドで信頼性向上。",
-      annotation: { x: 65, y: 55, label: "手の動き" }
+      analysis: "Hand gestures reinforce message effectively. Open-hand gestures enhance trustworthiness.",
+      annotation: { x: 65, y: 55, label: "Hand Movement" }
     },
     { 
       time: "1:20", 
-      event: "話速やや速い", 
+      event: "Speaking Pace Slightly Fast", 
       score: 65, 
       type: "warning",
       thumbnail: "/placeholder.svg",
-      analysis: "話速が180wpm。理想的な140-160wpmを上回っている。",
-      annotation: { x: 50, y: 25, label: "口の動き" }
+      analysis: "Speaking rate at 180wpm. Exceeds ideal range of 140-160wpm.",
+      annotation: { x: 50, y: 25, label: "Mouth Movement" }
     },
     { 
       time: "2:10", 
-      event: "表情豊か", 
+      event: "Rich Facial Expression", 
       score: 90, 
       type: "positive",
       thumbnail: "/placeholder.svg",
-      analysis: "自然な笑顔が1.8秒継続。聴衆との親近感を構築。",
-      annotation: { x: 48, y: 38, label: "表情" }
+      analysis: "Natural smile sustained for 1.8 seconds. Builds rapport with audience.",
+      annotation: { x: 48, y: 38, label: "Facial Expression" }
     }
   ];
 
   // 詳細な改善提案（What, Why, How）
   const detailedRecommendations = [
     {
-      what: "視線をカメラにより集中させることで信頼感が向上します",
-      why: "現在の視線接触時間は平均2.1秒ですが、B2Bプレゼン平均3.5秒を下回っています（Fortune 500 CEO分析データより）",
-      how: "IBM CEO Arvind Krishna氏の決算説明会では4.2秒の視線接触を維持",
+      what: "Enhance eye contact with camera to improve trustworthiness",
+      why: "Current average eye contact duration is 2.1 seconds, below the B2B presentation average of 3.5 seconds (Fortune 500 CEO analysis data)",
+      how: "IBM CEO Arvind Krishna maintains 4.2 seconds of eye contact during earnings calls",
       exampleUrl: "https://youtube.com/example-ceo-presentation",
-      benchmark: "決算説明会分析"
+      benchmark: "Earnings Call Analysis"
     },
     {
-      what: "話速を10-15%下げることで理解しやすくなります",
-      why: "現在180wpmですが、技術プレゼンテーション最適値140-160wpmを超過（MIT研究データ）",
-      how: "Microsoft CEO Satya Nadella氏は複雑な技術説明で155wpmを維持",
+      what: "Reduce speaking pace by 10-15% for better comprehension",
+      why: "Current 180wpm exceeds optimal technical presentation range of 140-160wpm (MIT research data)",
+      how: "Microsoft CEO Satya Nadella maintains 155wpm for complex technical explanations",
       exampleUrl: "https://youtube.com/example-tech-presentation",
-      benchmark: "技術プレゼンテーション分析"
+      benchmark: "Technical Presentation Analysis"
     },
     {
-      what: "手のジェスチャーの使用頻度を20%増やすことを推奨",
-      why: "現在分間2.3回ですが、エンゲージメント向上には分間3-4回が理想（Harvard Business Review研究）",
-      how: "Salesforce CEO Marc Benioff氏は分間3.8回の効果的なジェスチャーを使用",
+      what: "Increase hand gesture frequency by 20% for better engagement",
+      why: "Current rate of 2.3 gestures per minute, but 3-4 per minute is ideal for engagement (Harvard Business Review research)",
+      how: "Salesforce CEO Marc Benioff uses 3.8 effective gestures per minute",
       exampleUrl: "https://youtube.com/example-engaging-presentation",
-      benchmark: "エンゲージメント分析"
+      benchmark: "Engagement Analysis"
     },
     {
-      what: "笑顔の持続時間を延ばすことで親しみやすさが向上",
-      why: "現在1.2秒の笑顔持続ですが、親近感構築には2-3秒が効果的（心理学研究データ）",
-      how: "Adobe CEO Shantanu Narayen氏は自然な2.5秒笑顔で親しみやすさを演出",
+      what: "Extend smile duration to improve approachability",
+      why: "Current 1.2-second smile duration, but 2-3 seconds is effective for building rapport (psychology research data)",
+      how: "Adobe CEO Shantanu Narayen demonstrates natural 2.5-second smiles for approachability",
       exampleUrl: "https://youtube.com/example-approachable-ceo",
-      benchmark: "親近感分析"
+      benchmark: "Rapport Building Analysis"
     }
   ];
 
   return (
     <div className="space-y-6 animate-fade-in">
-      {/* ヘッダー */}
+      {/* Header */}
       <div className="border-b pb-4">
-        <h2 className="text-2xl font-bold">分析結果</h2>
+        <h2 className="text-2xl font-bold">Analysis Results</h2>
         <p className="text-muted-foreground mt-1">{videoTitle}</p>
       </div>
 
-      {/* 総合スコア */}
+      {/* Overall Score */}
       <Card className="border-l-4 border-l-primary">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Star className="h-5 w-5 text-primary" />
-            総合評価スコア
+            Overall Performance Score
           </CardTitle>
           <CardDescription>
-            B2Bコミュニケーション効果の総合評価
+            Comprehensive assessment of B2B communication effectiveness
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -151,7 +151,7 @@ const AnalysisResults = ({ videoTitle, videoUrl }: AnalysisResultsProps) => {
             <div className="flex-1">
               <Progress value={overallScore} className="h-3" />
               <p className="text-sm text-muted-foreground mt-1">
-                優秀なレベル (70点以上で良好)
+                Excellent level (Good performance above 70 points)
               </p>
             </div>
           </div>
@@ -160,10 +160,10 @@ const AnalysisResults = ({ videoTitle, videoUrl }: AnalysisResultsProps) => {
 
       <Tabs defaultValue="overview" className="w-full">
         <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="overview">概要</TabsTrigger>
-          <TabsTrigger value="emotions">感情分析</TabsTrigger>
-          <TabsTrigger value="timeline">タイムライン</TabsTrigger>
-          <TabsTrigger value="recommendations">改善提案</TabsTrigger>
+          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="emotions">Emotion Analysis</TabsTrigger>
+          <TabsTrigger value="timeline">Timeline</TabsTrigger>
+          <TabsTrigger value="recommendations">Recommendations</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-4">
@@ -172,7 +172,7 @@ const AnalysisResults = ({ videoTitle, videoUrl }: AnalysisResultsProps) => {
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-medium flex items-center gap-2">
                   <Eye className="h-4 w-4" />
-                  自信度
+                  Confidence
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -185,7 +185,7 @@ const AnalysisResults = ({ videoTitle, videoUrl }: AnalysisResultsProps) => {
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-medium flex items-center gap-2">
                   <Users className="h-4 w-4" />
-                  信頼性
+                  Trustworthiness
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -198,7 +198,7 @@ const AnalysisResults = ({ videoTitle, videoUrl }: AnalysisResultsProps) => {
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-medium flex items-center gap-2">
                   <TrendingUp className="h-4 w-4" />
-                  エンゲージメント
+                  Engagement
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -211,7 +211,7 @@ const AnalysisResults = ({ videoTitle, videoUrl }: AnalysisResultsProps) => {
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-medium flex items-center gap-2">
                   <MessageSquare className="h-4 w-4" />
-                  明瞭性
+                  Clarity
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -226,27 +226,27 @@ const AnalysisResults = ({ videoTitle, videoUrl }: AnalysisResultsProps) => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Info className="h-5 w-5" />
-                データソース情報
+                Data Source Information
               </CardTitle>
               <CardDescription>
-                各指標の分析に使用されたデータソース
+                Data sources used for analyzing each metric
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="flex justify-between items-center">
-                <span>自信度</span>
+                <span>Confidence</span>
                 <Badge variant="outline">{dataSources.confidence}</Badge>
               </div>
               <div className="flex justify-between items-center">
-                <span>信頼性</span>
+                <span>Trustworthiness</span>
                 <Badge variant="outline">{dataSources.authenticity}</Badge>
               </div>
               <div className="flex justify-between items-center">
-                <span>エンゲージメント</span>
+                <span>Engagement</span>
                 <Badge variant="outline">{dataSources.engagement}</Badge>
               </div>
               <div className="flex justify-between items-center">
-                <span>明瞭性</span>
+                <span>Clarity</span>
                 <Badge variant="outline">{dataSources.clarity}</Badge>
               </div>
             </CardContent>
@@ -257,21 +257,21 @@ const AnalysisResults = ({ videoTitle, videoUrl }: AnalysisResultsProps) => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Clock className="h-5 w-5" />
-                  音声分析
+                  Voice Analysis
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex justify-between">
-                  <span>動画長</span>
+                  <span>Video Length</span>
                   <span className="font-medium">{analysisData.duration}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>話速</span>
+                  <span>Speaking Rate</span>
                   <span className="font-medium">{analysisData.speakingRate}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>明瞭度</span>
-                  <Badge variant="secondary">良好</Badge>
+                  <span>Clarity</span>
+                  <Badge variant="secondary">Good</Badge>
                 </div>
               </CardContent>
             </Card>
@@ -280,21 +280,21 @@ const AnalysisResults = ({ videoTitle, videoUrl }: AnalysisResultsProps) => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Mic className="h-5 w-5" />
-                  メッセージ分析
+                  Message Analysis
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex justify-between">
-                  <span>キーワード密度</span>
-                  <Badge variant="secondary">適切</Badge>
+                  <span>Keyword Density</span>
+                  <Badge variant="secondary">Appropriate</Badge>
                 </div>
                 <div className="flex justify-between">
-                  <span>感情トーン</span>
-                  <Badge variant="secondary">ポジティブ</Badge>
+                  <span>Emotional Tone</span>
+                  <Badge variant="secondary">Positive</Badge>
                 </div>
                 <div className="flex justify-between">
-                  <span>構造</span>
-                  <Badge variant="secondary">論理的</Badge>
+                  <span>Structure</span>
+                  <Badge variant="secondary">Logical</Badge>
                 </div>
               </CardContent>
             </Card>
@@ -306,10 +306,10 @@ const AnalysisResults = ({ videoTitle, videoUrl }: AnalysisResultsProps) => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Smile className="h-5 w-5" />
-                感情表現分析（5角形レーダーチャート）
+                Emotion Expression Analysis (Pentagon Radar Chart)
               </CardTitle>
               <CardDescription>
-                表情・ジェスチャーから読み取られた感情の強度
+                Emotional intensity detected from facial expressions and gestures
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -324,7 +324,7 @@ const AnalysisResults = ({ videoTitle, videoUrl }: AnalysisResultsProps) => {
                       tick={false}
                     />
                     <Radar
-                      name="感情分析"
+                      name="Emotion Analysis"
                       dataKey="A"
                       stroke="hsl(var(--primary))"
                       fill="hsl(var(--primary))"
@@ -337,7 +337,7 @@ const AnalysisResults = ({ videoTitle, videoUrl }: AnalysisResultsProps) => {
               <div className="mt-4 p-3 bg-secondary/50 rounded-lg">
                 <div className="flex items-center gap-2 mb-2">
                   <Info className="h-4 w-4" />
-                  <span className="text-sm font-medium">データソース</span>
+                  <span className="text-sm font-medium">Data Source</span>
                 </div>
                 <p className="text-sm text-muted-foreground">
                   {dataSources.emotion}
@@ -352,10 +352,10 @@ const AnalysisResults = ({ videoTitle, videoUrl }: AnalysisResultsProps) => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <BarChart3 className="h-5 w-5" />
-                パフォーマンス・タイムライン（キャプチャ画像付き）
+                Performance Timeline (with Capture Images)
               </CardTitle>
               <CardDescription>
-                動画全体を通じた重要なポイントの分析とキャプチャ画像
+                Analysis of key points throughout the video with capture images
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -384,7 +384,7 @@ const AnalysisResults = ({ videoTitle, videoUrl }: AnalysisResultsProps) => {
                       <div className="relative w-48 h-32 bg-secondary rounded-lg overflow-hidden">
                         <img 
                           src={item.thumbnail} 
-                          alt={`キャプチャ ${item.time}`}
+                          alt={`Capture ${item.time}`}
                           className="w-full h-full object-cover"
                         />
                         {/* アノテーションポイント */}
@@ -427,10 +427,10 @@ const AnalysisResults = ({ videoTitle, videoUrl }: AnalysisResultsProps) => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <TrendingUp className="h-5 w-5" />
-                改善提案
+                Improvement Recommendations
               </CardTitle>
               <CardDescription>
-                B2Bコミュニケーション効果向上のための具体的なアドバイス
+                Specific advice to enhance B2B communication effectiveness
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -441,14 +441,14 @@ const AnalysisResults = ({ videoTitle, videoUrl }: AnalysisResultsProps) => {
                     <div className="flex items-start gap-3 mb-3">
                       <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                       <div className="flex-1">
-                        <h4 className="font-medium text-sm mb-2">改善点</h4>
+                        <h4 className="font-medium text-sm mb-2">Improvement Point</h4>
                         <p className="text-sm">{rec.what}</p>
                       </div>
                     </div>
                     
                     {/* Why */}
                     <div className="ml-8 mb-3">
-                      <h4 className="font-medium text-sm mb-2 text-yellow-600">根拠（Why）</h4>
+                      <h4 className="font-medium text-sm mb-2 text-yellow-600">Rationale (Why)</h4>
                       <p className="text-sm text-muted-foreground">{rec.why}</p>
                       <Badge variant="outline" className="mt-1">
                         {rec.benchmark}
@@ -457,7 +457,7 @@ const AnalysisResults = ({ videoTitle, videoUrl }: AnalysisResultsProps) => {
                     
                     {/* How */}
                     <div className="ml-8">
-                      <h4 className="font-medium text-sm mb-2 text-blue-600">改善方法（How）</h4>
+                      <h4 className="font-medium text-sm mb-2 text-blue-600">How to Improve (How)</h4>
                       <p className="text-sm text-muted-foreground mb-2">{rec.how}</p>
                       <a 
                         href={rec.exampleUrl}
@@ -466,7 +466,7 @@ const AnalysisResults = ({ videoTitle, videoUrl }: AnalysisResultsProps) => {
                         className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
                       >
                         <ExternalLink className="h-3 w-3" />
-                        参考事例を見る
+                        View Example Case
                       </a>
                     </div>
                   </div>
