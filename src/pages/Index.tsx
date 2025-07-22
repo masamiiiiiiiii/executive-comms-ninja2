@@ -2,17 +2,53 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { PlayCircle, BarChart3, Users, Brain } from "lucide-react";
+import { PlayCircle, BarChart3, Users, Brain, ArrowLeft } from "lucide-react";
+import AnalysisResults from "@/components/AnalysisResults";
 
 const Index = () => {
   const [youtubeUrl, setYoutubeUrl] = useState("");
+  const [showResults, setShowResults] = useState(false);
+  const [analyzing, setAnalyzing] = useState(false);
 
-  const handleAnalyze = () => {
+  const handleAnalyze = async () => {
     if (youtubeUrl) {
+      setAnalyzing(true);
       console.log("Analyzing video:", youtubeUrl);
-      // TODO: Implement video analysis
+      
+      // モック分析プロセス
+      await new Promise(resolve => setTimeout(resolve, 3000));
+      
+      setAnalyzing(false);
+      setShowResults(true);
     }
   };
+
+  const handleBack = () => {
+    setShowResults(false);
+    setYoutubeUrl("");
+  };
+
+  // 分析結果表示
+  if (showResults) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
+        <div className="container mx-auto px-4 py-8">
+          <Button 
+            variant="ghost" 
+            onClick={handleBack}
+            className="mb-6 hover:bg-secondary"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            新しい分析を開始
+          </Button>
+          <AnalysisResults 
+            videoTitle="CEO インタビュー - 企業戦略について"
+            videoUrl={youtubeUrl}
+          />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
@@ -46,8 +82,12 @@ const Index = () => {
                   onChange={(e) => setYoutubeUrl(e.target.value)}
                   className="flex-1"
                 />
-                <Button onClick={handleAnalyze} disabled={!youtubeUrl}>
-                  分析開始
+                <Button 
+                  onClick={handleAnalyze} 
+                  disabled={!youtubeUrl || analyzing}
+                  className="min-w-[100px]"
+                >
+                  {analyzing ? "分析中..." : "分析開始"}
                 </Button>
               </div>
               <p className="text-sm text-muted-foreground">
