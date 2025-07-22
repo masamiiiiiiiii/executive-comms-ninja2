@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
@@ -15,16 +16,23 @@ import {
   AlertTriangle,
   CheckCircle,
   ExternalLink,
-  Info
+  Info,
+  Download
 } from "lucide-react";
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } from 'recharts';
 
 interface AnalysisResultsProps {
   videoTitle: string;
   videoUrl: string;
+  analysisDetails: {
+    company: string;
+    role: string;
+    intervieweeName: string;
+    targetPerson: string;
+  };
 }
 
-const AnalysisResults = ({ videoTitle, videoUrl }: AnalysisResultsProps) => {
+const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails }: AnalysisResultsProps) => {
   // モックデータ
   const overallScore = 78;
   const analysisData = {
@@ -126,12 +134,74 @@ const AnalysisResults = ({ videoTitle, videoUrl }: AnalysisResultsProps) => {
     }
   ];
 
+  // CSV Export Function
+  const exportToCSV = () => {
+    const csvData = [
+      ['Executive Comms Ninja - Analysis Report'],
+      [''],
+      ['Executive Information'],
+      ['Company', analysisDetails.company],
+      ['Role', analysisDetails.role],
+      ['Name', analysisDetails.intervieweeName],
+      ['Analysis Target', analysisDetails.targetPerson],
+      ['Video URL', videoUrl],
+      [''],
+      ['Overall Performance'],
+      ['Overall Score', `${overallScore}%`],
+      [''],
+      ['Detailed Metrics'],
+      ['Confidence', `${analysisData.confidence}%`],
+      ['Trustworthiness', `${analysisData.authenticity}%`],
+      ['Engagement', `${analysisData.engagement}%`],
+      ['Clarity', `${analysisData.clarity}%`],
+      [''],
+      ['Emotion Analysis'],
+      ...emotionRadarData.map(emotion => [emotion.subject, `${emotion.A}%`]),
+      [''],
+      ['Timeline Analysis'],
+      ['Time', 'Event', 'Score', 'Analysis'],
+      ...timelineData.map(item => [item.time, item.event, item.score, item.analysis]),
+      [''],
+      ['Improvement Recommendations'],
+      ['What', 'Why', 'How', 'Benchmark'],
+      ...detailedRecommendations.map(rec => [rec.what, rec.why, rec.how, rec.benchmark]),
+      [''],
+      ['Generated on', new Date().toISOString()]
+    ];
+
+    const csvContent = csvData.map(row => 
+      Array.isArray(row) ? row.map(field => `"${field}"`).join(',') : `"${row}"`
+    ).join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    if (link.download !== undefined) {
+      const url = URL.createObjectURL(blob);
+      link.setAttribute('href', url);
+      link.setAttribute('download', `executive-analysis-${analysisDetails.company}-${analysisDetails.intervieweeName}-${new Date().toISOString().split('T')[0]}.csv`);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
   return (
     <div className="space-y-6 animate-fade-in">
-      {/* Header */}
-      <div className="border-b pb-4">
-        <h2 className="text-2xl font-bold">Analysis Results</h2>
-        <p className="text-muted-foreground mt-1">{videoTitle}</p>
+      {/* Header with Export */}
+      <div className="border-b pb-4 flex justify-between items-start">
+        <div>
+          <h2 className="text-2xl font-bold">Analysis Results</h2>
+          <p className="text-muted-foreground mt-1">{videoTitle}</p>
+          <div className="flex gap-4 mt-2 text-sm text-muted-foreground">
+            <span>Target: {analysisDetails.targetPerson}</span>
+            <span>Company: {analysisDetails.company}</span>
+          </div>
+        </div>
+        <Button onClick={exportToCSV} variant="outline" className="flex items-center gap-2">
+          <Download className="h-4 w-4" />
+          Export CSV
+        </Button>
       </div>
 
       {/* Overall Score */}
