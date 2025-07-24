@@ -228,188 +228,223 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
   };
 
   return (
-    <div className="space-y-6 animate-fade-in">
-      {/* Header with Export */}
-      <div className="border-b pb-4 flex justify-between items-start">
-        <div>
-          <h2 className="text-2xl font-bold">Analysis Results</h2>
-          <p className="text-muted-foreground mt-1">{videoTitle}</p>
-          <div className="flex gap-4 mt-2 text-sm text-muted-foreground">
-            <span>Target: {analysisDetails.targetPerson}</span>
-            <span>Company: {analysisDetails.company}</span>
+    <div className="space-y-6 animate-fade-in p-6 bg-gradient-to-br from-background to-secondary/20 min-h-screen">
+      {/* Header with Export - Enhanced */}
+      <div className="border-b border-gradient-to-r from-primary/20 to-accent/20 pb-6 flex justify-between items-start bg-card/50 backdrop-blur-sm rounded-xl p-6 shadow-lg hover-scale">
+        <div className="space-y-2">
+          <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            Analysis Results
+          </h2>
+          <p className="text-muted-foreground text-lg">{videoTitle}</p>
+          <div className="flex gap-6 mt-3 text-sm">
+            <div className="flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full">
+              <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+              <span className="font-medium">Target: {analysisDetails.targetPerson}</span>
+            </div>
+            <div className="flex items-center gap-2 px-3 py-1 bg-accent/10 rounded-full">
+              <div className="w-2 h-2 bg-accent rounded-full"></div>
+              <span className="font-medium">Company: {analysisDetails.company}</span>
+            </div>
             {analysisResults?.videoPublishedAt && (
-              <span>Published: {new Date(analysisResults.videoPublishedAt).toLocaleDateString('ja-JP')}</span>
+              <div className="flex items-center gap-2 px-3 py-1 bg-secondary/20 rounded-full">
+                <Clock className="h-3 w-3" />
+                <span>Published: {new Date(analysisResults.videoPublishedAt).toLocaleDateString('ja-JP')}</span>
+              </div>
             )}
           </div>
         </div>
-        <Button onClick={exportToCSV} variant="outline" className="flex items-center gap-2">
+        <Button onClick={exportToCSV} variant="outline" className="flex items-center gap-2 hover-scale border-primary/20 hover:border-primary/40 hover:bg-primary/5 transition-all duration-300">
           <Download className="h-4 w-4" />
           Export CSV
         </Button>
       </div>
 
-      {/* Overall Score */}
-      <Card className="border-l-4 border-l-primary">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Star className="h-5 w-5 text-primary" />
+      {/* Overall Score - Enhanced */}
+      <Card className="border-l-4 border-l-primary shadow-xl bg-gradient-to-r from-card to-primary/5 hover-scale transition-all duration-300 overflow-hidden relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-accent/5 opacity-50"></div>
+        <CardHeader className="relative z-10">
+          <CardTitle className="flex items-center gap-3 text-xl">
+            <div className="p-2 rounded-full bg-primary/10">
+              <Star className="h-6 w-6 text-primary" />
+            </div>
             Overall Performance Score
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="text-base">
             Comprehensive assessment of B2B communication effectiveness
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <div className="flex items-center gap-4">
-            <div className="text-4xl font-bold text-primary">{overallScore}</div>
-            <div className="flex-1">
-              <Progress value={overallScore} className="h-3" />
-              <p className="text-sm text-muted-foreground mt-1">
-                Excellent level (Good performance above 70 points)
-              </p>
+        <CardContent className="relative z-10">
+          <div className="flex items-center gap-6">
+            <div className="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              {overallScore}
+            </div>
+            <div className="flex-1 space-y-2">
+              <Progress value={overallScore} className="h-4 bg-gradient-to-r from-primary/20 to-accent/20" />
+              <div className="flex justify-between items-center">
+                <p className="text-sm text-muted-foreground">
+                  Excellent level (Good performance above 70 points)
+                </p>
+                <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20">
+                  Top Performer
+                </Badge>
+              </div>
             </div>
           </div>
         </CardContent>
       </Card>
 
       <Tabs defaultValue="overview" className="w-full">
-        <TabsList className="grid w-full grid-cols-5">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="detailed">Detailed Metrics</TabsTrigger>
-          <TabsTrigger value="emotions">Emotion Analysis</TabsTrigger>
-          <TabsTrigger value="timeline">Timeline</TabsTrigger>
-          <TabsTrigger value="recommendations">Recommendations</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-5 bg-gradient-to-r from-card to-secondary/30 p-1 rounded-xl shadow-lg">
+          <TabsTrigger value="overview" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-primary-foreground transition-all duration-300">Overview</TabsTrigger>
+          <TabsTrigger value="detailed" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-primary-foreground transition-all duration-300">Detailed Metrics</TabsTrigger>
+          <TabsTrigger value="emotions" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-primary-foreground transition-all duration-300">Emotion Analysis</TabsTrigger>
+          <TabsTrigger value="timeline" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-primary-foreground transition-all duration-300">Timeline</TabsTrigger>
+          <TabsTrigger value="recommendations" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-primary-foreground transition-all duration-300">Recommendations</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="overview" className="space-y-4">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium flex items-center gap-2">
-                  <Eye className="h-4 w-4" />
+        <TabsContent value="overview" className="space-y-6 animate-fade-in">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card className="hover-scale transition-all duration-300 border-0 shadow-lg bg-gradient-to-br from-card to-primary/5 hover:shadow-xl group">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-sm font-medium flex items-center gap-2 group-hover:text-primary transition-colors">
+                  <div className="p-1.5 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                    <Eye className="h-4 w-4 text-primary" />
+                  </div>
                   Confidence
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{analysisData.confidence}%</div>
-                <Progress value={analysisData.confidence} className="mt-2" />
+                <div className="text-2xl font-bold text-primary mb-2">{analysisData.confidence}%</div>
+                <Progress value={analysisData.confidence} className="h-2 bg-primary/10" />
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium flex items-center gap-2">
-                  <Users className="h-4 w-4" />
+            <Card className="hover-scale transition-all duration-300 border-0 shadow-lg bg-gradient-to-br from-card to-accent/5 hover:shadow-xl group">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-sm font-medium flex items-center gap-2 group-hover:text-accent transition-colors">
+                  <div className="p-1.5 rounded-lg bg-accent/10 group-hover:bg-accent/20 transition-colors">
+                    <Users className="h-4 w-4 text-accent" />
+                  </div>
                   Trustworthiness
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{analysisData.authenticity}%</div>
-                <Progress value={analysisData.authenticity} className="mt-2" />
+                <div className="text-2xl font-bold text-accent mb-2">{analysisData.authenticity}%</div>
+                <Progress value={analysisData.authenticity} className="h-2 bg-accent/10" />
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium flex items-center gap-2">
-                  <TrendingUp className="h-4 w-4" />
+            <Card className="hover-scale transition-all duration-300 border-0 shadow-lg bg-gradient-to-br from-card to-secondary/5 hover:shadow-xl group">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-sm font-medium flex items-center gap-2 group-hover:text-secondary transition-colors">
+                  <div className="p-1.5 rounded-lg bg-secondary/10 group-hover:bg-secondary/20 transition-colors">
+                    <TrendingUp className="h-4 w-4 text-secondary" />
+                  </div>
                   Engagement
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{analysisData.engagement}%</div>
-                <Progress value={analysisData.engagement} className="mt-2" />
+                <div className="text-2xl font-bold text-secondary mb-2">{analysisData.engagement}%</div>
+                <Progress value={analysisData.engagement} className="h-2 bg-secondary/10" />
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium flex items-center gap-2">
-                  <MessageSquare className="h-4 w-4" />
+            <Card className="hover-scale transition-all duration-300 border-0 shadow-lg bg-gradient-to-br from-card to-muted/5 hover:shadow-xl group">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-sm font-medium flex items-center gap-2 group-hover:text-foreground transition-colors">
+                  <div className="p-1.5 rounded-lg bg-muted/20 group-hover:bg-muted/30 transition-colors">
+                    <MessageSquare className="h-4 w-4" />
+                  </div>
                   Clarity
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{analysisData.clarity}%</div>
-                <Progress value={analysisData.clarity} className="mt-2" />
+                <div className="text-2xl font-bold mb-2">{analysisData.clarity}%</div>
+                <Progress value={analysisData.clarity} className="h-2 bg-muted/10" />
               </CardContent>
             </Card>
           </div>
 
-          {/* データソース情報追加 */}
-          <Card>
+          {/* データソース情報追加 - Enhanced */}
+          <Card className="shadow-lg border-0 bg-gradient-to-r from-card to-muted/10 hover-scale transition-all duration-300">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Info className="h-5 w-5" />
+              <CardTitle className="flex items-center gap-3">
+                <div className="p-2 rounded-full bg-muted/20">
+                  <Info className="h-5 w-5" />
+                </div>
                 Data Source Information
               </CardTitle>
-              <CardDescription>
+              <CardDescription className="text-base">
                 Data sources used for analyzing each metric
               </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex justify-between items-center">
-                <span>Confidence</span>
-                <Badge variant="outline">{dataSources.confidence}</Badge>
+            <CardContent className="space-y-4">
+              <div className="flex justify-between items-center p-3 rounded-lg bg-primary/5 hover:bg-primary/10 transition-colors">
+                <span className="font-medium">Confidence</span>
+                <Badge variant="outline" className="border-primary/30 text-primary">{dataSources.confidence}</Badge>
               </div>
-              <div className="flex justify-between items-center">
-                <span>Trustworthiness</span>
-                <Badge variant="outline">{dataSources.authenticity}</Badge>
+              <div className="flex justify-between items-center p-3 rounded-lg bg-accent/5 hover:bg-accent/10 transition-colors">
+                <span className="font-medium">Trustworthiness</span>
+                <Badge variant="outline" className="border-accent/30 text-accent">{dataSources.authenticity}</Badge>
               </div>
-              <div className="flex justify-between items-center">
-                <span>Engagement</span>
-                <Badge variant="outline">{dataSources.engagement}</Badge>
+              <div className="flex justify-between items-center p-3 rounded-lg bg-secondary/5 hover:bg-secondary/10 transition-colors">
+                <span className="font-medium">Engagement</span>
+                <Badge variant="outline" className="border-secondary/30 text-secondary">{dataSources.engagement}</Badge>
               </div>
-              <div className="flex justify-between items-center">
-                <span>Clarity</span>
-                <Badge variant="outline">{dataSources.clarity}</Badge>
+              <div className="flex justify-between items-center p-3 rounded-lg bg-muted/10 hover:bg-muted/20 transition-colors">
+                <span className="font-medium">Clarity</span>
+                <Badge variant="outline" className="border-muted-foreground/30">{dataSources.clarity}</Badge>
               </div>
             </CardContent>
           </Card>
 
-          <div className="grid md:grid-cols-2 gap-4">
-            <Card>
+          <div className="grid md:grid-cols-2 gap-6">
+            <Card className="shadow-lg border-0 bg-gradient-to-br from-card to-primary/5 hover-scale transition-all duration-300">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Clock className="h-5 w-5" />
+                <CardTitle className="flex items-center gap-3">
+                  <div className="p-2 rounded-full bg-primary/10">
+                    <Clock className="h-5 w-5 text-primary" />
+                  </div>
                   Voice Analysis
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex justify-between">
-                  <span>Video Length</span>
-                  <span className="font-medium">{analysisData.duration}</span>
+              <CardContent className="space-y-4">
+                <div className="flex justify-between items-center p-3 rounded-lg bg-primary/5">
+                  <span className="font-medium">Video Length</span>
+                  <span className="font-bold text-primary">{analysisData.duration}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span>Speaking Rate</span>
-                  <span className="font-medium">{analysisData.speakingRate}</span>
+                <div className="flex justify-between items-center p-3 rounded-lg bg-primary/5">
+                  <span className="font-medium">Speaking Rate</span>
+                  <span className="font-bold text-primary">{analysisData.speakingRate}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span>Clarity</span>
-                  <Badge variant="secondary">Good</Badge>
+                <div className="flex justify-between items-center p-3 rounded-lg bg-primary/5">
+                  <span className="font-medium">Clarity</span>
+                  <Badge variant="secondary" className="bg-primary/20 text-primary">Good</Badge>
                 </div>
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="shadow-lg border-0 bg-gradient-to-br from-card to-accent/5 hover-scale transition-all duration-300">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Mic className="h-5 w-5" />
+                <CardTitle className="flex items-center gap-3">
+                  <div className="p-2 rounded-full bg-accent/10">
+                    <Mic className="h-5 w-5 text-accent" />
+                  </div>
                   Message Analysis
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex justify-between">
-                  <span>Keyword Density</span>
-                  <Badge variant="secondary">Appropriate</Badge>
+              <CardContent className="space-y-4">
+                <div className="flex justify-between items-center p-3 rounded-lg bg-accent/5">
+                  <span className="font-medium">Keyword Density</span>
+                  <Badge variant="secondary" className="bg-accent/20 text-accent">Appropriate</Badge>
                 </div>
-                <div className="flex justify-between">
-                  <span>Emotional Tone</span>
-                  <Badge variant="secondary">Positive</Badge>
+                <div className="flex justify-between items-center p-3 rounded-lg bg-accent/5">
+                  <span className="font-medium">Emotional Tone</span>
+                  <Badge variant="secondary" className="bg-accent/20 text-accent">Positive</Badge>
                 </div>
-                <div className="flex justify-between">
-                  <span>Structure</span>
-                  <Badge variant="secondary">Logical</Badge>
+                <div className="flex justify-between items-center p-3 rounded-lg bg-accent/5">
+                  <span className="font-medium">Structure</span>
+                  <Badge variant="secondary" className="bg-accent/20 text-accent">Logical</Badge>
                 </div>
               </CardContent>
             </Card>
