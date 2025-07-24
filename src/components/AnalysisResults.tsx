@@ -867,59 +867,55 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
-                {detailedRecommendations.map((rec, index) => (
-                  <div key={index} className="border rounded-lg p-4">
-                    {/* What */}
-                    <div className="flex items-start gap-3 mb-3">
-                      <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                      <div className="flex-1">
-                        <h4 className="font-medium text-sm mb-2">Improvement Point</h4>
-                        <p className="text-sm">{rec.what}</p>
-                      </div>
-                    </div>
-                    
-                    {/* Why */}
-                    <div className="ml-8 mb-3">
-                      <h4 className="font-medium text-sm mb-2 text-yellow-600">Rationale (Why)</h4>
-                      <p className="text-sm text-muted-foreground">{rec.why}</p>
-                      <Badge variant="outline" className="mt-1">
-                        {rec.benchmark}
-                      </Badge>
-                    </div>
-                    
-                    {/* How */}
-                    <div className="ml-8 mb-3">
-                      <h4 className="font-medium text-sm mb-2 text-blue-600">Implementation Strategy</h4>
-                      <p className="text-sm text-muted-foreground mb-3">{rec.how}</p>
-                      
-                      {/* Implementation Details */}
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
-                        <div className="bg-green-50 dark:bg-green-950/20 rounded p-2">
-                          <div className="text-xs font-medium text-green-700 dark:text-green-400">Priority</div>
-                          <div className="text-sm font-bold text-green-800 dark:text-green-300">{rec.priority}</div>
-                        </div>
-                        <div className="bg-blue-50 dark:bg-blue-950/20 rounded p-2">
-                          <div className="text-xs font-medium text-blue-700 dark:text-blue-400">Timeframe</div>
-                          <div className="text-sm font-bold text-blue-800 dark:text-blue-300">{rec.timeframe}</div>
-                        </div>
-                        <div className="bg-purple-50 dark:bg-purple-950/20 rounded p-2">
-                          <div className="text-xs font-medium text-purple-700 dark:text-purple-400">Expected Impact</div>
-                          <div className="text-sm font-bold text-purple-800 dark:text-purple-300">{rec.expectedImprovement}</div>
-                        </div>
-                      </div>
-                      
-                      <a 
-                        href={rec.exampleUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
-                      >
-                        <ExternalLink className="h-3 w-3" />
-                        View Best Practice Examples
-                      </a>
-                    </div>
-                  </div>
-                ))}
+                 {detailedRecommendations.map((rec, index) => (
+                   <div key={index} className="border rounded-lg p-4">
+                     <div className="flex items-start gap-3 mb-3">
+                       <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                       <div className="flex-1">
+                         <h4 className="font-medium text-sm mb-2">Improvement Point</h4>
+                         <p className="text-sm">{rec.what}</p>
+                       </div>
+                     </div>
+                     
+                     <div className="ml-8 mb-3">
+                       <h4 className="font-medium text-sm mb-2 text-yellow-600">Rationale (Why)</h4>
+                       <p className="text-sm text-muted-foreground">{rec.why}</p>
+                       <Badge variant="outline" className="mt-1">
+                         {rec.benchmark}
+                       </Badge>
+                     </div>
+                     
+                     <div className="ml-8 mb-3">
+                       <h4 className="font-medium text-sm mb-2 text-blue-600">Implementation Strategy</h4>
+                       <p className="text-sm text-muted-foreground mb-3">{rec.how}</p>
+                       
+                       <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+                         <div className="bg-green-50 dark:bg-green-950/20 rounded p-2">
+                           <div className="text-xs font-medium text-green-700 dark:text-green-400">Priority</div>
+                           <div className="text-sm font-bold text-green-800 dark:text-green-300">{rec.priority}</div>
+                         </div>
+                         <div className="bg-blue-50 dark:bg-blue-950/20 rounded p-2">
+                           <div className="text-xs font-medium text-blue-700 dark:text-blue-400">Timeframe</div>
+                           <div className="text-sm font-bold text-blue-800 dark:text-blue-300">{rec.timeframe}</div>
+                         </div>
+                         <div className="bg-purple-50 dark:bg-purple-950/20 rounded p-2">
+                           <div className="text-xs font-medium text-purple-700 dark:text-purple-400">Expected Impact</div>
+                           <div className="text-sm font-bold text-purple-800 dark:text-purple-300">{rec.expectedImprovement}</div>
+                         </div>
+                       </div>
+                       
+                       <a 
+                         href={rec.exampleUrl}
+                         target="_blank"
+                         rel="noopener noreferrer"
+                         className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
+                       >
+                         <ExternalLink className="h-3 w-3" />
+                         View Best Practice Examples
+                       </a>
+                     </div>
+                   </div>
+                 ))}
               </div>
             </CardContent>
           </Card>
