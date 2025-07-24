@@ -38,15 +38,15 @@ interface AnalysisResultsProps {
 }
 
 const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResults }: AnalysisResultsProps) => {
-  // 実際の分析結果を使用、フォールバック値を設定
+  // Using actual analysis results with fallback values
   const overallScore = analysisResults?.overallScore || 0;
   const analysisData = {
-    // コア指標（実際のAPIレスポンス構造に合わせて修正）
+    // Core metrics (adjusted to match actual API response structure)
     confidence: analysisResults?.metrics?.confidence || analysisResults?.confidence || 0,
     authenticity: analysisResults?.metrics?.trustworthiness || analysisResults?.authenticity || 0,
     engagement: analysisResults?.metrics?.engagement || analysisResults?.engagement || 0,
     clarity: analysisResults?.metrics?.clarity || analysisResults?.clarity || 0,
-    // 詳細指標（emotion分析から取得）
+    // Detailed metrics (obtained from emotion analysis)
     eyeContact: analysisResults?.emotionAnalysis?.confidence || 0,
     voiceStability: analysisResults?.emotionAnalysis?.calmness || 0,
     gestureEffectiveness: analysisResults?.emotionAnalysis?.authority || 0,
@@ -55,18 +55,18 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
     bodyLanguage: analysisResults?.emotionAnalysis?.authenticity || 0,
     messageCoherence: analysisResults?.messageAnalysis?.persuasiveness ? 85 : 0,
     credibility: analysisResults?.emotionAnalysis?.authority || 0,
-    // 音声分析
+    // Voice analysis
     duration: analysisResults?.videoLength || analysisResults?.duration || "Duration Unknown",
     speakingRate: analysisResults?.voiceAnalysis?.pace || "Optimal Pace",
     pauseFrequency: "Appropriate Frequency",
     volumeVariation: "Stable",
-    // 言語分析
+    // Language analysis
     vocabularyLevel: "Professional",
     sentimentScore: analysisResults?.emotionAnalysis?.empathy || 0,
     keywordDensity: analysisResults?.messageAnalysis?.keyMessages?.length ? "High Density" : "Standard"
   };
 
-  // 時系列感情変化データ（実際の分析結果から取得、フォールバック付き）
+  // Emotion timeline data (obtained from actual analysis results with fallback)
   const emotionTimelineData = analysisResults?.timeline ? 
     analysisResults.timeline.map((item: any, index: number) => ({
       time: item.time || `${index * 30}s`,
@@ -81,7 +81,7 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
       { time: "1:00", confidence: (analysisResults?.emotionAnalysis?.confidence || 0) - 1, enthusiasm: (analysisResults?.emotionAnalysis?.enthusiasm || 0) + 3, composure: (analysisResults?.emotionAnalysis?.calmness || 0) + 2, trust: (analysisResults?.emotionAnalysis?.authenticity || 0) - 1 }
     ];
 
-  // パフォーマンス比較データ（実際の分析結果から取得）
+  // Performance comparison data (obtained from actual analysis results)
   const benchmarkData = [
     { metric: "Confidence", current: analysisData.confidence, industry: 74, ceo: 89 },
     { metric: "Trustworthiness", current: analysisData.authenticity, industry: 78, ceo: 85 },
@@ -91,7 +91,7 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
     { metric: "Voice Stability", current: analysisData.voiceStability, industry: 76, ceo: 91 }
   ];
 
-  // レーダーチャート用感情データ（実際の分析結果から取得）
+  // Radar chart emotion data (obtained from actual analysis results)
   const emotionRadarData = [
     { 
       subject: "Confidence", 
@@ -125,7 +125,7 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
     }
   ];
 
-  // データソース情報
+  // Data source information
   const dataSources = {
     confidence: "Google Cloud Video Intelligence API",
     authenticity: "Facial Expression Analysis Engine",
@@ -401,7 +401,7 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
             </Card>
           </div>
 
-          {/* データソース情報追加 - Enhanced */}
+          {/* Data source information - Enhanced */}
           <Card className="shadow-lg border-0 bg-gradient-to-r from-card to-muted/10 hover-scale transition-all duration-300">
             <CardHeader>
               <CardTitle className="flex items-center gap-3">
@@ -488,7 +488,7 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
         </TabsContent>
 
         <TabsContent value="detailed" className="space-y-4">
-          {/* 詳細メトリクス */}
+          {/* Detailed Metrics */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             <Card>
               <CardHeader className="pb-2">
@@ -575,7 +575,7 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
             </Card>
           </div>
 
-          {/* 音声・言語分析詳細 */}
+          {/* Advanced voice and language analysis */}
           <div className="grid md:grid-cols-2 gap-4">
             <Card>
               <CardHeader>
@@ -632,7 +632,7 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
             </Card>
           </div>
 
-          {/* 業界比較ベンチマーク */}
+          {/* Industry benchmark comparison */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -707,7 +707,7 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
             </CardContent>
           </Card>
 
-          {/* 時系列感情変化グラフ */}
+          {/* Emotion timeline analysis chart */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -789,14 +789,14 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
                     </div>
                     
                     <div className="flex gap-4">
-                      {/* キャプチャ画像とアノテーション */}
+                      {/* Screen capture with annotations */}
                       <div className="relative w-48 h-32 bg-secondary rounded-lg overflow-hidden">
                         <img 
                           src={item.thumbnail} 
                           alt={`Capture ${item.time}`}
                           className="w-full h-full object-cover"
                         />
-                        {/* アノテーションポイント */}
+                        {/* Annotation point */}
                         <div 
                           className="absolute w-3 h-3 bg-primary rounded-full border-2 border-white"
                           style={{
