@@ -8,12 +8,10 @@ import { useToast } from "@/hooks/use-toast";
 import AnalysisResults from "@/components/AnalysisResults";
 import Layout from "@/components/Layout";
 import { useAuth } from "@/hooks/useAuth";
-import { useAccessControl } from "@/hooks/useAccessControl";
 import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
   const { user, session, loading: authLoading, signOut } = useAuth();
-  const { hasAccess, isLoading: accessLoading } = useAccessControl();
   const { toast } = useToast();
   
   const [userProfile, setUserProfile] = useState<any>(null);
@@ -168,7 +166,7 @@ const [analysisDetails, setAnalysisDetails] = useState({
   };
 
   // Show loading state
-  if (authLoading || accessLoading) {
+  if (authLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20 flex items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin" />
@@ -179,12 +177,6 @@ const [analysisDetails, setAnalysisDetails] = useState({
   // Redirect to auth if not authenticated
   if (!user || !session) {
     window.location.href = '/auth';
-    return null;
-  }
-
-  // Redirect to access request if no access
-  if (!hasAccess) {
-    window.location.href = '/access-request';
     return null;
   }
 
