@@ -67,7 +67,13 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
   };
 
   // 時系列感情変化データ（実際の分析結果から取得、フォールバック付き）
-  const emotionTimelineData = analysisResults?.emotionTimeline || [
+  const emotionTimelineData = analysisResults?.timeline?.map((item: any, index: number) => ({
+    time: item.time || `${index}:00`,
+    confidence: analysisResults?.emotionAnalysis?.confidence || 0,
+    enthusiasm: analysisResults?.emotionAnalysis?.enthusiasm || 0,
+    composure: analysisResults?.emotionAnalysis?.calmness || 0,
+    trust: analysisResults?.emotionAnalysis?.authenticity || 0
+  })) || [
     { time: "0:00", confidence: 0, enthusiasm: 0, composure: 0, trust: 0 }
   ];
 
@@ -82,12 +88,37 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
   ];
 
   // レーダーチャート用感情データ（実際の分析結果から取得）
-  const emotionRadarData = analysisResults?.emotionRadar || [
-    { subject: "Confidence", A: analysisData.confidence, fullMark: 100 },
-    { subject: "Trust", A: analysisData.authenticity, fullMark: 100 },
-    { subject: "Enthusiasm", A: analysisData.engagement, fullMark: 100 },
-    { subject: "Composure", A: analysisData.clarity, fullMark: 100 },
-    { subject: "Approachability", A: analysisData.facialExpression, fullMark: 100 }
+  const emotionRadarData = [
+    { 
+      subject: "Confidence", 
+      A: analysisResults?.emotionAnalysis?.confidence || 0, 
+      fullMark: 100 
+    },
+    { 
+      subject: "Trust", 
+      A: analysisResults?.emotionAnalysis?.authenticity || 0, 
+      fullMark: 100 
+    },
+    { 
+      subject: "Enthusiasm", 
+      A: analysisResults?.emotionAnalysis?.enthusiasm || 0, 
+      fullMark: 100 
+    },
+    { 
+      subject: "Composure", 
+      A: analysisResults?.emotionAnalysis?.calmness || 0, 
+      fullMark: 100 
+    },
+    { 
+      subject: "Authority", 
+      A: analysisResults?.emotionAnalysis?.authority || 0, 
+      fullMark: 100 
+    },
+    { 
+      subject: "Empathy", 
+      A: analysisResults?.emotionAnalysis?.empathy || 0, 
+      fullMark: 100 
+    }
   ];
 
   // データソース情報
@@ -100,31 +131,24 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
   };
 
   // タイムラインデータ（実際の分析結果から取得、フォールバック付き）
-  const timelineData = (analysisResults?.timeline || [
-    { 
-      time: "0:00", 
-      event: "No timeline data available", 
-      score: 0, 
-      type: "neutral",
-      thumbnail: "/placeholder.svg",
-      analysis: "Timeline analysis will be available once video is processed.",
-      annotation: { x: 50, y: 50, label: "No Data" }
-    }
-  ]).map(item => ({
-    ...item,
-    annotation: item.annotation || { x: 50, y: 50, label: "No Data" }
+  const timelineData = (analysisResults?.timeline || []).map((item: any, index: number) => ({
+    time: item.time || `${index}:00`,
+    event: item.event || "データなし",
+    score: item.impact === "positive" ? 85 : item.impact === "neutral" ? 70 : 60,
+    type: item.impact || "neutral",
+    thumbnail: "/placeholder.svg",
+    analysis: `${item.event} - ${item.impact === "positive" ? "ポジティブな効果" : item.impact === "neutral" ? "中立的な効果" : "改善の余地"}`,
+    annotation: { x: 50, y: 50, label: item.impact === "positive" ? "Good" : "Note" }
   }));
 
   // 詳細な改善提案（実際の分析結果から取得、フォールバック付き）
-  const detailedRecommendations = analysisResults?.recommendations || [
-    {
-      what: "分析結果がありません",
-      why: "動画の処理が完了していないため、具体的な改善提案を生成できません",
-      how: "動画を再度アップロードして分析を実行してください",
-      exampleUrl: "#",
-      benchmark: "システム情報"
-    }
-  ];
+  const detailedRecommendations = (analysisResults?.recommendations || []).map((rec: any) => ({
+    what: rec.what || "改善提案なし",
+    why: rec.why || "分析データが不足しています",
+    how: rec.how || "再分析を実行してください",
+    exampleUrl: "#",
+    benchmark: rec.category || "一般"
+  }));
 
   // CSV Export Function
   const exportToCSV = () => {
