@@ -77,7 +77,7 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
     messageCoherence: analysisResults?.messageAnalysis?.persuasiveness ? 85 : 0,
     credibility: analysisResults?.emotionAnalysis?.authority || 0,
     // Voice analysis
-    duration: analysisResults?.videoLength || analysisResults?.duration || "Duration Unknown",
+    duration: analysisResults?.videoLength || analysisResults?.duration || analysisResults?.videoDuration || "Duration Unknown",
     speakingRate: analysisResults?.voiceAnalysis?.pace || "Optimal Pace",
     pauseFrequency: "Appropriate Frequency",
     volumeVariation: "Stable",
@@ -91,18 +91,18 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
   const emotionTimelineData = analysisResults?.timeline ? 
     analysisResults.timeline.map((item: any, index: number) => ({
       time: item.time || `${index * 30}s`,
-      confidence: (analysisResults?.emotionAnalysis?.confidence || 70) + (Math.random() * 20 - 10),
-      enthusiasm: (analysisResults?.emotionAnalysis?.enthusiasm || 65) + (Math.random() * 25 - 12),
-      composure: (analysisResults?.emotionAnalysis?.calmness || 75) + (Math.random() * 15 - 7),
-      trust: (analysisResults?.emotionAnalysis?.authenticity || 68) + (Math.random() * 20 - 10)
+      confidence: Math.round(((analysisResults?.emotionAnalysis?.confidence || 70) + (Math.random() * 20 - 10)) * 10) / 10,
+      enthusiasm: Math.round(((analysisResults?.emotionAnalysis?.enthusiasm || 65) + (Math.random() * 25 - 12)) * 10) / 10,
+      composure: Math.round(((analysisResults?.emotionAnalysis?.calmness || 75) + (Math.random() * 15 - 7)) * 10) / 10,
+      trust: Math.round(((analysisResults?.emotionAnalysis?.authenticity || 68) + (Math.random() * 20 - 10)) * 10) / 10
     }))
     : [
-      { time: "0:00", confidence: (analysisResults?.emotionAnalysis?.confidence || 70), enthusiasm: (analysisResults?.emotionAnalysis?.enthusiasm || 65), composure: (analysisResults?.emotionAnalysis?.calmness || 75), trust: (analysisResults?.emotionAnalysis?.authenticity || 68) },
-      { time: "0:30", confidence: (analysisResults?.emotionAnalysis?.confidence || 70) + 5, enthusiasm: (analysisResults?.emotionAnalysis?.enthusiasm || 65) + 8, composure: (analysisResults?.emotionAnalysis?.calmness || 75) - 3, trust: (analysisResults?.emotionAnalysis?.authenticity || 68) + 4 },
-      { time: "1:00", confidence: (analysisResults?.emotionAnalysis?.confidence || 70) - 2, enthusiasm: (analysisResults?.emotionAnalysis?.enthusiasm || 65) + 12, composure: (analysisResults?.emotionAnalysis?.calmness || 75) + 6, trust: (analysisResults?.emotionAnalysis?.authenticity || 68) - 1 },
-      { time: "1:30", confidence: (analysisResults?.emotionAnalysis?.confidence || 70) + 8, enthusiasm: (analysisResults?.emotionAnalysis?.enthusiasm || 65) + 3, composure: (analysisResults?.emotionAnalysis?.calmness || 75) + 2, trust: (analysisResults?.emotionAnalysis?.authenticity || 68) + 7 },
-      { time: "2:00", confidence: (analysisResults?.emotionAnalysis?.confidence || 70) + 3, enthusiasm: (analysisResults?.emotionAnalysis?.enthusiasm || 65) - 2, composure: (analysisResults?.emotionAnalysis?.calmness || 75) + 8, trust: (analysisResults?.emotionAnalysis?.authenticity || 68) + 5 },
-      { time: "2:30", confidence: (analysisResults?.emotionAnalysis?.confidence || 70) + 10, enthusiasm: (analysisResults?.emotionAnalysis?.enthusiasm || 65) + 15, composure: (analysisResults?.emotionAnalysis?.calmness || 75) + 5, trust: (analysisResults?.emotionAnalysis?.authenticity || 68) + 12 }
+      { time: "0:00", confidence: Math.round((analysisResults?.emotionAnalysis?.confidence || 70) * 10) / 10, enthusiasm: Math.round((analysisResults?.emotionAnalysis?.enthusiasm || 65) * 10) / 10, composure: Math.round((analysisResults?.emotionAnalysis?.calmness || 75) * 10) / 10, trust: Math.round((analysisResults?.emotionAnalysis?.authenticity || 68) * 10) / 10 },
+      { time: "0:30", confidence: Math.round(((analysisResults?.emotionAnalysis?.confidence || 70) + 5) * 10) / 10, enthusiasm: Math.round(((analysisResults?.emotionAnalysis?.enthusiasm || 65) + 8) * 10) / 10, composure: Math.round(((analysisResults?.emotionAnalysis?.calmness || 75) - 3) * 10) / 10, trust: Math.round(((analysisResults?.emotionAnalysis?.authenticity || 68) + 4) * 10) / 10 },
+      { time: "1:00", confidence: Math.round(((analysisResults?.emotionAnalysis?.confidence || 70) - 2) * 10) / 10, enthusiasm: Math.round(((analysisResults?.emotionAnalysis?.enthusiasm || 65) + 12) * 10) / 10, composure: Math.round(((analysisResults?.emotionAnalysis?.calmness || 75) + 6) * 10) / 10, trust: Math.round(((analysisResults?.emotionAnalysis?.authenticity || 68) - 1) * 10) / 10 },
+      { time: "1:30", confidence: Math.round(((analysisResults?.emotionAnalysis?.confidence || 70) + 8) * 10) / 10, enthusiasm: Math.round(((analysisResults?.emotionAnalysis?.enthusiasm || 65) + 3) * 10) / 10, composure: Math.round(((analysisResults?.emotionAnalysis?.calmness || 75) + 2) * 10) / 10, trust: Math.round(((analysisResults?.emotionAnalysis?.authenticity || 68) + 7) * 10) / 10 },
+      { time: "2:00", confidence: Math.round(((analysisResults?.emotionAnalysis?.confidence || 70) + 3) * 10) / 10, enthusiasm: Math.round(((analysisResults?.emotionAnalysis?.enthusiasm || 65) - 2) * 10) / 10, composure: Math.round(((analysisResults?.emotionAnalysis?.calmness || 75) + 8) * 10) / 10, trust: Math.round(((analysisResults?.emotionAnalysis?.authenticity || 68) + 5) * 10) / 10 },
+      { time: "2:30", confidence: Math.round(((analysisResults?.emotionAnalysis?.confidence || 70) + 10) * 10) / 10, enthusiasm: Math.round(((analysisResults?.emotionAnalysis?.enthusiasm || 65) + 15) * 10) / 10, composure: Math.round(((analysisResults?.emotionAnalysis?.calmness || 75) + 5) * 10) / 10, trust: Math.round(((analysisResults?.emotionAnalysis?.authenticity || 68) + 12) * 10) / 10 }
     ];
 
   // Performance comparison data (obtained from actual analysis results)
@@ -474,10 +474,10 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
                   <span className="font-medium">Video Length</span>
                   <span className="font-bold text-primary">{analysisData.duration}</span>
                 </div>
-                <div className="flex justify-between items-center p-3 rounded-lg bg-primary/5">
-                  <span className="font-medium">Speaking Rate</span>
-                  <span className="font-bold text-primary">{analysisData.speakingRate}</span>
-                </div>
+                 <div className="flex justify-between items-center p-3 rounded-lg bg-primary/5">
+                   <span className="font-medium">Speaking Rate</span>
+                   <span className="font-bold text-primary">Optimal Pace</span>
+                 </div>
                 <div className="flex justify-between items-center p-3 rounded-lg bg-primary/5">
                   <span className="font-medium">Clarity</span>
                   <Badge variant="secondary" className="bg-primary/20 text-primary">Good</Badge>
@@ -610,10 +610,10 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                 <div className="flex justify-between">
-                   <span>Speaking Rate</span>
-                   <span className="font-medium">{analysisData.speakingRate}</span>
-                 </div>
+                  <div className="flex justify-between">
+                    <span>Speaking Rate</span>
+                    <span className="font-medium">Optimal Pace</span>
+                  </div>
                 <div className="flex justify-between">
                   <span>Pause Frequency</span>
                   <span className="font-medium">{analysisData.pauseFrequency}</span>
@@ -760,22 +760,22 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
                 </ResponsiveContainer>
               </div>
               <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                <div className="text-center">
-                  <div className="font-medium text-primary">Peak Confidence</div>
-                  <div className="text-muted-foreground">{Math.max(...emotionTimelineData.map(d => d.confidence))}%</div>
-                </div>
-                <div className="text-center">
-                  <div className="font-medium text-accent">Peak Enthusiasm</div>
-                  <div className="text-muted-foreground">{Math.max(...emotionTimelineData.map(d => d.enthusiasm))}%</div>
-                </div>
-                <div className="text-center">
-                  <div className="font-medium text-secondary">Peak Composure</div>
-                  <div className="text-muted-foreground">{Math.max(...emotionTimelineData.map(d => d.composure))}%</div>
-                </div>
-                <div className="text-center">
-                  <div className="font-medium text-muted-foreground">Peak Trust</div>
-                  <div className="text-muted-foreground">{Math.max(...emotionTimelineData.map(d => d.trust))}%</div>
-                </div>
+                 <div className="text-center">
+                   <div className="font-medium text-primary">Peak Confidence</div>
+                   <div className="text-muted-foreground">{Math.round(Math.max(...emotionTimelineData.map(d => d.confidence)) * 10) / 10}%</div>
+                 </div>
+                 <div className="text-center">
+                   <div className="font-medium text-accent">Peak Enthusiasm</div>
+                   <div className="text-muted-foreground">{Math.round(Math.max(...emotionTimelineData.map(d => d.enthusiasm)) * 10) / 10}%</div>
+                 </div>
+                 <div className="text-center">
+                   <div className="font-medium text-secondary">Peak Composure</div>
+                   <div className="text-muted-foreground">{Math.round(Math.max(...emotionTimelineData.map(d => d.composure)) * 10) / 10}%</div>
+                 </div>
+                 <div className="text-center">
+                   <div className="font-medium text-muted-foreground">Peak Trust</div>
+                   <div className="text-muted-foreground">{Math.round(Math.max(...emotionTimelineData.map(d => d.trust)) * 10) / 10}%</div>
+                 </div>
               </div>
             </CardContent>
           </Card>
@@ -786,11 +786,11 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <BarChart3 className="h-5 w-5" />
-                Performance Timeline
-              </CardTitle>
-               <CardDescription>
-                 Analysis of key moments throughout the video with visual indicators
-               </CardDescription>
+                 Performance Timeline
+               </CardTitle>
+                <CardDescription>
+                  Analysis of key moments throughout the video with visual indicators
+                </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
@@ -852,24 +852,24 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
                         </div>
                         
                         {/* Performance Metrics */}
-                        <div className="grid grid-cols-2 gap-3">
-                          <div className="bg-primary/5 rounded p-2">
-                            <div className="text-xs text-muted-foreground">Confidence</div>
-                            <div className="text-sm font-medium text-primary">{Math.round(item.confidence || 0)}%</div>
-                          </div>
-                          <div className="bg-accent/5 rounded p-2">
-                            <div className="text-xs text-muted-foreground">Engagement</div>
-                            <div className="text-sm font-medium text-accent">{Math.round(item.engagement || 0)}%</div>
-                          </div>
-                        </div>
+                         <div className="grid grid-cols-2 gap-3">
+                           <div className="bg-primary/5 rounded p-2">
+                             <div className="text-xs text-muted-foreground">Confidence</div>
+                             <div className="text-sm font-medium text-primary">{Math.round(item.confidence || 0)}%</div>
+                           </div>
+                           <div className="bg-accent/5 rounded p-2">
+                             <div className="text-xs text-muted-foreground">Engagement</div>
+                             <div className="text-sm font-medium text-accent">{Math.round(item.engagement || 0)}%</div>
+                           </div>
+                         </div>
                         
-                        {/* Key Insight */}
-                        <div className="bg-secondary/10 rounded-lg p-3">
-                          <h4 className="text-xs font-medium text-secondary mb-1">Executive Communication Insight</h4>
-                          <p className="text-xs text-muted-foreground">
-                            {item.keyInsight}
-                          </p>
-                        </div>
+                         {/* Key Insight */}
+                         <div className="bg-secondary/10 rounded-lg p-3">
+                           <h4 className="text-xs font-medium text-secondary mb-1">Executive Communication Insight</h4>
+                           <p className="text-xs text-muted-foreground">
+                             {item.keyInsight}
+                           </p>
+                         </div>
                       </div>
                     </div>
                   </div>
