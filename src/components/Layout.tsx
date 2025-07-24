@@ -35,7 +35,7 @@ export default function Layout({
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Clock className="h-4 w-4" />
-                月間使用時間: {currentUsageHours}/{maxUsageHours}時間
+                Monthly Usage: {currentUsageHours}/{maxUsageHours} hours
               </div>
               <Badge variant="secondary" className="px-3 py-1">
                 {userProfile?.name || user?.email}

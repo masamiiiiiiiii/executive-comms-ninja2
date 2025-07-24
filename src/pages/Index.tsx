@@ -119,8 +119,8 @@ const [analysisDetails, setAnalysisDetails] = useState({
       if (error) {
         console.error('Analysis error:', error);
         toast({
-          title: "分析エラー",
-          description: "動画の分析中にエラーが発生しました。もう一度お試しください。",
+          title: "Analysis Error",
+          description: "An error occurred during video analysis. Please try again.",
           variant: "destructive",
         });
         setStep("person");
@@ -130,15 +130,15 @@ const [analysisDetails, setAnalysisDetails] = useState({
       console.log('Analysis completed:', data);
       setAnalysisResults(data.analysisResults);
       toast({
-        title: "分析完了",
-        description: "動画の分析が完了しました！",
+        title: "Analysis Complete",
+        description: "Video analysis has been completed successfully!",
       });
       
     } catch (error) {
       console.error('Unexpected error:', error);
       toast({
-        title: "エラー",
-        description: "予期しないエラーが発生しました。",
+        title: "Error",
+        description: "An unexpected error occurred. Please try again.",
         variant: "destructive",
       });
       setStep("person");
@@ -245,7 +245,7 @@ const [analysisDetails, setAnalysisDetails] = useState({
               Executive Comms Ninja
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-4">
-              経営陣の動画インタビューを分析し、コミュニケーション力を向上させる
+              Advanced AI-powered analysis of executive video interviews to enhance communication effectiveness
             </p>
           </div>
 

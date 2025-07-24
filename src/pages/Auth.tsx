@@ -25,17 +25,17 @@ const Auth = () => {
       if (error) {
         toast({
           variant: "destructive",
-          title: "ログインエラー",
+          title: "Authentication Error",
           description: error.message === 'Invalid login credentials' 
-            ? 'メールアドレスまたはパスワードが正しくありません。'
+            ? 'Invalid email address or password. Please check your credentials and try again.'
             : error.message,
         });
       }
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "エラー",
-        description: "ログイン中にエラーが発生しました。",
+        title: "Error",
+        description: "An error occurred during sign in. Please try again.",
       });
     } finally {
       setLoading(false);
@@ -51,20 +51,20 @@ const Auth = () => {
       if (error) {
         toast({
           variant: "destructive",
-          title: "サインアップエラー",
+          title: "Registration Error",
           description: error.message,
         });
       } else {
         toast({
-          title: "サインアップ完了",
-          description: "確認メールをお送りしました。メール内のリンクをクリックしてアカウントを有効化してください。",
+          title: "Registration Successful",
+          description: "A confirmation email has been sent. Please click the link in the email to activate your account.",
         });
       }
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "エラー",
-        description: "サインアップ中にエラーが発生しました。",
+        title: "Error",
+        description: "An error occurred during registration. Please try again.",
       });
     } finally {
       setLoading(false);
@@ -79,20 +79,20 @@ const Auth = () => {
             Executive Comms Ninja
           </CardTitle>
           <CardDescription>
-            グローバル広報チーム専用ツール
+            Advanced Communication Analytics for Global PR Teams
           </CardDescription>
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="signin" className="w-full">
             <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="signin">ログイン</TabsTrigger>
-              <TabsTrigger value="signup">サインアップ</TabsTrigger>
+              <TabsTrigger value="signin">Sign In</TabsTrigger>
+              <TabsTrigger value="signup">Sign Up</TabsTrigger>
             </TabsList>
             
             <TabsContent value="signin">
               <form onSubmit={handleSignIn} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="email">メールアドレス</Label>
+                  <Label htmlFor="email">Email Address</Label>
                   <Input
                     id="email"
                     type="email"
@@ -103,24 +103,24 @@ const Auth = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="password">パスワード</Label>
+                  <Label htmlFor="password">Password</Label>
                   <Input
                     id="password"
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    placeholder="パスワード"
+                    placeholder="Enter your password"
                   />
                 </div>
                 <Button type="submit" className="w-full" disabled={loading}>
                   {loading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      ログイン中...
+                      Signing in...
                     </>
                   ) : (
-                    'ログイン'
+                    'Sign In'
                   )}
                 </Button>
               </form>
@@ -129,18 +129,18 @@ const Auth = () => {
             <TabsContent value="signup">
               <form onSubmit={handleSignUp} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="signup-name">お名前</Label>
+                  <Label htmlFor="signup-name">Full Name</Label>
                   <Input
                     id="signup-name"
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
-                    placeholder="山田太郎"
+                    placeholder="Enter your full name"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signup-email">メールアドレス</Label>
+                  <Label htmlFor="signup-email">Email Address</Label>
                   <Input
                     id="signup-email"
                     type="email"
@@ -151,14 +151,14 @@ const Auth = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signup-password">パスワード</Label>
+                  <Label htmlFor="signup-password">Password</Label>
                   <Input
                     id="signup-password"
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    placeholder="パスワード（8文字以上）"
+                    placeholder="Password (8+ characters)"
                     minLength={8}
                   />
                 </div>
@@ -166,10 +166,10 @@ const Auth = () => {
                   {loading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      サインアップ中...
+                      Creating account...
                     </>
                   ) : (
-                    'サインアップ'
+                    'Sign Up'
                   )}
                 </Button>
               </form>

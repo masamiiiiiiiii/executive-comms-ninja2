@@ -50,8 +50,8 @@ const Dashboard = () => {
       if (error) {
         console.error('Error loading analyses:', error);
         toast({
-          title: "エラー",
-          description: "分析履歴の読み込みに失敗しました。",
+          title: "Error",
+          description: "Failed to load analysis history. Please try again.",
           variant: "destructive",
         });
         return;

@@ -28,24 +28,24 @@ interface AnalysisSettingsProps {
 
 const AnalysisSettings = ({ onSettingsChange, currentSettings }: AnalysisSettingsProps) => {
   const [settings, setSettings] = useState({
-    // 分析感度設定
+    // Analysis sensitivity settings
     confidenceThreshold: currentSettings?.confidenceThreshold || 75,
     voiceAnalysisDepth: currentSettings?.voiceAnalysisDepth || 'standard',
     emotionSensitivity: currentSettings?.emotionSensitivity || 80,
     gestureDetection: currentSettings?.gestureDetection || true,
     
-    // 業界比較設定
+    // Industry comparison settings
     industryBenchmark: currentSettings?.industryBenchmark || 'technology',
     executiveLevel: currentSettings?.executiveLevel || 'ceo',
     companySize: currentSettings?.companySize || 'large',
     
-    // 表示設定
+    // Display settings
     showDetailedMetrics: currentSettings?.showDetailedMetrics || true,
     showEmotionTimeline: currentSettings?.showEmotionTimeline || true,
     showBenchmarkComparison: currentSettings?.showBenchmarkComparison || true,
     showRecommendations: currentSettings?.showRecommendations || true,
     
-    // レポート設定
+    // Report settings
     reportLanguage: currentSettings?.reportLanguage || 'japanese',
     reportDetail: currentSettings?.reportDetail || 'comprehensive',
     exportFormat: currentSettings?.exportFormat || 'csv'
@@ -98,7 +98,7 @@ const AnalysisSettings = ({ onSettingsChange, currentSettings }: AnalysisSetting
           setSettings(importedSettings);
           onSettingsChange(importedSettings);
         } catch (error) {
-          console.error('設定ファイルの読み込みに失敗しました:', error);
+          console.error('Failed to load settings file:', error);
         }
       };
       reader.readAsText(file);
@@ -161,7 +161,7 @@ const AnalysisSettings = ({ onSettingsChange, currentSettings }: AnalysisSetting
         </TabsList>
 
         <TabsContent value="analysis" className="space-y-6 animate-fade-in">
-          {/* 分析感度設定 */}
+          {/* Analysis sensitivity settings */}
           <Card className="shadow-lg border-0 bg-gradient-to-br from-card to-primary/5 hover-scale transition-all duration-300">
             <CardHeader>
               <CardTitle className="flex items-center gap-3">
