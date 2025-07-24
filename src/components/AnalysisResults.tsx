@@ -19,7 +19,7 @@ import {
   Info,
   Download
 } from "lucide-react";
-import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } from 'recharts';
+import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, BarChart, Bar } from 'recharts';
 
 interface AnalysisResultsProps {
   videoTitle: string;
@@ -37,16 +37,53 @@ interface AnalysisResultsProps {
 }
 
 const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResults }: AnalysisResultsProps) => {
-  // モックデータ
+  // 詳細分析データ
   const overallScore = 78;
   const analysisData = {
+    // コア指標
     confidence: 82,
     authenticity: 75,
     engagement: 80,
     clarity: 77,
+    // 詳細指標
+    eyeContact: 79,
+    voiceStability: 84,
+    gestureEffectiveness: 72,
+    speechPacing: 68,
+    facialExpression: 86,
+    bodyLanguage: 73,
+    messageCoherence: 81,
+    credibility: 77,
+    // 音声分析
     duration: "2:34",
-    speakingRate: "145 wpm"
+    speakingRate: "145 wpm",
+    pauseFrequency: "8.2/min",
+    volumeVariation: "12dB",
+    // 言語分析
+    vocabularyLevel: "Professional",
+    sentimentScore: 0.73,
+    keywordDensity: "Optimal"
   };
+
+  // 時系列感情変化データ
+  const emotionTimelineData = [
+    { time: "0:00", confidence: 75, enthusiasm: 70, composure: 80, trust: 72 },
+    { time: "0:30", confidence: 78, enthusiasm: 75, composure: 82, trust: 74 },
+    { time: "1:00", confidence: 85, enthusiasm: 88, composure: 78, trust: 80 },
+    { time: "1:30", confidence: 80, enthusiasm: 82, composure: 85, trust: 82 },
+    { time: "2:00", confidence: 88, enthusiasm: 90, composure: 83, trust: 85 },
+    { time: "2:30", confidence: 84, enthusiasm: 85, composure: 87, trust: 83 }
+  ];
+
+  // パフォーマンス比較データ（業界平均との比較）
+  const benchmarkData = [
+    { metric: "Confidence", current: 82, industry: 74, ceo: 89 },
+    { metric: "Trustworthiness", current: 75, industry: 78, ceo: 85 },
+    { metric: "Engagement", current: 80, industry: 72, ceo: 87 },
+    { metric: "Clarity", current: 77, industry: 75, ceo: 84 },
+    { metric: "Eye Contact", current: 79, industry: 70, ceo: 88 },
+    { metric: "Voice Stability", current: 84, industry: 76, ceo: 91 }
+  ];
 
   // レーダーチャート用感情データ（5角形）
   const emotionRadarData = [
@@ -236,8 +273,9 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
       </Card>
 
       <Tabs defaultValue="overview" className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="grid w-full grid-cols-5">
           <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="detailed">Detailed Metrics</TabsTrigger>
           <TabsTrigger value="emotions">Emotion Analysis</TabsTrigger>
           <TabsTrigger value="timeline">Timeline</TabsTrigger>
           <TabsTrigger value="recommendations">Recommendations</TabsTrigger>
@@ -378,6 +416,181 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
           </div>
         </TabsContent>
 
+        <TabsContent value="detailed" className="space-y-4">
+          {/* 詳細メトリクス */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium flex items-center gap-2">
+                  <Eye className="h-4 w-4" />
+                  Eye Contact
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{analysisData.eyeContact}%</div>
+                <Progress value={analysisData.eyeContact} className="mt-2" />
+                <p className="text-xs text-muted-foreground mt-1">Camera engagement rate</p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium flex items-center gap-2">
+                  <Mic className="h-4 w-4" />
+                  Voice Stability
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{analysisData.voiceStability}%</div>
+                <Progress value={analysisData.voiceStability} className="mt-2" />
+                <p className="text-xs text-muted-foreground mt-1">Consistent tone & pace</p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium flex items-center gap-2">
+                  <Users className="h-4 w-4" />
+                  Gesture Effectiveness
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{analysisData.gestureEffectiveness}%</div>
+                <Progress value={analysisData.gestureEffectiveness} className="mt-2" />
+                <p className="text-xs text-muted-foreground mt-1">Hand movement impact</p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium flex items-center gap-2">
+                  <Clock className="h-4 w-4" />
+                  Speech Pacing
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{analysisData.speechPacing}%</div>
+                <Progress value={analysisData.speechPacing} className="mt-2" />
+                <p className="text-xs text-muted-foreground mt-1">Optimal speed rating</p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium flex items-center gap-2">
+                  <Smile className="h-4 w-4" />
+                  Facial Expression
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{analysisData.facialExpression}%</div>
+                <Progress value={analysisData.facialExpression} className="mt-2" />
+                <p className="text-xs text-muted-foreground mt-1">Natural expression</p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-sm font-medium flex items-center gap-2">
+                  <TrendingUp className="h-4 w-4" />
+                  Message Coherence
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{analysisData.messageCoherence}%</div>
+                <Progress value={analysisData.messageCoherence} className="mt-2" />
+                <p className="text-xs text-muted-foreground mt-1">Logical flow</p>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* 音声・言語分析詳細 */}
+          <div className="grid md:grid-cols-2 gap-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Mic className="h-5 w-5" />
+                  Advanced Voice Analysis
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="flex justify-between">
+                  <span>Speaking Rate</span>
+                  <span className="font-medium">{analysisData.speakingRate}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Pause Frequency</span>
+                  <span className="font-medium">{analysisData.pauseFrequency}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Volume Variation</span>
+                  <span className="font-medium">{analysisData.volumeVariation}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Voice Clarity</span>
+                  <Badge variant="secondary">Excellent</Badge>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <MessageSquare className="h-5 w-5" />
+                  Language Analysis
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="flex justify-between">
+                  <span>Vocabulary Level</span>
+                  <span className="font-medium">{analysisData.vocabularyLevel}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Sentiment Score</span>
+                  <span className="font-medium">{analysisData.sentimentScore}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Keyword Density</span>
+                  <Badge variant="secondary">{analysisData.keywordDensity}</Badge>
+                </div>
+                <div className="flex justify-between">
+                  <span>Message Structure</span>
+                  <Badge variant="secondary">Well-organized</Badge>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* 業界比較ベンチマーク */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <BarChart3 className="h-5 w-5" />
+                Performance Benchmark Comparison
+              </CardTitle>
+              <CardDescription>
+                Your performance vs Industry Average vs Top CEOs
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="h-80 w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={benchmarkData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="metric" />
+                    <YAxis domain={[0, 100]} />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="current" fill="hsl(var(--primary))" name="Your Score" />
+                    <Bar dataKey="industry" fill="hsl(var(--muted))" name="Industry Average" />
+                    <Bar dataKey="ceo" fill="hsl(var(--accent))" name="Top CEOs" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
         <TabsContent value="emotions" className="space-y-4">
           <Card>
             <CardHeader>
@@ -419,6 +632,54 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
                 <p className="text-sm text-muted-foreground">
                   {dataSources.emotion}
                 </p>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* 時系列感情変化グラフ */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <TrendingUp className="h-5 w-5" />
+                Emotion Timeline Analysis
+              </CardTitle>
+              <CardDescription>
+                How your emotional expression evolved throughout the video
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="h-80 w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={emotionTimelineData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="time" />
+                    <YAxis domain={[60, 100]} />
+                    <Tooltip />
+                    <Legend />
+                    <Line type="monotone" dataKey="confidence" stroke="hsl(var(--primary))" strokeWidth={2} name="Confidence" />
+                    <Line type="monotone" dataKey="enthusiasm" stroke="hsl(var(--accent))" strokeWidth={2} name="Enthusiasm" />
+                    <Line type="monotone" dataKey="composure" stroke="hsl(var(--secondary))" strokeWidth={2} name="Composure" />
+                    <Line type="monotone" dataKey="trust" stroke="hsl(var(--muted-foreground))" strokeWidth={2} name="Trust" />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+              <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                <div className="text-center">
+                  <div className="font-medium text-primary">Peak Confidence</div>
+                  <div className="text-muted-foreground">2:00 - 88%</div>
+                </div>
+                <div className="text-center">
+                  <div className="font-medium text-accent">Peak Enthusiasm</div>
+                  <div className="text-muted-foreground">2:00 - 90%</div>
+                </div>
+                <div className="text-center">
+                  <div className="font-medium text-secondary">Peak Composure</div>
+                  <div className="text-muted-foreground">2:30 - 87%</div>
+                </div>
+                <div className="text-center">
+                  <div className="font-medium text-muted-foreground">Peak Trust</div>
+                  <div className="text-muted-foreground">2:00 - 85%</div>
+                </div>
               </div>
             </CardContent>
           </Card>
