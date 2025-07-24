@@ -103,8 +103,44 @@ const Index = () => {
     setAnalyzing(true);
     console.log("Analyzing video:", youtubeUrl, "Details:", analysisDetails);
     
-    // Mock analysis process
-    await new Promise(resolve => setTimeout(resolve, 3000));
+    try {
+      const { data, error } = await supabase.functions.invoke('analyze-video', {
+        body: {
+          youtubeUrl: youtubeUrl,
+          company: analysisDetails.company,
+          role: analysisDetails.role,
+          intervieweeName: analysisDetails.intervieweeName,
+          targetPerson: analysisDetails.targetPerson
+        }
+      });
+
+      if (error) {
+        console.error('Analysis error:', error);
+        toast({
+          title: "分析エラー",
+          description: "動画の分析中にエラーが発生しました。もう一度お試しください。",
+          variant: "destructive",
+        });
+        setStep("person");
+        return;
+      }
+
+      console.log('Analysis completed:', data);
+      toast({
+        title: "分析完了",
+        description: "動画の分析が完了しました！",
+      });
+      
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      toast({
+        title: "エラー",
+        description: "予期しないエラーが発生しました。",
+        variant: "destructive",
+      });
+      setStep("person");
+      return;
+    }
     
     setAnalyzing(false);
     setStep("results");
