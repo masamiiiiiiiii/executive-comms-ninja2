@@ -38,61 +38,56 @@ interface AnalysisResultsProps {
 }
 
 const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResults }: AnalysisResultsProps) => {
-  // 詳細分析データ
-  const overallScore = 78;
+  // 実際の分析結果を使用、フォールバック値を設定
+  const overallScore = analysisResults?.overallScore || 0;
   const analysisData = {
     // コア指標
-    confidence: 82,
-    authenticity: 75,
-    engagement: 80,
-    clarity: 77,
+    confidence: analysisResults?.confidence || 0,
+    authenticity: analysisResults?.authenticity || 0,
+    engagement: analysisResults?.engagement || 0,
+    clarity: analysisResults?.clarity || 0,
     // 詳細指標
-    eyeContact: 79,
-    voiceStability: 84,
-    gestureEffectiveness: 72,
-    speechPacing: 68,
-    facialExpression: 86,
-    bodyLanguage: 73,
-    messageCoherence: 81,
-    credibility: 77,
+    eyeContact: analysisResults?.eyeContact || 0,
+    voiceStability: analysisResults?.voiceStability || 0,
+    gestureEffectiveness: analysisResults?.gestureEffectiveness || 0,
+    speechPacing: analysisResults?.speechPacing || 0,
+    facialExpression: analysisResults?.facialExpression || 0,
+    bodyLanguage: analysisResults?.bodyLanguage || 0,
+    messageCoherence: analysisResults?.messageCoherence || 0,
+    credibility: analysisResults?.credibility || 0,
     // 音声分析
-    duration: "2:34",
-    speakingRate: "145 wpm",
-    pauseFrequency: "8.2/min",
-    volumeVariation: "12dB",
+    duration: analysisResults?.duration || "0:00",
+    speakingRate: analysisResults?.speakingRate || "0 wpm",
+    pauseFrequency: analysisResults?.pauseFrequency || "0/min",
+    volumeVariation: analysisResults?.volumeVariation || "0dB",
     // 言語分析
-    vocabularyLevel: "Professional",
-    sentimentScore: 0.73,
-    keywordDensity: "Optimal"
+    vocabularyLevel: analysisResults?.vocabularyLevel || "Unknown",
+    sentimentScore: analysisResults?.sentimentScore || 0,
+    keywordDensity: analysisResults?.keywordDensity || "Unknown"
   };
 
-  // 時系列感情変化データ
-  const emotionTimelineData = [
-    { time: "0:00", confidence: 75, enthusiasm: 70, composure: 80, trust: 72 },
-    { time: "0:30", confidence: 78, enthusiasm: 75, composure: 82, trust: 74 },
-    { time: "1:00", confidence: 85, enthusiasm: 88, composure: 78, trust: 80 },
-    { time: "1:30", confidence: 80, enthusiasm: 82, composure: 85, trust: 82 },
-    { time: "2:00", confidence: 88, enthusiasm: 90, composure: 83, trust: 85 },
-    { time: "2:30", confidence: 84, enthusiasm: 85, composure: 87, trust: 83 }
+  // 時系列感情変化データ（実際の分析結果から取得、フォールバック付き）
+  const emotionTimelineData = analysisResults?.emotionTimeline || [
+    { time: "0:00", confidence: 0, enthusiasm: 0, composure: 0, trust: 0 }
   ];
 
-  // パフォーマンス比較データ（業界平均との比較）
+  // パフォーマンス比較データ（実際の分析結果から取得）
   const benchmarkData = [
-    { metric: "Confidence", current: 82, industry: 74, ceo: 89 },
-    { metric: "Trustworthiness", current: 75, industry: 78, ceo: 85 },
-    { metric: "Engagement", current: 80, industry: 72, ceo: 87 },
-    { metric: "Clarity", current: 77, industry: 75, ceo: 84 },
-    { metric: "Eye Contact", current: 79, industry: 70, ceo: 88 },
-    { metric: "Voice Stability", current: 84, industry: 76, ceo: 91 }
+    { metric: "Confidence", current: analysisData.confidence, industry: 74, ceo: 89 },
+    { metric: "Trustworthiness", current: analysisData.authenticity, industry: 78, ceo: 85 },
+    { metric: "Engagement", current: analysisData.engagement, industry: 72, ceo: 87 },
+    { metric: "Clarity", current: analysisData.clarity, industry: 75, ceo: 84 },
+    { metric: "Eye Contact", current: analysisData.eyeContact, industry: 70, ceo: 88 },
+    { metric: "Voice Stability", current: analysisData.voiceStability, industry: 76, ceo: 91 }
   ];
 
-  // レーダーチャート用感情データ（5角形）
-  const emotionRadarData = [
-    { subject: "Confidence", A: 82, fullMark: 100 },
-    { subject: "Trust", A: 75, fullMark: 100 },
-    { subject: "Enthusiasm", A: 88, fullMark: 100 },
-    { subject: "Composure", A: 71, fullMark: 100 },
-    { subject: "Approachability", A: 79, fullMark: 100 }
+  // レーダーチャート用感情データ（実際の分析結果から取得）
+  const emotionRadarData = analysisResults?.emotionRadar || [
+    { subject: "Confidence", A: analysisData.confidence, fullMark: 100 },
+    { subject: "Trust", A: analysisData.authenticity, fullMark: 100 },
+    { subject: "Enthusiasm", A: analysisData.engagement, fullMark: 100 },
+    { subject: "Composure", A: analysisData.clarity, fullMark: 100 },
+    { subject: "Approachability", A: analysisData.facialExpression, fullMark: 100 }
   ];
 
   // データソース情報
@@ -104,75 +99,27 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
     emotion: "Microsoft Face API + Proprietary Emotion Analysis Model"
   };
 
-  // タイムラインデータ（キャプチャ画像付き）
-  const timelineData = [
+  // タイムラインデータ（実際の分析結果から取得、フォールバック付き）
+  const timelineData = analysisResults?.timeline || [
     { 
-      time: "0:15", 
-      event: "Strong Eye Contact", 
-      score: 85, 
-      type: "positive",
+      time: "0:00", 
+      event: "No timeline data available", 
+      score: 0, 
+      type: "neutral",
       thumbnail: "/placeholder.svg",
-      analysis: "Sustained eye contact with camera for 3.2 seconds. Ideal duration for building trust.",
-      annotation: { x: 45, y: 32, label: "Eye Contact" }
-    },
-    { 
-      time: "0:45", 
-      event: "Effective Gestures", 
-      score: 78, 
-      type: "positive",
-      thumbnail: "/placeholder.svg",
-      analysis: "Hand gestures reinforce message effectively. Open-hand gestures enhance trustworthiness.",
-      annotation: { x: 65, y: 55, label: "Hand Movement" }
-    },
-    { 
-      time: "1:20", 
-      event: "Speaking Pace Slightly Fast", 
-      score: 65, 
-      type: "warning",
-      thumbnail: "/placeholder.svg",
-      analysis: "Speaking rate at 180wpm. Exceeds ideal range of 140-160wpm.",
-      annotation: { x: 50, y: 25, label: "Mouth Movement" }
-    },
-    { 
-      time: "2:10", 
-      event: "Rich Facial Expression", 
-      score: 90, 
-      type: "positive",
-      thumbnail: "/placeholder.svg",
-      analysis: "Natural smile sustained for 1.8 seconds. Builds rapport with audience.",
-      annotation: { x: 48, y: 38, label: "Facial Expression" }
+      analysis: "Timeline analysis will be available once video is processed.",
+      annotation: { x: 50, y: 50, label: "No Data" }
     }
   ];
 
-  // 詳細な改善提案（What, Why, How）
-  const detailedRecommendations = [
+  // 詳細な改善提案（実際の分析結果から取得、フォールバック付き）
+  const detailedRecommendations = analysisResults?.recommendations || [
     {
-      what: "Enhance eye contact with camera to improve trustworthiness",
-      why: "Current average eye contact duration is 2.1 seconds, below the B2B presentation average of 3.5 seconds (Fortune 500 CEO analysis data)",
-      how: "IBM CEO Arvind Krishna maintains 4.2 seconds of eye contact during earnings calls",
-      exampleUrl: "https://youtube.com/example-ceo-presentation",
-      benchmark: "Earnings Call Analysis"
-    },
-    {
-      what: "Reduce speaking pace by 10-15% for better comprehension",
-      why: "Current 180wpm exceeds optimal technical presentation range of 140-160wpm (MIT research data)",
-      how: "Microsoft CEO Satya Nadella maintains 155wpm for complex technical explanations",
-      exampleUrl: "https://youtube.com/example-tech-presentation",
-      benchmark: "Technical Presentation Analysis"
-    },
-    {
-      what: "Increase hand gesture frequency by 20% for better engagement",
-      why: "Current rate of 2.3 gestures per minute, but 3-4 per minute is ideal for engagement (Harvard Business Review research)",
-      how: "Salesforce CEO Marc Benioff uses 3.8 effective gestures per minute",
-      exampleUrl: "https://youtube.com/example-engaging-presentation",
-      benchmark: "Engagement Analysis"
-    },
-    {
-      what: "Extend smile duration to improve approachability",
-      why: "Current 1.2-second smile duration, but 2-3 seconds is effective for building rapport (psychology research data)",
-      how: "Adobe CEO Shantanu Narayen demonstrates natural 2.5-second smiles for approachability",
-      exampleUrl: "https://youtube.com/example-approachable-ceo",
-      benchmark: "Rapport Building Analysis"
+      what: "分析結果がありません",
+      why: "動画の処理が完了していないため、具体的な改善提案を生成できません",
+      how: "動画を再度アップロードして分析を実行してください",
+      exampleUrl: "#",
+      benchmark: "システム情報"
     }
   ];
 
