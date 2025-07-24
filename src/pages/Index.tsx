@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { PlayCircle, BarChart3, Users, Brain, ArrowLeft, Clock, LogOut, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import AnalysisResults from "@/components/AnalysisResults";
+import Layout from "@/components/Layout";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -182,82 +183,73 @@ const [analysisDetails, setAnalysisDetails] = useState({
   // Analysis results display
   if (step === "results") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex justify-between items-center mb-6">
-            <Button 
-              variant="ghost" 
-              onClick={handleBack}
-              className="hover:bg-secondary"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Start New Analysis
-            </Button>
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Clock className="h-4 w-4" />
-                月間使用時間: {currentUsageHours}/100時間
-              </div>
-              <Badge variant="secondary" className="px-3 py-1">
-                {userProfile?.name || user?.email}
-              </Badge>
-              <Button variant="ghost" size="sm" onClick={handleSignOut}>
-                <LogOut className="h-4 w-4 mr-2" />
-                Logout
+      <Layout 
+        currentUsageHours={currentUsageHours}
+        maxUsageHours={maxUsageHours}
+        userProfile={userProfile}
+      >
+        <div className="bg-gradient-to-br from-background to-secondary/20 min-h-full">
+          <div className="container mx-auto px-4 py-8">
+            <div className="flex justify-between items-center mb-6">
+              <Button 
+                variant="ghost" 
+                onClick={handleBack}
+                className="hover:bg-secondary"
+              >
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Start New Analysis
               </Button>
             </div>
+            <AnalysisResults 
+              videoTitle={`${analysisDetails.company} ${analysisDetails.role} - ${analysisDetails.intervieweeName}`}
+              videoUrl={youtubeUrl}
+              analysisDetails={analysisDetails}
+              analysisResults={analysisResults}
+            />
           </div>
-          <AnalysisResults 
-            videoTitle={`${analysisDetails.company} ${analysisDetails.role} - ${analysisDetails.intervieweeName}`}
-            videoUrl={youtubeUrl}
-            analysisDetails={analysisDetails}
-            analysisResults={analysisResults}
-          />
         </div>
-      </div>
+      </Layout>
     );
   }
 
   // Loading screen during analysis
   if (step === "analyzing") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary mx-auto mb-4"></div>
-          <h2 className="text-2xl font-bold mb-2">Analyzing Video</h2>
-          <p className="text-muted-foreground">Processing {analysisDetails.intervieweeName} from {analysisDetails.company}...</p>
+      <Layout 
+        currentUsageHours={currentUsageHours}
+        maxUsageHours={maxUsageHours}
+        userProfile={userProfile}
+      >
+        <div className="bg-gradient-to-br from-background to-secondary/20 min-h-full flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary mx-auto mb-4"></div>
+            <h2 className="text-2xl font-bold mb-2">Analyzing Video</h2>
+            <p className="text-muted-foreground">Processing {analysisDetails.intervieweeName} from {analysisDetails.company}...</p>
+          </div>
         </div>
-      </div>
+      </Layout>
     );
   }
 
   // Main form flow
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
-      <div className="container mx-auto px-4 py-16">
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-            Executive Comms Ninja
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-4">
-            経営陣の動画インタビューを分析し、コミュニケーション力を向上させる
-          </p>
-          <div className="flex justify-center items-center gap-6">
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Clock className="h-4 w-4" />
-              月間使用時間: {currentUsageHours}/{maxUsageHours}時間
-            </div>
-            <Badge variant="secondary" className="px-3 py-1">
-              {userProfile?.name || user?.email}
-            </Badge>
-            <Button variant="ghost" size="sm" onClick={handleSignOut}>
-              <LogOut className="h-4 w-4 mr-2" />
-              Logout
-            </Button>
+    <Layout 
+      currentUsageHours={currentUsageHours}
+      maxUsageHours={maxUsageHours}
+      userProfile={userProfile}
+    >
+      <div className="bg-gradient-to-br from-background to-secondary/20 min-h-full">
+        <div className="container mx-auto px-4 py-16">
+          <div className="text-center mb-12">
+            <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+              Executive Comms Ninja
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-4">
+              経営陣の動画インタビューを分析し、コミュニケーション力を向上させる
+            </p>
           </div>
-        </div>
 
-        <div className="max-w-4xl mx-auto space-y-8">
+          <div className="max-w-4xl mx-auto space-y-8">
           {/* Navigation */}
           <div className="flex justify-center mb-8">
             <div className="flex items-center space-x-4">
@@ -495,8 +487,9 @@ const [analysisDetails, setAnalysisDetails] = useState({
             </div>
           )}
         </div>
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
