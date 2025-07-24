@@ -1,18 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { PlayCircle, BarChart3, Users, Brain, ArrowLeft, Clock } from "lucide-react";
+import { PlayCircle, BarChart3, Users, Brain, ArrowLeft, Clock, LogOut, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import AnalysisResults from "@/components/AnalysisResults";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [userEmail, setUserEmail] = useState("");
-  const [userName, setUserName] = useState("");
-  const [usedHours] = useState(23); // Mock data for used hours
+  const { user, session, loading: authLoading, signOut } = useAuth();
   const { toast } = useToast();
+  
+  const [userProfile, setUserProfile] = useState<any>(null);
+  const [currentUsageHours, setCurrentUsageHours] = useState(0);
+  const maxUsageHours = 100;
 
   const [step, setStep] = useState<"input" | "details" | "person" | "analyzing" | "results">("input");
   const [youtubeUrl, setYoutubeUrl] = useState("");
@@ -24,32 +27,57 @@ const Index = () => {
   });
   const [analyzing, setAnalyzing] = useState(false);
 
-  const handleAuthentication = () => {
-    if (!userEmail || !userName) {
-      toast({
-        title: "入力エラー",
-        description: "メールアドレスと名前を入力してください。",
-        variant: "destructive",
-      });
-      return;
+  // Load user profile and usage data
+  useEffect(() => {
+    if (user && session) {
+      loadUserProfile();
+      loadUsageData();
     }
-    
-    // Simple email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(userEmail)) {
-      toast({
-        title: "入力エラー", 
-        description: "有効なメールアドレスを入力してください。",
-        variant: "destructive",
-      });
-      return;
-    }
+  }, [user, session]);
 
-    setIsAuthenticated(true);
-    toast({
-      title: "アクセス承認",
-      description: `${userName}さん、Executive Comms Ninjaへようこそ！`,
-    });
+  const loadUserProfile = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('user_id', user?.id)
+        .single();
+
+      if (error && error.code !== 'PGRST116') {
+        console.error('Error loading profile:', error);
+        return;
+      }
+
+      if (data) {
+        setUserProfile(data);
+      }
+    } catch (error) {
+      console.error('Error loading profile:', error);
+    }
+  };
+
+  const loadUsageData = async () => {
+    try {
+      const currentMonth = new Date().toISOString().slice(0, 7); // YYYY-MM format
+      
+      const { data, error } = await supabase
+        .from('usage_tracking')
+        .select('total_hours_used')
+        .eq('user_id', user?.id)
+        .eq('month_year', currentMonth)
+        .single();
+
+      if (error && error.code !== 'PGRST116') {
+        console.error('Error loading usage:', error);
+        return;
+      }
+
+      if (data) {
+        setCurrentUsageHours(data.total_hours_used);
+      }
+    } catch (error) {
+      console.error('Error loading usage:', error);
+    }
   };
 
   const handleUrlSubmit = () => {
@@ -93,55 +121,23 @@ const Index = () => {
     });
   };
 
-  // Authentication screen
-  if (!isAuthenticated) {
+  const handleSignOut = () => {
+    signOut();
+  };
+
+  // Show loading state
+  if (authLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20 flex items-center justify-center p-4">
-        <Card className="w-full max-w-md">
-          <CardHeader className="text-center">
-            <div className="w-16 h-16 bg-gradient-to-r from-primary to-primary/60 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Users className="h-8 w-8 text-primary-foreground" />
-            </div>
-            <CardTitle className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-              Executive Comms Ninja
-            </CardTitle>
-            <CardDescription>
-              グローバル広報チーム専用ツール<br/>
-              アクセスには認証が必要です
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <label htmlFor="userEmail" className="text-sm font-medium">メールアドレス</label>
-              <Input
-                id="userEmail"
-                type="email"
-                placeholder="your.name@company.com"
-                value={userEmail}
-                onChange={(e) => setUserEmail(e.target.value)}
-              />
-            </div>
-            <div className="space-y-2">
-              <label htmlFor="userName" className="text-sm font-medium">お名前</label>
-              <Input
-                id="userName"
-                type="text"
-                placeholder="山田 太郎"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-              />
-            </div>
-            <Button 
-              onClick={handleAuthentication}
-              className="w-full"
-              disabled={!userEmail || !userName}
-            >
-              アクセス開始
-            </Button>
-          </CardContent>
-        </Card>
+      <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20 flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin" />
       </div>
     );
+  }
+
+  // Redirect to auth if not authenticated
+  if (!user || !session) {
+    window.location.href = '/auth';
+    return null;
   }
 
   // Analysis results display
@@ -161,11 +157,15 @@ const Index = () => {
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Clock className="h-4 w-4" />
-                月間使用時間: {usedHours}/100時間
+                月間使用時間: {currentUsageHours}/100時間
               </div>
               <Badge variant="secondary" className="px-3 py-1">
-                {userName} ({userEmail})
+                {userProfile?.name || user?.email}
               </Badge>
+              <Button variant="ghost" size="sm" onClick={handleSignOut}>
+                <LogOut className="h-4 w-4 mr-2" />
+                Logout
+              </Button>
             </div>
           </div>
           <AnalysisResults 
@@ -205,11 +205,15 @@ const Index = () => {
           <div className="flex justify-center items-center gap-6">
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Clock className="h-4 w-4" />
-              月間使用時間: {usedHours}/100時間
+              月間使用時間: {currentUsageHours}/{maxUsageHours}時間
             </div>
             <Badge variant="secondary" className="px-3 py-1">
-              {userName} ({userEmail})
+              {userProfile?.name || user?.email}
             </Badge>
+            <Button variant="ghost" size="sm" onClick={handleSignOut}>
+              <LogOut className="h-4 w-4 mr-2" />
+              Logout
+            </Button>
           </div>
         </div>
 
@@ -439,12 +443,12 @@ const Index = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-lg">
                     <Users className="h-5 w-5 text-primary" />
-                    B2B Specialized Reports
+                    Communication Strategy
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground">
-                    Corporate communication-focused improvement recommendations and executive benchmarking
+                    Receive actionable recommendations to enhance executive presence and communication effectiveness
                   </p>
                 </CardContent>
               </Card>
