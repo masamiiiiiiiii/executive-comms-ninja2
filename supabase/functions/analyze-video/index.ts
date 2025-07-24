@@ -29,18 +29,26 @@ serve(async (req) => {
     // Initialize Supabase client
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
     const supabaseKey = Deno.env.get('SUPABASE_ANON_KEY')!;
-    const supabase = createClient(supabaseUrl, supabaseKey, {
-      auth: { persistSession: false }
-    });
-
-    // Get user from request
+    
+    // Get auth token from request
     const authHeader = req.headers.get('Authorization');
     if (!authHeader) {
       throw new Error('Authorization header is required');
     }
 
+    const supabase = createClient(supabaseUrl, supabaseKey, {
+      auth: { persistSession: false },
+      global: {
+        headers: {
+          Authorization: authHeader
+        }
+      }
+    });
+
+    // Get user from request
     const { data: { user }, error: authError } = await supabase.auth.getUser(authHeader.replace('Bearer ', ''));
     if (authError || !user) {
+      console.error('Auth error:', authError);
       throw new Error('Invalid authentication');
     }
 
@@ -185,6 +193,7 @@ serve(async (req) => {
     // Update usage tracking
     const currentMonth = new Date().toISOString().slice(0, 7); // YYYY-MM format
     
+    // Use upsert for usage tracking
     const { error: usageError } = await supabase
       .from('usage_tracking')
       .upsert({
@@ -192,7 +201,8 @@ serve(async (req) => {
         month_year: currentMonth,
         total_hours_used: videoDurationHours
       }, {
-        onConflict: 'user_id,month_year'
+        onConflict: 'user_id,month_year',
+        ignoreDuplicates: false
       });
 
     if (usageError) {
