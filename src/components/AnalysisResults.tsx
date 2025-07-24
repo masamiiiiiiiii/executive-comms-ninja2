@@ -100,7 +100,7 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
   };
 
   // タイムラインデータ（実際の分析結果から取得、フォールバック付き）
-  const timelineData = analysisResults?.timeline || [
+  const timelineData = (analysisResults?.timeline || [
     { 
       time: "0:00", 
       event: "No timeline data available", 
@@ -110,7 +110,10 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
       analysis: "Timeline analysis will be available once video is processed.",
       annotation: { x: 50, y: 50, label: "No Data" }
     }
-  ];
+  ]).map(item => ({
+    ...item,
+    annotation: item.annotation || { x: 50, y: 50, label: "No Data" }
+  }));
 
   // 詳細な改善提案（実際の分析結果から取得、フォールバック付き）
   const detailedRecommendations = analysisResults?.recommendations || [
