@@ -20,6 +20,7 @@ import {
   Download
 } from "lucide-react";
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, BarChart, Bar } from 'recharts';
+import AnalysisSettings from './AnalysisSettings';
 
 interface AnalysisResultsProps {
   videoTitle: string;
@@ -294,12 +295,13 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
       </Card>
 
       <Tabs defaultValue="overview" className="w-full">
-        <TabsList className="grid w-full grid-cols-5 bg-gradient-to-r from-card to-secondary/30 p-1 rounded-xl shadow-lg">
+        <TabsList className="grid w-full grid-cols-6 bg-gradient-to-r from-card to-secondary/30 p-1 rounded-xl shadow-lg">
           <TabsTrigger value="overview" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-primary-foreground transition-all duration-300">Overview</TabsTrigger>
           <TabsTrigger value="detailed" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-primary-foreground transition-all duration-300">Detailed Metrics</TabsTrigger>
           <TabsTrigger value="emotions" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-primary-foreground transition-all duration-300">Emotion Analysis</TabsTrigger>
           <TabsTrigger value="timeline" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-primary-foreground transition-all duration-300">Timeline</TabsTrigger>
           <TabsTrigger value="recommendations" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-primary-foreground transition-all duration-300">Recommendations</TabsTrigger>
+          <TabsTrigger value="settings" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-accent data-[state=active]:text-primary-foreground transition-all duration-300">Settings</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-6 animate-fade-in">
@@ -847,6 +849,13 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
               </div>
             </CardContent>
           </Card>
+        </TabsContent>
+
+        <TabsContent value="settings" className="space-y-6 animate-fade-in">
+          <AnalysisSettings 
+            currentSettings={{}} 
+            onSettingsChange={(settings) => console.log('Settings changed:', settings)} 
+          />
         </TabsContent>
       </Tabs>
     </div>
