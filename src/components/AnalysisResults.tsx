@@ -17,10 +17,13 @@ import {
   CheckCircle,
   ExternalLink,
   Info,
-  Download
+  Download,
+  Loader2
 } from "lucide-react";
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, BarChart, Bar } from 'recharts';
 import AnalysisSettings from './AnalysisSettings';
+import { supabase } from "@/integrations/supabase/client";
+import { useState, useEffect } from "react";
 
 interface AnalysisResultsProps {
   videoTitle: string;
@@ -38,6 +41,9 @@ interface AnalysisResultsProps {
 }
 
 const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResults }: AnalysisResultsProps) => {
+  const [timelineImages, setTimelineImages] = useState<{[key: string]: string}>({});
+  const [isGeneratingImages, setIsGeneratingImages] = useState(false);
+
   // Using actual analysis results with fallback values
   const overallScore = analysisResults?.overallScore || 0;
   const analysisData = {
@@ -141,7 +147,7 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
       event: item.event || `Key moment ${index + 1}`,
       score: item.impact === "positive" ? 85 : item.impact === "neutral" ? 70 : 60,
       type: item.impact || "neutral",
-      thumbnail: "/placeholder.svg",
+      thumbnail: timelineImages[item.time || `${index * 30}s`] || "/placeholder.svg",
       analysis: `${item.event || `Analysis point ${index + 1}`} - ${item.impact === "positive" ? "Positive impact on audience engagement" : item.impact === "neutral" ? "Neutral effect, maintains baseline" : "Opportunity for improvement identified"}`,
       annotation: { x: 50 + (index * 10) % 40, y: 40 + (index * 15) % 30, label: item.impact === "positive" ? "Strong" : "Note" },
       confidence: (analysisResults?.emotionAnalysis?.confidence || 70) + (Math.random() * 20 - 10),
@@ -149,11 +155,44 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
       keyInsight: item.keyInsight || `Critical observation at ${item.time || `${index * 30}s`}: Demonstrates ${item.impact === "positive" ? "excellent" : "adequate"} communication technique`
     }))
     : [
-      { time: "0:00", event: "Opening Statement", score: 78, type: "positive", thumbnail: "/placeholder.svg", analysis: "Strong opening with clear objective - Establishes credibility and sets professional tone", annotation: { x: 45, y: 35, label: "Strong" }, confidence: 78, engagement: 82, keyInsight: "Excellent eye contact and confident posture establish immediate authority" },
-      { time: "0:45", event: "Key Message Delivery", score: 85, type: "positive", thumbnail: "/placeholder.svg", analysis: "Clear articulation of main points - Demonstrates subject matter expertise", annotation: { x: 55, y: 42, label: "Peak" }, confidence: 85, engagement: 88, keyInsight: "Strategic pause before key message enhances impact and audience retention" },
-      { time: "1:30", event: "Visual Engagement", score: 72, type: "neutral", thumbnail: "/placeholder.svg", analysis: "Moderate audience connection - Maintains professional demeanor", annotation: { x: 50, y: 48, label: "Note" }, confidence: 72, engagement: 70, keyInsight: "Opportunity to increase gestural emphasis for enhanced message delivery" },
-      { time: "2:15", event: "Closing Remarks", score: 80, type: "positive", thumbnail: "/placeholder.svg", analysis: "Effective conclusion with clear call-to-action - Strong finish", annotation: { x: 52, y: 40, label: "Good" }, confidence: 80, engagement: 83, keyInsight: "Confident conclusion reinforces key messages and demonstrates leadership presence" }
+      { time: "0:00", event: "Opening Statement", score: 78, type: "positive", thumbnail: timelineImages["0:00"] || "/placeholder.svg", analysis: "Strong opening with clear objective - Establishes credibility and sets professional tone", annotation: { x: 45, y: 35, label: "Strong" }, confidence: 78, engagement: 82, keyInsight: "Excellent eye contact and confident posture establish immediate authority" },
+      { time: "0:45", event: "Key Message Delivery", score: 85, type: "positive", thumbnail: timelineImages["0:45"] || "/placeholder.svg", analysis: "Clear articulation of main points - Demonstrates subject matter expertise", annotation: { x: 55, y: 42, label: "Peak" }, confidence: 85, engagement: 88, keyInsight: "Strategic pause before key message enhances impact and audience retention" },
+      { time: "1:30", event: "Visual Engagement", score: 72, type: "neutral", thumbnail: timelineImages["1:30"] || "/placeholder.svg", analysis: "Moderate audience connection - Maintains professional demeanor", annotation: { x: 50, y: 48, label: "Note" }, confidence: 72, engagement: 70, keyInsight: "Opportunity to increase gestural emphasis for enhanced message delivery" },
+      { time: "2:15", event: "Closing Remarks", score: 80, type: "positive", thumbnail: timelineImages["2:15"] || "/placeholder.svg", analysis: "Effective conclusion with clear call-to-action - Strong finish", annotation: { x: 52, y: 40, label: "Good" }, confidence: 80, engagement: 83, keyInsight: "Confident conclusion reinforces key messages and demonstrates leadership presence" }
     ];
+
+  // Generate visual timeline images using AI
+  const generateTimelineVisuals = async () => {
+    if (isGeneratingImages) return;
+    
+    setIsGeneratingImages(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('generate-timeline-visuals', {
+        body: { timelineEvents: timelineData }
+      });
+      
+      if (error) throw error;
+      
+      if (data?.images) {
+        const imageMap: {[key: string]: string} = {};
+        data.images.forEach((img: any) => {
+          imageMap[img.time] = img.imageUrl;
+        });
+        setTimelineImages(imageMap);
+      }
+    } catch (error) {
+      console.error('Error generating timeline visuals:', error);
+    } finally {
+      setIsGeneratingImages(false);
+    }
+  };
+
+  // Use effect to generate images when timeline data is available
+  useEffect(() => {
+    if (timelineData.length > 0 && Object.keys(timelineImages).length === 0) {
+      generateTimelineVisuals();
+    }
+  }, [timelineData]);
 
   // Enhanced improvement recommendations with detailed analysis
   const detailedRecommendations = analysisResults?.recommendations?.length > 0 ?
@@ -756,15 +795,17 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
           </Card>
         </TabsContent>
 
-        <TabsContent value="timeline" className="space-y-4">
+         <TabsContent value="timeline" className="space-y-4">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <BarChart3 className="h-5 w-5" />
-                Performance Timeline (with Capture Images)
+                Performance Timeline (with AI-Generated Visuals)
+                {isGeneratingImages && <Loader2 className="h-4 w-4 animate-spin ml-2" />}
               </CardTitle>
               <CardDescription>
-                Analysis of key points throughout the video with capture images
+                Analysis of key points throughout the video with AI-generated visual representations
+                {isGeneratingImages && " - Generating visual aids..."}
               </CardDescription>
             </CardHeader>
             <CardContent>
