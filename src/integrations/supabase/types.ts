@@ -14,7 +14,102 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          name: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          name: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      usage_tracking: {
+        Row: {
+          created_at: string
+          id: string
+          month_year: string
+          total_hours_used: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          month_year: string
+          total_hours_used?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          month_year?: string
+          total_hours_used?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      video_analyses: {
+        Row: {
+          analysis_results: Json | null
+          company: string
+          created_at: string
+          id: string
+          role: string
+          target_person: string
+          updated_at: string
+          user_id: string
+          video_duration_hours: number
+          video_title: string | null
+          youtube_url: string
+        }
+        Insert: {
+          analysis_results?: Json | null
+          company: string
+          created_at?: string
+          id?: string
+          role: string
+          target_person: string
+          updated_at?: string
+          user_id: string
+          video_duration_hours: number
+          video_title?: string | null
+          youtube_url: string
+        }
+        Update: {
+          analysis_results?: Json | null
+          company?: string
+          created_at?: string
+          id?: string
+          role?: string
+          target_person?: string
+          updated_at?: string
+          user_id?: string
+          video_duration_hours?: number
+          video_title?: string | null
+          youtube_url?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
