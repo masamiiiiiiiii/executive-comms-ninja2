@@ -158,11 +158,24 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
     emotion: "Microsoft Face API + Proprietary Emotion Analysis Model"
   };
 
+  // Timeline event translations
+  const translateTimelineEvent = (text: string): string => {
+    const timelineTranslations: Record<string, string> = {
+      'アジアのデータセンター需要に関する説明': 'Explanation of Asia data center demand trends',
+      'デジタルインフラへの投資の重要性': 'Importance of digital infrastructure investment',
+      '地政学的リスクの影響について': 'Impact of geopolitical risks',
+      '市場成長の予測と分析': 'Market growth forecasting and analysis',
+      '競合他社との差別化戦略': 'Competitive differentiation strategy',
+      '顧客ニーズの変化への対応': 'Adapting to changing customer needs'
+    };
+    return timelineTranslations[text] || text;
+  };
+
   // Timeline data with enhanced screen capture simulation
   const timelineData = analysisResults?.timeline?.length > 0 ? 
     analysisResults.timeline.map((item: any, index: number) => ({
       time: item.time || `${index * 30}s`,
-      event: item.event || `Key moment ${index + 1}`,
+      event: translateTimelineEvent(item.event) || `Key moment ${index + 1}`,
       score: item.impact === "positive" ? 85 : item.impact === "neutral" ? 70 : 60,
       type: item.impact || "neutral",
       thumbnail: createFaceIcon(analysisDetails.targetPerson.toLowerCase().includes('female') ? 'female' : 'male', item.impact || "neutral"),
@@ -180,14 +193,43 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
     ];
 
 
+  // Translation helper for Japanese content
+  const translateToEnglish = (text: string): string => {
+    const translations: Record<string, string> = {
+      // Categories
+      'メッセージング': 'Messaging',
+      'プレゼンテーション': 'Presentation',
+      'コミュニケーション': 'Communication',
+      
+      // Recommendations
+      '地政学的リスクへの具体的な対応策の説明': 'Articulate specific geopolitical risk mitigation strategies',
+      '地域特有の課題についての言及': 'Address region-specific market challenges',
+      'より具体的なデータの提示': 'Present more specific data points',
+      '視聴者との関係性の構築': 'Build stronger audience connection',
+      
+      // Rationale
+      '視聴者の懸念に直接対応するため': 'To directly address audience concerns and build confidence',
+      'より詳細な市場理解を示すため': 'To demonstrate deeper market understanding and expertise',
+      '信頼性を向上させるため': 'To enhance credibility and trustworthiness',
+      'エンゲージメントを高めるため': 'To increase audience engagement',
+      
+      // Implementation
+      '具体的な事例や数値を用いた説明': 'Use specific case studies and quantitative data',
+      '各主要市場における具体的な状況の説明': 'Provide detailed analysis of key market conditions',
+      'より詳細なリスク分析の提示': 'Present comprehensive risk analysis',
+      'インタラクティブな要素の追加': 'Incorporate interactive elements'
+    };
+    return translations[text] || text;
+  };
+
   // Enhanced improvement recommendations with detailed analysis
   const detailedRecommendations = analysisResults?.recommendations?.length > 0 ?
     analysisResults.recommendations.map((rec: any) => ({
-      what: rec.what || "Enhance communication effectiveness",
-      why: rec.why || "Based on comprehensive analysis of performance metrics",
-      how: rec.how || "Implement targeted improvement strategies",
+      what: translateToEnglish(rec.what) || "Enhance communication effectiveness",
+      why: translateToEnglish(rec.why) || "Based on comprehensive analysis of performance metrics",
+      how: translateToEnglish(rec.how) || "Implement targeted improvement strategies",
       exampleUrl: rec.exampleUrl || "#",
-      benchmark: rec.category || "Executive Level",
+      benchmark: translateToEnglish(rec.category) || "Executive Level",
       priority: rec.priority || "Medium",
       timeframe: rec.timeframe || "2-4 weeks",
       expectedImprovement: rec.expectedImprovement || "10-15%"
