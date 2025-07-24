@@ -1,14 +1,18 @@
 import { ReactNode, useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
+import { useAccessControl } from '@/hooks/useAccessControl';
 
 interface ProtectedRouteProps {
   children: ReactNode;
 }
 
 export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const { user, loading } = useAuth();
+  const { user, loading: authLoading } = useAuth();
+  const { hasAccess, isLoading: accessLoading } = useAccessControl();
   const location = useLocation();
+
+  const loading = authLoading || accessLoading;
 
   useEffect(() => {
     // Log access attempts for security monitoring
@@ -28,6 +32,11 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   if (!user) {
     // Store the attempted URL for redirect after login
     return <Navigate to="/auth" state={{ from: location.pathname }} replace />;
+  }
+
+  if (!hasAccess) {
+    // User is authenticated but doesn't have access
+    return <Navigate to="/access-request" replace />;
   }
 
   return <>{children}</>;

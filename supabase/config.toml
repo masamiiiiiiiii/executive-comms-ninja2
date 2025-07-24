@@ -65,3 +65,6 @@ inspector_port = 54289
 
 [functions.analyze-video]
 verify_jwt = true
+
+[functions.send-access-notification]
+verify_jwt = false
