@@ -18,7 +18,7 @@ export type Database = {
         Row: {
           approved_at: string | null
           created_at: string
-          email: string
+          email: string | null
           expires_at: string | null
           id: string
           name: string
@@ -28,7 +28,7 @@ export type Database = {
         Insert: {
           approved_at?: string | null
           created_at?: string
-          email: string
+          email?: string | null
           expires_at?: string | null
           id?: string
           name: string
@@ -38,7 +38,7 @@ export type Database = {
         Update: {
           approved_at?: string | null
           created_at?: string
-          email?: string
+          email?: string | null
           expires_at?: string | null
           id?: string
           name?: string
