@@ -86,15 +86,15 @@ serve(async (req) => {
 })
 
 function generateVisualPrompt(event: TimelineEvent): string {
-  const baseStyle = "Professional portrait line drawing, detailed human face modeling, sophisticated sketch style, business executive portrait, clean lineart, realistic facial features, elegant composition"
+  const baseStyle = "Minimalist business icon, clean human silhouette, modern line design, professional simplicity, vector style illustration, monochrome"
   
   switch (event.type) {
     case 'positive':
-      return `${baseStyle}, confident executive with engaging smile, direct eye contact, strong jawline, professional attire, positive facial expression, charismatic presence, ${event.event.toLowerCase()}`
+      return `${baseStyle}, confident posture silhouette, upright stance, positive body language, successful gesture, ${event.event.toLowerCase()}`
     case 'neutral':
-      return `${baseStyle}, composed professional portrait, neutral expression, focused gaze, balanced features, business formal appearance, steady demeanor, ${event.event.toLowerCase()}`
+      return `${baseStyle}, balanced professional silhouette, neutral stance, composed posture, business formal outline, ${event.event.toLowerCase()}`
     default:
-      return `${baseStyle}, thoughtful executive portrait, contemplative expression, learning posture, professional development context, room for growth, ${event.event.toLowerCase()}`
+      return `${baseStyle}, thoughtful silhouette, learning posture, development-focused stance, growth-oriented gesture, ${event.event.toLowerCase()}`
   }
 }
 
