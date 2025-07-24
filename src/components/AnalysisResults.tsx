@@ -41,6 +41,43 @@ interface AnalysisResultsProps {
 }
 
 const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResults }: AnalysisResultsProps) => {
+  // Translation helper for Japanese content - must be defined first
+  const translateToEnglish = (text: string): string => {
+    const translations: Record<string, string> = {
+      // Voice Analysis
+      'プロフェッショナルかつ適切': 'Professional and appropriate pace',
+      '自信に満ちた説得力のある口調': 'Confident and persuasive tone',
+      '明確で理解しやすい発音': 'Clear and easily understood pronunciation',
+      
+      // Message Analysis
+      '論理的で分かりやすい構成': 'Logical and clearly structured',
+      'データと経験に基づく説得力のある内容': 'Persuasive content based on data and experience',
+      
+      // Categories
+      'メッセージング': 'Messaging',
+      'プレゼンテーション': 'Presentation',
+      'コミュニケーション': 'Communication',
+      
+      // Recommendations
+      '地政学的リスクへの具体的な対応策の説明': 'Articulate specific geopolitical risk mitigation strategies',
+      '地域特有の課題についての言及': 'Address region-specific market challenges',
+      'より具体的なデータの提示': 'Present more specific data points',
+      '視聴者との関係性の構築': 'Build stronger audience connection',
+      
+      // Rationale
+      '視聴者の懸念に直接対応するため': 'To directly address audience concerns and build confidence',
+      'より詳細な市場理解を示すため': 'To demonstrate deeper market understanding and expertise',
+      '信頼性を向上させるため': 'To enhance credibility and trustworthiness',
+      'エンゲージメントを高めるため': 'To increase audience engagement',
+      
+      // Implementation
+      '具体的な事例や数値を用いた説明': 'Use specific case studies and quantitative data',
+      '各主要市場における具体的な状況の説明': 'Provide detailed analysis of key market conditions',
+      'より詳細なリスク分析の提示': 'Present comprehensive risk analysis',
+      'インタラクティブな要素の追加': 'Incorporate interactive elements'
+    };
+    return translations[text] || text;
+  };
   // Simple SVG face icons for timeline visualization with white line drawings
   const createFaceIcon = (gender: 'male' | 'female', type: 'positive' | 'neutral' | 'negative') => {
     const bgColor = type === 'positive' ? '#10B981' : type === 'neutral' ? '#6B7280' : '#F59E0B';
@@ -78,11 +115,13 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
     credibility: analysisResults?.emotionAnalysis?.authority || 0,
     // Voice analysis
     duration: analysisResults?.videoLength || analysisResults?.duration || analysisResults?.videoDuration || "Duration Unknown",
-    speakingRate: analysisResults?.voiceAnalysis?.pace || "Optimal Pace",
+    speakingRate: translateToEnglish(analysisResults?.voiceAnalysis?.pace || "Optimal Pace"),
     pauseFrequency: "Appropriate Frequency",
     volumeVariation: "Stable",
     // Language analysis
     vocabularyLevel: "Professional",
+    voiceTone: translateToEnglish(analysisResults?.voiceAnalysis?.tone || "Professional and engaging"),
+    voiceClarity: translateToEnglish(analysisResults?.voiceAnalysis?.clarity || "Clear and articulate"),
     sentimentScore: analysisResults?.emotionAnalysis?.empathy || 0,
     keywordDensity: analysisResults?.messageAnalysis?.keyMessages?.length ? "High Density" : "Standard"
   };
@@ -193,34 +232,6 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
     ];
 
 
-  // Translation helper for Japanese content
-  const translateToEnglish = (text: string): string => {
-    const translations: Record<string, string> = {
-      // Categories
-      'メッセージング': 'Messaging',
-      'プレゼンテーション': 'Presentation',
-      'コミュニケーション': 'Communication',
-      
-      // Recommendations
-      '地政学的リスクへの具体的な対応策の説明': 'Articulate specific geopolitical risk mitigation strategies',
-      '地域特有の課題についての言及': 'Address region-specific market challenges',
-      'より具体的なデータの提示': 'Present more specific data points',
-      '視聴者との関係性の構築': 'Build stronger audience connection',
-      
-      // Rationale
-      '視聴者の懸念に直接対応するため': 'To directly address audience concerns and build confidence',
-      'より詳細な市場理解を示すため': 'To demonstrate deeper market understanding and expertise',
-      '信頼性を向上させるため': 'To enhance credibility and trustworthiness',
-      'エンゲージメントを高めるため': 'To increase audience engagement',
-      
-      // Implementation
-      '具体的な事例や数値を用いた説明': 'Use specific case studies and quantitative data',
-      '各主要市場における具体的な状況の説明': 'Provide detailed analysis of key market conditions',
-      'より詳細なリスク分析の提示': 'Present comprehensive risk analysis',
-      'インタラクティブな要素の追加': 'Incorporate interactive elements'
-    };
-    return translations[text] || text;
-  };
 
   // Enhanced improvement recommendations with detailed analysis
   const detailedRecommendations = analysisResults?.recommendations?.length > 0 ?
