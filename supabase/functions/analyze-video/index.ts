@@ -96,24 +96,24 @@ serve(async (req) => {
     }
 
     // Create analysis prompt for Claude
-    const prompt = `あなたは経営陣向けのコミュニケーション専門家です。以下の動画について詳細な分析を行ってください：
+    const prompt = `You are a communication expert for executives. Please provide a detailed analysis of the following video:
 
-動画情報:
-- タイトル: ${videoTitle}
-- 会社: ${company}
-- 役職: ${role}
-- 話者: ${intervieweeName}
-- 対象者: ${targetPerson}
+Video Information:
+- Title: ${videoTitle}
+- Company: ${company}
+- Position: ${role}
+- Speaker: ${intervieweeName}
+- Target Audience: ${targetPerson}
 
-以下の観点から分析し、JSON形式で結果を返してください：
+Please analyze from the following perspectives and return the results in JSON format:
 
 {
-  "overallScore": 0-100の総合スコア,
+  "overallScore": overall score from 0-100,
   "metrics": {
-    "confidence": 0-100の自信度スコア,
-    "trustworthiness": 0-100の信頼性スコア,
-    "engagement": 0-100のエンゲージメントスコア,
-    "clarity": 0-100の明確性スコア
+    "confidence": confidence score from 0-100,
+    "trustworthiness": trustworthiness score from 0-100,
+    "engagement": engagement score from 0-100,
+    "clarity": clarity score from 0-100
   },
   "emotionAnalysis": {
     "confidence": 0-100,
@@ -126,32 +126,32 @@ serve(async (req) => {
   "timeline": [
     {
       "time": "MM:SS",
-      "event": "重要な瞬間の説明",
+      "event": "description of important moment",
       "impact": "positive" | "negative" | "neutral"
     }
   ],
   "recommendations": [
     {
-      "category": "改善カテゴリ",
-      "what": "何を改善すべきか",
-      "why": "なぜ重要か",
-      "how": "どのように改善するか",
+      "category": "improvement category",
+      "what": "what should be improved",
+      "why": "why it's important",
+      "how": "how to improve",
       "priority": "high" | "medium" | "low"
     }
   ],
   "voiceAnalysis": {
-    "pace": "適切なペースかどうか",
-    "tone": "声のトーンについて",
-    "clarity": "発音の明瞭さ"
+    "pace": "assessment of speaking pace",
+    "tone": "assessment of voice tone",
+    "clarity": "assessment of pronunciation clarity"
   },
   "messageAnalysis": {
-    "keyMessages": ["主要メッセージ1", "主要メッセージ2"],
-    "structure": "話の構成について",
-    "persuasiveness": "説得力について"
+    "keyMessages": ["key message 1", "key message 2"],
+    "structure": "assessment of speech structure",
+    "persuasiveness": "assessment of persuasiveness"
   }
 }
 
-詳細で実用的な分析を提供し、具体的な改善提案を含めてください。`;
+Please provide detailed and practical analysis with specific improvement suggestions. All responses should be in English.`;
 
     // Call Claude API
     const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -288,49 +288,49 @@ function generateFallbackAnalysis(intervieweeName: string, company: string, role
     timeline: [
       {
         time: "00:30",
-        event: "自己紹介で明確な声で話している",
+        event: "Clear and confident self-introduction",
         impact: "positive"
       },
       {
         time: "02:15",
-        event: "視線が少し下がり、自信が揺らいで見える",
+        event: "Slight drop in eye contact, appearing less confident",
         impact: "negative"
       },
       {
         time: "05:45",
-        event: "具体例を使って効果的に説明",
+        event: "Effective explanation using concrete examples",
         impact: "positive"
       }
     ],
     recommendations: [
       {
-        category: "ボディランゲージ",
-        what: "アイコンタクトの維持",
-        why: "信頼感と自信を示すため",
-        how: "カメラを直視し、定期的に視線を上げる練習をする",
+        category: "Body Language",
+        what: "Maintain consistent eye contact",
+        why: "To demonstrate confidence and trustworthiness",
+        how: "Practice looking directly at the camera and periodically raising your gaze",
         priority: "high"
       },
       {
-        category: "話し方",
-        what: "声のトーンを一定に保つ",
-        why: "安定感と信頼性を伝えるため", 
-        how: "録音練習を通じて声の抑揚をコントロールする",
+        category: "Speaking Style",
+        what: "Keep voice tone consistent",
+        why: "To convey stability and reliability", 
+        how: "Practice controlling voice modulation through recording exercises",
         priority: "medium"
       }
     ],
     voiceAnalysis: {
-      pace: "適切だが、重要なポイントでの間の取り方を改善できる",
-      tone: "誠実で親しみやすいが、権威性をもう少し強調できる",
-      clarity: "全体的に明瞭だが、専門用語の説明時により丁寧に"
+      pace: "Appropriate but could improve timing of pauses at key points",
+      tone: "Sincere and approachable, but could emphasize authority more",
+      clarity: "Generally clear, but could be more careful when explaining technical terms"
     },
     messageAnalysis: {
       keyMessages: [
-        `${company}での${role}としての経験と実績`,
-        "チームリーダーシップと問題解決能力",
-        "将来のビジョンと具体的な計画"
+        `Experience and achievements as ${role} at ${company}`,
+        "Team leadership and problem-solving abilities",
+        "Future vision and concrete plans"
       ],
-      structure: "論理的な流れだが、結論部分をより強化できる",
-      persuasiveness: "具体例が効果的だが、数値データの活用を増やすとより説得力が向上"
+      structure: "Logical flow but could strengthen the conclusion",
+      persuasiveness: "Concrete examples are effective, but using more numerical data would enhance persuasiveness"
     }
   };
 }
