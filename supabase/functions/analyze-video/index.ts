@@ -62,9 +62,38 @@ serve(async (req) => {
       throw new Error('Invalid YouTube URL');
     }
 
-    // Get video title and duration (mock for now)
-    const videoTitle = `${intervieweeName} - ${company} ${role} Interview`;
-    const videoDurationHours = 0.5; // Mock 30 minutes
+    // Get video information from YouTube Data API
+    const youtubeApiKey = Deno.env.get('YOUTUBE_API_KEY');
+    let videoTitle = `${intervieweeName} - ${company} ${role} Interview`;
+    let videoDurationHours = 0.5; // Default 30 minutes
+    let publishedAt = null;
+
+    if (youtubeApiKey) {
+      try {
+        const youtubeResponse = await fetch(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&part=snippet,contentDetails&key=${youtubeApiKey}`);
+        if (youtubeResponse.ok) {
+          const youtubeData = await youtubeResponse.json();
+          if (youtubeData.items && youtubeData.items.length > 0) {
+            const video = youtubeData.items[0];
+            videoTitle = video.snippet.title;
+            publishedAt = video.snippet.publishedAt;
+            
+            // Parse duration from ISO 8601 format (PT15M33S) to hours
+            const duration = video.contentDetails.duration;
+            const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+            if (match) {
+              const hours = parseInt(match[1] || '0');
+              const minutes = parseInt(match[2] || '0');
+              const seconds = parseInt(match[3] || '0');
+              videoDurationHours = hours + (minutes / 60) + (seconds / 3600);
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Failed to fetch YouTube data:', error);
+        // Continue with mock data
+      }
+    }
 
     // Create analysis prompt for Claude
     const prompt = `あなたは経営陣向けのコミュニケーション専門家です。以下の動画について詳細な分析を行ってください：
@@ -180,7 +209,10 @@ serve(async (req) => {
         role: role,
         target_person: targetPerson,
         video_duration_hours: videoDurationHours,
-        analysis_results: analysisResults
+        analysis_results: {
+          ...analysisResults,
+          videoPublishedAt: publishedAt
+        }
       })
       .select()
       .single();

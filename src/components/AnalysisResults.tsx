@@ -30,9 +30,13 @@ interface AnalysisResultsProps {
     intervieweeName: string;
     targetPerson: string;
   };
+  analysisResults?: {
+    videoPublishedAt?: string;
+    [key: string]: any;
+  };
 }
 
-const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails }: AnalysisResultsProps) => {
+const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResults }: AnalysisResultsProps) => {
   // モックデータ
   const overallScore = 78;
   const analysisData = {
@@ -196,6 +200,9 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails }: AnalysisResu
           <div className="flex gap-4 mt-2 text-sm text-muted-foreground">
             <span>Target: {analysisDetails.targetPerson}</span>
             <span>Company: {analysisDetails.company}</span>
+            {analysisResults?.videoPublishedAt && (
+              <span>Published: {new Date(analysisResults.videoPublishedAt).toLocaleDateString('ja-JP')}</span>
+            )}
           </div>
         </div>
         <Button onClick={exportToCSV} variant="outline" className="flex items-center gap-2">
