@@ -41,6 +41,26 @@ interface AnalysisResultsProps {
 }
 
 const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResults }: AnalysisResultsProps) => {
+  // Analysis reliability disclaimer component
+  const AnalysisDisclaimer = () => (
+    <Card className="mb-6 border-amber-200 bg-amber-50 dark:border-amber-800 dark:bg-amber-950">
+      <CardContent className="pt-4">
+        <div className="flex items-start gap-3">
+          <AlertTriangle className="h-5 w-5 text-amber-600 dark:text-amber-400 mt-0.5 flex-shrink-0" />
+          <div className="space-y-2">
+            <p className="text-sm font-medium text-amber-800 dark:text-amber-200">
+              Analysis Reliability Notice
+            </p>
+            <p className="text-xs text-amber-700 dark:text-amber-300 leading-relaxed">
+              Analysis accuracy may vary depending on video format (camera angle, lighting, audio quality, Zoom interviews vs. studio settings). 
+              Facial expression analysis has a confidence threshold of ±15% and voice analysis ±20% due to technical variations in recording conditions.
+            </p>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+
   // Translation helper for Japanese content - must be defined first
   const translateToEnglish = (text: string): string => {
     const translations: Record<string, string> = {
@@ -342,6 +362,7 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
 
   return (
     <div className="space-y-6 animate-fade-in p-6 bg-gradient-to-br from-background to-secondary/20 min-h-screen">
+      <AnalysisDisclaimer />
       {/* Header with Export - Enhanced */}
       <div className="border-b border-gradient-to-r from-primary/20 to-accent/20 pb-6 flex justify-between items-start bg-card/50 backdrop-blur-sm rounded-xl p-6 shadow-lg hover-scale">
         <div className="space-y-2">
