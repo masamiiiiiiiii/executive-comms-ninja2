@@ -35,7 +35,7 @@ export default function Layout({
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Clock className="h-4 w-4" />
-                Monthly Usage: {currentUsageHours}/{maxUsageHours} hours
+                Remaining Time: {Math.floor((maxUsageHours - currentUsageHours)).toString().padStart(2, '0')}:{Math.floor(((maxUsageHours - currentUsageHours) % 1) * 60).toString().padStart(2, '0')}
               </div>
               <Badge variant="secondary" className="px-3 py-1">
                 {userProfile?.name || user?.email}
