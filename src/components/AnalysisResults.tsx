@@ -617,7 +617,7 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
                     <Tooltip />
                     <Legend />
                     <Bar dataKey="current" fill="hsl(var(--primary))" name="Your Score" />
-                    <Bar dataKey="industry" fill="hsl(var(--muted))" name="Industry Average" />
+                    <Bar dataKey="industry" fill="hsl(var(--secondary))" name="Industry Average" />
                     <Bar dataKey="ceo" fill="hsl(var(--accent))" name="Top CEOs" />
                   </BarChart>
                 </ResponsiveContainer>
