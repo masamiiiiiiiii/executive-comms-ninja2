@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { BarChart3, TrendingUp, Clock, Search, Filter, ArrowUpRight, ArrowDownRight, Calendar } from "lucide-react";
+import { BarChart3, TrendingUp, Clock, Search, Filter, ArrowUpRight, ArrowDownRight, Calendar, Trash2 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -62,6 +62,41 @@ const Dashboard = () => {
       console.error('Unexpected error:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const deleteAnalysis = async (analysisId: string, videoTitle: string) => {
+    try {
+      const { error } = await supabase
+        .from('video_analyses')
+        .delete()
+        .eq('id', analysisId)
+        .eq('user_id', user?.id);
+
+      if (error) {
+        console.error('Error deleting analysis:', error);
+        toast({
+          title: "Error",
+          description: "Failed to delete analysis. Please try again.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      // Update local state
+      setAnalyses(prev => prev.filter(analysis => analysis.id !== analysisId));
+      
+      toast({
+        title: "Analysis Deleted",
+        description: `Successfully deleted analysis for "${videoTitle}".`,
+      });
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
     }
   };
 
@@ -240,12 +275,12 @@ const Dashboard = () => {
                                 <div className="font-medium truncate max-w-48">
                                   {analysis.video_title || `${analysis.company} Interview`}
                                 </div>
-                                {analysis.analysis_results?.videoPublishedAt && (
-                                  <div className="text-xs text-muted-foreground flex items-center gap-1">
-                                    <Calendar className="h-3 w-3" />
-                                    Published: {new Date(analysis.analysis_results.videoPublishedAt).toLocaleDateString('ja-JP')}
-                                  </div>
-                                )}
+                                 {analysis.analysis_results?.videoPublishedAt && (
+                                   <div className="text-xs text-muted-foreground flex items-center gap-1">
+                                     <Calendar className="h-3 w-3" />
+                                     Published: {new Date(analysis.analysis_results.videoPublishedAt).toLocaleDateString('en-US')}
+                                   </div>
+                                 )}
                               </div>
                             </TableCell>
                             <TableCell>
@@ -268,16 +303,26 @@ const Dashboard = () => {
                               {(analysis.video_duration_hours * 60).toFixed(0)}min
                             </TableCell>
                             <TableCell>
-                              {new Date(analysis.created_at).toLocaleDateString('ja-JP')}
+                              {new Date(analysis.created_at).toLocaleDateString('en-US')}
                             </TableCell>
                             <TableCell>
-                              <Button 
-                                variant="ghost" 
-                                size="sm"
-                                onClick={() => window.open(analysis.youtube_url, '_blank')}
-                              >
-                                View Video
-                              </Button>
+                              <div className="flex gap-2">
+                                <Button 
+                                  variant="ghost" 
+                                  size="sm"
+                                  onClick={() => window.open(analysis.youtube_url, '_blank')}
+                                >
+                                  View Video
+                                </Button>
+                                <Button 
+                                  variant="ghost" 
+                                  size="sm"
+                                  onClick={() => deleteAnalysis(analysis.id, analysis.video_title || `${analysis.company} Interview`)}
+                                  className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                                >
+                                  <Trash2 className="h-4 w-4" />
+                                </Button>
+                              </div>
                             </TableCell>
                           </TableRow>
                         );

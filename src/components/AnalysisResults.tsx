@@ -322,7 +322,7 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
             {analysisResults?.videoPublishedAt && (
               <div className="flex items-center gap-2 px-3 py-1 bg-secondary/20 rounded-full">
                 <Clock className="h-3 w-3" />
-                <span>Published: {new Date(analysisResults.videoPublishedAt).toLocaleDateString('en-US')}</span>
+                 <span>Published: {new Date(analysisResults.videoPublishedAt).toLocaleDateString('en-US')}</span>
               </div>
             )}
           </div>
