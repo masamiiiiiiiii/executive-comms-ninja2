@@ -9,7 +9,6 @@ import { supabase } from '@/integrations/supabase/client';
 
 const AccessRequest = () => {
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const { toast } = useToast();
@@ -25,7 +24,7 @@ const AccessRequest = () => {
         .insert([
           {
             name: name.trim(),
-            email: email.trim().toLowerCase(),
+            email: null, // No email required
           }
         ]);
 
@@ -37,7 +36,7 @@ const AccessRequest = () => {
       const { error: emailError } = await supabase.functions.invoke('send-access-notification', {
         body: {
           name: name.trim(),
-          email: email.trim().toLowerCase(),
+          email: null,
           type: 'request'
         }
       });
@@ -49,15 +48,15 @@ const AccessRequest = () => {
 
       setSubmitted(true);
       toast({
-        title: "申請を送信いたしました",
-        description: "管理者による審査後、メールでご連絡いたします。",
+        title: "Request Submitted",
+        description: "Your access request has been submitted for admin review.",
       });
     } catch (error: any) {
       console.error('Access request error:', error);
       toast({
         variant: "destructive",
-        title: "申請送信エラー",
-        description: error.message || "申請の送信中にエラーが発生しました。もう一度お試しください。",
+        title: "Submission Error",
+        description: error.message || "An error occurred while submitting your request. Please try again.",
       });
     } finally {
       setLoading(false);
@@ -73,10 +72,10 @@ const AccessRequest = () => {
               <CheckCircle className="h-16 w-16 text-green-500" />
             </div>
             <CardTitle className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              申請を受け付けました
+              Request Submitted
             </CardTitle>
             <CardDescription>
-              管理者による審査後、メールでご連絡いたします。しばらくお待ちください。
+              Your access request has been submitted and is pending admin review.
             </CardDescription>
           </CardHeader>
         </Card>
@@ -92,49 +91,38 @@ const AccessRequest = () => {
             Executive Comms Ninja
           </CardTitle>
           <CardDescription>
-            アクセス申請フォーム
+            Access Request Form
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name">お名前（本名）</Label>
+              <Label htmlFor="name">Full Name</Label>
               <Input
                 id="name"
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                placeholder="山田太郎"
+                placeholder="John Doe"
                 minLength={2}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">メールアドレス</Label>
-              <Input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                placeholder="your.email@company.com"
               />
             </div>
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  申請送信中...
+                  Submitting...
                 </>
               ) : (
-                'アクセス申請を送信'
+                'Submit Access Request'
               )}
             </Button>
           </form>
           <div className="mt-6 pt-6 border-t border-border">
             <p className="text-sm text-muted-foreground text-center">
-              申請後、管理者による審査を経てアクセス権限が付与されます。<br/>
-              承認されたアクセス権限の有効期間は1ヶ月間です。
+              After submission, your request will be reviewed by an administrator.<br/>
+              Approved access is valid for 1 month.
             </p>
           </div>
         </CardContent>
