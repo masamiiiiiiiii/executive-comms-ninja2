@@ -19,13 +19,14 @@ const Index = () => {
 
   const [step, setStep] = useState<"input" | "details" | "person" | "analyzing" | "results">("input");
   const [youtubeUrl, setYoutubeUrl] = useState("");
-  const [analysisDetails, setAnalysisDetails] = useState({
+const [analysisDetails, setAnalysisDetails] = useState({
     company: "",
     role: "",
     intervieweeName: "",
     targetPerson: ""
   });
   const [analyzing, setAnalyzing] = useState(false);
+  const [analysisResults, setAnalysisResults] = useState<any>(null);
 
   // Load user profile and usage data
   useEffect(() => {
@@ -126,6 +127,7 @@ const Index = () => {
       }
 
       console.log('Analysis completed:', data);
+      setAnalysisResults(data.analysisResults);
       toast({
         title: "分析完了",
         description: "動画の分析が完了しました！",
@@ -155,6 +157,7 @@ const Index = () => {
       intervieweeName: "",
       targetPerson: ""
     });
+    setAnalysisResults(null);
   };
 
   const handleSignOut = () => {
@@ -208,6 +211,7 @@ const Index = () => {
             videoTitle={`${analysisDetails.company} ${analysisDetails.role} - ${analysisDetails.intervieweeName}`}
             videoUrl={youtubeUrl}
             analysisDetails={analysisDetails}
+            analysisResults={analysisResults}
           />
         </div>
       </div>
