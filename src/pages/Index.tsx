@@ -129,6 +129,8 @@ const [analysisDetails, setAnalysisDetails] = useState({
 
       console.log('Analysis completed:', data);
       setAnalysisResults(data.analysisResults);
+      setAnalyzing(false);
+      setStep("results");
       toast({
         title: "Analysis Complete",
         description: "Video analysis has been completed successfully!",
