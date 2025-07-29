@@ -10,6 +10,7 @@ import { BarChart3, TrendingUp, Clock, Search, Filter, ArrowUpRight, ArrowDownRi
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 
 interface AnalysisRecord {
   id: string;
@@ -26,6 +27,7 @@ interface AnalysisRecord {
 const Dashboard = () => {
   const { user } = useAuth();
   const { toast } = useToast();
+  const navigate = useNavigate();
   
   const [analyses, setAnalyses] = useState<AnalysisRecord[]>([]);
   const [loading, setLoading] = useState(true);
@@ -63,6 +65,20 @@ const Dashboard = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const viewAnalysis = (analysis: AnalysisRecord) => {
+    // Navigate to Index page with the analysis results pre-loaded
+    navigate('/', { 
+      state: { 
+        analysisResults: analysis.analysis_results,
+        videoTitle: analysis.video_title,
+        company: analysis.company,
+        role: analysis.role,
+        targetPerson: analysis.target_person,
+        youtubeUrl: analysis.youtube_url
+      } 
+    });
   };
 
   const deleteAnalysis = async (analysisId: string, videoTitle: string) => {
@@ -307,6 +323,13 @@ const Dashboard = () => {
                             </TableCell>
                             <TableCell>
                               <div className="flex gap-2">
+                                <Button 
+                                  variant="default" 
+                                  size="sm"
+                                  onClick={() => viewAnalysis(analysis)}
+                                >
+                                  View Analysis
+                                </Button>
                                 <Button 
                                   variant="ghost" 
                                   size="sm"

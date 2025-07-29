@@ -9,10 +9,12 @@ import AnalysisResults from "@/components/AnalysisResults";
 import Layout from "@/components/Layout";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
+import { useLocation } from "react-router-dom";
 
 const Index = () => {
   const { user, session, loading: authLoading, signOut } = useAuth();
   const { toast } = useToast();
+  const location = useLocation();
   
   const [userProfile, setUserProfile] = useState<any>(null);
   const [currentUsageHours, setCurrentUsageHours] = useState(0);
@@ -28,6 +30,21 @@ const [analysisDetails, setAnalysisDetails] = useState({
   });
   const [analyzing, setAnalyzing] = useState(false);
   const [analysisResults, setAnalysisResults] = useState<any>(null);
+
+  // Check if we have pre-loaded analysis results from navigation
+  useEffect(() => {
+    if (location.state?.analysisResults) {
+      setAnalysisResults(location.state.analysisResults);
+      setYoutubeUrl(location.state.youtubeUrl || "");
+      setAnalysisDetails({
+        company: location.state.company || "",
+        role: location.state.role || "",
+        intervieweeName: "",
+        targetPerson: location.state.targetPerson || ""
+      });
+      setStep("results");
+    }
+  }, [location.state]);
 
   // Load user profile and usage data
   useEffect(() => {
