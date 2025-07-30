@@ -18,8 +18,10 @@ import {
   ExternalLink,
   Info,
   Download,
-  Loader2
+  Loader2,
+  FileText
 } from "lucide-react";
+import jsPDF from 'jspdf';
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, BarChart, Bar } from 'recharts';
 import AnalysisSettings from './AnalysisSettings';
 import { supabase } from "@/integrations/supabase/client";
@@ -41,6 +43,107 @@ interface AnalysisResultsProps {
 }
 
 const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResults }: AnalysisResultsProps) => {
+  // PDF export functionality
+  const exportToPDF = () => {
+    const pdf = new jsPDF();
+    const margin = 20;
+    let yPosition = margin;
+    
+    // Title
+    pdf.setFontSize(20);
+    pdf.text('Communication Analysis Report', margin, yPosition);
+    yPosition += 15;
+    
+    // Video Info
+    pdf.setFontSize(12);
+    pdf.text(`Video: ${videoTitle}`, margin, yPosition);
+    yPosition += 8;
+    pdf.text(`Company: ${analysisDetails.company}`, margin, yPosition);
+    yPosition += 8;
+    pdf.text(`Role: ${analysisDetails.role}`, margin, yPosition);
+    yPosition += 8;
+    pdf.text(`Analyzed Person: ${analysisDetails.targetPerson}`, margin, yPosition);
+    yPosition += 15;
+    
+    // Overall Score
+    pdf.setFontSize(16);
+    pdf.text('Overall Performance Score', margin, yPosition);
+    yPosition += 10;
+    pdf.setFontSize(14);
+    pdf.text(`${overallScore}/100`, margin, yPosition);
+    yPosition += 15;
+    
+    // Key Metrics
+    pdf.setFontSize(16);
+    pdf.text('Key Metrics', margin, yPosition);
+    yPosition += 10;
+    pdf.setFontSize(10);
+    
+    const metrics = [
+      `Confidence: ${analysisData.confidence}%`,
+      `Authenticity: ${analysisData.authenticity}%`,
+      `Engagement: ${analysisData.engagement}%`,
+      `Clarity: ${analysisData.clarity}%`,
+      `Eye Contact: ${analysisData.eyeContact}%`,
+      `Voice Stability: ${analysisData.voiceStability}%`
+    ];
+    
+    metrics.forEach(metric => {
+      pdf.text(metric, margin, yPosition);
+      yPosition += 6;
+    });
+    yPosition += 10;
+    
+    // Recommendations
+    pdf.setFontSize(16);
+    pdf.text('Improvement Recommendations', margin, yPosition);
+    yPosition += 10;
+    pdf.setFontSize(10);
+    
+    detailedRecommendations.slice(0, 3).forEach((rec, index) => {
+      if (yPosition > 250) {
+        pdf.addPage();
+        yPosition = margin;
+      }
+      
+      pdf.setFontSize(12);
+      pdf.text(`${index + 1}. ${rec.what}`, margin, yPosition);
+      yPosition += 8;
+      
+      pdf.setFontSize(10);
+      const whyLines = pdf.splitTextToSize(`Why: ${rec.why}`, 170);
+      pdf.text(whyLines, margin, yPosition);
+      yPosition += whyLines.length * 5;
+      
+      const howLines = pdf.splitTextToSize(`How: ${rec.how}`, 170);
+      pdf.text(howLines, margin, yPosition);
+      yPosition += howLines.length * 5 + 5;
+    });
+    
+    // Timeline highlights
+    if (yPosition > 200) {
+      pdf.addPage();
+      yPosition = margin;
+    }
+    
+    pdf.setFontSize(16);
+    pdf.text('Key Moments Timeline', margin, yPosition);
+    yPosition += 10;
+    pdf.setFontSize(10);
+    
+    timelineData.slice(0, 4).forEach(moment => {
+      pdf.text(`${moment.time}: ${moment.event} (Score: ${moment.score})`, margin, yPosition);
+      yPosition += 6;
+    });
+    
+    // Footer
+    pdf.setFontSize(8);
+    pdf.text(`Generated on ${new Date().toLocaleDateString()}`, margin, 280);
+    
+    // Download the PDF
+    pdf.save(`communication-analysis-${analysisDetails.targetPerson.replace(/\s+/g, '-')}.pdf`);
+  };
+
   // Analysis reliability disclaimer component
   const AnalysisDisclaimer = () => (
     <Card className="mb-6 border-amber-200 bg-amber-50 dark:border-amber-800 dark:bg-amber-950">
@@ -387,10 +490,16 @@ const AnalysisResults = ({ videoTitle, videoUrl, analysisDetails, analysisResult
             )}
           </div>
         </div>
-        <Button onClick={exportToCSV} variant="outline" className="flex items-center gap-2 hover-scale border-primary/20 hover:border-primary/40 hover:bg-primary/5 transition-all duration-300">
-          <Download className="h-4 w-4" />
-          Export CSV
-        </Button>
+        <div className="flex gap-2">
+          <Button onClick={exportToPDF} variant="outline" className="flex items-center gap-2 hover-scale border-primary/20 hover:border-primary/40 hover:bg-primary/5 transition-all duration-300">
+            <FileText className="h-4 w-4" />
+            PDF書き出し
+          </Button>
+          <Button onClick={exportToCSV} variant="outline" className="flex items-center gap-2 hover-scale border-primary/20 hover:border-primary/40 hover:bg-primary/5 transition-all duration-300">
+            <Download className="h-4 w-4" />
+            Export CSV
+          </Button>
+        </div>
       </div>
 
       {/* Overall Score - Enhanced */}
