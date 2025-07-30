@@ -68,17 +68,8 @@ const Dashboard = () => {
   };
 
   const viewAnalysis = (analysis: AnalysisRecord) => {
-    // Navigate to Index page with the analysis results pre-loaded
-    navigate('/', { 
-      state: { 
-        analysisResults: analysis.analysis_results,
-        videoTitle: analysis.video_title,
-        company: analysis.company,
-        role: analysis.role,
-        targetPerson: analysis.target_person,
-        youtubeUrl: analysis.youtube_url
-      } 
-    });
+    // Navigate to individual analysis page with unique URL
+    navigate(`/analysis/${analysis.id}`);
   };
 
   const deleteAnalysis = async (analysisId: string, videoTitle: string) => {
