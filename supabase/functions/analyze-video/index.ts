@@ -167,7 +167,9 @@ Please provide detailed and practical analysis with specific improvement suggest
         messages: [
           {
             role: 'user',
-            content: prompt
+            content: `${prompt}
+
+Please return ONLY a valid JSON object with no additional text, markdown formatting, or explanations. The response must start with { and end with }.`
           }
         ]
       })
