@@ -185,15 +185,34 @@ Please provide detailed and practical analysis with specific improvement suggest
     // Parse JSON from Claude's response
     let analysisResults;
     try {
-      // Extract JSON from the response (Claude might wrap it in text)
-      const jsonMatch = analysisText.match(/\{[\s\S]*\}/);
-      if (jsonMatch) {
-        analysisResults = JSON.parse(jsonMatch[0]);
-      } else {
-        throw new Error('No JSON found in Claude response');
+      console.log('Claude response:', analysisText);
+      
+      // Try to parse the response as JSON directly first
+      try {
+        analysisResults = JSON.parse(analysisText);
+      } catch (directParseError) {
+        console.log('Direct JSON parse failed, trying to extract JSON from text');
+        
+        // If direct parsing fails, try to extract JSON from markdown code block or text
+        const jsonMatch = analysisText.match(/```(?:json)?\s*(\{[\s\S]*?\})\s*```/) || 
+                         analysisText.match(/(\{[\s\S]*\})/);
+        
+        if (jsonMatch) {
+          analysisResults = JSON.parse(jsonMatch[1]);
+          console.log('Successfully extracted JSON from response');
+        } else {
+          throw new Error('No valid JSON found in Claude response');
+        }
       }
+      
+      // Validate that we have the required structure
+      if (!analysisResults.overallScore && !analysisResults.metrics) {
+        throw new Error('Invalid analysis structure received');
+      }
+      
     } catch (parseError) {
       console.error('Failed to parse Claude response:', parseError);
+      console.error('Raw response:', analysisText);
       // Fallback to structured mock data
       analysisResults = generateFallbackAnalysis(intervieweeName, company, role);
     }
