@@ -1,0 +1,5 @@
+google-cloud-videointelligence
+google-cloud-storage
+supabase
+yt-dlp
+python-dotenv
