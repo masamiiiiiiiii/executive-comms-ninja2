@@ -117,11 +117,6 @@ export function NewAnalysisForm() {
                     {loading ? "Analyzing..." : "Analyze"}
                 </Button>
             </div>
-            <div className="flex justify-center">
-                <Button variant="outline" size="sm" onClick={handleDemo} disabled={loading} className="text-muted-foreground hover:text-primary">
-                    Try Demo Analysis (No YouTube Required)
-                </Button>
-            </div>
         </div>
     );
 }

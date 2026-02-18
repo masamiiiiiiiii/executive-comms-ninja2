@@ -22,9 +22,13 @@ export function VideoPlayer({ url, timeline }: VideoPlayerProps) {
     const playerRef = useRef<ReactPlayer>(null);
 
     const handleSeek = (timeStr: string) => {
+        if (!timeStr) return;
         const parts = timeStr.split(":");
+        if (parts.length < 2) return;
         const seconds = parseInt(parts[0]) * 60 + parseInt(parts[1]);
-        playerRef.current?.seekTo(seconds, "seconds");
+        if (playerRef.current) {
+            playerRef.current.seekTo(seconds, "seconds");
+        }
         setPlaying(true);
     };
 
@@ -44,26 +48,22 @@ export function VideoPlayer({ url, timeline }: VideoPlayerProps) {
 
             {/* Interactive Timeline Controls */}
             {timeline.length > 0 && (
-                <div className="p-4 bg-card/90 border-t border-border overflow-x-auto">
-                    <h3 className="text-xs font-semibold uppercase text-muted-foreground mb-3">Key Moments</h3>
-                    <div className="flex gap-2">
-                        {timeline.map((item, idx) => (
+                <div className="p-4 bg-muted/20 border-t border-border overflow-x-auto">
+                    <h3 className="text-xs font-semibold uppercase text-muted-foreground mb-3 tracking-wider">Jump to Key Moment</h3>
+                    <div className="flex gap-2 pb-2">
+                        {timeline.map((item: any, idx) => (
                             <Button
                                 key={idx}
                                 variant="outline"
                                 size="sm"
-                                className={`text-xs h-auto py-2 flex flex-col items-start gap-1 min-w-[140px] ${item.impact === 'positive' ? 'border-green-500/30 hover:bg-green-500/10' :
-                                    item.impact === 'negative' ? 'border-red-500/30 hover:bg-red-500/10' :
-                                        'border-border'
-                                    }`}
-                                onClick={() => handleSeek(item.time)}
+                                className={`text-xs h-auto py-2 px-3 flex flex-col items-start gap-1 min-w-[140px] whitespace-normal bg-background/50 backdrop-blur-sm hover:bg-background hover:border-emerald-300 transition-all`}
+                                onClick={() => handleSeek(item.timestamp || item.time)}
                             >
-                                <div className="flex items-center gap-1.5 w-full">
-                                    <span className="font-mono opacity-70">{item.time}</span>
-                                    {item.impact === 'positive' ? <CheckCircle2 className="h-3 w-3 text-green-500" /> :
-                                        item.impact === 'negative' ? <AlertCircle className="h-3 w-3 text-red-500" /> : null}
+                                <div className="flex items-center gap-2 w-full border-b border-border/50 pb-1 mb-1">
+                                    <span className="font-mono text-[10px] bg-muted px-1 rounded text-muted-foreground">{item.timestamp || item.time}</span>
+                                    {item.emotion_label && <span className="text-[10px] font-bold text-emerald-600 uppercase ml-auto">{item.emotion_label}</span>}
                                 </div>
-                                <span className="truncate w-full text-left" title={item.event}>{item.event}</span>
+                                <span className="text-[10px] leading-tight text-left text-muted-foreground line-clamp-2 w-full" title={item.event}>{item.event}</span>
                             </Button>
                         ))}
                     </div>

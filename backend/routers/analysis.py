@@ -73,25 +73,50 @@ async def process_analysis(request: AnalysisRequest, analysis_id: str):
         # 1. Update status to 'processing_download'
         supabase.table("video_analyses").update({"status": "downloading"}).eq("id", analysis_id).execute()
         
-        # 2. Download & Upload
-        print(f"Starting download for {request.youtube_url}")
-        gcs_uri = youtube_service.download_and_upload(request.youtube_url)
+        # 2. Download (Local or GCS)
+        print(f"Starting processing for {request.youtube_url}")
+        
+        # Check if we are in API Key mode (Local)
+        # We can check the service instance or just check env var
+        is_local_mode = os.getenv("GEMINI_API_KEY") is not None
+        
+        video_path = None
+        metadata = None
+
+        if is_local_mode:
+            print("Mode: Local Download (API Key)")
+            video_path, metadata = youtube_service.download_video_local(request.youtube_url)
+        else:
+            print("Mode: GCS Upload (Vertex AI)")
+            video_path = youtube_service.download_and_upload(request.youtube_url)
         
         # 3. Update status to 'analyzing'
         supabase.table("video_analyses").update({"status": "analyzing"}).eq("id", analysis_id).execute()
         
         # 4. Analyze with Gemini
-        print(f"Starting Gemini analysis for {gcs_uri}")
-        analysis_result = gemini_service.analyze_video(gcs_uri)
+        print(f"Starting Gemini analysis for {video_path}")
+        analysis_result = gemini_service.analyze_video(video_path)
         
+        # Inject real metadata into results for frontend display
+        if metadata and analysis_result:
+            if "video_metadata" not in analysis_result:
+                analysis_result["video_metadata"] = {}
+            
+            analysis_result["video_metadata"]["channel_title"] = metadata.get("author")
+            analysis_result["video_metadata"]["published_date"] = metadata.get("publish_date")
+            analysis_result["video_metadata"]["duration_seconds"] = metadata.get("length")
+
         # 5. Save results
         supabase.table("video_analyses").update({
             "status": "completed",
             "analysis_results": analysis_result,
-            # We could also update video duration if we extracted it
         }).eq("id", analysis_id).execute()
         
         print(f"Analysis {analysis_id} completed successfully.")
+        
+        # Cleanup local file if it exists and we are done
+        if is_local_mode and os.path.exists(video_path):
+             os.remove(video_path)
         
     except Exception as e:
         print(f"Analysis {analysis_id} failed: {e}")
@@ -187,10 +212,13 @@ async def start_analysis(request: AnalysisRequest, background_tasks: BackgroundT
         return {"status": "queued", "analysis_id": analysis_id}
         
     except Exception as e:
-        return {"status": "queued", "analysis_id": analysis_id}
-        
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        import traceback
+        traceback.print_exc()
+        # If analysis_id was created but task failed to schedule (unlikely), we still return success-ish
+        # But if creation failed, we raise 500
+        if 'analysis_id' in locals():
+             return {"status": "queued", "analysis_id": analysis_id}
+        raise HTTPException(status_code=500, detail=f"Failed to start analysis: {str(e)}")
 
 @router.get("/analyze/{analysis_id}")
 async def get_analysis(analysis_id: str):
