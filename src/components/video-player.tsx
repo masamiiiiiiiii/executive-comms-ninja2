@@ -38,6 +38,7 @@ export function VideoPlayer({ url, timeline }: VideoPlayerProps) {
         <div className="space-y-4">
             <div className="relative aspect-video bg-black rounded-lg overflow-hidden shadow-lg border border-border/50">
                 {/* Check if window is defined to avoid hydration mismatch, though dynamic import handles this */}
+                {/* @ts-ignore */}
                 <ReactPlayer
                     ref={playerRef}
                     url={url}
