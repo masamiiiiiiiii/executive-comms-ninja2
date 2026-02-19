@@ -9,7 +9,7 @@ import { Play, Pause, RefreshCw } from "lucide-react";
 
 // Dynamically import ReactPlayer to avoid hydration errors
 // Using lazy loading for client-side only component
-const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
+const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 interface VideoPlayerProps {
     url: string;
