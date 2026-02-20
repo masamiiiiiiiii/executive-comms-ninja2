@@ -29,20 +29,7 @@ export function NewAnalysisForm() {
                 userId = "0d93271a-2865-458a-8191-7a3b5934b52c";
             }
 
-            // 1.5 Extract transcript natively via Vercel to bypass GCP Datacenter block
-            toast.loading("Extracting interview text...", { id: "transcript" });
-            const transcriptRes = await fetch("/api/transcript", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ url })
-            });
-
-            if (!transcriptRes.ok) {
-                toast.dismiss("transcript");
-                throw new Error("Unable to extract transcript due to YouTube security restrictions. Please try another video or the Demo.");
-            }
-            const { transcript } = await transcriptRes.json();
-            toast.success("Transcript extracted!", { id: "transcript" });
+            toast.loading("Sending to Executive Comms AI...", { id: "analyze" });
 
             // 2. Call Backend API
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/analyze`, {
@@ -51,13 +38,13 @@ export function NewAnalysisForm() {
                 body: JSON.stringify({
                     youtube_url: url,
                     user_id: userId,
-                    video_title: "Pending...", // Expect backend/worker to update this
-                    company: "Demo Corp", // Default for quick demo
+                    video_title: "Pending...",
+                    company: "Demo Corp",
                     role: "Executive",
-                    target_person: "Speaker",
-                    transcript_text: transcript
+                    target_person: "Speaker"
                 }),
             });
+            toast.dismiss("analyze");
 
             if (!response.ok) {
                 throw new Error("Failed to start analysis");
