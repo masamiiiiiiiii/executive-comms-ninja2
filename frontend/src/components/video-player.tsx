@@ -1,52 +1,57 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Play, Pause, RefreshCw } from "lucide-react";
-// Import type explicitly if needed, but 'any' is safer for quick fix
-// import ReactPlayer from "react-player"; 
-
-// Dynamically import ReactPlayer to avoid hydration errors
-// Using lazy loading for client-side only component
-const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 interface VideoPlayerProps {
     url: string;
-    timeline?: any[]; // Allow any for now to facilitate build
+    timeline?: any[];
 }
 
 export function VideoPlayer({ url, timeline }: VideoPlayerProps) {
-    const [playing, setPlaying] = useState(false);
-    const [progress, setProgress] = useState(0);
-    // Use 'any' to bypass strict type check for ReactPlayer instance
-    const playerRef = useRef<any>(null);
+    // Extract video ID from URL
+    const getVideoId = (url: string) => {
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+        const match = url.match(regExp);
+        return (match && match[2].length === 11) ? match[2] : null;
+    };
+
+    const videoId = getVideoId(url);
+    const [iframeUrl, setIframeUrl] = useState<string>("");
+
+    useEffect(() => {
+        if (videoId) {
+            setIframeUrl(`https://www.youtube.com/embed/${videoId}?enablejsapi=1`);
+        }
+    }, [videoId]);
 
     const handleSeek = (timeStr: string) => {
-        if (!timeStr) return;
+        if (!timeStr || !videoId) return;
         const parts = timeStr.split(":");
         if (parts.length < 2) return;
         const seconds = parseInt(parts[0]) * 60 + parseInt(parts[1]);
 
-        if (playerRef.current) {
-            playerRef.current.seekTo(seconds, "seconds");
-            setPlaying(true);
-        }
+        // Update iframe src to auto-play at timestamp
+        setIframeUrl(`https://www.youtube.com/embed/${videoId}?start=${seconds}&autoplay=1&enablejsapi=1`);
     };
+
+    if (!videoId) {
+        return <div className="aspect-video bg-slate-100 flex items-center justify-center text-slate-400">Invalid Video URL</div>;
+    }
 
     return (
         <div className="space-y-4">
             <div className="relative aspect-video bg-black rounded-lg overflow-hidden shadow-lg border border-border/50">
-                {/* Check if window is defined to avoid hydration mismatch, though dynamic import handles this */}
-                <ReactPlayer
-                    ref={playerRef}
-                    url={url}
+                <iframe
                     width="100%"
                     height="100%"
-                    playing={playing}
-                    controls={true}
-                    onProgress={(state: any) => setProgress(state.playedSeconds)}
-                />
+                    src={iframeUrl}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="absolute top-0 left-0 w-full h-full"
+                ></iframe>
             </div>
 
             {/* Timeline Controls */}

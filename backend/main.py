@@ -16,9 +16,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-from routers import analysis
+from routers import analysis, snapshot
 
 app.include_router(analysis.router, prefix="/api", tags=["analysis"])
+app.include_router(snapshot.router, prefix="/api", tags=["snapshot"])
 
 @app.get("/")
 def read_root():

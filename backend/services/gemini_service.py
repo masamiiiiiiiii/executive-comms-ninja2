@@ -176,6 +176,243 @@ class GeminiService:
                 generation_config={"response_mime_type": "application/json"}
             )
             return self._parse_response(responses.text)
+    def analyze_full_transcript(self, transcript_text: str, metadata: dict) -> dict:
+        """
+        Analyzes a full video transcript as an alternative to analyzing the raw video file.
+        This bypasses the need to download the video, avoiding YouTube bot blocking.
+        """
+        prompt = """
+        You are an elite Executive Communication Coach for the AI era. You are analyzing a transcript of an executive's speech or presentation to generate a comprehensive "Executive Dashboard" report.
+        Even though you cannot see the video, evaluate their communication style based on the spoken text, structure, pacing (implied by content), and implicit tone.
+
+        **Objective**: Evaluate the speaker's executive credibility, communication effectiveness, and structure against global C-suite standards based on this transcript.
+
+        **Output**: Return a strict JSON object with this EXACT structure (ensure all fields are present):
+        {
+            "analysis_reliability": {
+                "score": 85,
+                "notice": "Analysis is based on text transcript only. Visual and vocal nuances (like posture and exact tone) are inferred from content structure and language choice."
+            },
+            "video_metadata": {
+                "duration": "Duration Unknown",
+                "published_date": "Unknown"
+            },
+            "overall_performance": {
+                "score": 85,
+                "level": "Excellent",
+                "summary": "Comprehensive assessment based on transcript.",
+                "badge": "Top Performer"
+            },
+            "high_level_metrics": {
+                "confidence": {"score": 90, "label": "Confidence"},
+                "trustworthiness": {"score": 85, "label": "Trustworthiness"},
+                "engagement": {"score": 80, "label": "Engagement"},
+                "clarity": {"score": 85, "label": "Clarity"}
+            },
+            "detailed_analysis": {
+                "voice_analysis": {
+                    "speaking_rate": "Not Evaluated",
+                    "pause_frequency": "Not Evaluated",
+                    "volume_variation": "Not Evaluated",
+                    "clarity_rating": "Good",
+                    "observation": "Voice metrics cannot be fully evaluated from transcript alone. Language suggests a confident delivery."
+                },
+                "message_analysis": {
+                    "keyword_density": "Appropriate",
+                    "emotional_tone": "Positive",
+                    "structure_rating": "Logical",
+                    "logic_flow": "Well-organized",
+                    "observation": "Key themes are reinforced with clear signposting."
+                }
+            },
+            "emotion_radar": {
+                "confidence": 90,
+                "empathy": 70,
+                "authority": 85,
+                "composure": 80,
+                "enthusiasm": 75,
+                "trust": 88
+            },
+            "timeline_analysis": [
+                {
+                    "timestamp": "00:00",
+                    "event": "Opening",
+                    "sentiment": "positive",
+                    "emotion_label": "Confident",
+                    "confidence_score": 85,
+                    "engagement_score": 87,
+                    "insight": "Opening statement sets a strong tone."
+                }
+            ],
+            "benchmark_comparison": {
+                "your_score": 85,
+                "industry_average": 72,
+                "top_ceos": 92,
+                "metrics": ["Confidence", "Trustworthiness", "Engagement", "Clarity"],
+                "emotion_radar_benchmark": {
+                    "confidence": 85,
+                    "empathy": 80,
+                    "authority": 90,
+                    "composure": 85,
+                    "enthusiasm": 70,
+                    "trust": 85
+                }
+            },
+            "recommendations": [
+                {
+                    "title": "Include more relatable examples",
+                    "rationale": "Makes technical content more accessible.",
+                    "strategy": "Add industry-specific use cases and success stories.",
+                    "priority": "Medium",
+                    "timeframe": "1 week",
+                    "expected_impact": "10-15%"
+                }
+            ],
+            "summary": "Narrative summary of the speech..."
+        }
+        
+        Analyze the following transcript:
+        """ + transcript_text
+
+        try:
+            if self.use_api_key:
+                response = self.model.generate_content(
+                    prompt,
+                    generation_config={"response_mime_type": "application/json"}
+                )
+            else:
+                response = self.model.generate_content(
+                    prompt,
+                    generation_config={"response_mime_type": "application/json"}
+                )
+            return self._parse_response(response.text)
+        except Exception as e:
+            print(f"Transcript full analysis failed: {e}")
+            raise e
+
+    def analyze_snapshot(self, image_data: bytes, mime_type: str = "image/jpeg") -> dict:
+        """
+        Analyzes a single image snapshot.
+        """
+        prompt = """
+        Analyze this video snapshot to evaluate the Executive Presence of the main spokesperson.
+
+        **Target Identification Rules**:
+        1. Identify the primary speaker who is being interviewed (the guest/executive).
+        2. **Prioritize the person associated with "Equinix"** if visible in text overlays (lower thirds) or background logos.
+        3. Ignore the interviewer/host (usually the one asking questions or positioned as the anchor).
+        4. If unsure, focus on the person acting as the domain expert or answering questions.
+
+        **Analysis**:
+        Evaluate their facial expression, eye contact, hand gestures, and posture.
+
+        Return a JSON object with:
+        {
+            "score": (0-100 integer reflecting confidence and authority),
+            "feedback": "Concise feedback focusing on the spokesperson's delivery (max 20 words).",
+            "emotion": "Current detected emotion (e.g., Confident, Thoughtful, Defensive)",
+            "key_observation": "Brief observation on why they look authoritative (or not)."
+        }
+        """
+        
+        try:
+            if self.use_api_key:
+                # --- API Key Mode ---
+                # genai supports PIL Image or bytes? 
+                # For safety, let's wrap contents in a list
+                # We need to construct a 'blob' for genai if passing raw bytes is tricky, 
+                # but usually it accepts a dict {'mime_type': ..., 'data': ...}
+                image_blob = {'mime_type': mime_type, 'data': image_data}
+                
+                response = self.model.generate_content(
+                    [prompt, image_blob],
+                    generation_config={"response_mime_type": "application/json"}
+                )
+                return self._parse_response(response.text)
+                
+            else:
+                # --- Vertex AI Mode ---
+                image_part = Part.from_data(data=image_data, mime_type=mime_type)
+                
+                response = self.model.generate_content(
+                    [image_part, prompt],
+                    generation_config={"response_mime_type": "application/json"}
+                )
+                return self._parse_response(response.text)
+                
+        except Exception as e:
+            print(f"Snapshot analysis failed: {e}")
+            return {"error": str(e), "score": 0, "feedback": "Analysis failed."}
+
+    def analyze_audio(self, audio_data: bytes, mime_type: str = "audio/webm") -> dict:
+        """
+        Analyzes a short audio chunk.
+        """
+        prompt = """
+        Listen to this audio clip of an executive speaker.
+        Evaluate their vocal delivery based on:
+        1. **Confidence** (tone stability, projection)
+        2. **Fluency** (pace, use of fillers like 'um', 'uh')
+        3. **Clarity** (articulation)
+
+        Return a JSON object:
+        {
+            "score": (0-100 integer),
+            "feedback": "Brief feedback on vocal performance (max 15 words).",
+            "metric": "Key strength or weakness observed (e.g., 'Monotone', 'Dynamic', 'Too Fast')"
+        }
+        """
+        
+        try:
+            if self.use_api_key:
+                audio_blob = {'mime_type': mime_type, 'data': audio_data}
+                response = self.model.generate_content(
+                    [prompt, audio_blob],
+                    generation_config={"response_mime_type": "application/json"}
+                )
+                return self._parse_response(response.text)
+            else:
+                audio_part = Part.from_data(data=audio_data, mime_type=mime_type)
+                response = self.model.generate_content(
+                    [audio_part, prompt],
+                    generation_config={"response_mime_type": "application/json"}
+                )
+                return self._parse_response(response.text)
+                
+        except Exception as e:
+            print(f"Audio analysis failed: {e}")
+            return {"error": str(e), "score": 0, "feedback": "Audio analysis failed."}
+
+    def analyze_transcript(self, text: str) -> dict:
+        """
+        Analyzes a short transcript text.
+        """
+        prompt = f"""
+        Analyze this spoken sentence by an executive (in any language):
+        "{text}"
+        
+        Evaluate based on:
+        1. **Clarity** (Is it easy to understand?)
+        2. **Impact** (Is it persuasive?)
+        3. **Professionalism** (Vocabulary choice)
+
+        Return a JSON object ONLY. No markdown formatting.
+        {{
+            "score": (0-100 integer),
+            "metric": "Key quality (e.g., 'Concise', 'Vague', 'Powerful')",
+            "feedback": "Brief feedback in English (max 10 words)."
+        }}
+        """
+        
+        try:
+            response = self.model.generate_content(
+                prompt,
+                generation_config={"response_mime_type": "application/json"}
+            )
+            return self._parse_response(response.text)
+        except Exception as e:
+            print(f"Transcript analysis failed: {e}")
+            return {"error": str(e), "score": 0, "feedback": "Analysis failed."}
 
     def _parse_response(self, text: str) -> dict:
         try:

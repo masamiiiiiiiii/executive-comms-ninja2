@@ -21,9 +21,6 @@ export function NewAnalysisForm() {
         try {
             // 1. Get current user (anonymous or logged in)
             const { data: { user } } = await supabase.auth.getUser();
-            // For MVP, if no user, we might want to sign them in anonymously or just error.
-            // Let's assume public access for now or handle in backend.
-            // Actually backend requires user_id.
 
             let userId = user?.id;
             if (!userId) {
@@ -31,6 +28,21 @@ export function NewAnalysisForm() {
                 // This satisfies the foreign key constraint in `video_analyses`
                 userId = "0d93271a-2865-458a-8191-7a3b5934b52c";
             }
+
+            // 1.5 Extract transcript natively via Vercel to bypass GCP Datacenter block
+            toast.loading("Extracting interview text...", { id: "transcript" });
+            const transcriptRes = await fetch("/api/transcript", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ url })
+            });
+
+            if (!transcriptRes.ok) {
+                toast.dismiss("transcript");
+                throw new Error("Unable to extract transcript due to YouTube security restrictions. Please try another video or the Demo.");
+            }
+            const { transcript } = await transcriptRes.json();
+            toast.success("Transcript extracted!", { id: "transcript" });
 
             // 2. Call Backend API
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/analyze`, {
@@ -42,7 +54,8 @@ export function NewAnalysisForm() {
                     video_title: "Pending...", // Expect backend/worker to update this
                     company: "Demo Corp", // Default for quick demo
                     role: "Executive",
-                    target_person: "Speaker"
+                    target_person: "Speaker",
+                    transcript_text: transcript
                 }),
             });
 
@@ -55,9 +68,9 @@ export function NewAnalysisForm() {
             toast.success("Analysis started!");
             router.push(`/analysis/${data.analysis_id}`);
 
-        } catch (error) {
+        } catch (error: any) {
             console.error(error);
-            toast.error("Failed to start analysis. Please try again.");
+            toast.error(error.message || "Failed to start analysis. Please try again.");
         } finally {
             setLoading(false);
         }

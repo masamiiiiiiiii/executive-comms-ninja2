@@ -65,6 +65,7 @@ class AnalysisRequest(BaseModel):
     company: str
     role: str
     target_person: str
+    transcript_text: str = ""
 
 async def process_analysis(request: AnalysisRequest, analysis_id: str):
     youtube_service, gemini_service, supabase = get_services()
@@ -73,29 +74,29 @@ async def process_analysis(request: AnalysisRequest, analysis_id: str):
         # 1. Update status to 'processing_download'
         supabase.table("video_analyses").update({"status": "downloading"}).eq("id", analysis_id).execute()
         
-        # 2. Download (Local or GCS)
-        print(f"Starting processing for {request.youtube_url}")
+        # 2. Extract Transcript and Metadata
+        print(f"Extracting transcript & metadata for {request.youtube_url}")
         
-        # Check if we are in API Key mode (Local)
-        # We can check the service instance or just check env var
-        is_local_mode = os.getenv("GEMINI_API_KEY") is not None
-        
-        video_path = None
-        metadata = None
+        try:
+            metadata = youtube_service.get_metadata(request.youtube_url)
+        except Exception as e:
+            print(f"Metadata extraction warning: {e}")
+            metadata = {}
+            
+        transcript_text = request.transcript_text
+        if not transcript_text:
+            # Fallback to backend extraction if not provided by frontend
+            try:
+                transcript_text = youtube_service.get_transcript(request.youtube_url)
+            except Exception as e:
+                raise ValueError(f"Failed to extract transcript from backend: {e}")
 
-        if is_local_mode:
-            print("Mode: Local Download (API Key)")
-            video_path, metadata = youtube_service.download_video_local(request.youtube_url)
-        else:
-            print("Mode: GCS Upload (Vertex AI)")
-            video_path = youtube_service.download_and_upload(request.youtube_url)
-        
         # 3. Update status to 'analyzing'
         supabase.table("video_analyses").update({"status": "analyzing"}).eq("id", analysis_id).execute()
         
         # 4. Analyze with Gemini
-        print(f"Starting Gemini analysis for {video_path}")
-        analysis_result = gemini_service.analyze_video(video_path)
+        print(f"Starting Gemini transcript analysis")
+        analysis_result = gemini_service.analyze_full_transcript(transcript_text, metadata)
         
         # Inject real metadata into results for frontend display
         if metadata and analysis_result:
@@ -113,10 +114,6 @@ async def process_analysis(request: AnalysisRequest, analysis_id: str):
         }).eq("id", analysis_id).execute()
         
         print(f"Analysis {analysis_id} completed successfully.")
-        
-        # Cleanup local file if it exists and we are done
-        if is_local_mode and os.path.exists(video_path):
-             os.remove(video_path)
         
     except Exception as e:
         print(f"Analysis {analysis_id} failed: {e}")

@@ -1,10 +1,12 @@
 fastapi
 uvicorn
-python-dotenv
-supabase
+python-multipart
+requests
+yt-dlp>=2024.08.06
 google-cloud-storage
 google-cloud-aiplatform
-yt-dlp>=2025.01.26
-pydantic
-python-multipart
 google-generativeai
+supabase
+pydantic
+moviepy
+pytubefix
