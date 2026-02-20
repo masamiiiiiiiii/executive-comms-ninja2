@@ -44,3 +44,4 @@ supabase/.temp
 .vscode
 .idea
 *.swp
+service_account.json
