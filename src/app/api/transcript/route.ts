@@ -58,9 +58,12 @@ export async function POST(request: Request) {
         }
 
         const playerData = JSON.parse(playerResponseMatch[1]);
-        const captionTracks: any[] = playerData?.captions?.playerCaptionsTracklistRenderer?.captionTracks || [];
+        const trackData = playerData?.captions?.playerCaptionsTracklistRenderer?.captionTracks || [];
+        if (trackData.length > 0) {
+            captionTracks = trackData;
+        }
 
-        let videoTitle = playerData?.videoDetails?.title || 'Unknown Title';
+        videoTitle = playerData?.videoDetails?.title || videoTitle;
 
         if (captionTracks.length === 0) {
             // Last resort: Try ytdl-core as it has deeper parsing
