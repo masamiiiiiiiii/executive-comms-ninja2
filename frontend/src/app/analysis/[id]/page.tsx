@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { VideoPlayer } from "@/components/video-player";
 import { TimelineChart } from "@/components/timeline-chart";
 import { TimelineSection } from "@/components/timeline-section";
@@ -151,8 +151,9 @@ function FailedState({ error, onRetry }: { error?: string, onRetry: () => void }
 
 // --- Main Page ---
 
-export default function AnalysisPage({ params }: { params: { id: string } }) {
-    const id = params.id;
+export default function AnalysisPage() {
+    const params = useParams();
+    const id = params?.id as string;
     const router = useRouter();
     const [analysis, setAnalysis] = useState<any>(null);
     const [loading, setLoading] = useState(true);
