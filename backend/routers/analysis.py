@@ -34,9 +34,9 @@ def get_services():
             traceback.print_exc()
             print(f"Could not load project_id from service_account.json: {e}")
 
-    if not project_id:
-        print("ERROR: Project ID is missing.")
-        raise HTTPException(status_code=500, detail="Configuration Error: Project ID missing")
+    if not project_id and not os.getenv("GEMINI_API_KEY") and not os.getenv("gemini_api_key"):
+        print("ERROR: Project ID or API Key is missing.")
+        raise HTTPException(status_code=500, detail="Configuration Error: Project ID or API Key missing")
 
     try:
         youtube_service = YouTubeService(bucket_name)
