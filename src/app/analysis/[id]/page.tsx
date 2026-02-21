@@ -1,5 +1,7 @@
-import { createClient } from "@/lib/supabase/server";
-import { notFound, redirect } from "next/navigation";
+"use client";
+
+import { useState, useEffect, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { VideoPlayer } from "@/components/video-player";
 import { TimelineChart } from "@/components/timeline-chart";
 import { TimelineSection } from "@/components/timeline-section";
@@ -8,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Download, FileText, AlertTriangle, CheckCircle2, Info, User, Building2, Calendar, Target, Mic, MessageSquare, Sparkles, Trophy, Flag, TrendingUp, Smile, Meh, Frown, Activity } from "lucide-react";
+import { ArrowLeft, Download, FileText, AlertTriangle, CheckCircle2, Info, User, Building2, Calendar, Target, Mic, MessageSquare, Sparkles, Trophy, Flag, TrendingUp, Smile, Meh, Frown, Activity, Loader2, RefreshCw } from "lucide-react";
 import { SentimentChart } from "@/components/sentiment-chart";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
@@ -31,7 +33,6 @@ function AnalysisReliabilityNotice({ score, notice }: { score?: number, notice?:
     );
 }
 
-// Icon fallbacks
 function ShieldCheckIcon(props: any) { return <CheckCircle2 {...props} /> }
 function UserCheckIcon(props: any) { return <User {...props} /> }
 function SparklesIcon(props: any) { return <Sparkles {...props} /> }
@@ -97,29 +98,121 @@ function TimelineIcon({ label }: { label?: string }) {
     return <Activity className="h-4 w-4 text-slate-400" />;
 }
 
+// --- Processing Skeleton ---
+function ProcessingState({ status }: { status: string }) {
+    const isQueued = status === "queued";
+    return (
+        <div className="min-h-screen bg-slate-50/50 flex items-center justify-center">
+            <div className="text-center max-w-md mx-auto p-8">
+                <div className="relative mb-6">
+                    <div className="w-20 h-20 mx-auto rounded-full bg-emerald-100 flex items-center justify-center">
+                        <Loader2 className="h-10 w-10 text-emerald-600 animate-spin" />
+                    </div>
+                </div>
+                <h2 className="text-2xl font-bold text-slate-900 mb-2">
+                    {isQueued ? "Analysis Queued" : "Analyzing Executive Presence"}
+                </h2>
+                <p className="text-slate-500 text-sm leading-relaxed mb-4">
+                    {isQueued
+                        ? "Your analysis is waiting to be processed. This will start shortly..."
+                        : "Gemini AI is analyzing communication patterns, vocal dynamics, and leadership presence. This usually takes 15–30 seconds."}
+                </p>
+                <div className="flex items-center justify-center gap-2 text-xs text-slate-400">
+                    <RefreshCw className="h-3 w-3 animate-spin" />
+                    <span>Auto-refreshing...</span>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+// --- Failed State ---
+function FailedState({ error, onRetry }: { error?: string, onRetry: () => void }) {
+    return (
+        <div className="min-h-screen bg-slate-50/50 flex items-center justify-center">
+            <div className="text-center max-w-md mx-auto p-8">
+                <AlertTriangle className="h-16 w-16 text-amber-500 mx-auto mb-4" />
+                <h2 className="text-xl font-bold text-slate-900 mb-2">Analysis Could Not Be Completed</h2>
+                <p className="text-slate-500 text-sm mb-2 leading-relaxed">
+                    {error?.includes("captions") || error?.includes("transcript")
+                        ? "This video does not have captions/subtitles enabled on YouTube. Please try a video that has captions."
+                        : "An error occurred during analysis."}
+                </p>
+                {error && <p className="text-xs text-slate-400 bg-slate-100 rounded p-2 mb-6 text-left font-mono break-all">{error.slice(0, 200)}</p>}
+                <div className="flex flex-col gap-2">
+                    <Button onClick={onRetry} variant="outline" size="sm">
+                        <RefreshCw className="h-3 w-3 mr-2" /> Try Another Video
+                    </Button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
 // --- Main Page ---
 
-export default async function AnalysisPage({ params }: { params: Promise<{ id: string }> }) {
-    const { id } = await params;
+export default function AnalysisPage({ params }: { params: { id: string } }) {
+    const id = params.id;
+    const router = useRouter();
+    const [analysis, setAnalysis] = useState<any>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
-    // Fetch from Backend API (bypassing RLS)
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/analyze/${id}`, {
-        cache: 'no-store' // Ensure fresh data
-    });
+    const fetchAnalysis = useCallback(async () => {
+        try {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/analyze/${id}`, { cache: "no-store" });
+            if (!res.ok) {
+                setError("Failed to load analysis.");
+                return null;
+            }
+            const data = await res.json();
+            setAnalysis(data);
+            setLoading(false);
+            return data;
+        } catch (e) {
+            setError("Network error. Please check your connection.");
+            setLoading(false);
+            return null;
+        }
+    }, [id]);
 
-    if (!res.ok) {
-        if (res.status === 404) notFound();
-        // If 500 or other error, show error state
-        throw new Error("Failed to fetch analysis");
+    useEffect(() => {
+        let timer: ReturnType<typeof setTimeout>;
+        let pollCount = 0;
+
+        const poll = async () => {
+            const data = await fetchAnalysis();
+            const status = data?.status;
+
+            // Keep polling if still processing/queued (max 2 minutes)
+            if ((status === "processing" || status === "queued") && pollCount < 24) {
+                pollCount++;
+                timer = setTimeout(poll, 5000); // poll every 5s
+            }
+        };
+
+        poll();
+        return () => clearTimeout(timer);
+    }, [fetchAnalysis]);
+
+    if (loading || !analysis) {
+        return <ProcessingState status="queued" />;
     }
 
-    const analysis = await res.json();
+    if (error && !analysis) {
+        return <FailedState error={error} onRetry={() => router.push("/")} />;
+    }
+
+    const status = analysis.status;
+    if (status === "processing" || status === "queued") {
+        return <ProcessingState status={status} />;
+    }
+    if (status === "failed") {
+        return <FailedState error={analysis.error_message} onRetry={() => router.push("/")} />;
+    }
+
     const results = analysis.analysis_results || {};
 
-    // Safety check for null results
-    if (!results) return <div>No results</div>;
-
-    // Fallbacks
     const metrics = results.high_level_metrics || {
         confidence: { score: 0, label: "Confidence" },
         trustworthiness: { score: 0, label: "Trustworthiness" },
@@ -237,7 +330,7 @@ export default async function AnalysisPage({ params }: { params: Promise<{ id: s
                             <MetricCard title="Clarity" score={metrics.clarity?.score || 0} icon={LightbulbIcon} colorClass="bg-emerald-500" definition={metricDefinitions.Clarity} />
                         </div>
 
-                        {/* Executive Summary Box (Overview only) */}
+                        {/* Executive Summary Box */}
                         <Card className="bg-emerald-50/30 border-emerald-100">
                             <CardHeader>
                                 <CardTitle className="flex items-center gap-2 text-emerald-800">
@@ -256,7 +349,6 @@ export default async function AnalysisPage({ params }: { params: Promise<{ id: s
                     {/* DETAILED TAB */}
                     <TabsContent value="detailed" className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-500">
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                            {/* Voice Analysis */}
                             <Card className="border-border/60 shadow-sm h-full">
                                 <CardHeader className="bg-emerald-50/50 border-b border-border/40 py-4">
                                     <div className="flex items-center gap-2">
@@ -275,7 +367,6 @@ export default async function AnalysisPage({ params }: { params: Promise<{ id: s
                                 </CardContent>
                             </Card>
 
-                            {/* Message Analysis */}
                             <Card className="border-border/60 shadow-sm h-full">
                                 <CardHeader className="bg-indigo-50/50 border-b border-border/40 py-4">
                                     <div className="flex items-center gap-2">
