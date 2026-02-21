@@ -26,47 +26,57 @@ export async function POST(request: Request) {
         if (!vidMatch) return NextResponse.json({ error: 'Invalid YouTube URL' }, { status: 400 });
         const videoId = vidMatch[1];
 
-        // Fetch YouTube page to extract ytInitialPlayerResponse
-        const ytRes = await fetch(`https://www.youtube.com/watch?v=${videoId}&hl=en`, {
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
-                'Accept-Language': 'en-US,en;q=0.9',
-            },
-        });
+        // Use @distube/ytdl-core to get video info including caption track URLs
+        // This library handles YouTube's bot detection better than direct HTTP
+        process.env.YTDL_NO_UPDATE = '1';
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
+        const ytdl = require('@distube/ytdl-core');
 
-        const html = await ytRes.text();
+        let captionTracks: any[] = [];
+        let videoTitle = 'Unknown Title';
 
-        // Extract ytInitialPlayerResponse
-        const match = html.match(/ytInitialPlayerResponse\s*=\s*(\{.+?\});\s*(?:var|window|<\/script)/);
-        if (!match) {
-            return NextResponse.json({ error: 'Could not parse YouTube page' }, { status: 500 });
+        try {
+            const info = await ytdl.getInfo(`https://www.youtube.com/watch?v=${videoId}`);
+            videoTitle = info.videoDetails?.title || 'Unknown Title';
+            captionTracks = info.player_response?.captions?.playerCaptionsTracklistRenderer?.captionTracks || [];
+        } catch (e: any) {
+            console.error('ytdl-core failed:', e.message);
         }
-
-        const playerData = JSON.parse(match[1]);
-        const captionTracks: any[] = playerData?.captions?.playerCaptionsTracklistRenderer?.captionTracks || [];
 
         if (captionTracks.length === 0) {
-            return NextResponse.json({ error: 'No captions available for this video' }, { status: 404 });
+            return NextResponse.json({
+                error: 'No captions available for this video. The video may not have subtitles/captions enabled on YouTube.'
+            }, { status: 404 });
         }
 
-        // Prefer english tracks
-        const track = captionTracks.find((t: any) => t.languageCode?.startsWith('en')) || captionTracks[0];
+        // Prefer English track
+        const track = captionTracks.find((t: any) =>
+            t.languageCode?.startsWith('en') && t.kind !== 'asr'
+        ) || captionTracks.find((t: any) =>
+            t.languageCode?.startsWith('en')
+        ) || captionTracks[0];
+
         const vttUrl = `${track.baseUrl}&fmt=vtt`;
 
         const vttRes = await fetch(vttUrl, {
             headers: {
-                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
             },
         });
 
         const vttText = await vttRes.text();
 
         if (!vttText || vttText.length < 50) {
-            return NextResponse.json({ error: 'Captions returned empty content' }, { status: 403 });
+            return NextResponse.json({ error: 'Captions content was empty. Please try again.' }, { status: 403 });
         }
 
         const transcript = parseVtt(vttText);
-        return NextResponse.json({ transcript, videoId, characterCount: transcript.length });
+        return NextResponse.json({
+            transcript,
+            videoId,
+            videoTitle,
+            characterCount: transcript.length
+        });
 
     } catch (error: any) {
         console.error('Transcript API error:', error);
