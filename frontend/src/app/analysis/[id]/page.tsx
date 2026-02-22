@@ -15,6 +15,8 @@ import { SentimentChart } from "@/components/sentiment-chart";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { AmbientLiquidBackground } from "@/components/v2/ambient-background";
+import { motion, AnimatePresence } from "framer-motion";
 
 // --- Components ---
 
@@ -115,18 +117,26 @@ function ProcessingState({ status }: { status: string }) {
     }
 
     return (
-        <div className="min-h-screen bg-slate-50/50 flex items-center justify-center">
-            <div className="text-center max-w-md mx-auto p-8">
-                <div className="relative mb-6">
-                    <div className="w-20 h-20 mx-auto rounded-full bg-emerald-100 flex items-center justify-center">
-                        <Loader2 className="h-10 w-10 text-emerald-600 animate-spin" />
+        <div className="min-h-screen bg-slate-950 flex items-center justify-center relative overflow-hidden">
+            <AmbientLiquidBackground />
+            <div className="text-center max-w-md mx-auto p-12 bg-slate-900/40 backdrop-blur-xl border border-white/5 rounded-3xl relative z-10 shadow-2xl">
+                <div className="relative mb-8">
+                    <div className="w-24 h-24 mx-auto rounded-full bg-emerald-500/10 flex items-center justify-center border border-emerald-500/30">
+                        <Loader2 className="h-10 w-10 text-emerald-500 animate-spin" />
                     </div>
+                    <motion.div
+                        className="absolute inset-x-0 -bottom-2 flex justify-center"
+                        animate={{ opacity: [0.4, 1, 0.4] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                        <span className="text-[10px] font-mono text-emerald-500 tracking-[0.3em] uppercase">Neural Synthesis</span>
+                    </motion.div>
                 </div>
-                <h2 className="text-2xl font-bold text-slate-900 mb-2">{title}</h2>
-                <p className="text-slate-500 text-sm leading-relaxed mb-4">{description}</p>
-                <div className="flex items-center justify-center gap-2 text-xs text-slate-400">
+                <h2 className="text-2xl font-bold text-white mb-3 tracking-tight">{title}</h2>
+                <p className="text-slate-400 text-sm leading-relaxed mb-6 px-4">{description}</p>
+                <div className="flex items-center justify-center gap-3 text-[10px] font-mono text-emerald-500/60 uppercase tracking-widest">
                     <RefreshCw className="h-3 w-3 animate-spin" />
-                    <span>Auto-refreshing...</span>
+                    <span>Syncing with Cloud Intelligence...</span>
                 </div>
             </div>
         </div>
@@ -247,10 +257,20 @@ export default function AnalysisPage() {
                     Back to Dashboard
                 </Link>
                 <div className="flex items-center gap-2">
-                    <Button variant="outline" size="sm" className="h-8 gap-2 text-xs">
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        className="h-8 gap-2 text-xs"
+                        onClick={() => toast.info("PDF Export is a Ninja Ultra Pro feature. Implementation pending Stripe integration.")}
+                    >
                         <FileText className="h-3 w-3" /> PDF Export
                     </Button>
-                    <Button variant="outline" size="sm" className="h-8 gap-2 text-xs">
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        className="h-8 gap-2 text-xs"
+                        onClick={() => toast.info("CSV Export is a Ninja Ultra Pro feature.")}
+                    >
                         <Download className="h-3 w-3" /> Export CSV
                     </Button>
                 </div>
@@ -287,33 +307,47 @@ export default function AnalysisPage() {
                 </div>
 
                 {/* Overall Score Card */}
-                <div className="bg-white rounded-xl border border-border shadow-sm p-8">
-                    <div className="flex items-center gap-2 mb-2">
-                        <Trophy className="h-5 w-5 text-emerald-600" />
-                        <h2 className="text-sm font-bold text-slate-500 uppercase tracking-widest">Overall Performance Score</h2>
-                    </div>
-                    <p className="text-slate-600 text-sm mb-6 max-w-2xl">{results.overall_performance?.summary || "Comprehensive assessment of executive presence."}</p>
-
-                    <div className="flex items-end gap-6 mb-4">
-                        <span className="text-7xl font-bold text-emerald-600 tracking-tighter leading-none">{overallScore}</span>
-                        <div className="pb-2">
-                            <span className="text-emerald-700 font-bold bg-emerald-50 px-3 py-1 rounded-full text-xs uppercase tracking-wide border border-emerald-100">
-                                {results.overall_performance?.level || "Good"} level
-                            </span>
-                            <span className="text-slate-400 text-xs ml-2">(Executive Standard: 80+)</span>
+                <div className="bg-slate-950 rounded-2xl border border-emerald-500/20 shadow-2xl p-10 relative overflow-hidden">
+                    <AmbientLiquidBackground />
+                    <div className="relative z-10">
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="p-2 bg-emerald-500/10 rounded-lg border border-emerald-500/20">
+                                <Trophy className="h-5 w-5 text-emerald-500" />
+                            </div>
+                            <h2 className="text-xs font-bold text-emerald-500/80 uppercase tracking-[0.3em]">Neural Verification Score</h2>
                         </div>
-                        {overallScore >= 85 && (
-                            <Badge className="mb-3 ml-auto bg-emerald-100 text-emerald-700 hover:bg-emerald-200 border-emerald-200 gap-1 pl-1">
-                                <CheckCircle2 className="h-3.5 w-3.5" /> Top Performer
-                            </Badge>
-                        )}
-                    </div>
 
-                    <div className="relative h-3 w-full bg-slate-100 rounded-full overflow-hidden">
-                        <div
-                            className="absolute top-0 left-0 h-full bg-emerald-500 rounded-full transition-all duration-1000 ease-out"
-                            style={{ width: `${overallScore}%` }}
-                        />
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end">
+                            <div>
+                                <p className="text-slate-300 text-sm leading-relaxed mb-8 max-w-xl font-medium">
+                                    {results.overall_performance?.summary || "Your executive patterns have been processed and compared against global leadership benchmarks."}
+                                </p>
+                                <div className="flex items-baseline gap-4">
+                                    <span className="text-8xl font-black text-emerald-500 tracking-tighter drop-shadow-[0_0_15px_rgba(16,185,129,0.3)]">{overallScore}</span>
+                                    <div className="space-y-1">
+                                        <Badge className="bg-emerald-500 text-slate-950 border-none px-3 py-1 font-black text-[10px] uppercase tracking-widest">
+                                            {results.overall_performance?.level || "PROFESSIONAL"} LEVEL
+                                        </Badge>
+                                        <p className="text-slate-500 text-[10px] font-mono uppercase tracking-tight">Executive Threshold: 85+</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="space-y-4 pb-2">
+                                <div className="flex justify-between text-[10px] font-mono text-emerald-500/60 uppercase tracking-widest">
+                                    <span>Sync Accuracy</span>
+                                    <span>High Fidelity</span>
+                                </div>
+                                <div className="relative h-2 w-full bg-slate-800 rounded-full overflow-hidden shadow-inner">
+                                    <motion.div
+                                        initial={{ width: 0 }}
+                                        animate={{ width: `${overallScore}%` }}
+                                        transition={{ duration: 1.5, ease: "easeOut" }}
+                                        className="absolute top-0 left-0 h-full bg-gradient-to-r from-emerald-600 to-emerald-400 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.5)]"
+                                    />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

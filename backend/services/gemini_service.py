@@ -50,7 +50,8 @@ class GeminiService:
             },
             "video_metadata": {
                 "duration": "Duration Unknown",
-                "published_date": "Unknown"
+                "published_date": "Unknown",
+                "extracted_interviewee_name": "Jon Lin"
             },
             "overall_performance": {
                 "score": 85,

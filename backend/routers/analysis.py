@@ -160,50 +160,135 @@ async def start_analysis(request: AnalysisRequest, background_tasks: BackgroundT
         # Create a mock analysis record
         mock_analysis_id = str(uuid.uuid4())
         mock_results = {
-            "summary": "This is a demonstration of the Executive Comms Ninja analysis. The speaker demonstrates strong executive presence with clear articulation and good pacing. However, there are moments of filler word usage that could be reduced.",
-            "executive_presence_score": 88,
-            "strategic_metrics": {
-                "gravitas": 92,
-                "clarity": 88,
-                "empathy": 80,
-                "passion": 85
+            "analysis_reliability": {
+                "score": 92,
+                "notice": "High confidence analysis based on clear audio and video quality from CNBC."
             },
-            "sentiment_arc": [
-                {"timestamp": "00:00", "sentiment": 60, "label": "Calm Opening"},
-                {"timestamp": "01:15", "sentiment": 75, "label": "Building Momentum"},
-                {"timestamp": "02:30", "sentiment": 90, "label": "Peak Passion"},
-                {"timestamp": "03:45", "sentiment": 70, "label": "Thoughtful Transition"},
-                {"timestamp": "05:00", "sentiment": 85, "label": "Confident Closing"}
+            "video_metadata": {
+                "duration": "08:45",
+                "published_date": "2024-03-01",
+                "extracted_interviewee_name": "Jon Lin",
+                "channel_title": "CNBC Television"
+            },
+            "overall_performance": {
+                "score": 88,
+                "level": "Elite",
+                "summary": "This is a demonstration of the Executive Comms Ninja analysis. The speaker demonstrates exceptionally strong executive presence with clear articulation, steady pacing, and excellent composure under questioning. The analogical breakdown of complex topics was masterful.",
+                "badge": "Top Performer"
+            },
+            "high_level_metrics": {
+                "confidence": {"score": 92, "label": "Confidence"},
+                "trustworthiness": {"score": 85, "label": "Trustworthiness"},
+                "engagement": {"score": 80, "label": "Engagement"},
+                "clarity": {"score": 89, "label": "Clarity"}
+            },
+            "detailed_analysis": {
+                "voice_analysis": {
+                    "speaking_rate": "Optimal Pace",
+                    "pause_frequency": "Appropriate",
+                    "volume_variation": "Dynamic",
+                    "clarity_rating": "Excellent",
+                    "observation": "Speaker maintained a steady 135wpm pace with strategic pausing before key points, ideal for comprehension and gravity."
+                },
+                "message_analysis": {
+                    "keyword_density": "High",
+                    "emotional_tone": "Positive",
+                    "structure_rating": "Logical",
+                    "logic_flow": "Well-organized",
+                    "observation": "Key themes were reinforced using concise, repetitive market terminology that resonates with the core audience."
+                }
+            },
+            "emotion_radar": {
+                "confidence": 92,
+                "empathy": 75,
+                "authority": 88,
+                "composure": 94,
+                "enthusiasm": 82,
+                "trust": 85
+            },
+            "timeline_analysis": [
+                {
+                    "timestamp": "00:15",
+                    "event": "Calm Opening",
+                    "sentiment": "neutral",
+                    "emotion_label": "Confident",
+                    "confidence_score": 90,
+                    "engagement_score": 85,
+                    "insight": "Strong opening statement, established credibility early without rushing."
+                },
+                {
+                    "timestamp": "01:30",
+                    "event": "Building Momentum",
+                    "sentiment": "positive",
+                    "emotion_label": "Enthusiastic",
+                    "confidence_score": 92,
+                    "engagement_score": 88,
+                    "insight": "Used a clear analogy to explain complex technical pipeline topic."
+                },
+                {
+                    "timestamp": "02:45",
+                    "event": "Thoughtful Reframing",
+                    "sentiment": "neutral",
+                    "emotion_label": "Composed",
+                    "confidence_score": 85,
+                    "engagement_score": 80,
+                    "insight": "Slight hesitation before effectively pivoting a challenging anchor question."
+                },
+                {
+                    "timestamp": "04:20",
+                    "event": "Peak Assertion",
+                    "sentiment": "positive",
+                    "emotion_label": "Authoritative",
+                    "confidence_score": 95,
+                    "engagement_score": 92,
+                    "insight": "Great eye contact and steady hand gestures during the closing forward guidance."
+                }
             ],
-            "timeline": [
-                {"timestamp": "00:15", "observation": "Strong opening statement, established credibility early.", "metric": "Gravitas"},
-                {"timestamp": "01:30", "observation": "Used a clear analogy to explain complex topic.", "metric": "Clarity"},
-                {"timestamp": "02:45", "observation": "Slight hesitation and use of 'um' filler word.", "metric": "Fluency"},
-                {"timestamp": "04:20", "observation": "Great eye contact and hand gestures during key point.", "metric": "Passion"}
+            "benchmark_comparison": {
+                "your_score": 88,
+                "industry_average": 74,
+                "top_ceos": 91,
+                "metrics": ["Confidence", "Trust", "Clarity", "Composure"],
+                "emotion_radar_benchmark": {
+                    "confidence": 85,
+                    "empathy": 80,
+                    "authority": 88,
+                    "composure": 82,
+                    "enthusiasm": 75,
+                    "trust": 85
+                }
+            },
+            "recommendations": [
+                {
+                    "title": "Reduce filler words in transitions",
+                    "rationale": "Minor hesitation ('um', 'uh') occasionally weakens pivots.",
+                    "strategy": "Embrace silence instead of vocalizing pauses when formulating responses.",
+                    "priority": "Low",
+                    "timeframe": "Ongoing",
+                    "expected_impact": "5%"
+                },
+                {
+                    "title": "Inject more varying tonal emphasis",
+                    "rationale": "High consistency can sometimes border on monotone during longer explanations.",
+                    "strategy": "Apply slight volume increases on strategic keywords.",
+                    "priority": "Medium",
+                    "timeframe": "1-2 weeks",
+                    "expected_impact": "10%"
+                }
             ],
-            "strengths": [
-                "Clear and articulate speaking style",
-                "Good use of analogies to simplify concepts",
-                "Strong eye contact and engagement",
-                "Confident posture and body language"
-            ],
-            "weaknesses": [
-                "Occasional use of filler words (um, uh)",
-                "Pacing could be slightly slower in technical sections",
-                "Could use more variation in tone for emphasis"
-            ]
+            "summary": "A masterful display of executive composure and clarity. The speaker navigated technical subject matter with ease, translating it into accessible business value for the CNBC audience. The primary opportunity for growth is embracing absolute silence during transitions rather than minimal filler sounds, which will elevate the perceived authority from Excellent to Elite."
         }
         
         try:
             supabase.table("video_analyses").insert({
                 "id": mock_analysis_id,
                 "user_id": request.user_id,
-                "youtube_url": "https://www.youtube.com/watch?v=demo_video",
-                "video_title": "Executive Presence Demo",
-                "company": request.company,
-                "role": request.role,
-                "target_person": request.target_person,
+                "youtube_url": "https://www.youtube.com/watch?v=y8OnoxCotHE", # Real video for demo player seeking
                 "status": "completed",
+                "video_title": request.video_title,
+                "target_person": request.target_person,
+                "role": request.role,
+                "company": request.company,
                 "analysis_results": mock_results
             }).execute()
             

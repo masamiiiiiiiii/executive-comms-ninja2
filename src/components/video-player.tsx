@@ -12,20 +12,41 @@ const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 interface VideoPlayerProps {
     url: string;
     timeline?: any[];
+    initialTimestamp?: string | null;
 }
 
-export function VideoPlayer({ url, timeline }: VideoPlayerProps) {
+export function VideoPlayer({ url, timeline, initialTimestamp }: VideoPlayerProps) {
     const [playing, setPlaying] = useState(false);
     const [progress, setProgress] = useState(0);
     const playerRef = useRef<any>(null);
 
-    const handleSeek = (timeStr: any) => {
-        if (!timeStr) return;
+    const hasSeeked = useRef(false);
+
+    const parseTime = (timeStr: string) => {
+        if (!timeStr) return 0;
         const parts = timeStr.toString().split(":");
-        if (parts.length < 2) return;
-        const seconds = parseInt(parts[0]) * 60 + parseInt(parts[1]);
-        
-        if (playerRef.current) {
+        if (parts.length < 2) return 0;
+        return parseInt(parts[0]) * 60 + parseInt(parts[1]);
+    };
+
+    const handleReady = () => {
+        if (initialTimestamp && playerRef.current && !hasSeeked.current) {
+            const seconds = parseTime(initialTimestamp);
+            if (seconds > 0) {
+                setPlaying(true);
+                setTimeout(() => {
+                    if (playerRef.current) {
+                        playerRef.current.seekTo(seconds, "seconds");
+                        hasSeeked.current = true;
+                    }
+                }, 500);
+            }
+        }
+    };
+
+    const handleSeek = (timeStr: any) => {
+        const seconds = parseTime(timeStr);
+        if (playerRef.current && seconds > 0) {
             playerRef.current.seekTo(seconds, "seconds");
             setPlaying(true);
         }
@@ -41,6 +62,7 @@ export function VideoPlayer({ url, timeline }: VideoPlayerProps) {
                     height="100%"
                     playing={playing}
                     controls={true}
+                    onReady={handleReady}
                     onProgress={(state: any) => setProgress(state.playedSeconds)}
                 />
             </div>

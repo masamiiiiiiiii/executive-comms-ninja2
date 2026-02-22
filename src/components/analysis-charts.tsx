@@ -1,13 +1,7 @@
 "use client";
 
-import {
-    PolarAngleAxis,
-    PolarGrid,
-    Radar,
-    RadarChart,
-    ResponsiveContainer,
-} from "recharts";
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import React, { useMemo } from 'react';
+import { motion } from 'framer-motion';
 
 interface AnalysisChartsProps {
     data: Record<string, number>;
@@ -17,62 +11,178 @@ interface AnalysisChartsProps {
 export function AnalysisCharts({ data, benchmarkData }: AnalysisChartsProps) {
     if (!data) return <div className="text-sm text-muted-foreground">No metrics available.</div>;
 
-    // Transform data for Recharts
-    // e.g., { confidence: 80, clarity: 90 } -> [{ subject: 'Confidence', A: 80, B: 90, fullMark: 100 }, ...]
     const subjects = Object.keys(data);
-    const chartData = subjects.map((key) => ({
-        subject: key.charAt(0).toUpperCase() + key.slice(1),
-        A: data[key],
-        B: benchmarkData ? (benchmarkData[key] || 0) : undefined,
-        fullMark: 100,
-    }));
+    const numPoints = subjects.length;
 
-    const chartConfig = {
-        score: {
-            label: "Your Score",
-            color: "hsl(var(--primary))",
-        },
-        benchmark: {
-            label: "Industry Standard",
-            color: "hsl(var(--muted-foreground))",
-        }
-    }
+    // SVG coordinate system setup
+    const size = 500;
+    const center = size / 2;
+    const radius = size * 0.26; // Much more room for outside text labels so they never clip
+
+    // Precompute polygon points based on a 0-100 scale dataset
+    const getPoints = (record: Record<string, number>) => {
+        return subjects.map((subj, i) => {
+            const val = record[subj] || 0;
+            const r = (val / 100) * radius;
+            const angle = (Math.PI * 2 * i) / numPoints - Math.PI / 2;
+            return {
+                x: center + r * Math.cos(angle),
+                y: center + r * Math.sin(angle)
+            };
+        });
+    };
+
+    const userPoints = useMemo(() => getPoints(data), [data, subjects]);
+    const benchPoints = useMemo(() => benchmarkData ? getPoints(benchmarkData) : [], [benchmarkData, subjects]);
+
+    // Format into SVG polygon strings
+    const toPolygonStr = (pts: { x: number, y: number }[]) => pts.map(p => `${p.x},${p.y}`).join(" ");
+
+    const userPolygon = toPolygonStr(userPoints);
+    const benchPolygon = toPolygonStr(benchPoints);
+
+    // Create concentric background grid lines
+    const gridLevels = [0.2, 0.4, 0.6, 0.8, 1.0];
 
     return (
-        <div className="h-[300px] w-full">
-            <ChartContainer config={chartConfig} className="h-full w-full">
-                <RadarChart cx="50%" cy="50%" outerRadius="75%" data={chartData}>
-                    <PolarGrid className="text-muted/20" stroke="currentColor" />
-                    <PolarAngleAxis
-                        dataKey="subject"
-                        className="text-[10px] font-bold fill-muted-foreground uppercase tracking-widest"
-                        tick={{ dy: 4 }}
+        <div className="relative w-full h-full flex items-center justify-center min-h-[300px]">
+            <svg viewBox={`0 0 ${size} ${size}`} className="w-full h-full max-w-[500px] drop-shadow-sm">
+
+                {/* 1. Radar Web Background (Animated drawing effect) */}
+                <g className="stroke-slate-400" strokeWidth="1" fill="none">
+                    {gridLevels.map((level, idx) => {
+                        const r = radius * level;
+                        const pts = subjects.map((_, i) => {
+                            const angle = (Math.PI * 2 * i) / numPoints - Math.PI / 2;
+                            return `${center + r * Math.cos(angle)},${center + r * Math.sin(angle)}`;
+                        }).join(" ");
+                        return (
+                            <motion.polygon
+                                key={`grid-level-${level}`}
+                                points={pts}
+                                initial={{ opacity: 0, pathLength: 0 }}
+                                animate={{ opacity: 0.2, pathLength: 1 }}
+                                transition={{ duration: 0.8, delay: idx * 0.1, ease: "easeOut" }}
+                            />
+                        );
+                    })}
+                    {/* Spokes */}
+                    {subjects.map((_, i) => {
+                        const angle = (Math.PI * 2 * i) / numPoints - Math.PI / 2;
+                        return (
+                            <motion.line
+                                key={`spoke-${i}`}
+                                x1={center}
+                                y1={center}
+                                x2={center + radius * Math.cos(angle)}
+                                y2={center + radius * Math.sin(angle)}
+                                initial={{ opacity: 0, pathLength: 0 }}
+                                animate={{ opacity: 0.2, pathLength: 1 }}
+                                transition={{ duration: 0.8, delay: 0.4 + i * 0.05, ease: "easeOut" }}
+                            />
+                        );
+                    })}
+                </g>
+
+                {/* 2. Industry Average (Benchmark) Polygon */}
+                {benchmarkData && (
+                    <motion.polygon
+                        points={benchPolygon}
+                        initial={{ opacity: 0, scale: 0.5, pathLength: 0 }}
+                        animate={{ opacity: 1, scale: 1, pathLength: 1 }}
+                        transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
+                        style={{ transformOrigin: "center" }}
+                        fill="rgba(148, 163, 184, 0.15)" // slate-400 with opacity
+                        stroke="rgba(148, 163, 184, 0.8)"
+                        strokeWidth="1.5"
+                        strokeDasharray="4 4"
                     />
+                )}
 
-                    {/* Benchmark Radar (Background) */}
-                    {benchmarkData && (
-                        <Radar
-                            name="Industry Standard"
-                            dataKey="B"
-                            stroke="hsl(var(--muted-foreground))"
-                            fill="hsl(var(--muted-foreground))"
-                            fillOpacity={0.1}
-                            strokeDasharray="4 4"
-                        />
-                    )}
+                {/* 3. User Score Polygon */}
+                <motion.polygon
+                    points={userPolygon}
+                    initial={{ opacity: 0, scale: 0, pathLength: 0 }}
+                    animate={{ opacity: 1, scale: 1, pathLength: 1 }}
+                    transition={{ duration: 0.8, ease: "backOut", delay: 0.2 }}
+                    style={{ transformOrigin: "center" }}
+                    fill="url(#userGradient)"
+                    stroke="#10b981" // emerald-500
+                    strokeWidth="2.5"
+                />
 
-                    {/* User Radar (Foreground) */}
-                    <Radar
-                        name="Your Score"
-                        dataKey="A"
-                        stroke="#10b981"
+                {/* User Score Data Points (Nodes) */}
+                {userPoints.map((pt, i) => (
+                    <motion.circle
+                        key={`node-${i}`}
+                        cx={pt.x}
+                        cy={pt.y}
+                        r={4}
                         fill="#10b981"
-                        fillOpacity={0.3}
-                        className="drop-shadow-sm"
+                        stroke="#ffffff"
+                        strokeWidth={1.5}
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.4, delay: 0.8 + i * 0.1 }}
+                        style={{ transformOrigin: `${pt.x}px ${pt.y}px` }}
                     />
-                    <ChartTooltip content={<ChartTooltipContent />} />
-                </RadarChart>
-            </ChartContainer>
+                ))}
+
+                {/* 4. Labels */}
+                {subjects.map((subj, i) => {
+                    const angle = (Math.PI * 2 * i) / numPoints - Math.PI / 2;
+                    // Push labels slightly outside the max radius
+                    const labelR = radius * 1.25;
+                    const x = center + labelR * Math.cos(angle);
+                    const y = center + labelR * Math.sin(angle);
+
+                    // Simple alignment heuristic based on angle
+                    let textAnchor = "middle";
+                    if (Math.cos(angle) > 0.1) textAnchor = "start";
+                    if (Math.cos(angle) < -0.1) textAnchor = "end";
+
+                    return (
+                        <motion.text
+                            key={`label-${i}`}
+                            x={x}
+                            y={y}
+                            fill="#64748b" // slate-500
+                            fontSize="11"
+                            fontWeight="bold"
+                            textAnchor={textAnchor as any}
+                            alignmentBaseline="middle"
+                            className="uppercase tracking-widest"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
+                        >
+                            {subj}
+                        </motion.text>
+                    );
+                })}
+
+                {/* Definitions for Gradients */}
+                <defs>
+                    <linearGradient id="userGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="rgba(16, 185, 129, 0.4)" />
+                        <stop offset="100%" stopColor="rgba(16, 185, 129, 0.1)" />
+                    </linearGradient>
+                </defs>
+            </svg>
+
+            {/* Legend placed absolutely over the SVG container */}
+            <div className="absolute bottom-[-10px] left-0 right-0 flex justify-center gap-6 text-[10px] uppercase tracking-wider font-bold">
+                <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-sm bg-emerald-500/20 border-2 border-emerald-500"></div>
+                    <span className="text-emerald-700">Your Score</span>
+                </div>
+                {benchmarkData && (
+                    <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 rounded-sm bg-slate-400/10 border-2 border-slate-400 border-dashed"></div>
+                        <span className="text-slate-500">Industry Avg</span>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

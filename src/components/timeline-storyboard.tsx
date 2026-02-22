@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/componen
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Play, Pause, ChevronRight, ChevronLeft, Quote, Sparkles } from "lucide-react";
+import { EmotionIllustration } from "@/components/v2/emotion-illustrations";
 
 interface TimelineEvent {
     timestamp: string;
@@ -73,6 +74,13 @@ export function TimelineStoryboard({ events, onPlayTimestamp }: TimelineStoryboa
                             </CardTitle>
                         </CardHeader>
                         <CardContent className="p-4 flex-grow flex flex-col gap-3">
+                            <div className="w-full flex justify-center mb-1">
+                                <div className="w-24 h-24 bg-slate-950 rounded-xl overflow-hidden shadow-inner border border-emerald-900/30 p-2 relative">
+                                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.1)_0%,transparent_70%)]" />
+                                    <EmotionIllustration emotion={event.emotion_label || "Neutral"} />
+                                </div>
+                            </div>
+
                             <div className="relative">
                                 <Quote className="h-4 w-4 text-slate-200 absolute -top-1 -left-1 transform -scale-x-100" />
                                 <p className="text-xs text-slate-600 leading-relaxed pl-3 italic relative z-10">

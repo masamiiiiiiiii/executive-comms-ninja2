@@ -128,7 +128,7 @@ export function NewAnalysisForm() {
 
     if (watchMode && videoId) {
         return (
-            <div className="w-full max-w-4xl mx-auto animate-in fade-in zoom-in duration-500">
+            <div className="w-full max-w-5xl mx-auto animate-in fade-in zoom-in duration-500">
                 <div className="mb-6 flex items-center justify-between">
                     <div>
                         <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Co-Watching Session</h2>

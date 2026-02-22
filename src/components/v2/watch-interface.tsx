@@ -8,7 +8,9 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { Play, Pause, CheckCircle, Info, Zap } from 'lucide-react';
+import { Play, Pause, CheckCircle, Info, Zap, Loader2 } from 'lucide-react';
+
+import { AmbientLiquidBackground } from './ambient-background';
 
 interface WatchInterfaceProps {
     videoId: string;
@@ -28,14 +30,22 @@ export const WatchInterface: React.FC<WatchInterfaceProps> = ({
     const [watchedSeconds, setWatchedSeconds] = useState<Set<number>>(new Set());
     const [progress, setProgress] = useState(0);
     const [isRequirementMet, setIsRequirementMet] = useState(false);
+    const [isTransitioning, setIsTransitioning] = useState(false);
 
     const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-    // Requirement: 
+    // Requirement:
     // - If < 5m (300s): Watch 90% (to handle end-slop)
     // - If >= 5m: Watch 180s (3m) total unique seconds
     const isShort = duration > 0 && duration < 300;
     const threshold = isShort ? Math.floor(duration * 0.9) : 180;
+
+    const handleFinalInitiate = () => {
+        setIsTransitioning(true);
+        setTimeout(() => {
+            onReadyToAnalyze();
+        }, 2000); // Aesthetic delay for the 'Ultra' transition
+    };
 
     useEffect(() => {
         if (isObserving && player) {
@@ -89,85 +99,112 @@ export const WatchInterface: React.FC<WatchInterfaceProps> = ({
     };
 
     return (
-        <Card className="p-6 bg-slate-950 border-emerald-500/20 shadow-2xl shadow-emerald-500/10 overflow-hidden relative">
-            <div className="flex flex-col md:flex-row gap-8 items-start">
+        <Card className="p-6 lg:p-8 bg-slate-950 border-white/5 shadow-2xl relative overflow-hidden group max-w-7xl mx-auto">
+
+            <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-stretch relative z-10">
                 {/* Left: Video Player */}
-                <div className="flex-1 w-full space-y-4">
-                    <div className="relative rounded-xl overflow-hidden border border-slate-800 shadow-inner">
-                        <YouTube videoId={videoId} opts={opts} onReady={onPlayerReady} onStateChange={onStateChange} />
+                <div className="flex-1 min-w-0 space-y-4">
+                    <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black aspect-video">
+                        <YouTube videoId={videoId} opts={{ ...opts, height: '100%', width: '100%' }} onReady={onPlayerReady} onStateChange={onStateChange} className="absolute inset-0 w-full h-full [&>iframe]:w-full [&>iframe]:h-full" />
                         {!isObserving && (
-                            <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] pointer-events-none flex items-center justify-center">
-                                <div className="bg-emerald-500/10 border border-emerald-500/30 px-4 py-2 rounded-full flex items-center gap-2">
-                                    <Info className="w-4 h-4 text-emerald-400" />
-                                    <span className="text-xs font-mono text-emerald-400">WAITING FOR OBSERVATION START</span>
+                            <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] pointer-events-none flex items-center justify-center transition-all duration-700">
+                                <div className="bg-emerald-500/5 border border-emerald-500/20 px-6 py-3 rounded-full flex items-center gap-3 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+                                    <Zap className="w-5 h-5 text-emerald-500/60 animate-pulse" />
+                                    <span className="text-[10px] font-mono font-bold text-emerald-500/60 tracking-[0.3em] uppercase">LINK_ESTABLISHED</span>
                                 </div>
                             </div>
                         )}
                     </div>
 
-                    <div className="flex justify-between items-center px-1">
-                        <h3 className="text-sm font-mono text-slate-300 truncate max-w-[70%]">{title}</h3>
-                        <Badge variant="outline" className="border-emerald-500/30 text-emerald-400 font-mono text-[10px]">
-                            {isShort ? "SHORT_CLIP_MODE" : "EXTENDED_OBSERVATION"}
+                    <div className="flex justify-between items-center px-2">
+                        <div className="flex flex-col min-w-0">
+                            <span className="text-[9px] font-mono text-emerald-500/50 uppercase tracking-widest mb-1 leading-none truncate">V_SOURCE_ID: {videoId}</span>
+                            <h3 className="text-sm font-mono text-slate-300 truncate">{title}</h3>
+                        </div>
+                        <Badge variant="outline" className="bg-slate-900/50 border-white/10 text-slate-500 font-mono text-[9px] px-3 py-1 uppercase tracking-tighter flex-shrink-0 ml-4">
+                            {isShort ? "CLIP_MODE_90P" : "DEEP_OBS_180S"}
                         </Badge>
                     </div>
                 </div>
 
                 {/* Right: Ninja Monitoring Panel */}
-                <div className="w-full md:w-80 flex flex-col items-center space-y-6">
-                    <NinjaIntelligenceIndicator isObserving={isObserving} />
+                <div className="w-full lg:w-80 flex-shrink-0 flex flex-col items-center justify-between p-6 lg:p-8 rounded-3xl bg-slate-900/30 backdrop-blur-xl border border-white/10 relative overflow-hidden shadow-2xl">
+                    {/* Ambient Liquid Background: localized behind monitoring panel */}
+                    <div className="absolute inset-0 z-0">
+                        <AmbientLiquidBackground />
+                    </div>
 
-                    <div className="w-full space-y-3">
-                        <div className="flex justify-between text-[10px] font-mono text-slate-400 uppercase tracking-widest">
-                            <span>Observation Progress</span>
-                            <span className={isRequirementMet ? "text-emerald-400" : ""}>
-                                {Math.round(progress)}%
-                            </span>
+                    <div className="relative z-10 w-full flex flex-col items-center flex-1 space-y-6">
+                        <div className="relative h-64 flex items-center justify-center">
+                            <NinjaIntelligenceIndicator isObserving={isObserving} />
                         </div>
-                        <Progress value={progress} className="h-1 bg-slate-800" indicatorClassName="bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
 
-                        <div className="p-3 bg-emerald-500/5 border border-emerald-500/10 rounded-lg text-[10px] leading-tight text-slate-400 font-mono">
-                            {isRequirementMet ? (
-                                <p className="text-emerald-400 flex items-center gap-1.5">
-                                    <CheckCircle className="w-3 h-3" /> SUFFICIENT DATA COLLECTED. READY FOR ANALYSIS.
-                                </p>
-                            ) : (
-                                <p>
-                                    {isShort
-                                        ? "WATCH THE FULL CLIP TO ENABLE DEEP ANALYSIS."
-                                        : `PLEASE OBSERVE AT LEAST 3 MINUTES OF CONTENT. (${watchedSeconds.size}/${threshold} SECS)`}
-                                </p>
-                            )}
+                        <div className="w-full space-y-5">
+                            <div className="flex justify-between text-[10px] font-mono text-slate-400 uppercase tracking-[0.3em]">
+                                <span>Neural Sync</span>
+                                <span className={isRequirementMet ? "text-emerald-400" : "text-emerald-500/60"}>
+                                    {Math.round(progress)}%
+                                </span>
+                            </div>
+                            <Progress
+                                value={progress}
+                                className="h-1 bg-white/5 border border-white/5"
+                                indicatorClassName="bg-emerald-400 shadow-[0_0_15px_rgba(52,211,153,0.5)] transition-all duration-1000"
+                            />
+
+                            <div className="p-4 bg-slate-950/40 border border-white/5 rounded-2xl text-[9px] leading-relaxed text-slate-500 font-mono shadow-inner relative overflow-hidden">
+                                <div className="absolute top-0 left-0 w-1 h-full bg-emerald-500/20" />
+                                {isRequirementMet ? (
+                                    <p className="text-emerald-400/80 flex items-center gap-2">
+                                        <CheckCircle className="w-3 h-3" /> VERIFIED. PROCEED TO SYNTHESIS.
+                                    </p>
+                                ) : (
+                                    <div className="flex flex-col gap-1">
+                                        <span className="text-emerald-600/40 text-[7px] uppercase tracking-widest">Pending Requirements</span>
+                                        <p className="opacity-80">
+                                            {isShort
+                                                ? "OBSERVE REMAINING SEQUENCE DATA."
+                                                : `MIN 180S OBSERVATION. (${watchedSeconds.size}/${threshold}s)`}
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
 
                     <Button
-                        disabled={!isRequirementMet}
-                        onClick={onReadyToAnalyze}
-                        className={`w-full h-12 relative overflow-hidden group transition-all duration-500 ${isRequirementMet
-                                ? "bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold tracking-tighter"
-                                : "bg-slate-800 text-slate-500 grayscale"
+                        disabled={!isRequirementMet || isTransitioning}
+                        onClick={handleFinalInitiate}
+                        className={`w-full h-14 relative overflow-hidden group transition-all duration-700 rounded-2xl mt-8 z-10 ${isRequirementMet
+                            ? "bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black tracking-widest text-[10px]"
+                            : "bg-slate-800/20 text-slate-600 border border-white/5"
                             }`}
                     >
                         <AnimatePresence>
-                            {isRequirementMet && (
+                            {(isRequirementMet || isTransitioning) && (
                                 <motion.div
                                     initial={{ x: '-100%' }}
                                     animate={{ x: '100%' }}
-                                    transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-                                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
+                                    transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
+                                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12 opacity-30"
                                 />
                             )}
                         </AnimatePresence>
-                        <Zap className={`w-4 h-4 mr-2 ${isRequirementMet ? "animate-pulse" : ""}`} />
-                        INITIATE DEEP ANALYSIS
+
+                        {isTransitioning ? (
+                            <div className="flex items-center gap-3">
+                                <Loader2 className="w-4 h-4 animate-spin" />
+                                SYNTH_START_PROC
+                            </div>
+                        ) : (
+                            <div className="flex items-center gap-3">
+                                <Zap className={`w-4 h-4 ${isRequirementMet ? "animate-pulse" : ""}`} />
+                                INIT_DEEP_SYNC
+                            </div>
+                        )}
                     </Button>
                 </div>
             </div>
-
-            {/* Background Decorative Lines */}
-            <div className="absolute top-0 right-0 w-32 h-32 border-t border-r border-emerald-500/10 rounded-tr-3xl pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-32 h-32 border-b border-l border-emerald-500/10 rounded-bl-3xl pointer-events-none" />
         </Card>
     );
 };

@@ -71,8 +71,12 @@ export function TimelineSection({ analysis, results }: TimelineSectionProps) {
                         </div>
 
                         <div className="aspect-video bg-black relative">
-                            {/* The VideoPlayer component will need to handle auto-seeking if possible, or user seeks manually */}
-                            <VideoPlayer url={analysis.youtube_url} timeline={results.timeline_analysis || []} />
+                            {/* The VideoPlayer component will handle auto-seeking on load via initialTimestamp */}
+                            <VideoPlayer
+                                url={analysis.youtube_url}
+                                timeline={results.timeline_analysis || []}
+                                initialTimestamp={evidenceTimestamp}
+                            />
                         </div>
 
                         <div className="p-4 bg-slate-50 text-center border-t border-slate-100">
