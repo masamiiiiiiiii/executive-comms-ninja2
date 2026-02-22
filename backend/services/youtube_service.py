@@ -68,7 +68,13 @@ class YouTubeService:
                 except:
                     pass
             if not transcript:
-                transcript = transcript_list.find_generated_transcript(['en', 'ja'])
+                try:
+                    transcript = transcript_list.find_generated_transcript(['en', 'ja'])
+                except:
+                    pass
+
+            if not transcript:
+                raise ValueError("No English or Japanese transcript found for this video.")
 
             fetched = transcript.fetch()
             text = " ".join(snip.text for snip in fetched.snippets)
@@ -174,6 +180,7 @@ class YouTubeService:
             ydl_opts['cookiefile'] = cookie_path
             
         try:
+            print(f"Attempting audio download with yt-dlp: {youtube_url}")
             with ytdlp_mod.YoutubeDL(ydl_opts) as ydl:
                 ydl.download([youtube_url])
             
@@ -190,8 +197,27 @@ class YouTubeService:
             return downloaded_files[0]
             
         except Exception as e:
-            print(f"Audio download failed: {e}")
-            raise ValueError(f"Could not download audio: {e}")
+            print(f"yt-dlp audio download failed: {e}. Trying pytubefix fallback...")
+            
+            try:
+                from pytubefix import YouTube
+                yt = YouTube(youtube_url)
+                # Filter for audio-only streams
+                audio_stream = yt.streams.get_audio_only()
+                if not audio_stream:
+                    raise ValueError("No audio stream found via pytubefix.")
+                
+                # Download and rename
+                download_path = audio_stream.download(output_path=out_dir, filename="audio_raw")
+                
+                # Convert to mp3 using moviepy (since it's in requirements) or just use as is if Gemini supports it
+                # Gemini supports various audio formats including mp4/m4a which pytube downloads
+                print(f"pytubefix download success: {download_path}")
+                return download_path
+                
+            except Exception as e2:
+                print(f"pytubefix audio download failed: {e2}")
+                raise ValueError(f"Could not download audio via any method. Last error: {e2}")
 
     def get_metadata(self, youtube_url: str) -> dict:
         ydl_opts = {
