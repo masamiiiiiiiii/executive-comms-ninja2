@@ -7,6 +7,7 @@ google-cloud-storage
 google-cloud-aiplatform
 google-generativeai
 supabase
+stripe
 pydantic
 moviepy
 pytubefix
