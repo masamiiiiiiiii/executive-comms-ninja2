@@ -141,6 +141,58 @@ class YouTubeService:
                 lines.append(line)
         return ' '.join(lines)
 
+    def download_audio(self, youtube_url: str) -> str:
+        """
+        Download only audio from YouTube using yt-dlp.
+        Returns the path to the downloaded audio file.
+        """
+        import uuid
+        import os
+        import yt_dlp as ytdlp_mod
+
+        base_dir = "/app" if os.path.isdir("/app") else os.path.dirname(os.path.abspath(__file__))
+        req_id = str(uuid.uuid4())
+        out_dir = os.path.join(base_dir, "temp", req_id)
+        os.makedirs(out_dir, exist_ok=True)
+        
+        out_path = os.path.join(out_dir, "audio.%(ext)s")
+        
+        cookie_path = self._get_cookie_path()
+        
+        ydl_opts = {
+            'format': 'bestaudio/best',
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '128',
+            }],
+            'outtmpl': out_path,
+            'quiet': False,
+        }
+        
+        if cookie_path:
+            ydl_opts['cookiefile'] = cookie_path
+            
+        try:
+            with ytdlp_mod.YoutubeDL(ydl_opts) as ydl:
+                ydl.download([youtube_url])
+            
+            # Find the actual downloaded file (extension might be changed by postprocessor)
+            import glob
+            downloaded_files = glob.glob(os.path.join(out_dir, "audio.mp3"))
+            if not downloaded_files:
+                # Try any file in that directory
+                downloaded_files = glob.glob(os.path.join(out_dir, "*"))
+            
+            if not downloaded_files:
+                raise ValueError("Audio download failed: No file found.")
+                
+            return downloaded_files[0]
+            
+        except Exception as e:
+            print(f"Audio download failed: {e}")
+            raise ValueError(f"Could not download audio: {e}")
+
     def get_metadata(self, youtube_url: str) -> dict:
         ydl_opts = {
             'quiet': True,

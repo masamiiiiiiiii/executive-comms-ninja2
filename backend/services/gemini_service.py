@@ -176,6 +176,151 @@ class GeminiService:
                 generation_config={"response_mime_type": "application/json"}
             )
             return self._parse_response(responses.text)
+    def analyze_audio_multimodal(self, audio_path: str) -> dict:
+        """
+        Analyzes an audio file directly using Gemini's multimodal capabilities.
+        This provides deeper analysis of tone, pacing, and confidence than transcript-only analysis.
+        """
+        prompt = """
+        You are an elite Executive Communication Coach for the AI era. Listen to this audio recording of an executive's speech or interview.
+        
+        **Objective**: Evaluate the speaker's executive presence, voice tone, pacing, confidence, and message clarity against global C-suite standards.
+        
+        **Analysis Focus**:
+        1. **Confidence & Authority**: Detect signs of hesitation, fillers (ums, uhs), and vocal projection.
+        2. **Emotional Tone**: Analyze the underlying sentiment and enthusiasm.
+        3. **Clarity & Articulation**: Is the message easy to follow?
+        4. **Pacing**: Is the speaking rate optimal for an executive audience?
+
+        **Output**: Return a strict JSON object with this EXACT structure (ensure all fields are present):
+        {
+            "analysis_reliability": {
+                "score": 95,
+                "notice": "High confidence analysis based on direct audio observation."
+            },
+            "video_metadata": {
+                "duration": "Detected from audio",
+                "published_date": "Unknown"
+            },
+            "overall_performance": {
+                "score": 85,
+                "level": "Excellent",
+                "summary": "Detailed assessmet based on vocal delivery and content.",
+                "badge": "Authentic Leader"
+            },
+            "high_level_metrics": {
+                "confidence": {"score": 90, "label": "Confidence"},
+                "trustworthiness": {"score": 85, "label": "Trustworthiness"},
+                "engagement": {"score": 80, "label": "Engagement"},
+                "clarity": {"score": 85, "label": "Clarity"}
+            },
+            "detailed_analysis": {
+                "voice_analysis": {
+                    "speaking_rate": "Analyzed from audio",
+                    "pause_frequency": "Analyzed from audio",
+                    "volume_variation": "Analyzed from audio",
+                    "clarity_rating": "Analyzed from audio",
+                    "observation": "Provide a detailed observation based on what you HEAR."
+                },
+                "message_analysis": {
+                    "keyword_density": "Appropriate",
+                    "emotional_tone": "Analyzed from audio",
+                    "structure_rating": "Logical",
+                    "logic_flow": "Well-organized",
+                    "observation": "Identify key themes and structural effectiveness."
+                }
+            },
+            "emotion_radar": {
+                "confidence": 90,
+                "empathy": 70,
+                "authority": 85,
+                "composure": 80,
+                "enthusiasm": 75,
+                "trust": 88
+            },
+            "timeline_analysis": [
+                {
+                    "timestamp": "00:05",
+                    "event": "Detected opening tone",
+                    "sentiment": "positive",
+                    "emotion_label": "Confident",
+                    "confidence_score": 90,
+                    "engagement_score": 85,
+                    "insight": "Observation from the audio start."
+                }
+            ],
+            "benchmark_comparison": {
+                "your_score": 85,
+                "industry_average": 72,
+                "top_ceos": 92,
+                "metrics": ["Confidence", "Voice Stability", "Articulation", "Tone"],
+                "emotion_radar_benchmark": {
+                    "confidence": 85,
+                    "empathy": 80,
+                    "authority": 90,
+                    "composure": 85,
+                    "enthusiasm": 70,
+                    "trust": 85
+                }
+            },
+            "recommendations": [
+                {
+                    "title": "Reduce filler words",
+                    "rationale": "Improves perceived authority.",
+                    "strategy": "Practice comfortable silence instead of 'um'.",
+                    "priority": "High",
+                    "timeframe": "Immediate",
+                    "expected_impact": "15%"
+                }
+            ],
+            "summary": "Comprehensive narrative summary based on what you heard..."
+        }
+        """
+
+        if self.use_api_key:
+            # --- API Key Mode (Local File) ---
+            print(f"Uploading audio {audio_path} to Gemini...")
+            if not os.path.exists(audio_path):
+                raise ValueError(f"Local audio file not found: {audio_path}")
+
+            audio_file = genai.upload_file(path=audio_path)
+            
+            # Wait for processing
+            print(f"Waiting for audio processing: {audio_file.name}")
+            start_time = time.time()
+            while audio_file.state.name == "PROCESSING":
+                print(".", end='', flush=True)
+                time.sleep(2)
+                audio_file = genai.get_file(audio_file.name)
+                if time.time() - start_time > 120: # 2 min timeout
+                    raise TimeoutError("Gemini audio processing timed out.")
+            print("Done.")
+            
+            if audio_file.state.name == "FAILED":
+                raise ValueError("Gemini audio processing failed.")
+
+            response = self.model.generate_content(
+                [audio_file, prompt],
+                generation_config={"response_mime_type": "application/json"}
+            )
+            return self._parse_response(response.text)
+
+        else:
+            # --- Vertex AI Mode (GCS URI) ---
+            # Assumption: audio_path is a GCS URI like gs://...
+            if not audio_path.startswith("gs://"):
+                # If it's a local file in prod, we need to upload to GCS first
+                # But for now, let's assume the caller handles GCS upload if using Vertex
+                audio = Part.from_data(data=open(audio_path, 'rb').read(), mime_type="audio/mpeg")
+            else:
+                audio = Part.from_uri(mime_type="audio/mpeg", uri=audio_path)
+            
+            response = self.model.generate_content(
+                [audio, prompt],
+                generation_config={"response_mime_type": "application/json"}
+            )
+            return self._parse_response(response.text)
+
     def analyze_full_transcript(self, transcript_text: str, metadata: dict) -> dict:
         """
         Analyzes a full video transcript as an alternative to analyzing the raw video file.

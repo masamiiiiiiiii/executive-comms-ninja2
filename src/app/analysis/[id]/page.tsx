@@ -101,6 +101,19 @@ function TimelineIcon({ label }: { label?: string }) {
 // --- Processing Skeleton ---
 function ProcessingState({ status }: { status: string }) {
     const isQueued = status === "queued";
+    const isDownloading = status === "downloading";
+
+    let title = "Analyzing Executive Presence";
+    let description = "Gemini AI is analyzing communication patterns, vocal dynamics, and leadership presence. This usually takes 15–30 seconds.";
+
+    if (isQueued) {
+        title = "Analysis Queued";
+        description = "Your analysis is waiting to be processed. This will start shortly...";
+    } else if (isDownloading) {
+        title = "Downloading Audio Content";
+        description = "YouTube transcript is unavailable. We are downloading the audio for an AI multimodal analysis (voice & tone).";
+    }
+
     return (
         <div className="min-h-screen bg-slate-50/50 flex items-center justify-center">
             <div className="text-center max-w-md mx-auto p-8">
@@ -109,14 +122,8 @@ function ProcessingState({ status }: { status: string }) {
                         <Loader2 className="h-10 w-10 text-emerald-600 animate-spin" />
                     </div>
                 </div>
-                <h2 className="text-2xl font-bold text-slate-900 mb-2">
-                    {isQueued ? "Analysis Queued" : "Analyzing Executive Presence"}
-                </h2>
-                <p className="text-slate-500 text-sm leading-relaxed mb-4">
-                    {isQueued
-                        ? "Your analysis is waiting to be processed. This will start shortly..."
-                        : "Gemini AI is analyzing communication patterns, vocal dynamics, and leadership presence. This usually takes 15–30 seconds."}
-                </p>
+                <h2 className="text-2xl font-bold text-slate-900 mb-2">{title}</h2>
+                <p className="text-slate-500 text-sm leading-relaxed mb-4">{description}</p>
                 <div className="flex items-center justify-center gap-2 text-xs text-slate-400">
                     <RefreshCw className="h-3 w-3 animate-spin" />
                     <span>Auto-refreshing...</span>
@@ -134,11 +141,9 @@ function FailedState({ error, onRetry }: { error?: string, onRetry: () => void }
                 <AlertTriangle className="h-16 w-16 text-amber-500 mx-auto mb-4" />
                 <h2 className="text-xl font-bold text-slate-900 mb-2">Analysis Could Not Be Completed</h2>
                 <p className="text-slate-500 text-sm mb-2 leading-relaxed">
-                    {error?.includes("captions") || error?.includes("transcript")
-                        ? "This video does not have captions/subtitles enabled on YouTube. Please try a video that has captions."
-                        : "An error occurred during analysis."}
+                    Something went wrong during the analysis process.
                 </p>
-                {error && <p className="text-xs text-slate-400 bg-slate-100 rounded p-2 mb-6 text-left font-mono break-all">{error.slice(0, 200)}</p>}
+                {error && <p className="text-xs text-slate-400 bg-slate-100 rounded p-2 mb-6 text-left font-mono break-all">{error.slice(0, 300)}</p>}
                 <div className="flex flex-col gap-2">
                     <Button onClick={onRetry} variant="outline" size="sm">
                         <RefreshCw className="h-3 w-3 mr-2" /> Try Another Video

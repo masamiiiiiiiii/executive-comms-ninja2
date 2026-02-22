@@ -84,21 +84,49 @@ async def process_analysis(request: AnalysisRequest, analysis_id: str):
             metadata = {}
             
         transcript_text = request.transcript_text
+        analysis_result = None
+        
         if not transcript_text:
             # Fallback to backend extraction if not provided by frontend
             try:
+                print(f"Attempting transcript extraction for {request.youtube_url}")
                 transcript_text = youtube_service.get_transcript(request.youtube_url)
+                
+                # 3. Update status to 'analyzing'
+                supabase.table("video_analyses").update({"status": "analyzing"}).eq("id", analysis_id).execute()
+                
+                # 4. Analyze with Gemini (Transcript mode)
+                print(f"Starting Gemini transcript analysis")
+                analysis_result = gemini_service.analyze_full_transcript(transcript_text, metadata)
+                
             except Exception as e:
-                raise ValueError(f"Failed to extract transcript from backend: {e}")
+                print(f"Transcript extraction failed, falling back to AUDIO analysis: {e}")
+                
+                # Update status to 'downloading_audio'
+                supabase.table("video_analyses").update({"status": "downloading"}).eq("id", analysis_id).execute()
+                
+                # 1. Download Audio
+                audio_path = youtube_service.download_audio(request.youtube_url)
+                
+                # 2. Update status to 'analyzing_voice'
+                supabase.table("video_analyses").update({"status": "analyzing"}).eq("id", analysis_id).execute()
+                
+                # 3. Run Multimodal Analysis
+                print(f"Starting Gemini AUDIO analysis")
+                analysis_result = gemini_service.analyze_audio_multimodal(audio_path)
+                
+                # 4. Cleanup temp file
+                try:
+                    import shutil
+                    shutil.rmtree(os.path.dirname(audio_path))
+                except:
+                    pass
+        else:
+             # Manual transcript provided
+             supabase.table("video_analyses").update({"status": "analyzing"}).eq("id", analysis_id).execute()
+             analysis_result = gemini_service.analyze_full_transcript(transcript_text, metadata)
 
-        # 3. Update status to 'analyzing'
-        supabase.table("video_analyses").update({"status": "analyzing"}).eq("id", analysis_id).execute()
-        
-        # 4. Analyze with Gemini
-        print(f"Starting Gemini transcript analysis")
-        analysis_result = gemini_service.analyze_full_transcript(transcript_text, metadata)
-        
-        # Inject real metadata into results for frontend display
+        # 5. Inject real metadata into results for frontend display
         if metadata and analysis_result:
             if "video_metadata" not in analysis_result:
                 analysis_result["video_metadata"] = {}
@@ -107,7 +135,7 @@ async def process_analysis(request: AnalysisRequest, analysis_id: str):
             analysis_result["video_metadata"]["published_date"] = metadata.get("publish_date")
             analysis_result["video_metadata"]["duration_seconds"] = metadata.get("length")
 
-        # 5. Save results
+        # 6. Save results
         supabase.table("video_analyses").update({
             "status": "completed",
             "analysis_results": analysis_result,
