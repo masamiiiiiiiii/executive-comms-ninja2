@@ -133,6 +133,11 @@ class GeminiService:
                     "expected_impact": "10-15%"
                 }
             ],
+            "key_takeaways": [
+                "Established strong credibility early with confident eye contact.",
+                "Effectively simplified complex technical pipeline for general audience.",
+                "Should rely more on silence rather than filler words during transitions."
+            ],
             "summary": "A detailed narrative summary of the performance..."
         }
         """
@@ -274,6 +279,11 @@ class GeminiService:
                     "expected_impact": "15%"
                 }
             ],
+            "key_takeaways": [
+                "Point 1",
+                "Point 2",
+                "Point 3"
+            ],
             "summary": "Comprehensive narrative summary based on what you heard..."
         }
         """
@@ -413,6 +423,11 @@ class GeminiService:
                     "timeframe": "1 week",
                     "expected_impact": "10-15%"
                 }
+            ],
+            "key_takeaways": [
+                "Point 1",
+                "Point 2",
+                "Point 3"
             ],
             "summary": "Narrative summary of the speech..."
         }

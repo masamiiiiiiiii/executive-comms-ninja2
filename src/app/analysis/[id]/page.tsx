@@ -385,6 +385,30 @@ export default function AnalysisPage() {
                                 </p>
                             </CardContent>
                         </Card>
+
+                        {/* Executive Key Takeaways */}
+                        {results.key_takeaways && results.key_takeaways.length > 0 && (
+                            <Card className="bg-white border-border shadow-sm">
+                                <CardHeader className="pb-3 border-b border-slate-100">
+                                    <CardTitle className="flex items-center gap-2 text-slate-800 text-lg font-bold tracking-tight">
+                                        <Target className="h-5 w-5 text-emerald-600" />
+                                        Executive Key Takeaways
+                                    </CardTitle>
+                                </CardHeader>
+                                <CardContent className="pt-5 pb-5">
+                                    <ul className="space-y-4">
+                                        {results.key_takeaways.map((takeaway: string, idx: number) => (
+                                            <li key={idx} className="flex items-start gap-3 group">
+                                                <div className="mt-0.5 shrink-0 h-6 w-6 rounded-full bg-emerald-50 flex items-center justify-center border border-emerald-200 transition-colors group-hover:bg-emerald-100">
+                                                    <span className="text-[11px] font-bold text-emerald-700">{idx + 1}</span>
+                                                </div>
+                                                <p className="text-slate-700 leading-snug text-[15px] pt-0.5 font-medium">{takeaway}</p>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </CardContent>
+                            </Card>
+                        )}
                     </TabsContent>
 
                     {/* DETAILED TAB */}

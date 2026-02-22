@@ -276,6 +276,11 @@ async def start_analysis(request: AnalysisRequest, background_tasks: BackgroundT
                     "expected_impact": "10%"
                 }
             ],
+            "key_takeaways": [
+                "Masterful use of analogies to simplify extremely complex technical architecture.",
+                "Demonstrated unflappable composure when hit with an unexpected, hostile question.",
+                "Can further elevate executive presence by replacing micro-hesitations with deliberate silence."
+            ],
             "summary": "A masterful display of executive composure and clarity. The speaker navigated technical subject matter with ease, translating it into accessible business value for the CNBC audience. The primary opportunity for growth is embracing absolute silence during transitions rather than minimal filler sounds, which will elevate the perceived authority from Excellent to Elite."
         }
         
