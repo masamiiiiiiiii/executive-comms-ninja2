@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,6 +7,8 @@ import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { NewAnalysisForm } from "@/components/new-analysis-form";
 import { Badge } from "@/components/ui/badge";
+import { DemoCTA } from "@/components/demo-cta";
+import { NavActions } from "@/components/nav-actions";
 
 export default async function Dashboard() {
   const cookieStore = await cookies();
@@ -54,98 +57,77 @@ export default async function Dashboard() {
           </div>
           <span className="font-bold text-slate-800 tracking-tight">ExecComms Ninja</span>
         </div>
-        <div>
-          {/* Future Auth Buttons */}
+        <div className="flex items-center gap-6">
+          <Suspense fallback={<div className="w-20 h-8 animate-pulse bg-slate-200 rounded-full" />}>
+            <NavActions />
+          </Suspense>
         </div>
       </nav>
 
-      <main className="w-full max-w-5xl px-6 relative z-10 grid lg:grid-cols-5 gap-12 items-center">
+      <main className="w-full max-w-5xl px-6 relative z-10 flex flex-col items-center justify-center pt-8">
+        {/* Hero Section */}
+        <div className="w-full text-center space-y-8 mb-16 relative z-10 pt-10">
+          <Badge variant="outline" className="bg-white/50 backdrop-blur border-emerald-200 text-emerald-700 px-4 py-1.5 text-sm font-bold uppercase tracking-widest shadow-sm">
+            AI-Powered Executive Coaching
+          </Badge>
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.1] max-w-4xl mx-auto">
+            Master Your <br className="hidden md:block" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500 line-clamp-2 pb-2">
+              Executive Presence
+            </span>
+          </h1>
+          <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            Elevate your media presence and leadership communication with C-suite level AI precision. Analyze tone, conviction, and strategic message delivery instantly.
+          </p>
 
-        {/* Left: Hero & Input */}
-        <div className="lg:col-span-3 text-left space-y-8">
-          <div className="space-y-4">
-            <Badge variant="outline" className="bg-white/50 backdrop-blur border-emerald-200 text-emerald-700 px-3 py-1 text-sm font-medium">
-              AI-Powered Executive Coaching
-            </Badge>
-            <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.1]">
-              Master Your <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500">
-                Executive Presence
-              </span>
-            </h1>
-            <p className="text-lg text-slate-600 max-w-lg leading-relaxed">
-              Analyze your communication style, tone, and impact with C-suite level precision.
-              Get actionable feedback instantly.
+          <div className="pt-6 pb-2">
+            <DemoCTA />
+          </div>
+          <p className="text-sm font-medium text-slate-500">
+            Start with our interactive Jack Welch analysis — no credit card required.
+          </p>
+        </div>
+
+        {/* Founder Story Section */}
+        <div className="max-w-4xl mx-auto bg-white/60 backdrop-blur-xl border border-white p-8 md:p-12 rounded-3xl shadow-xl relative z-10 mb-20 text-center">
+          <h2 className="text-3xl font-bold text-slate-900 mb-6 flex items-center justify-center flex-wrap gap-y-2 gap-x-3">
+            <span>Designed by</span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.png" alt="Executive Comms Ninja Logo" className="h-8 w-auto inline-block relative -top-0.5" />
+          </h2>
+          <div className="space-y-4 text-lg text-slate-700 leading-relaxed max-w-3xl mx-auto text-left">
+            <p>
+              This entire platform was engineered by a former Blue Bird PR professional operating out of the Far East.
+            </p>
+            <p>
+              Drawing upon a wealth of knowledge forged in the high-stakes crucible of corporate risk management and executive media training, this AI distills the exact methodologies used to prepare global executives for the world's most aggressive press interviews.
+            </p>
+            <p>
+              Our neural analysis acts as your personal, hyper-vigilant communications coach—detecting the subtle shifts in cadence, vocal authority, and emotional resonance that separate competent managers from legendary leaders.
             </p>
           </div>
-
-          <div className="bg-white p-2 rounded-2xl shadow-xl border border-slate-100/50 ring-4 ring-slate-100/50">
-            <NewAnalysisForm />
-          </div>
-
-          <div className="flex items-center gap-6 text-sm text-slate-500 font-medium">
-            <div className="flex items-center gap-2">
-              <div className="h-1.5 w-1.5 bg-emerald-500 rounded-full" /> Instant Analysis
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="h-1.5 w-1.5 bg-emerald-500 rounded-full" /> Privacy First
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="h-1.5 w-1.5 bg-emerald-500 rounded-full" /> Deep Insights
-            </div>
-          </div>
         </div>
 
-        {/* Right: Recent Results (Mini-Feed) */}
-        <div className="lg:col-span-2 space-y-4">
-          <div className="flex items-center justify-between px-2">
-            <h2 className="text-sm font-bold uppercase text-slate-400 tracking-widest">Recent Reports</h2>
-            <Link href="#" className="text-xs font-medium text-emerald-600 hover:underline flex items-center gap-1">
-              View All <ArrowRight className="h-3 w-3" />
-            </Link>
-          </div>
+        {/* Custom Analysis Section Removed - Now Behind Paywall */}
 
-          <div className="grid gap-3">
-            {analyses?.map((analysis) => (
-              <Link href={`/analysis/${analysis.id}`} key={analysis.id}>
-                <div className="group bg-white rounded-xl p-3 border border-slate-200 shadow-sm hover:shadow-md hover:border-emerald-300 transition-all flex gap-3 cursor-pointer">
-                  <div className="shrink-0 h-16 w-24 bg-slate-100 rounded-lg overflow-hidden relative">
-                    {/* Thumbnail */}
-                    <img
-                      src={`https://img.youtube.com/vi/${analysis.youtube_url?.split('v=')[1]?.split('&')[0]}/mqdefault.jpg`}
-                      alt=""
-                      className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-                      onError={(e) => { e.currentTarget.style.display = 'none' }}
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-transparent transition-colors">
-                      <PlayCircle className="h-6 w-6 text-white drop-shadow-md" />
-                    </div>
-                  </div>
-                  <div className="flex flex-col justify-center min-w-0">
-                    <h3 className="font-bold text-slate-800 text-sm truncate pr-2 group-hover:text-emerald-700 transition-colors">
-                      {analysis.video_title || "Untitled Analysis"}
-                    </h3>
-                    <div className="flex items-center gap-2 mt-1">
-                      <Badge variant="secondary" className="text-[10px] h-4 px-1 bg-slate-100 text-slate-500">{new Date(analysis.created_at).toLocaleDateString()}</Badge>
-                      {analysis.analysis_results?.metrics?.confidence && (
-                        <span className="text-[10px] font-bold text-emerald-600 flex items-center gap-1">
-                          <Activity className="h-3 w-3" /> {analysis.analysis_results.metrics.confidence}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
-
-            {(!analyses || analyses.length === 0) && (
-              <div className="text-center py-8 text-slate-400 text-sm bg-slate-100/50 rounded-xl border border-dashed border-slate-200">
-                No recent analyses.
-              </div>
-            )}
+        {/* Footer / Inquiry */}
+        <footer className="w-full max-w-5xl px-6 relative z-10 flex flex-col items-center justify-center pt-8 border-t border-slate-200/50 mt-12">
+          <div className="flex flex-col items-center gap-4">
+            <span className="font-bold text-slate-800 tracking-tight text-xl mb-4">ExecComms Ninja</span>
+            <p className="text-sm text-slate-500 font-medium">
+              For enterprise inquiries and media coaching consultations, please contact our official X (Blue Bird) account.
+            </p>
+            <a href="https://x.com/ExecutiveCommsNinja" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-emerald-600 font-bold hover:text-emerald-700 transition-colors bg-emerald-50 px-4 py-2 rounded-lg hover:bg-emerald-100">
+              Contact via Official X Account
+            </a>
           </div>
-        </div>
+          <div className="flex gap-6 mt-8 w-full border-t border-slate-200 pt-6 justify-center">
+            <Link href="/legal" className="text-sm font-medium text-slate-500 hover:text-emerald-600 transition-colors">Terms of Service</Link>
+            <Link href="/legal" className="text-sm font-medium text-slate-500 hover:text-emerald-600 transition-colors">Privacy Policy</Link>
+            <Link href="/legal" className="text-sm font-medium text-slate-500 hover:text-emerald-600 transition-colors">FAQ & Support</Link>
+          </div>
+        </footer>
       </main>
-    </div>
+    </div >
   );
 }

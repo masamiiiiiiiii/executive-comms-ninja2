@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;600;900&amp;display=swap');
+        
+        .bg-img {
+            animation: pan 20s infinite alternate ease-in-out;
+            transform-origin: center;
+        }
+        
+        .scanline {
+            animation: scan 4s infinite linear;
+        }
+        
+        .pulse-text {
+            animation: pulse 2.5s infinite alternate;
+        }
+
+        .fade-in-text {
+            animation: slideUp 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .ring-spin {
+            animation: spin 30s infinite linear;
+            transform-origin: 600px 315px;
+        }
+
+        .ring-spin-reverse {
+            animation: spinReverse 40s infinite linear;
+            transform-origin: 600px 315px;
+        }
+
+        @keyframes pan {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.1) translate(-20px, -10px); }
+        }
+        @keyframes scan {
+            0% { transform: translateY(-630px); }
+            100% { transform: translateY(630px); }
+        }
+        @keyframes pulse {
+            0% { text-shadow: 0 0 15px rgba(16, 185, 129, 0.3); opacity: 0.8; }
+            100% { text-shadow: 0 0 30px rgba(16, 185, 129, 0.7), 0 0 60px rgba(16, 185, 129, 0.3); opacity: 1; }
+        }
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes spinReverse {
+            100% { transform: rotate(-360deg); }
+        }
+    </style>
+
+    <defs>
+        <clipPath id="canvas">
+            <rect width="1200" height="630" />
+        </clipPath>
+        <clipPath id="centerMask">
+            <rect x="200" y="100" width="800" height="430" rx="20" />
+        </clipPath>
+        <linearGradient id="cyber-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#020617" stop-opacity="0.85"/>
+            <stop offset="100%" stop-color="#064e3b" stop-opacity="0.95"/>
+        </linearGradient>
+    </defs>
+    
+    <g clip-path="url(#canvas)">
+        <!-- Animated Background Image (First sequence) -->
+        <g class="bg-img">
+            <image href="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=1400&amp;q=80" width="1400" height="800" x="-100" y="-85" preserveAspectRatio="xMidYMid slice" />
+        </g>
+        
+        <!-- Gradient Overlay -->
+        <rect width="1200" height="630" fill="url(#cyber-gradient)" />
+
+        <!-- Sub Center Image Focus (Second sequence) -->
+        <rect x="200" y="100" width="800" height="430" fill="none" stroke="#10b981" stroke-width="2" rx="20" opacity="0.5" />
+        <g clip-path="url(#centerMask)">
+            <g class="bg-img" style="animation-duration: 25s; animation-direction: alternate-reverse;">
+                 <image href="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=1400&amp;q=80" width="1400" height="800" x="-100" y="-85" preserveAspectRatio="xMidYMid slice" opacity="0.4" />
+            </g>
+        </g>
+        
+        <!-- Animated Scanline -->
+        <g class="scanline">
+            <rect x="0" y="0" width="1200" height="4" fill="#10b981" opacity="0.5" />
+            <linearGradient id="glow" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#10b981" stop-opacity="0"/>
+                <stop offset="100%" stop-color="#10b981" stop-opacity="0.2"/>
+            </linearGradient>
+            <rect x="0" y="-100" width="1200" height="100" fill="url(#glow)" />
+        </g>
+
+        <!-- Neural UI Elements / Scanners -->
+        <circle cx="600" cy="315" r="350" fill="none" stroke="#10b981" stroke-width="1.5" opacity="0.15" stroke-dasharray="1 10" class="ring-spin" />
+        <circle cx="600" cy="315" r="280" fill="none" stroke="#34d399" stroke-width="2" opacity="0.25" stroke-dasharray="20 40 10 30" class="ring-spin-reverse" />
+        
+        <!-- Crosshairs -->
+        <path d="M 600 285 L 600 295 M 600 335 L 600 345 M 570 315 L 580 315 M 620 315 L 630 315" stroke="#10b981" stroke-width="2" opacity="0.6" />
+
+        <!-- Typography -->
+        <text class="fade-in-text" x="600" y="300" font-family="'Inter', sans-serif" font-size="110" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="-3" style="animation-delay: 0.3s; text-shadow: 0 10px 30px rgba(0,0,0,0.8);">Art of Interview</text>
+        <text class="fade-in-text pulse-text" x="600" y="390" font-family="'Inter', sans-serif" font-size="34" font-weight="600" fill="#34d399" text-anchor="middle" letter-spacing="8" style="animation-delay: 0.9s;">EXECUTIVE COMMS NINJA</text>
+    </g>
+</svg>

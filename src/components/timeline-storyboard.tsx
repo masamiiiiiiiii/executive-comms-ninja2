@@ -99,16 +99,6 @@ export function TimelineStoryboard({ events, onPlayTimestamp }: TimelineStoryboa
                                 </div>
                             </div>
                         </CardContent>
-                        <CardFooter className="p-3 pt-0">
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                className="w-full text-xs gap-2 text-slate-500 hover:text-emerald-700 hover:bg-emerald-50"
-                                onClick={() => onPlayTimestamp(event.timestamp)}
-                            >
-                                <Play className="h-3 w-3" /> Verify Evidence
-                            </Button>
-                        </CardFooter>
                     </Card>
                 ))}
             </div>

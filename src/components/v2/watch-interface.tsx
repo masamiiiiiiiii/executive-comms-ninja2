@@ -8,9 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
-import { Play, Pause, CheckCircle, Info, Zap, Loader2 } from 'lucide-react';
-
-import { AmbientLiquidBackground } from './ambient-background';
+import { CheckCircle, Zap, Loader2, Maximize } from 'lucide-react';
 
 interface WatchInterfaceProps {
     videoId: string;
@@ -31,8 +29,10 @@ export const WatchInterface: React.FC<WatchInterfaceProps> = ({
     const [progress, setProgress] = useState(0);
     const [isRequirementMet, setIsRequirementMet] = useState(false);
     const [isTransitioning, setIsTransitioning] = useState(false);
+    const [isFullscreen, setIsFullscreen] = useState(false);
 
     const timerRef = useRef<NodeJS.Timeout | null>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
 
     // Requirement:
     // - If < 5m (300s): Watch 90% (to handle end-slop)
@@ -68,6 +68,14 @@ export const WatchInterface: React.FC<WatchInterfaceProps> = ({
     }, [isObserving, player]);
 
     useEffect(() => {
+        const handleFullscreenChange = () => {
+            setIsFullscreen(!!document.fullscreenElement);
+        };
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    }, []);
+
+    useEffect(() => {
         const uniqueWatchedCount = watchedSeconds.size;
         const newProgress = Math.min((uniqueWatchedCount / threshold) * 100, 100);
         setProgress(newProgress);
@@ -80,6 +88,16 @@ export const WatchInterface: React.FC<WatchInterfaceProps> = ({
     const onPlayerReady: YouTubeProps['onReady'] = (event) => {
         setPlayer(event.target);
         setDuration(event.target.getDuration());
+    };
+
+    const toggleFullscreen = () => {
+        if (!document.fullscreenElement) {
+            containerRef.current?.requestFullscreen().catch(err => {
+                console.error(`Error attempting to enable fullscreen: ${err.message}`);
+            });
+        } else {
+            document.exitFullscreen();
+        }
     };
 
     const onStateChange: YouTubeProps['onStateChange'] = (event) => {
@@ -99,18 +117,35 @@ export const WatchInterface: React.FC<WatchInterfaceProps> = ({
     };
 
     return (
-        <Card className="p-6 lg:p-8 bg-slate-950 border-white/5 shadow-2xl relative overflow-hidden group max-w-7xl mx-auto">
+        <Card ref={containerRef} className={`p-6 lg:p-8 border-white/5 shadow-2xl relative overflow-hidden group max-w-7xl mx-auto transition-all duration-300 ${isFullscreen ? 'bg-slate-950/95 w-screen h-screen flex flex-col justify-center max-w-none rounded-none' : 'bg-slate-950'}`}>
 
-            <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-stretch relative z-10">
+            {/* Expand Button (Top Right of entire Card) */}
+            <div className="absolute top-4 right-4 z-50">
+                <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={toggleFullscreen}
+                    className="w-10 h-10 rounded-full bg-slate-900/60 hover:bg-emerald-500/20 text-slate-400 hover:text-emerald-400 backdrop-blur-md border border-white/10 shadow-[0_0_15px_rgba(0,0,0,0.5)] transition-all duration-300 group/fs"
+                    title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
+                >
+                    <Maximize className="w-4 h-4 group-hover/fs:scale-110 transition-transform" />
+                </Button>
+            </div>
+
+            <div className={`flex flex-col lg:flex-row gap-6 lg:gap-8 items-stretch relative z-10 ${isFullscreen ? 'h-[80vh] max-w-7xl mx-auto w-full' : ''}`}>
                 {/* Left: Video Player */}
-                <div className="flex-1 min-w-0 space-y-4">
-                    <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black aspect-video">
+                <div className="flex-1 min-w-0 space-y-4 flex flex-col justify-center">
+                    <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-black aspect-video group/video">
                         <YouTube videoId={videoId} opts={{ ...opts, height: '100%', width: '100%' }} onReady={onPlayerReady} onStateChange={onStateChange} className="absolute inset-0 w-full h-full [&>iframe]:w-full [&>iframe]:h-full" />
-                        {!isObserving && (
-                            <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] pointer-events-none flex items-center justify-center transition-all duration-700">
-                                <div className="bg-emerald-500/5 border border-emerald-500/20 px-6 py-3 rounded-full flex items-center gap-3 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
-                                    <Zap className="w-5 h-5 text-emerald-500/60 animate-pulse" />
-                                    <span className="text-[10px] font-mono font-bold text-emerald-500/60 tracking-[0.3em] uppercase">LINK_ESTABLISHED</span>
+
+                        {!isObserving && !isFullscreen && (
+                            <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] pointer-events-none flex items-center justify-center transition-all duration-700 z-10">
+                                <div className="bg-emerald-500/5 border border-emerald-500/20 px-8 py-6 rounded-3xl flex flex-col items-center gap-4 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+                                    <div className="flex items-center gap-3">
+                                        <Zap className="w-6 h-6 text-emerald-500/60 animate-pulse" />
+                                        <span className="text-xs font-mono font-bold text-emerald-500/60 tracking-[0.3em] uppercase">Link Established</span>
+                                    </div>
+                                    <span className="text-sm font-bold text-white tracking-widest uppercase animate-pulse">Press Play on Video to Begin</span>
                                 </div>
                             </div>
                         )}
@@ -119,23 +154,38 @@ export const WatchInterface: React.FC<WatchInterfaceProps> = ({
                     <div className="flex justify-between items-center px-2">
                         <div className="flex flex-col min-w-0">
                             <span className="text-[9px] font-mono text-emerald-500/50 uppercase tracking-widest mb-1 leading-none truncate">V_SOURCE_ID: {videoId}</span>
-                            <h3 className="text-sm font-mono text-slate-300 truncate">{title}</h3>
+                            <h3 className="text-sm font-mono text-emerald-50 truncate">{title}</h3>
                         </div>
-                        <Badge variant="outline" className="bg-slate-900/50 border-white/10 text-slate-500 font-mono text-[9px] px-3 py-1 uppercase tracking-tighter flex-shrink-0 ml-4">
-                            {isShort ? "CLIP_MODE_90P" : "DEEP_OBS_180S"}
-                        </Badge>
+                        <div className="flex items-center gap-4">
+                            {!isShort && (
+                                <div className="flex items-center gap-2 bg-slate-900/50 border border-white/5 rounded-full px-3 py-1">
+                                    <span className="text-[9px] uppercase tracking-widest text-slate-400 font-mono">Jump to Start (s):</span>
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        max={duration}
+                                        className="w-16 bg-transparent text-[10px] text-emerald-400 font-mono focus:outline-none placeholder:text-slate-600"
+                                        placeholder="0"
+                                        onChange={(e) => {
+                                            const val = parseInt(e.target.value);
+                                            if (!isNaN(val) && player) player.seekTo(val);
+                                        }}
+                                    />
+                                </div>
+                            )}
+                            <Badge variant="outline" className="bg-slate-900/50 border-white/10 text-slate-500 font-mono text-[9px] px-3 py-1 uppercase tracking-tighter flex-shrink-0">
+                                {isShort ? "CLIP_MODE_90P" : "DEEP_OBS_180S"}
+                            </Badge>
+                        </div>
                     </div>
                 </div>
 
                 {/* Right: Ninja Monitoring Panel */}
                 <div className="w-full lg:w-80 flex-shrink-0 flex flex-col items-center justify-between p-6 lg:p-8 rounded-3xl bg-slate-900/30 backdrop-blur-xl border border-white/10 relative overflow-hidden shadow-2xl">
-                    {/* Ambient Liquid Background: localized behind monitoring panel */}
-                    <div className="absolute inset-0 z-0">
-                        <AmbientLiquidBackground />
-                    </div>
+
 
                     <div className="relative z-10 w-full flex flex-col items-center flex-1 space-y-6">
-                        <div className="relative h-64 flex items-center justify-center">
+                        <div className="relative h-48 flex items-center justify-center">
                             <NinjaIntelligenceIndicator isObserving={isObserving} />
                         </div>
 
@@ -175,9 +225,9 @@ export const WatchInterface: React.FC<WatchInterfaceProps> = ({
                     <Button
                         disabled={!isRequirementMet || isTransitioning}
                         onClick={handleFinalInitiate}
-                        className={`w-full h-14 relative overflow-hidden group transition-all duration-700 rounded-2xl mt-8 z-10 ${isRequirementMet
+                        className={`w-full h-14 relative overflow-hidden group transition-all duration-700 rounded-2xl mt-8 z-10 font-mono ${isRequirementMet
                             ? "bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black tracking-widest text-[10px]"
-                            : "bg-slate-800/20 text-slate-600 border border-white/5"
+                            : "bg-slate-800/40 text-slate-500 border border-white/5"
                             }`}
                     >
                         <AnimatePresence>
@@ -194,12 +244,12 @@ export const WatchInterface: React.FC<WatchInterfaceProps> = ({
                         {isTransitioning ? (
                             <div className="flex items-center gap-3">
                                 <Loader2 className="w-4 h-4 animate-spin" />
-                                SYNTH_START_PROC
+                                Generating Report...
                             </div>
                         ) : (
                             <div className="flex items-center gap-3">
                                 <Zap className={`w-4 h-4 ${isRequirementMet ? "animate-pulse" : ""}`} />
-                                INIT_DEEP_SYNC
+                                Generate Report
                             </div>
                         )}
                     </Button>

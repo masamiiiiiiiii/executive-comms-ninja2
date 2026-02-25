@@ -100,25 +100,25 @@ async def process_analysis(request: AnalysisRequest, analysis_id: str):
                 analysis_result = gemini_service.analyze_full_transcript(transcript_text, metadata)
                 
             except Exception as e:
-                print(f"Transcript extraction failed, falling back to AUDIO analysis: {e}")
+                print(f"Transcript extraction failed, falling back to VIDEO analysis: {e}")
                 
-                # Update status to 'downloading_audio'
+                # Update status to 'downloading'
                 supabase.table("video_analyses").update({"status": "downloading"}).eq("id", analysis_id).execute()
                 
-                # 1. Download Audio
-                audio_path = youtube_service.download_audio(request.youtube_url)
+                # 1. Download Video (Audio + Vision)
+                video_path = youtube_service.download_video(request.youtube_url)
                 
-                # 2. Update status to 'analyzing_voice'
+                # 2. Update status to 'analyzing'
                 supabase.table("video_analyses").update({"status": "analyzing"}).eq("id", analysis_id).execute()
                 
-                # 3. Run Multimodal Analysis
-                print(f"Starting Gemini AUDIO analysis")
-                analysis_result = gemini_service.analyze_audio_multimodal(audio_path)
+                # 3. Run Multimodal Analysis (Includes facial expressions, eye contact)
+                print(f"Starting Gemini VIDEO analysis")
+                analysis_result = gemini_service.analyze_video(video_path, metadata)
                 
                 # 4. Cleanup temp file
                 try:
                     import shutil
-                    shutil.rmtree(os.path.dirname(audio_path))
+                    shutil.rmtree(os.path.dirname(video_path))
                 except:
                     pass
         else:
@@ -134,6 +134,10 @@ async def process_analysis(request: AnalysisRequest, analysis_id: str):
             analysis_result["video_metadata"]["channel_title"] = metadata.get("author")
             analysis_result["video_metadata"]["published_date"] = metadata.get("publish_date")
             analysis_result["video_metadata"]["duration_seconds"] = metadata.get("length")
+            
+            # Fallback for Target Person Name if AI failed to extract it
+            if not analysis_result["video_metadata"].get("extracted_interviewee_name") or analysis_result["video_metadata"].get("extracted_interviewee_name") == "Unknown":
+                analysis_result["video_metadata"]["extracted_interviewee_name"] = metadata.get("author")
 
         # 6. Save results
         supabase.table("video_analyses").update({
@@ -161,94 +165,85 @@ async def start_analysis(request: AnalysisRequest, background_tasks: BackgroundT
         mock_analysis_id = str(uuid.uuid4())
         mock_results = {
             "analysis_reliability": {
-                "score": 92,
-                "notice": "High confidence analysis based on clear audio and video quality from CNBC."
+                "score": 98,
+                "notice": "High confidence analysis based on legendary Jack Welch interview footage."
             },
             "video_metadata": {
-                "duration": "08:45",
-                "published_date": "2024-03-01",
-                "extracted_interviewee_name": "Jon Lin",
-                "channel_title": "CNBC Television"
+                "duration": "09:12",
+                "published_date": "2018-05-15",
+                "extracted_interviewee_name": "Jack Welch",
+                "channel_title": "Leadership Vault"
             },
             "overall_performance": {
-                "score": 88,
-                "level": "Elite",
-                "summary": "This is a demonstration of the Executive Comms Ninja analysis. The speaker demonstrates exceptionally strong executive presence with clear articulation, steady pacing, and excellent composure under questioning. The analogical breakdown of complex topics was masterful.",
-                "badge": "Top Performer"
+                "score": 96,
+                "level": "Legendary",
+                "summary": "This is a demonstration of the Executive Comms Ninja analysis using Jack Welch's classic interview footage. The speaker demonstrates unparalleled executive presence characterized by extreme candor, high energy, and absolute conviction. His direct, no-nonsense communication style cuts effortlessly through corporate jargon.",
+                "badge": "Master Communicator"
             },
             "high_level_metrics": {
-                "confidence": {"score": 92, "label": "Confidence"},
-                "trustworthiness": {"score": 85, "label": "Trustworthiness"},
-                "engagement": {"score": 80, "label": "Engagement"},
-                "clarity": {"score": 89, "label": "Clarity"}
+                "confidence": {"score": 98, "label": "Confidence"},
+                "trustworthiness": {"score": 90, "label": "Authenticity"},
+                "engagement": {"score": 95, "label": "Engagement"},
+                "clarity": {"score": 94, "label": "Clarity"}
             },
             "detailed_analysis": {
                 "voice_analysis": {
-                    "speaking_rate": "Optimal Pace",
-                    "pause_frequency": "Appropriate",
-                    "volume_variation": "Dynamic",
+                    "speaking_rate": "Energetic Pace",
+                    "pause_frequency": "Strategic",
+                    "volume_variation": "Highly Dynamic",
                     "clarity_rating": "Excellent",
-                    "observation": "Speaker maintained a steady 135wpm pace with strategic pausing before key points, ideal for comprehension and gravity."
+                    "observation": "Speaker maintained an energetic, staccato rhythm. He frequently leaned in and used volume shifts to passionately emphasize core principles like 'candor' and 'differentiation'."
                 },
                 "message_analysis": {
-                    "keyword_density": "High",
-                    "emotional_tone": "Positive",
-                    "structure_rating": "Logical",
-                    "logic_flow": "Well-organized",
-                    "observation": "Key themes were reinforced using concise, repetitive market terminology that resonates with the core audience."
+                    "keyword_density": "Very High",
+                    "emotional_tone": "Assertive",
+                    "structure_rating": "Direct",
+                    "logic_flow": "Anecdote-driven",
+                    "observation": "Utterly void of corporate speak. Messages were delivered with blunt honesty, using personal anecdotes to enforce a strict meritocratic philosophy."
                 }
             },
             "emotion_radar": {
-                "confidence": 92,
-                "empathy": 75,
-                "authority": 88,
-                "composure": 94,
-                "enthusiasm": 82,
-                "trust": 85
+                "confidence": 98,
+                "empathy": 65,
+                "authority": 99,
+                "composure": 90,
+                "enthusiasm": 96,
+                "trust": 88
             },
             "timeline_analysis": [
                 {
-                    "timestamp": "00:15",
-                    "event": "Calm Opening",
+                    "timestamp": "00:25",
+                    "event": "Blunt Assertion",
                     "sentiment": "neutral",
-                    "emotion_label": "Confident",
-                    "confidence_score": 90,
-                    "engagement_score": 85,
-                    "insight": "Strong opening statement, established credibility early without rushing."
+                    "emotion_label": "Authoritative",
+                    "confidence_score": 99,
+                    "engagement_score": 90,
+                    "insight": "Immediately took control of the narrative, establishing dominance with a blunt truth about organizational candor."
                 },
                 {
-                    "timestamp": "01:30",
-                    "event": "Building Momentum",
+                    "timestamp": "02:10",
+                    "event": "Passionate Anecdote",
                     "sentiment": "positive",
                     "emotion_label": "Enthusiastic",
-                    "confidence_score": 92,
-                    "engagement_score": 88,
-                    "insight": "Used a clear analogy to explain complex technical pipeline topic."
-                },
-                {
-                    "timestamp": "02:45",
-                    "event": "Thoughtful Reframing",
-                    "sentiment": "neutral",
-                    "emotion_label": "Composed",
-                    "confidence_score": 85,
-                    "engagement_score": 80,
-                    "insight": "Slight hesitation before effectively pivoting a challenging anchor question."
-                },
-                {
-                    "timestamp": "04:20",
-                    "event": "Peak Assertion",
-                    "sentiment": "positive",
-                    "emotion_label": "Authoritative",
                     "confidence_score": 95,
+                    "engagement_score": 96,
+                    "insight": "Leaned forward, increasing vocal intensity to passionately describe the 20-70-10 differentiation rule."
+                },
+                {
+                    "timestamp": "05:40",
+                    "event": "No-Nonsense Rebuttal",
+                    "sentiment": "neutral",
+                    "emotion_label": "Intense",
+                    "confidence_score": 98,
                     "engagement_score": 92,
-                    "insight": "Great eye contact and steady hand gestures during the closing forward guidance."
+                    "insight": "Swiftly dismissed a premise in the interviewer's question, cutting straight to the core business reality."
                 }
             ],
             "benchmark_comparison": {
-                "your_score": 88,
+                "your_score": 96,
                 "industry_average": 74,
                 "top_ceos": 91,
-                "metrics": ["Confidence", "Trust", "Clarity", "Composure"],
+                "metrics": ["Confidence", "Authority", "Energy", "Clarity"],
                 "emotion_radar_benchmark": {
                     "confidence": 85,
                     "empathy": 80,
@@ -260,35 +255,27 @@ async def start_analysis(request: AnalysisRequest, background_tasks: BackgroundT
             },
             "recommendations": [
                 {
-                    "title": "Reduce filler words in transitions",
-                    "rationale": "Minor hesitation ('um', 'uh') occasionally weakens pivots.",
-                    "strategy": "Embrace silence instead of vocalizing pauses when formulating responses.",
+                    "title": "Soften delivery for highly sensitive topics",
+                    "rationale": "Extreme candor can sometimes alienate a subset of the modern workforce.",
+                    "strategy": "Incorporate a brief empathetic preamble before delivering hard truths to broaden receptivity.",
                     "priority": "Low",
                     "timeframe": "Ongoing",
                     "expected_impact": "5%"
-                },
-                {
-                    "title": "Inject more varying tonal emphasis",
-                    "rationale": "High consistency can sometimes border on monotone during longer explanations.",
-                    "strategy": "Apply slight volume increases on strategic keywords.",
-                    "priority": "Medium",
-                    "timeframe": "1-2 weeks",
-                    "expected_impact": "10%"
                 }
             ],
             "key_takeaways": [
-                "Masterful use of analogies to simplify extremely complex technical architecture.",
-                "Demonstrated unflappable composure when hit with an unexpected, hostile question.",
-                "Can further elevate executive presence by replacing micro-hesitations with deliberate silence."
+                "Master-class in conveying absolute conviction and authority through visceral, energetic delivery.",
+                "Zero reliance on corporate jargon; language was accessible, blunt, and highly memorable.",
+                "A vivid demonstration of 'Executive Presence' defined by sheer force of personality rather than polished perfection."
             ],
-            "summary": "A masterful display of executive composure and clarity. The speaker navigated technical subject matter with ease, translating it into accessible business value for the CNBC audience. The primary opportunity for growth is embracing absolute silence during transitions rather than minimal filler sounds, which will elevate the perceived authority from Excellent to Elite."
+            "summary": "A masterful display of executive presence and authority. Jack Welch navigated the interview with extreme candor and high energy, translating complex business philosophies into accessible, hard-hitting truths. The primary hallmark of his style is a complete absence of corporate speak, relying instead on pure conviction to command the room."
         }
         
         try:
             supabase.table("video_analyses").insert({
                 "id": mock_analysis_id,
                 "user_id": request.user_id,
-                "youtube_url": "https://www.youtube.com/watch?v=y8OnoxCotHE", # Real video for demo player seeking
+                "youtube_url": "https://www.youtube.com/watch?v=VM0AU-vPNeQ", # Real video for demo player seeking
                 "status": "completed",
                 "video_title": request.video_title,
                 "target_person": request.target_person,

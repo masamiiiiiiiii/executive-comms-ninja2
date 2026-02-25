@@ -207,8 +207,8 @@ class YouTubeService:
                 if not audio_stream:
                     raise ValueError("No audio stream found via pytubefix.")
                 
-                # Download and rename
-                download_path = audio_stream.download(output_path=out_dir, filename="audio_raw")
+                # Download and rename with a valid extension so mimetypes can detect it
+                download_path = audio_stream.download(output_path=out_dir, filename="audio_raw.mp4")
                 
                 # Convert to mp3 using moviepy (since it's in requirements) or just use as is if Gemini supports it
                 # Gemini supports various audio formats including mp4/m4a which pytube downloads
@@ -218,6 +218,72 @@ class YouTubeService:
             except Exception as e2:
                 print(f"pytubefix audio download failed: {e2}")
                 raise ValueError(f"Could not download audio via any method. Last error: {e2}")
+
+    def download_video(self, youtube_url: str) -> str:
+        """
+        Download standard resolution video (up to 720p to save time/bandwidth) using yt-dlp.
+        Returns the path to the downloaded video file.
+        """
+        import uuid
+        import os
+        import yt_dlp as ytdlp_mod
+
+        base_dir = "/app" if os.path.isdir("/app") else os.path.dirname(os.path.abspath(__file__))
+        req_id = str(uuid.uuid4())
+        out_dir = os.path.join(base_dir, "temp", req_id)
+        os.makedirs(out_dir, exist_ok=True)
+        
+        out_path = os.path.join(out_dir, "video.%(ext)s")
+        cookie_path = self._get_cookie_path()
+        
+        ydl_opts = {
+            'format': 'bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]/best[height<=720][ext=mp4]/best',
+            'outtmpl': out_path,
+            'quiet': False,
+            'merge_output_format': 'mp4',
+        }
+        
+        if cookie_path:
+            ydl_opts['cookiefile'] = cookie_path
+            
+        try:
+            print(f"Attempting video download with yt-dlp: {youtube_url}")
+            with ytdlp_mod.YoutubeDL(ydl_opts) as ydl:
+                ydl.download([youtube_url])
+            
+            import glob
+            downloaded_files = glob.glob(os.path.join(out_dir, "video.mp4"))
+            if not downloaded_files:
+                downloaded_files = glob.glob(os.path.join(out_dir, "video.*"))
+                if not downloaded_files:
+                    downloaded_files = glob.glob(os.path.join(out_dir, "*"))
+            
+            if not downloaded_files:
+                raise ValueError("Video download failed: No file found.")
+                
+            return downloaded_files[0]
+            
+        except Exception as e:
+            print(f"yt-dlp video download failed: {e}. Trying pytubefix fallback...")
+            
+            try:
+                from pytubefix import YouTube
+                yt = YouTube(youtube_url)
+                video_stream = yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first()
+                if not video_stream:
+                    # Fallback to mostly any mp4
+                    video_stream = yt.streams.filter(file_extension='mp4').first()
+                    
+                if not video_stream:
+                    raise ValueError("No viable video stream found via pytubefix.")
+                
+                download_path = video_stream.download(output_path=out_dir, filename="video_raw.mp4")
+                print(f"pytubefix video download success: {download_path}")
+                return download_path
+                
+            except Exception as e2:
+                print(f"pytubefix video download failed: {e2}")
+                raise ValueError(f"Could not download video via any method. Last error: {e2}")
 
     def get_metadata(self, youtube_url: str) -> dict:
         ydl_opts = {
@@ -234,7 +300,8 @@ class YouTubeService:
                     "author": info.get("uploader", "Unknown Channel"),
                     "publish_date": info.get("upload_date", "Unknown Date"),
                     "length": info.get("duration", 0),
-                    "channel_url": info.get("channel_url", "")
+                    "channel_url": info.get("channel_url", ""),
+                    "description": info.get("description", "")
                 }
         except Exception as e:
             print(f"Metadata extraction failed: {e}")

@@ -38,18 +38,20 @@ export const NinjaIntelligenceIndicator: React.FC<NinjaIndicatorProps> = ({
                 <motion.g
                     animate={{ rotate: 360 }}
                     transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+                    className="drop-shadow-[0_0_8px_rgba(52,211,153,0.5)]"
                 >
-                    <circle cx="100" cy="100" r="85" fill="none" stroke="#34d399" strokeWidth="0.75" strokeDasharray="30 10 5 10" className="opacity-40" />
-                    <circle cx="100" cy="100" r="80" fill="none" stroke="#34d399" strokeWidth="0.5" strokeDasharray="1 10" className="opacity-30" />
+                    <circle cx="100" cy="100" r="85" fill="none" stroke="#34d399" strokeWidth="0.75" strokeDasharray="30 10 5 10" className="opacity-60" />
+                    <circle cx="100" cy="100" r="80" fill="none" stroke="#34d399" strokeWidth="0.5" strokeDasharray="1 10" className="opacity-40" />
                 </motion.g>
 
                 {/* Counter-Rotating Secondary Ring */}
                 <motion.g
                     animate={{ rotate: -360 }}
                     transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+                    className="drop-shadow-[0_0_5px_rgba(16,185,129,0.5)]"
                 >
-                    <circle cx="100" cy="100" r="70" fill="none" stroke="#10b981" strokeWidth="1" strokeDasharray="120 40" className="opacity-20" />
-                    <path d="M 100 30 A 70 70 0 0 1 170 100" fill="none" stroke="#34d399" strokeWidth="1" className="opacity-40" />
+                    <circle cx="100" cy="100" r="70" fill="none" stroke="#10b981" strokeWidth="1" strokeDasharray="120 40" className="opacity-40" />
+                    <path d="M 100 30 A 70 70 0 0 1 170 100" fill="none" stroke="#34d399" strokeWidth="1.5" className="opacity-60 drop-shadow-[0_0_10px_rgba(52,211,153,0.8)]" />
                 </motion.g>
 
                 {/* Precision Crosshair */}
@@ -67,7 +69,7 @@ export const NinjaIntelligenceIndicator: React.FC<NinjaIndicatorProps> = ({
                         className="absolute inset-0"
                     >
                         {/* Rapid Scanning Arcs */}
-                        <svg viewBox="0 0 200 200" className="absolute w-full h-full">
+                        <svg viewBox="0 0 200 200" className="absolute w-full h-full drop-shadow-[0_0_12px_rgba(110,231,183,0.8)]">
                             <motion.path
                                 d="M 100 20 A 80 80 0 0 1 180 100"
                                 fill="none"
@@ -90,8 +92,8 @@ export const NinjaIntelligenceIndicator: React.FC<NinjaIndicatorProps> = ({
 
                         {/* High-Frequency Neural Pulse (Minimal) */}
                         <motion.div
-                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border border-emerald-400/20 rounded-full"
-                            animate={{ scale: [1, 1.2], opacity: [0.3, 0] }}
+                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border border-emerald-400/50 rounded-full shadow-[0_0_30px_rgba(52,211,153,0.4)]"
+                            animate={{ scale: [1, 1.2], opacity: [0.6, 0] }}
                             transition={{ duration: 1, repeat: Infinity, ease: "easeOut" }}
                         />
                     </motion.div>
@@ -108,7 +110,7 @@ export const NinjaIntelligenceIndicator: React.FC<NinjaIndicatorProps> = ({
                         transition={{ duration: 2, repeat: Infinity }}
                     />
                     <div className="flex flex-col gap-1 items-center">
-                        <span className="text-[9px] font-mono text-emerald-500 tracking-tighter opacity-80">NEURAL</span>
+                        <span className="text-[9px] font-mono text-emerald-400 font-bold tracking-tighter drop-shadow-[0_0_5px_rgba(52,211,153,0.8)]">NEURAL</span>
                         <div className="h-0.5 w-8 bg-emerald-500/40" />
                         <motion.span
                             key={glitchText}

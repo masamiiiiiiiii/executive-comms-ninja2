@@ -12,34 +12,51 @@ router = APIRouter()
 # Initialize Stripe with a dummy key if not set.
 stripe.api_key = os.getenv("STRIPE_SECRET_KEY", "sk_test_dummy")
 
+from typing import Literal
+
 class CheckoutSessionRequest(BaseModel):
-    user_id: str
-    price_id: str = "price_pro_tier_dummy" # Replace with real Stripe Price ID
+    user_id: str = "anonymous"
+    tier: Literal["one_time", "subscription"]
     success_url: str
     cancel_url: str
 
 @router.post("/create-checkout-session")
 async def create_checkout_session(req: CheckoutSessionRequest):
     """
-    Creates a Stripe Checkout session for upgrading to Pro.
+    Creates a Stripe Checkout session for the selected tier.
     """
     try:
+        if stripe.api_key == "sk_test_dummy":
+            logger.info("Using dummy Stripe key. Bypassing real Stripe API call.")
+            sep = "&" if "?" in req.success_url else "?"
+            return {"checkout_url": f"{req.success_url}{sep}session_id=dummy_session_test_123"}
+            
+        if req.tier == "subscription":
+            line_items = [{
+                'price': 'price_1T3xODC1eYYIOTtfgWfaF68H',
+                'quantity': 1,
+            }]
+            mode = 'subscription'
+        else:
+            line_items = [{
+                'price': 'price_1T3xNMC1eYYIOTtfzH7IVTDf',
+                'quantity': 1,
+            }]
+            mode = 'payment'
+
+        sep = "&" if "?" in req.success_url else "?"
         session = stripe.checkout.Session.create(
             payment_method_types=['card'],
-            line_items=[{
-                'price': req.price_id,
-                'quantity': 1,
-            }],
-            mode='subscription',
-            success_url=f"{req.success_url}?session_id={{CHECKOUT_SESSION_ID}}",
+            line_items=line_items,
+            mode=mode,
+            success_url=f"{req.success_url}{sep}session_id={{CHECKOUT_SESSION_ID}}",
             cancel_url=req.cancel_url,
-            client_reference_id=req.user_id, # Link Stripe session to our user
+            client_reference_id=req.user_id,
         )
         return {"checkout_url": session.url}
     except Exception as e:
         logger.error(f"Error creating Stripe checkout session: {e}")
         raise HTTPException(status_code=500, detail=str(e))
-
 
 @router.post("/webhook")
 async def stripe_webhook(request: Request):

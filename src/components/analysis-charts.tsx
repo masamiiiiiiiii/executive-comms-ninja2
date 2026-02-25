@@ -6,9 +6,10 @@ import { motion } from 'framer-motion';
 interface AnalysisChartsProps {
     data: Record<string, number>;
     benchmarkData?: Record<string, number>;
+    isEliteBenchmark?: boolean;
 }
 
-export function AnalysisCharts({ data, benchmarkData }: AnalysisChartsProps) {
+export function AnalysisCharts({ data, benchmarkData, isEliteBenchmark = false }: AnalysisChartsProps) {
     if (!data) return <div className="text-sm text-muted-foreground">No metrics available.</div>;
 
     const subjects = Object.keys(data);
@@ -84,7 +85,7 @@ export function AnalysisCharts({ data, benchmarkData }: AnalysisChartsProps) {
                     })}
                 </g>
 
-                {/* 2. Industry Average (Benchmark) Polygon */}
+                {/* 2. Benchmark Polygon (Industry Avg or Elite) */}
                 {benchmarkData && (
                     <motion.polygon
                         points={benchPolygon}
@@ -92,8 +93,8 @@ export function AnalysisCharts({ data, benchmarkData }: AnalysisChartsProps) {
                         animate={{ opacity: 1, scale: 1, pathLength: 1 }}
                         transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
                         style={{ transformOrigin: "center" }}
-                        fill="rgba(148, 163, 184, 0.15)" // slate-400 with opacity
-                        stroke="rgba(148, 163, 184, 0.8)"
+                        fill={isEliteBenchmark ? "rgba(245, 158, 11, 0.15)" : "rgba(148, 163, 184, 0.15)"} // amber-500 or slate-400
+                        stroke={isEliteBenchmark ? "rgba(245, 158, 11, 0.8)" : "rgba(148, 163, 184, 0.8)"}
                         strokeWidth="1.5"
                         strokeDasharray="4 4"
                     />
@@ -178,8 +179,11 @@ export function AnalysisCharts({ data, benchmarkData }: AnalysisChartsProps) {
                 </div>
                 {benchmarkData && (
                     <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-sm bg-slate-400/10 border-2 border-slate-400 border-dashed"></div>
-                        <span className="text-slate-500">Industry Avg</span>
+                        <div className={`w-3 h-3 rounded-sm border-2 border-dashed ${isEliteBenchmark ? "bg-amber-500/10 border-amber-500" : "bg-slate-400/10 border-slate-400"
+                            }`}></div>
+                        <span className={isEliteBenchmark ? "text-amber-600" : "text-slate-500"}>
+                            {isEliteBenchmark ? "Elite Leaders" : "Industry Avg"}
+                        </span>
                     </div>
                 )}
             </div>

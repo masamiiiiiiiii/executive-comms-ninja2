@@ -10,14 +10,16 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Download, FileText, AlertTriangle, CheckCircle2, Info, User, Building2, Calendar, Target, Mic, MessageSquare, Sparkles, Trophy, Flag, TrendingUp, Smile, Meh, Frown, Activity, Loader2, RefreshCw } from "lucide-react";
+import { ArrowLeft, Download, FileText, AlertTriangle, CheckCircle2, Info, User, Building2, Calendar, Target, Mic, MessageSquare, Sparkles, Trophy, Flag, TrendingUp, Smile, Meh, Frown, Activity, Loader2, RefreshCw, ShieldAlert, Zap } from "lucide-react";
 import { SentimentChart } from "@/components/sentiment-chart";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { ElegantWaveform } from "@/components/v2/elegant-waveform";
+import { NinjaIntelligenceIndicator } from "@/components/v2/ninja-indicator";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
+import { generatePDFExport, generateCSVExport } from "@/lib/export-utils";
 
 // --- Components ---
 
@@ -118,27 +120,13 @@ function ProcessingState({ status }: { status: string }) {
     }
 
     return (
-        <div className="min-h-screen bg-slate-950 flex items-center justify-center relative overflow-hidden">
-            <ElegantWaveform />
-            <div className="text-center max-w-md mx-auto p-12 bg-slate-900/40 backdrop-blur-xl border border-white/5 rounded-3xl relative z-10 shadow-2xl">
-                <div className="relative mb-8">
-                    <div className="w-24 h-24 mx-auto rounded-full bg-emerald-500/10 flex items-center justify-center border border-emerald-500/30">
-                        <Loader2 className="h-10 w-10 text-emerald-500 animate-spin" />
-                    </div>
-                    <motion.div
-                        className="absolute inset-x-0 -bottom-2 flex justify-center"
-                        animate={{ opacity: [0.4, 1, 0.4] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                    >
-                        <span className="text-[10px] font-mono text-emerald-500 tracking-[0.3em] uppercase">Neural Synthesis</span>
-                    </motion.div>
-                </div>
-                <h2 className="text-2xl font-bold text-white mb-3 tracking-tight">{title}</h2>
-                <p className="text-slate-400 text-sm leading-relaxed mb-6 px-4">{description}</p>
-                <div className="flex items-center justify-center gap-3 text-[10px] font-mono text-emerald-500/60 uppercase tracking-widest">
-                    <RefreshCw className="h-3 w-3 animate-spin" />
-                    <span>Syncing with Cloud Intelligence...</span>
-                </div>
+        <div className="min-h-screen bg-slate-950 flex items-center justify-center relative overflow-hidden flex-col">
+            <div className="scale-150 mb-16 opacity-60 pointer-events-none">
+                <NinjaIntelligenceIndicator isObserving={true} />
+            </div>
+            <div className="text-center max-w-sm mx-auto p-8 rounded-2xl relative z-10 border border-emerald-500/20 bg-slate-950/60 backdrop-blur-md shadow-[0_0_50px_rgba(16,185,129,0.1)]">
+                <h2 className="text-base font-mono text-emerald-400 mb-2 tracking-widest uppercase">{title}</h2>
+                <p className="text-slate-400 text-xs leading-relaxed font-mono opacity-80">{description}</p>
             </div>
         </div>
     );
@@ -174,6 +162,23 @@ export default function AnalysisPage() {
     const [analysis, setAnalysis] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+
+    const [isUnlocked, setIsUnlocked] = useState(false);
+    const [pricingTier, setPricingTier] = useState<string | null>(null);
+
+    const summarizeVideoTitle = (title: string) => {
+        if (!title) return "Untitled Analysis";
+        let clean = title.split(' | ')[0].split(' - ')[0].trim();
+        if (clean.length > 55) return clean.substring(0, 55) + "...";
+        return clean;
+    };
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            setIsUnlocked(sessionStorage.getItem("ninja_pro_unlocked") === "true");
+            setPricingTier(sessionStorage.getItem("selected_pricing_tier"));
+        }
+    }, []);
 
     const fetchAnalysis = useCallback(async () => {
         try {
@@ -213,7 +218,7 @@ export default function AnalysisPage() {
     }, [fetchAnalysis]);
 
     if (loading || !analysis) {
-        return <ProcessingState status="queued" />;
+        return <ProcessingState status={analysis?.status || "queued"} />;
     }
 
     if (error && !analysis) {
@@ -252,17 +257,17 @@ export default function AnalysisPage() {
         <div className="min-h-screen bg-slate-50/50 text-slate-900 font-sans pb-20">
 
             {/* Top Navigation */}
-            <div className="bg-white border-b border-border sticky top-0 z-10 px-6 py-3 flex items-center justify-between shadow-sm">
-                <Link href="/" className="flex items-center text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">
+            <div className="bg-white/90 backdrop-blur-md border-b border-border sticky top-0 z-50 px-6 py-3 flex items-center justify-between shadow-sm">
+                <Button variant="ghost" className="flex items-center text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors p-0 h-auto" onClick={() => router.push(isUnlocked ? '/dashboard' : '/')}>
                     <ArrowLeft className="mr-2 h-4 w-4" />
-                    Back to Dashboard
-                </Link>
+                    {isUnlocked ? 'Back to Dashboard' : 'Back to Home'}
+                </Button>
                 <div className="flex items-center gap-2">
                     <Button
                         variant="outline"
                         size="sm"
                         className="h-8 gap-2 text-xs"
-                        onClick={() => toast.info("PDF Export is a Ninja Ultra Pro feature. Implementation pending Stripe integration.")}
+                        onClick={() => generatePDFExport(analysis, "exportable-analysis-results")}
                     >
                         <FileText className="h-3 w-3" /> PDF Export
                     </Button>
@@ -270,7 +275,7 @@ export default function AnalysisPage() {
                         variant="outline"
                         size="sm"
                         className="h-8 gap-2 text-xs"
-                        onClick={() => toast.info("CSV Export is a Ninja Ultra Pro feature.")}
+                        onClick={() => generateCSVExport(analysis)}
                     >
                         <Download className="h-3 w-3" /> Export CSV
                     </Button>
@@ -287,16 +292,16 @@ export default function AnalysisPage() {
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                         <div>
                             <h1 className="text-2xl font-bold text-slate-900 leading-tight mb-2">Analysis Results</h1>
-                            <p className="text-lg text-slate-700 font-medium">{analysis.video_title || "Untitled Analysis"}</p>
+                            <p className="text-lg text-slate-700 font-medium">{summarizeVideoTitle(analysis.video_title)}</p>
 
                             <div className="flex flex-wrap items-center gap-4 mt-3 text-xs text-slate-500 uppercase tracking-wide font-semibold">
                                 <div className="flex items-center gap-1.5 bg-slate-100 px-2 py-1 rounded">
                                     <Target className="h-3 w-3" />
-                                    <span>Who: {analysis.target_person !== "Speaker" ? analysis.target_person : (analysis.analysis_results?.video_metadata?.extracted_interviewee_name || analysis.analysis_results?.video_metadata?.channel_title || "Primary Target")} {analysis.role ? `(${analysis.role})` : ""}</span>
+                                    <span>Who: {analysis.analysis_results?.video_metadata?.extracted_interviewee_name || analysis.target_person || "Speaker"} {analysis.role ? `(${analysis.role})` : ""}</span>
                                 </div>
                                 <div className="flex items-center gap-1.5 bg-slate-100 px-2 py-1 rounded">
                                     <Sparkles className="h-3 w-3" />
-                                    <span>Media: {analysis.analysis_results?.video_metadata?.channel_title || "YouTube Source"}</span>
+                                    <span>Media: {analysis.analysis_results?.video_metadata?.channel_title || "YouTube Channel"}</span>
                                 </div>
                                 <div className="flex items-center gap-1.5 bg-slate-100 px-2 py-1 rounded">
                                     <Calendar className="h-3 w-3" />
@@ -309,7 +314,9 @@ export default function AnalysisPage() {
 
                 {/* Overall Score Card */}
                 <div className="bg-slate-950 rounded-2xl border border-emerald-500/20 shadow-2xl p-10 relative overflow-hidden">
-                    <ElegantWaveform />
+                    <div className="absolute inset-0 opacity-40">
+                        <ElegantWaveform />
+                    </div>
                     <div className="relative z-10">
                         <div className="flex items-center gap-3 mb-4">
                             <div className="p-2 bg-emerald-500/10 rounded-lg border border-emerald-500/20">
@@ -385,30 +392,6 @@ export default function AnalysisPage() {
                                 </p>
                             </CardContent>
                         </Card>
-
-                        {/* Executive Key Takeaways */}
-                        {results.key_takeaways && results.key_takeaways.length > 0 && (
-                            <Card className="bg-white border-border shadow-sm">
-                                <CardHeader className="pb-3 border-b border-slate-100">
-                                    <CardTitle className="flex items-center gap-2 text-slate-800 text-lg font-bold tracking-tight">
-                                        <Target className="h-5 w-5 text-emerald-600" />
-                                        Executive Key Takeaways
-                                    </CardTitle>
-                                </CardHeader>
-                                <CardContent className="pt-5 pb-5">
-                                    <ul className="space-y-4">
-                                        {results.key_takeaways.map((takeaway: string, idx: number) => (
-                                            <li key={idx} className="flex items-start gap-3 group">
-                                                <div className="mt-0.5 shrink-0 h-6 w-6 rounded-full bg-emerald-50 flex items-center justify-center border border-emerald-200 transition-colors group-hover:bg-emerald-100">
-                                                    <span className="text-[11px] font-bold text-emerald-700">{idx + 1}</span>
-                                                </div>
-                                                <p className="text-slate-700 leading-snug text-[15px] pt-0.5 font-medium">{takeaway}</p>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </CardContent>
-                            </Card>
-                        )}
                     </TabsContent>
 
                     {/* DETAILED TAB */}
@@ -513,6 +496,7 @@ export default function AnalysisPage() {
                                         <AnalysisCharts
                                             data={results.emotion_radar || metrics}
                                             benchmarkData={results.benchmark_comparison?.emotion_radar_benchmark}
+                                            isEliteBenchmark={overallScore >= 92}
                                         />
                                     </div>
                                 </CardContent>
@@ -523,17 +507,23 @@ export default function AnalysisPage() {
                                     <CardTitle className="text-sm uppercase tracking-widest text-slate-500">Benchmark Insights</CardTitle>
                                 </CardHeader>
                                 <CardContent className="space-y-6">
-                                    <div>
-                                        <p className="text-3xl font-light text-slate-400 mb-1">{results.benchmark_comparison?.industry_average || 72}</p>
-                                        <p className="text-xs font-bold text-slate-500 uppercase">Industry Average</p>
-                                    </div>
-                                    <div>
-                                        <p className="text-3xl font-light text-emerald-600 mb-1">{results.benchmark_comparison?.top_ceos || 92}</p>
-                                        <p className="text-xs font-bold text-emerald-700 uppercase">Top 10% CEO Benchmark</p>
-                                    </div>
+                                    {overallScore >= 92 ? (
+                                        <div>
+                                            <p className="text-3xl font-light text-amber-500 mb-1">{results.benchmark_comparison?.top_ceos || 92}</p>
+                                            <p className="text-xs font-bold text-amber-600 uppercase">Elite Leaders</p>
+                                        </div>
+                                    ) : (
+                                        <div>
+                                            <p className="text-3xl font-light text-slate-400 mb-1">{results.benchmark_comparison?.industry_average || 72}</p>
+                                            <p className="text-xs font-bold text-slate-500 uppercase">Industry Average</p>
+                                        </div>
+                                    )}
                                     <div className="pt-6 border-t border-slate-200">
                                         <p className="text-xs text-slate-500 leading-relaxed">
-                                            Your performance exceeds the industry average in <strong>Authority</strong> and <strong>Trust</strong>, but trails top CEOs in <strong>Enthusiasm</strong>.
+                                            {overallScore >= 92
+                                                ? "Your performance is exceptional, placing you among the elite tier of executive communicators. You have exceeded all standard industry benchmarks."
+                                                : "Your performance is solid compared to the industry average, but there is still room to grow to reach the Elite Leaders benchmark (92+)."
+                                            }
                                         </p>
                                     </div>
                                 </CardContent>
@@ -542,6 +532,64 @@ export default function AnalysisPage() {
                     </TabsContent>
 
                 </Tabs>
+
+                {/* --- Post-Analysis Conversion & Navigation CTA --- */}
+                <div className="mt-16 pt-12 border-t border-slate-200/50">
+                    {!isUnlocked || analysis.target_person === "Jack Welch" ? (
+                        // Demo / Unpaid User CTA
+                        <div className="max-w-3xl mx-auto bg-gradient-to-br from-emerald-950 to-slate-900 rounded-3xl p-10 text-center shadow-2xl border border-emerald-500/20 relative overflow-hidden group">
+                            <div className="absolute inset-0 bg-[url('/noise.png')] opacity-20 mix-blend-overlay"></div>
+                            <div className="absolute inset-0 bg-emerald-500/10 blur-[100px] group-hover:bg-emerald-500/20 transition-all duration-700"></div>
+
+                            <div className="relative z-10 space-y-6">
+                                <ShieldAlert className="w-12 h-12 text-emerald-400 mx-auto mb-2 opacity-80" />
+                                <h3 className="text-3xl font-extrabold text-white tracking-tight">Run Your Own Intelligence Sweep</h3>
+                                <p className="text-emerald-100/70 text-lg max-w-xl mx-auto leading-relaxed font-medium">
+                                    You have just witnessed a fraction of the predictive capability. Unlock the full neural suite and analyze your own high-stakes engagements.
+                                </p>
+                                <Button
+                                    size="lg"
+                                    onClick={() => router.push('/pricing')}
+                                    className="mt-6 h-14 px-10 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black tracking-widest uppercase text-sm shadow-[0_0_30px_rgba(16,185,129,0.3)] transition-all hover:scale-105"
+                                >
+                                    <Zap className="mr-2 h-5 w-5" />
+                                    Unlock Executive Pro
+                                </Button>
+                            </div>
+                        </div>
+                    ) : (
+                        // Paid User Navigation
+                        <div className="max-w-xl mx-auto text-center space-y-6">
+                            <h3 className="text-xl font-bold text-slate-800">Analysis Complete</h3>
+                            {pricingTier === "subscription" ? (
+                                <div className="space-y-4">
+                                    <p className="text-slate-500">You can return to the dashboard to queue another observation phase.</p>
+                                    <Button
+                                        size="lg"
+                                        onClick={() => router.push('/dashboard')}
+                                        className="w-full bg-slate-900 hover:bg-slate-800 text-white"
+                                    >
+                                        Return to Dashboard (New Session)
+                                    </Button>
+                                    <Button variant="ghost" className="w-full text-slate-400" onClick={() => router.push('/')}>
+                                        End Session (Return to Home)
+                                    </Button>
+                                </div>
+                            ) : (
+                                <div className="space-y-4">
+                                    <p className="text-slate-500">Your tactical deep dive report is safely stored. Returning to base.</p>
+                                    <Button
+                                        size="lg"
+                                        onClick={() => router.push('/')}
+                                        className="w-full bg-slate-900 hover:bg-slate-800 text-white"
+                                    >
+                                        Return to Home
+                                    </Button>
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </div>
 
             </main>
         </div>

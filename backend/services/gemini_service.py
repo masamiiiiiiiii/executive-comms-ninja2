@@ -31,7 +31,7 @@ class GeminiService:
         else:
              print("Warning: No Gemini Auth configured.")
 
-    def analyze_video(self, video_path: str) -> dict:
+    def analyze_video(self, video_path: str, metadata: dict = None) -> dict:
         """
         Analyzes a video.
         If API Key is used, 'video_path' must be a local file path.
@@ -125,12 +125,20 @@ class GeminiService:
             },
             "recommendations": [
                 {
-                    "title": "Include more relatable examples",
+                    "title": "Include more relatable examples (PROVIDE 2-3 RECOMMENDATIONS)",
                     "rationale": "Makes technical content more accessible.",
                     "strategy": "Add industry-specific use cases and success stories.",
+                    "priority": "High",
+                    "timeframe": "Immediate",
+                    "expected_impact": "Significant"
+                },
+                {
+                    "title": "Utilize strategic pausing",
+                    "rationale": "Allows key points to resonate with the audience.",
+                    "strategy": "Count to three after delivering a critical metric or insight.",
                     "priority": "Medium",
-                    "timeframe": "2-4 weeks",
-                    "expected_impact": "10-15%"
+                    "timeframe": "1-2 weeks",
+                    "expected_impact": "Moderate"
                 }
             ],
             "key_takeaways": [
@@ -138,9 +146,12 @@ class GeminiService:
                 "Effectively simplified complex technical pipeline for general audience.",
                 "Should rely more on silence rather than filler words during transitions."
             ],
-            "summary": "A detailed narrative summary of the performance..."
+            "summary": "WRITE A HIGHLY INSIGHTFUL, ELITE EXECUTIVE COACH'S NOTE HERE. Do not write a plain summary. Write 2-3 hard-hitting paragraphs analyzing their psychological presence, tactical communication strengths, and precise areas where they are leaking authority or engagement. Use professional consulting/executive coaching terminology (e.g., 'cognitive load', 'executive presence', 'strategic pausing'). Make the user feel they are receiving a $10,000/hour consultation."
         }
         """
+
+        if metadata and metadata.get("description"):
+            prompt += f"\n\n**Additional Context (Video Description)**:\n{metadata['description']}\n\n*Use the above description to help identify the true name of the speaker if possible.*"
 
         if self.use_api_key:
             # --- API Key Mode (Local File) ---
@@ -149,7 +160,12 @@ class GeminiService:
             if not os.path.exists(video_path):
                 raise ValueError(f"Local video file not found: {video_path}")
 
-            video_file = genai.upload_file(path=video_path)
+            import mimetypes
+            mime_type, _ = mimetypes.guess_type(video_path)
+            if not mime_type:
+                mime_type = "video/mp4" # Safe fallback
+
+            video_file = genai.upload_file(path=video_path, mime_type=mime_type)
             
             # Wait for processing
             print(f"Waiting for video processing: {video_file.name}")
@@ -294,7 +310,12 @@ class GeminiService:
             if not os.path.exists(audio_path):
                 raise ValueError(f"Local audio file not found: {audio_path}")
 
-            audio_file = genai.upload_file(path=audio_path)
+            import mimetypes
+            mime_type, _ = mimetypes.guess_type(audio_path)
+            if not mime_type:
+                mime_type = "audio/mp3" # Safe fallback
+
+            audio_file = genai.upload_file(path=audio_path, mime_type=mime_type)
             
             # Wait for processing
             print(f"Waiting for audio processing: {audio_file.name}")
@@ -351,7 +372,8 @@ class GeminiService:
             },
             "video_metadata": {
                 "duration": "Duration Unknown",
-                "published_date": "Unknown"
+                "published_date": "Unknown",
+                "extracted_interviewee_name": "Jon Lin"
             },
             "overall_performance": {
                 "score": 85,
@@ -416,12 +438,20 @@ class GeminiService:
             },
             "recommendations": [
                 {
-                    "title": "Include more relatable examples",
+                    "title": "Include more relatable examples (PROVIDE 2-3 RECOMMENDATIONS)",
                     "rationale": "Makes technical content more accessible.",
                     "strategy": "Add industry-specific use cases and success stories.",
+                    "priority": "High",
+                    "timeframe": "Immediate",
+                    "expected_impact": "Significant"
+                },
+                {
+                    "title": "Structure content with the Rule of Three",
+                    "rationale": "Improves audience retention of core arguments.",
+                    "strategy": "Group supporting points into three distinct categories.",
                     "priority": "Medium",
-                    "timeframe": "1 week",
-                    "expected_impact": "10-15%"
+                    "timeframe": "1-2 weeks",
+                    "expected_impact": "Moderate"
                 }
             ],
             "key_takeaways": [
@@ -429,11 +459,14 @@ class GeminiService:
                 "Point 2",
                 "Point 3"
             ],
-            "summary": "Narrative summary of the speech..."
+            "summary": "WRITE A HIGHLY INSIGHTFUL, ELITE EXECUTIVE COACH'S NOTE HERE. Do not write a plain summary. Write 2-3 hard-hitting paragraphs analyzing their psychological presence, tactical communication strengths, and precise areas where they are leaking authority or engagement. Use professional consulting/executive coaching terminology (e.g., 'cognitive load', 'executive presence', 'strategic pausing'). Make the user feel they are receiving a $10,000/hour consultation."
         }
         
         Analyze the following transcript:
         """ + transcript_text
+
+        if metadata and metadata.get("description"):
+            prompt += f"\n\n**Additional Context (Video Description)**:\n{metadata['description']}\n\n*Use the above description to help identify the true name of the speaker if possible.*"
 
         try:
             if self.use_api_key:
