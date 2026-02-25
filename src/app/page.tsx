@@ -122,9 +122,10 @@ export default async function Dashboard() {
               DM us on X (@ExecCommsNinja)
             </a>
           </div>
-          <div className="flex gap-6 mt-8 w-full border-t border-slate-200 pt-6 justify-center">
+          <div className="flex flex-wrap gap-4 md:gap-6 mt-8 w-full border-t border-slate-200 pt-6 justify-center items-center">
             <Link href="/legal" className="text-sm font-medium text-slate-500 hover:text-emerald-600 transition-colors">Terms of Service</Link>
             <Link href="/legal" className="text-sm font-medium text-slate-500 hover:text-emerald-600 transition-colors">Privacy Policy</Link>
+            <Link href="/legal/tokushoho" className="text-sm font-medium text-slate-500 hover:text-emerald-600 transition-colors whitespace-nowrap">特定商取引法に基づく表記</Link>
             <Link href="/legal" className="text-sm font-medium text-slate-500 hover:text-emerald-600 transition-colors">FAQ & Support</Link>
           </div>
         </footer>
