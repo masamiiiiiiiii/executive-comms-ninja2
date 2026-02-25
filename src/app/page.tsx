@@ -115,8 +115,7 @@ export default async function Dashboard() {
           <div className="flex flex-col items-center gap-4">
             <span className="font-bold text-slate-800 tracking-tight text-xl mb-4">ExecComms Ninja</span>
             <p className="text-sm text-slate-500 font-medium text-center">
-              For enterprise inquiries and support, please send a DM to our official X account.<br />
-              （お問い合わせやご相談は、以下の公式XアカウントへのDMにて承っております）
+              For enterprise inquiries and support, please send a DM to our official X account.
             </p>
             <a href="https://x.com/ExecCommsNinja" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-slate-800 font-bold hover:text-black transition-colors bg-slate-100 px-6 py-3 rounded-full hover:bg-slate-200 border border-slate-200 shadow-sm mt-2">
               <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4 fill-current"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>

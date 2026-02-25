@@ -68,7 +68,7 @@ export default function LegalPage() {
                         </div>
                         <div>
                             <h4 className="font-bold text-slate-800 mb-1">How can I contact support?</h4>
-                            <p className="text-sm text-slate-600">For all inquiries, including enterprise plans and media coaching, please send a Direct Message (DM) to our official X account: <a href="https://x.com/ExecCommsNinja" target="_blank" rel="noopener noreferrer" className="text-emerald-600 font-bold hover:underline">@ExecCommsNinja</a>.<br />（お問い合わせ・ご相談は公式XアカウントへのDMにて承ります）</p>
+                            <p className="text-sm text-slate-600">For all inquiries, including enterprise plans and media coaching, please send a Direct Message (DM) to our official X account: <a href="https://x.com/ExecCommsNinja" target="_blank" rel="noopener noreferrer" className="text-emerald-600 font-bold hover:underline">@ExecCommsNinja</a>.</p>
                         </div>
                     </CardContent>
                 </Card>
