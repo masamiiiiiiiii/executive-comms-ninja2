@@ -26,23 +26,23 @@ export default function TokushohoPage() {
                                 <tbody className="divide-y divide-slate-100">
                                     <tr className="hover:bg-slate-50/50 transition-colors">
                                         <th className="py-4 pr-4 font-bold text-slate-800 w-1/3 align-top">販売事業者名</th>
-                                        <td className="py-4 text-slate-700">【事業者名・会社名を入力してください】</td>
+                                        <td className="py-4 text-slate-700">【請求があった場合は遅滞なく開示します】</td>
                                     </tr>
                                     <tr className="hover:bg-slate-50/50 transition-colors">
                                         <th className="py-4 pr-4 font-bold text-slate-800 align-top">運営統括責任者</th>
-                                        <td className="py-4 text-slate-700">【代表者名 または 責任者名を入力してください】</td>
+                                        <td className="py-4 text-slate-700">【請求があった場合は遅滞なく開示します】</td>
                                     </tr>
                                     <tr className="hover:bg-slate-50/50 transition-colors">
                                         <th className="py-4 pr-4 font-bold text-slate-800 align-top">所在地</th>
-                                        <td className="py-4 text-slate-700">〒【郵便番号】<br />【都道府県・市区町村・番地・建物名などを入力してください】</td>
+                                        <td className="py-4 text-slate-700">〒【請求があった場合は遅滞なく開示します】<br />【請求があった場合は遅滞なく開示します】</td>
                                     </tr>
                                     <tr className="hover:bg-slate-50/50 transition-colors">
                                         <th className="py-4 pr-4 font-bold text-slate-800 align-top">電話番号</th>
-                                        <td className="py-4 text-slate-700">【電話番号を入力してください】<br /><span className="text-xs text-slate-500">※サービスに関するお問い合わせは、記録を残すため以下のメールアドレスまたは公式XアカウントのDMにて承っております。</span></td>
+                                        <td className="py-4 text-slate-700">【請求があった場合は遅滞なく開示します】<br /><span className="text-xs text-slate-500">※サービスに関するお問い合わせは、記録を残すため以下のメールアドレスまたは公式XアカウントのDMにて承っております。</span></td>
                                     </tr>
                                     <tr className="hover:bg-slate-50/50 transition-colors">
                                         <th className="py-4 pr-4 font-bold text-slate-800 align-top">メールアドレス</th>
-                                        <td className="py-4 text-slate-700">【メールアドレスを入力してください】</td>
+                                        <td className="py-4 text-slate-700">【oniatama77@gmail.com】</td>
                                     </tr>
                                     <tr className="hover:bg-slate-50/50 transition-colors">
                                         <th className="py-4 pr-4 font-bold text-slate-800 align-top">販売価格</th>
