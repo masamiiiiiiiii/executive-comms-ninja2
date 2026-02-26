@@ -33,13 +33,13 @@ async def create_checkout_session(req: CheckoutSessionRequest):
             
         if req.tier == "subscription":
             line_items = [{
-                'price': 'price_1T3xODC1eYYIOTtfgWfaF68H',
+                'price': 'price_1T4gGu2HCK38VhqueFDCkho8', # prod_U2loAa9CeE5gtz (Tactical Deep Dive / $149)
                 'quantity': 1,
             }]
             mode = 'subscription'
         else:
             line_items = [{
-                'price': 'price_1T3xNMC1eYYIOTtfzH7IVTDf',
+                'price': 'price_1T4gGQ2HCK38Vhqu92JyrSsA', # prod_U2lo68paorrnM8 (Executive Pro / $49)
                 'quantity': 1,
             }]
             mode = 'payment'
