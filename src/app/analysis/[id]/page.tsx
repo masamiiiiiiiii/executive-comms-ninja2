@@ -17,6 +17,7 @@ import { Progress } from "@/components/ui/progress";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { ElegantWaveform } from "@/components/v2/elegant-waveform";
 import { NinjaIntelligenceIndicator } from "@/components/v2/ninja-indicator";
+import { GlobalFooter } from "@/components/global-footer";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { generatePDFExport, generateCSVExport } from "@/lib/export-utils";
@@ -598,6 +599,7 @@ export default function AnalysisPage() {
                 </div>
 
             </main>
+            <GlobalFooter />
         </div>
     );
 }

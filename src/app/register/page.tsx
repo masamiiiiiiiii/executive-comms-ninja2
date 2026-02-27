@@ -10,6 +10,7 @@ import { ShieldCheck, Activity, BrainCircuit, CheckCircle2, Lock, Mail, KeyRound
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { NinjaIntelligenceIndicator } from "@/components/v2/ninja-indicator";
+import { GlobalFooter } from "@/components/global-footer";
 
 // PR / Executive themed Verification Questions
 const VERIFICATION_QUESTIONS = [
@@ -328,6 +329,10 @@ export default function RegisterPage() {
                     </Button>
                 </div>
             </motion.div>
+
+            <div className="w-full mt-12 pb-8">
+                <GlobalFooter theme="dark" />
+            </div>
         </div>
     );
 }

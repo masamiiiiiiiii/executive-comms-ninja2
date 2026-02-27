@@ -1,0 +1,64 @@
+# Google Ads Blueprint: Executive Comms Ninja
+
+This document outlines the optimal Google Ads strategy to capture high-intent users actively searching for media training, based on the provided X (Twitter) audience profiles and keywords.
+
+---
+
+## 1. ターゲティングの変換（Xの層をGoogleに連れてくる）
+Google広告ではX（旧Twitter）のフォロワーを直接指定することはできませんが、**「カスタムオーディエンス（Custom Audiences）」**を使うことで、指定されたメディアに触れている・興味を持っている層を完全に再現できます。
+
+### 【設定A】URL＆アプリベースのカスタムオーディエンス
+以下のWebサイトを定期的に閲覧している、あるいは関連アプリを使っている人をターゲットにします（ご提示いただいたXアカウント群の読者層です）。
+*   `bloomberg.com`, `wsj.com`, `asia.nikkei.com`, `cnbc.com`, `nytimes.com/section/business`
+*   `prweek.com`, `prnewswire.com`
+*   `webershandwick.com`, `edelman.com`, `teamlewis.com`, `fleishmanhillard.com` (大手PR代理店のサイト)
+
+### 【設定B】検索キーワードベースのカスタムオーディエンス（インテント）
+以下のキーワードをGoogleで実際に検索している、極めて購買意欲の高い層。
+*   "media training online"
+*   "executive presence coaching"
+*   "strategic communications consultant"
+*   "pr interview preparation"
+*   "crisis management training"
+
+---
+
+## 2. 推奨する2つのキャンペーン構成
+
+### ① 検索広告（Search Campaign） - 刈り取り
+**目的:** 「メディアトレーニング」をまさに今探している人にリーチする。
+**地域:** アメリカ、カナダ、イギリス、オーストラリアなどの主要英語圏（Tier 1）
+**言語:** 英語
+**キーワード（フレーズ一致・完全一致推奨）:**
+*   `"media training"`
+*   `"online media training"`
+*   `"executive media training"`
+*   `"public relations training"`
+
+**💬 広告コピー例（RSA: レスポンシブ検索広告）:**
+*   **Headline 1:** AI Executive Media Training
+*   **Headline 2:** Skip the $10,000 Seminar
+*   **Headline 3:** Analyze Your YouTube Videos
+*   **Description 1:** Master your pitch in minutes. Upload a video and get objective, data-driven feedback on your executive presence.
+*   **Description 2:** The $49 alternative to traditional media training. Analyze your pacing and body language with AI.
+
+### ② P-MAX または ディスプレイ広告（Display Campaign） - 認知拡大
+**目的:** ニュースメディア（WSJやBloombergのネットワーク内）を見ている対象者に、作成した「The New Yorker風」のエレガントなバナーを表示させる。
+**ターゲティング:** 上記の【設定A】と【設定B】のカスタムオーディエンスを指定。
+**クリエイティブ:** 前回作成した3パターンの画像（$10,000の値札、YouTube虫眼鏡、時計）を使用。
+
+---
+
+## 3. Google広告の「始め方」5ステップ
+
+1.  **コンバージョンの設定（最重要）**
+    予算を無駄にしないため、Executive Comms Ninjaの「有料プラン決済完了」または「サインアップ」のページにGoogle広告のコンバージョンタグ（計測タグ）を正しく埋め込みます。これをしないとAIが学習できません。
+2.  **検索広告の立ち上げ（少額スタート）**
+    まずは1日 $30〜$50 程度の予算で ① の検索広告のみをスタートします。潜在層へのディスプレイ広告は、検索広告で初速が出てから（CVが数件発生してから）始めるのが安全なセオリーです。
+3.  **「除外キーワード」の徹底的な登録**
+    検索広告において、見込みのないクリックを弾くために以下のワードを「除外キーワードリスト（Negative Keywords）」に登録してキャンペーンに紐づけます。
+    *   `free`, `cheap`, `jobs`, `salary`, `internship`, `definition`, `what is`, `book`, `template`
+4.  **広告文（コピー）に値段や強みを入れる**
+    「$49」や「In minutes」という数字を広告の見出しに入れることで、高額な対面トレーニングを探していた企業層の目を一気に惹き、無駄なクリック（冷やかし）を防止できます。
+5.  **1〜2週間は触らずにデータを溜める**
+    Google広告のAIはクリックやコンバージョンの傾向を数日間かけて学習します。開始後すぐに数値がブレても、極端な予算消化がない限りは数日は様子を見てデータを溜めてください。

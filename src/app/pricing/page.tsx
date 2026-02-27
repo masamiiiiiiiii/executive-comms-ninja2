@@ -7,6 +7,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Check, ShieldAlert, Sparkles, Target, Zap, Activity } from "lucide-react";
+import { GlobalFooter } from "@/components/global-footer";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "pk_test_dummy");
 
@@ -171,6 +172,7 @@ export default function PricingPage() {
 
                 </div>
             </div>
+            <GlobalFooter />
         </div>
     );
 }

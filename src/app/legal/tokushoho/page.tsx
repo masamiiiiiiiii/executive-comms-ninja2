@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Scale, Building2 } from "lucide-react";
+import { GlobalFooter } from "@/components/global-footer";
 
 export default function TokushohoPage() {
     return (
@@ -93,6 +94,7 @@ export default function TokushohoPage() {
                 </Card>
 
             </div>
+            <GlobalFooter />
         </div>
     );
 }

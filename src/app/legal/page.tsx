@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Copy, MapPin, Scale, Eye, Info } from "lucide-react";
+import { GlobalFooter } from "@/components/global-footer";
 
 export default function LegalPage() {
     return (
@@ -74,6 +75,7 @@ export default function LegalPage() {
                 </Card>
 
             </div>
+            <GlobalFooter />
         </div>
     );
 }
