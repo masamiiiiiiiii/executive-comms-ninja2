@@ -44,6 +44,14 @@ export default function PricingPage() {
                 <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-200/40 blur-[120px] rounded-full" />
             </div>
 
+            {/* Top Navigation */}
+            <div className="fixed top-0 left-0 w-full z-50 px-6 py-4 flex items-center justify-start pointer-events-auto">
+                <Button variant="ghost" className="bg-white/50 hover:bg-white/80 backdrop-blur-md flex items-center text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors shadow-sm rounded-full px-4 border border-slate-200/50" onClick={() => router.push('/')}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 h-4 w-4"><path d="m12 19-7-7 7-7" /><path d="M19 12H5" /></svg>
+                    Back to Home
+                </Button>
+            </div>
+
             <div className="relative z-10 w-full max-w-5xl pt-20 pb-16">
                 <div className="text-center mb-16 space-y-4">
                     <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
@@ -88,7 +96,7 @@ export default function PricingPage() {
                                 </li>
                                 <li className="flex items-start text-slate-700 text-sm">
                                     <Check className="h-5 w-5 text-emerald-500 mr-3 shrink-0 mt-0.5" />
-                                    <span><strong>Immediate Export Rights:</strong> Download the executive-ready PDF & raw CSV data instantly.</span>
+                                    <span><strong>Targeted Processing:</strong> Submit any public YouTube URL and analyze up to 5 minutes of focused footage.</span>
                                 </li>
                                 <li className="flex items-start text-slate-700 text-sm">
                                     <Check className="h-5 w-5 text-emerald-500 mr-3 shrink-0 mt-0.5" />
@@ -137,7 +145,7 @@ export default function PricingPage() {
                             <ul className="space-y-4">
                                 <li className="flex items-start text-slate-300 text-sm">
                                     <Sparkles className="h-5 w-5 text-emerald-400 mr-3 shrink-0 mt-0.5" />
-                                    <span><strong>5 Executive Analyses per Month:</strong> Continuous feedback loops across various media formats and press conferences. ($245 Value)</span>
+                                    <span><strong>5 Executive Analyses per Month:</strong> Continuous feedback loops across various media formats and media interviews. Support for YouTube URLs (analyze any 5-minute segment from videos of any length). ($245 Value)</span>
                                 </li>
                                 <li className="flex items-start text-slate-300 text-sm">
                                     <Check className="h-5 w-5 text-emerald-400 mr-3 shrink-0 mt-0.5" />

@@ -120,7 +120,13 @@ function ProcessingState({ status }: { status: string }) {
     }
 
     return (
-        <div className="min-h-screen bg-slate-950 flex items-center justify-center relative overflow-hidden flex-col">
+        <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center relative overflow-hidden">
+            <div className="absolute top-0 w-full p-6 flex justify-start z-50">
+                <Button variant="ghost" className="bg-slate-900/50 hover:bg-slate-800 backdrop-blur-md flex items-center text-sm font-medium text-slate-300 hover:text-white transition-colors shadow-sm rounded-full px-4 border border-slate-700/50" onClick={() => window.location.href = '/'}>
+                    <ArrowLeft className="mr-2 h-4 w-4" />
+                    Back to Home
+                </Button>
+            </div>
             <div className="scale-150 mb-16 opacity-60 pointer-events-none">
                 <NinjaIntelligenceIndicator isObserving={true} />
             </div>

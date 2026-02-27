@@ -36,7 +36,7 @@ export function NavActions() {
 
     return (
         <div className="flex items-center gap-6">
-            <Link href="/pricing" className="text-sm font-bold text-slate-600 hover:text-slate-900 transition-colors">
+            <Link href="/pricing" className="text-sm font-bold text-slate-600 hover:text-slate-900 transition-colors px-4 py-2 rounded-full hover:bg-slate-200/50 active:bg-slate-200">
                 Pricing
             </Link>
             {isUnlocked && (
