@@ -17,7 +17,7 @@ export function ConversionTracker() {
             // Fire the specific Google Ads conversion event precisely via gtag configuration.
             // Note: sendGAEvent uses dataLayer.push internally to broadcast exactly to the tags connected.
             sendGAEvent("event", "conversion", {
-                send_to: "AW-17979887612/mmsqCL6g9OUZELzt9O8R",
+                send_to: "AW-17979887612/jvSACIGP3v8bEPyfvf1C",
                 value: 49.0,
                 currency: "USD"
             });
