@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 };
 
 import { Toaster } from "@/components/ui/sonner";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export default function RootLayout({
   children,
@@ -52,6 +53,9 @@ export default function RootLayout({
         <noscript>
           <img height="1" width="1" style={{ display: "none" }} alt="" src="https://px.ads.linkedin.com/collect/?pid=8877620&fmt=gif" />
         </noscript>
+        
+        {/* Google Ads Tag */}
+        <GoogleAnalytics gaId="AW-17979887612" />
       </body>
     </html>
   );

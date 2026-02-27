@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { DemoCTA } from "@/components/demo-cta";
 import { NavActions } from "@/components/nav-actions";
 import { GlobalFooter } from "@/components/global-footer";
+import { ConversionTracker } from "@/components/conversion-tracker";
 
 export default async function Dashboard() {
   const cookieStore = await cookies();
@@ -44,6 +45,10 @@ export default async function Dashboard() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 font-sans flex flex-col items-center justify-center relative overflow-hidden">
+      
+      <Suspense fallback={null}>
+        <ConversionTracker />
+      </Suspense>
 
       {/* Background Decor */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0 opacity-30">
