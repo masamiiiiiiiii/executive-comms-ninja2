@@ -46,10 +46,12 @@ export default function PricingPage() {
             </div>
 
             {/* Top Navigation */}
-            <div className="fixed top-0 left-0 w-full z-50 px-6 py-4 flex items-center justify-start pointer-events-auto">
-                <Button variant="ghost" className="bg-white/50 hover:bg-white/80 backdrop-blur-md flex items-center text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors shadow-sm rounded-full px-4 border border-slate-200/50" onClick={() => router.push('/')}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 h-4 w-4"><path d="m12 19-7-7 7-7" /><path d="M19 12H5" /></svg>
-                    Back to Home
+            <div className="fixed top-0 left-0 w-full z-50 px-4 sm:px-6 py-4 flex items-center justify-start pointer-events-auto">
+                <Button variant="ghost" asChild className="bg-white/50 hover:bg-white/80 backdrop-blur-md flex items-center text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors shadow-sm rounded-full px-5 py-6 sm:px-4 sm:py-2 border border-slate-200/50 min-h-[44px]">
+                    <a href="/">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 h-4 w-4"><path d="m12 19-7-7 7-7" /><path d="M19 12H5" /></svg>
+                        Back to Home
+                    </a>
                 </Button>
             </div>
 

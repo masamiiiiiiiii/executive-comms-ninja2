@@ -14,8 +14,17 @@ function SuccessContent() {
     useEffect(() => {
         if (typeof window !== "undefined") {
             sessionStorage.setItem("ninja_pro_unlocked", "true");
+            // Fire Google Ads Conversion Tracking Event
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'conversion', {
+                    'send_to': 'AW-17979887612/jvSACIGP3v8bEPyfvf1C',
+                    'value': 49.0,
+                    'currency': 'USD',
+                    'transaction_id': sessionId || ''
+                });
+            }
         }
-    }, []);
+    }, [sessionId]);
 
     return (
         <div className="relative z-10 w-full max-w-2xl text-center space-y-8">

@@ -61,13 +61,13 @@ export function DemoCTA() {
     return (
         <>
             {isGlobalProcessing && (
-                <div className="fixed inset-0 z-[100] bg-slate-950 flex flex-col items-center justify-center">
-                    <div className="scale-150 mb-16 opacity-60">
+                <div className="fixed inset-0 z-[100] bg-slate-950 flex flex-col items-center justify-center overflow-hidden">
+                    <div className="absolute inset-0 flex items-center justify-center scale-150 opacity-60 pointer-events-none z-0">
                         <NinjaIntelligenceIndicator isObserving={true} />
                     </div>
-                    <div className="relative z-10 text-center">
-                        <h2 className="text-xl font-mono text-emerald-400 mb-2 tracking-widest uppercase">Initializing Neural Link</h2>
-                        <p className="text-slate-400 text-sm font-mono opacity-80 animate-pulse">Establishing connection to observation grid...</p>
+                    <div className="relative z-50 text-center mt-32">
+                        <h2 className="text-xl font-mono text-emerald-400 mb-2 tracking-widest uppercase bg-slate-950/80 px-4 py-2 rounded">Initializing Neural Link</h2>
+                        <p className="text-slate-400 text-sm font-mono opacity-80 animate-pulse bg-slate-950/80 px-4 py-2 rounded inline-block">Establishing connection to observation grid...</p>
                     </div>
                 </div>
             )}

@@ -264,10 +264,12 @@ export default function AnalysisPage() {
         <div className="min-h-screen bg-slate-50/50 text-slate-900 font-sans pb-20">
 
             {/* Top Navigation */}
-            <div className="bg-white/90 backdrop-blur-md border-b border-border sticky top-0 z-50 px-6 py-3 flex items-center justify-between shadow-sm">
-                <Button variant="ghost" className="flex items-center text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors p-0 h-auto" onClick={() => router.push(isUnlocked ? '/dashboard' : '/')}>
-                    <ArrowLeft className="mr-2 h-4 w-4" />
-                    {isUnlocked ? 'Back to Dashboard' : 'Back to Home'}
+            <div className="bg-white/90 backdrop-blur-md border-b border-border sticky top-0 z-50 px-4 sm:px-6 py-3 flex items-center justify-between shadow-sm">
+                <Button variant="ghost" asChild className="flex items-center text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors p-2 sm:p-0 min-h-[44px]">
+                    <a href={isUnlocked ? '/dashboard' : '/'}>
+                        <ArrowLeft className="mr-2 h-4 w-4" />
+                        {isUnlocked ? 'Back to Dashboard' : 'Back to Home'}
+                    </a>
                 </Button>
                 <div className="flex items-center gap-2">
                     <Button

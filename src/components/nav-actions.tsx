@@ -35,8 +35,8 @@ export function NavActions() {
     }, [searchParams, router]);
 
     return (
-        <div className="flex items-center gap-6">
-            <Link href="/pricing" className="text-sm font-bold text-slate-600 hover:text-slate-900 transition-colors px-4 py-2 rounded-full hover:bg-slate-200/50 active:bg-slate-200">
+        <div className="flex items-center gap-4 sm:gap-6">
+            <Link href="/pricing" className="flex items-center justify-center text-sm font-bold text-slate-600 hover:text-slate-900 transition-colors px-5 py-3 sm:px-4 sm:py-2 rounded-full hover:bg-slate-200/50 active:bg-slate-200 min-h-[44px] min-w-[80px]">
                 Pricing
             </Link>
             {isUnlocked && (
