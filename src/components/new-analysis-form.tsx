@@ -10,7 +10,7 @@ import { toast } from "sonner";
 import { WatchInterface } from "./v2/watch-interface";
 import { NinjaIntelligenceIndicator } from "./v2/ninja-indicator";
 
-export function NewAnalysisForm() {
+export function NewAnalysisForm({ currentLang }: { currentLang: string }) {
     const [url, setUrl] = useState(() => {
         if (typeof window !== "undefined") {
             return sessionStorage.getItem("pendingAnalysisUrl") || "";
@@ -145,7 +145,8 @@ export function NewAnalysisForm() {
                         company: "Ninja Intelligence V2",
                         role: "Executive",
                         target_person: "Speaker",
-                        transcript_text: transcript
+                        transcript_text: transcript,
+                        lang: currentLang
                     }),
                 });
             };
@@ -174,7 +175,7 @@ export function NewAnalysisForm() {
             }
 
             toast.success("Deep Analysis Initiated!", { id: "analysis" });
-            router.push(`/analysis/${data.analysis_id}`);
+            router.push(`/${currentLang}/analysis/${data.analysis_id}`);
 
         } catch (error: any) {
             console.error(error);

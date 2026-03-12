@@ -31,7 +31,7 @@ class GeminiService:
         else:
              print("Warning: No Gemini Auth configured.")
 
-    def analyze_video(self, video_path: str, metadata: dict = None, target_person: str = None) -> dict:
+    def analyze_video(self, video_path: str, metadata: dict = None, target_person: str = None, lang: str = "en") -> dict:
         """
         Analyzes a video.
         If API Key is used, 'video_path' must be a local file path.
@@ -41,8 +41,12 @@ class GeminiService:
         if target_person and target_person.lower() != "speaker":
             target_instruction = f"\n\n**CRITICAL REQUIREMENT: IDENTIFY AND ANALYZE THE SPECIFIC PERSON NAMED '{target_person}'.**\nIf multiple people are present, you MUST focus your entire analysis exclusively on '{target_person}'. Do not analyze the interviewer or other participants.\n"
 
+        lang_instruction = ""
+        if lang == "ja":
+            lang_instruction = "\n\n**CRITICAL LANGUAGE REQUIREMENT: YOU MUST OUTPUT THE ENTIRE JSON (ALL SUMMARIES, OBSERVATIONS, LABELS, RATIONALES) IN BEAUTIFUL, POLISHED, FORMAL BUSINESS JAPANESE (teinei na bunsho).**\n"
+
         prompt = f"""
-        You are an elite Executive Communication Coach for the AI era. Analyze this video with high precision to generate a comprehensive "Executive Dashboard" report.{target_instruction}
+        You are an elite Executive Communication Coach for the AI era. Analyze this video with high precision to generate a comprehensive "Executive Dashboard" report.{target_instruction}{lang_instruction}
 
         **Objective**: Evaluate the speaker's executive presence, credibility, and communication effectiveness against global C-suite standards.
 
@@ -340,7 +344,7 @@ class GeminiService:
             )
             return self._parse_response(response.text)
 
-    def analyze_full_transcript(self, transcript_text: str, metadata: dict, target_person: str = None) -> dict:
+    def analyze_full_transcript(self, transcript_text: str, metadata: dict, target_person: str = None, lang: str = "en") -> dict:
         """
         Analyzes a full video transcript as an alternative to analyzing the raw video file.
         This bypasses the need to download the video, avoiding YouTube bot blocking.
@@ -349,8 +353,12 @@ class GeminiService:
         if target_person and target_person.lower() != "speaker":
             target_instruction = f"\n\n**CRITICAL REQUIREMENT: IDENTIFY AND ANALYZE THE SPECIFIC PERSON NAMED '{target_person}'.**\nIf multiple people are present, you MUST focus your entire analysis exclusively on '{target_person}'. Do not analyze the interviewer or other participants.\n"
 
+        lang_instruction = ""
+        if lang == "ja":
+            lang_instruction = "\n\n**CRITICAL LANGUAGE REQUIREMENT: YOU MUST OUTPUT THE ENTIRE JSON (ALL SUMMARIES, OBSERVATIONS, LABELS, RATIONALES) IN BEAUTIFUL, POLISHED, FORMAL BUSINESS JAPANESE (teinei na bunsho).**\n"
+
         prompt = f"""
-        You are an elite Executive Communication Coach for the AI era. You are analyzing a transcript of an executive's speech or presentation to generate a comprehensive "Executive Dashboard" report.{target_instruction}
+        You are an elite Executive Communication Coach for the AI era. You are analyzing a transcript of an executive's speech or presentation to generate a comprehensive "Executive Dashboard" report.{target_instruction}{lang_instruction}
         Even though you cannot see the video, evaluate their communication style based on the spoken text, structure, pacing (implied by content), and implicit tone.
 
         **Objective**: Evaluate the speaker's executive credibility, communication effectiveness, and structure against global C-suite standards based on this transcript.

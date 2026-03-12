@@ -92,7 +92,7 @@ export default async function Dashboard({ params }: { params: Promise<{ lang: 'e
           </p>
 
           <div className="pt-6 pb-2">
-            <DemoCTA dict={dict.demoCta} />
+            <DemoCTA dict={dict.demoCta} currentLang={lang} />
           </div>
           <p className="text-sm font-medium text-slate-500">
             {dict.home.demoText}

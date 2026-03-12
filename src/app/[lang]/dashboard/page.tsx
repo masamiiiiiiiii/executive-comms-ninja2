@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { ShieldCheck, Loader2, PlaySquare, Calendar, Target, Trophy, ArrowRight } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 import Link from "next/link";
@@ -31,6 +31,8 @@ interface AnalysisRecord {
 
 export default function DashboardPage() {
     const router = useRouter();
+    const params = useParams();
+    const lang = (params?.lang as string) || "en";
     const [isAuthorized, setIsAuthorized] = useState<boolean | null>(null);
     const [analyses, setAnalyses] = useState<AnalysisRecord[]>([]);
     const [loadingData, setLoadingData] = useState(true);
@@ -103,7 +105,7 @@ export default function DashboardPage() {
                         Initiate New Analysis
                     </h2>
                     <div className="max-w-4xl">
-                        <NewAnalysisForm />
+                        <NewAnalysisForm currentLang={lang} />
                     </div>
                 </div>
 

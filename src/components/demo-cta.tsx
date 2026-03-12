@@ -8,7 +8,7 @@ import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
 import { NinjaIntelligenceIndicator } from "./v2/ninja-indicator";
 
-export function DemoCTA({ dict }: { dict: { initializing: string, experience: string } }) {
+export function DemoCTA({ dict, currentLang }: { dict: { initializing: string, experience: string }, currentLang: string }) {
     const [loading, setLoading] = useState(false);
     const [isGlobalProcessing, setIsGlobalProcessing] = useState(false);
     const router = useRouter();
@@ -34,7 +34,8 @@ export function DemoCTA({ dict }: { dict: { initializing: string, experience: st
                     video_title: "Jack Welch Leadership Interview",
                     company: "General Electric",
                     role: "Legendary CEO",
-                    target_person: "Jack Welch"
+                    target_person: "Jack Welch",
+                    lang: currentLang
                 }),
             });
 
@@ -48,7 +49,7 @@ export function DemoCTA({ dict }: { dict: { initializing: string, experience: st
 
             const data = await response.json();
             toast.success("Demo Analysis Loaded!");
-            router.push(`/analysis/${data.analysis_id}`);
+            router.push(`/${currentLang}/analysis/${data.analysis_id}`);
 
         } catch (error) {
             console.error(error);
