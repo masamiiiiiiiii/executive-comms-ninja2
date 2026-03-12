@@ -59,7 +59,7 @@ export default async function Dashboard({ params }: { params: Promise<{ lang: 'e
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-200/40 blur-[100px] rounded-full" />
       </div>
 
-      <nav className="absolute top-0 w-full flex justify-between items-center p-6 z-10">
+      <nav className="absolute top-0 w-full flex justify-between items-center p-6 z-50 pointer-events-auto">
         <div className="flex items-center gap-2">
           <div className="h-8 w-8 bg-emerald-600 rounded-lg flex items-center justify-center text-white shadow-sm">
             <Video className="h-5 w-5" />
@@ -73,7 +73,7 @@ export default async function Dashboard({ params }: { params: Promise<{ lang: 'e
         </div>
       </nav>
 
-      <main className="w-full max-w-5xl px-6 relative z-10 flex flex-col items-center justify-center pt-8">
+      <main className="w-full max-w-5xl px-6 relative z-10 flex flex-col items-center justify-center pt-24">
         {/* Hero Section */}
         <div className="w-full text-center space-y-8 mb-16 relative z-10 pt-10">
           <Badge variant="outline" className="bg-white/50 backdrop-blur border-emerald-200 text-emerald-700 px-4 py-1.5 text-sm font-bold uppercase tracking-widest shadow-sm">
