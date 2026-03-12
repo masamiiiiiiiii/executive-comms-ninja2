@@ -103,8 +103,6 @@ export default async function Dashboard({ params }: { params: Promise<{ lang: 'e
         <div className="max-w-4xl mx-auto bg-white/60 backdrop-blur-xl border border-white p-8 md:p-12 rounded-3xl shadow-xl relative z-10 mb-20 text-center">
           <h2 className="text-3xl font-bold text-slate-900 mb-6 flex items-center justify-center flex-wrap gap-y-2 gap-x-3">
             <span>{dict.home.founderTitle}</span>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo.png" alt="Executive Comms Ninja Logo" className="h-[22px] md:h-8 w-auto inline-block relative -top-0.5 object-contain" />
           </h2>
           <div className="space-y-4 text-lg text-slate-700 leading-relaxed max-w-3xl mx-auto text-left">
             <p>{dict.home.founderP1}</p>
