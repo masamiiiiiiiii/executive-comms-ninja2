@@ -1,0 +1,158 @@
+
+> frontend@0.1.0 dev
+> next dev
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.4:3000
+- Environments: .env.local
+
+✓ Starting...
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+✓ Ready in 1488ms
+ GET /newsjack/8c894acf-d787-4f5d-8510-9e9bd1b30d9c 200 in 1610ms (compile: 1374ms, proxy.ts: 81ms, render: 155ms)
+ GET /noise.png 404 in 155ms (compile: 108ms, proxy.ts: 5ms, render: 42ms)
+ GET /newsjack 200 in 232ms (compile: 121ms, proxy.ts: 15ms, render: 96ms)
+⚠ ./src/app/api/transcript/route.ts:73:30
+Module not found: Can't resolve '@distube/ytdl-core'
+[0m [90m 71 |[39m                 process[33m.[39menv[33m.[39m[33mYTDL_NO_UPDATE[39m [33m=[39m [32m'1'[39m[33m;[39m
+ [90m 72 |[39m                 [90m// eslint-disable-next-line @typescript-eslint/no-require-imports[39m
+[31m[1m>[22m[39m[90m 73 |[39m                 [36mconst[39m ytdl [33m=[39m require([32m'@distube/ytdl-core'[39m)[33m;[39m
+ [90m    |[39m                              [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 74 |[39m                 [36mconst[39m info [33m=[39m [36mawait[39m ytdl[33m.[39mgetInfo([32m`https://www.youtube.com/watch?v=${videoId}`[39m[33m,[39m {
+ [90m 75 |[39m                     requestOptions[33m:[39m {
+ [90m 76 |[39m                         headers[33m:[39m {[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+Transcript API error: Error: Cannot find module '@distube/ytdl-core'
+    at <unknown> (.next/dev/server/chunks/[root-of-the-server]__f1afc237._.js:90:23)
+    at POST (.next/dev/server/chunks/[root-of-the-server]__f1afc237._.js:93:11) {
+  code: 'MODULE_NOT_FOUND'
+}
+ POST /api/transcript 500 in 186ms (compile: 61ms, render: 125ms)
+ GET /newsjack/46a55d7b-3998-42d9-8406-bc59f6ffe932 200 in 37ms (compile: 11ms, proxy.ts: 5ms, render: 22ms)
+ GET /noise.png 404 in 52ms (compile: 9ms, proxy.ts: 7ms, render: 36ms)
+ GET /noise.png?1772336804721 404 in 38ms (compile: 9ms, proxy.ts: 7ms, render: 23ms)
+ GET /newsjack 200 in 112ms (compile: 5ms, proxy.ts: 48ms, render: 58ms)
+⚠ ./src/app/api/transcript/route.ts:73:30
+Module not found: Can't resolve '@distube/ytdl-core'
+[0m [90m 71 |[39m                 process[33m.[39menv[33m.[39m[33mYTDL_NO_UPDATE[39m [33m=[39m [32m'1'[39m[33m;[39m
+ [90m 72 |[39m                 [90m// eslint-disable-next-line @typescript-eslint/no-require-imports[39m
+[31m[1m>[22m[39m[90m 73 |[39m                 [36mconst[39m ytdl [33m=[39m require([32m'@distube/ytdl-core'[39m)[33m;[39m
+ [90m    |[39m                              [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 74 |[39m                 [36mconst[39m info [33m=[39m [36mawait[39m ytdl[33m.[39mgetInfo([32m`https://www.youtube.com/watch?v=${videoId}`[39m[33m,[39m {
+ [90m 75 |[39m                     requestOptions[33m:[39m {
+ [90m 76 |[39m                         headers[33m:[39m {[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⚠ ./src/app/api/transcript/route.ts:73:30
+Module not found: Can't resolve '@distube/ytdl-core'
+[0m [90m 71 |[39m                 process[33m.[39menv[33m.[39m[33mYTDL_NO_UPDATE[39m [33m=[39m [32m'1'[39m[33m;[39m
+ [90m 72 |[39m                 [90m// eslint-disable-next-line @typescript-eslint/no-require-imports[39m
+[31m[1m>[22m[39m[90m 73 |[39m                 [36mconst[39m ytdl [33m=[39m require([32m'@distube/ytdl-core'[39m)[33m;[39m
+ [90m    |[39m                              [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 74 |[39m                 [36mconst[39m info [33m=[39m [36mawait[39m ytdl[33m.[39mgetInfo([32m`https://www.youtube.com/watch?v=${videoId}`[39m[33m,[39m {
+ [90m 75 |[39m                     requestOptions[33m:[39m {
+ [90m 76 |[39m                         headers[33m:[39m {[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+Transcript API error: Error: Cannot find module '@distube/ytdl-core'
+    at <unknown> (.next/dev/server/chunks/[root-of-the-server]__f1afc237._.js:90:23)
+    at POST (.next/dev/server/chunks/[root-of-the-server]__f1afc237._.js:93:11) {
+  code: 'MODULE_NOT_FOUND'
+}
+ POST /api/transcript 500 in 88ms (compile: 11ms, render: 77ms)
+ GET /newsjack/7277dde1-9222-49b1-97b7-883c338b3a13 200 in 27ms (compile: 10ms, proxy.ts: 3ms, render: 14ms)
+ GET /noise.png 404 in 41ms (compile: 8ms, proxy.ts: 5ms, render: 27ms)
+ GET /newsjack 200 in 82ms (compile: 9ms, proxy.ts: 21ms, render: 52ms)
+⚠ ./src/app/api/transcript/route.ts:73:30
+Module not found: Can't resolve '@distube/ytdl-core'
+[0m [90m 71 |[39m                 process[33m.[39menv[33m.[39m[33mYTDL_NO_UPDATE[39m [33m=[39m [32m'1'[39m[33m;[39m
+ [90m 72 |[39m                 [90m// eslint-disable-next-line @typescript-eslint/no-require-imports[39m
+[31m[1m>[22m[39m[90m 73 |[39m                 [36mconst[39m ytdl [33m=[39m require([32m'@distube/ytdl-core'[39m)[33m;[39m
+ [90m    |[39m                              [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 74 |[39m                 [36mconst[39m info [33m=[39m [36mawait[39m ytdl[33m.[39mgetInfo([32m`https://www.youtube.com/watch?v=${videoId}`[39m[33m,[39m {
+ [90m 75 |[39m                     requestOptions[33m:[39m {
+ [90m 76 |[39m                         headers[33m:[39m {[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⚠ ./src/app/api/transcript/route.ts:73:30
+Module not found: Can't resolve '@distube/ytdl-core'
+[0m [90m 71 |[39m                 process[33m.[39menv[33m.[39m[33mYTDL_NO_UPDATE[39m [33m=[39m [32m'1'[39m[33m;[39m
+ [90m 72 |[39m                 [90m// eslint-disable-next-line @typescript-eslint/no-require-imports[39m
+[31m[1m>[22m[39m[90m 73 |[39m                 [36mconst[39m ytdl [33m=[39m require([32m'@distube/ytdl-core'[39m)[33m;[39m
+ [90m    |[39m                              [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 74 |[39m                 [36mconst[39m info [33m=[39m [36mawait[39m ytdl[33m.[39mgetInfo([32m`https://www.youtube.com/watch?v=${videoId}`[39m[33m,[39m {
+ [90m 75 |[39m                     requestOptions[33m:[39m {
+ [90m 76 |[39m                         headers[33m:[39m {[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+Transcript API error: Error: Cannot find module '@distube/ytdl-core'
+    at <unknown> (.next/dev/server/chunks/[root-of-the-server]__f1afc237._.js:90:23)
+    at POST (.next/dev/server/chunks/[root-of-the-server]__f1afc237._.js:93:11) {
+  code: 'MODULE_NOT_FOUND'
+}
+ POST /api/transcript 500 in 96ms (compile: 16ms, render: 80ms)
+ GET /newsjack/93b63ea7-7c26-4b40-876e-d871bcc30fb0 200 in 38ms (compile: 12ms, proxy.ts: 3ms, render: 23ms)
+ GET /noise.png 404 in 46ms (compile: 11ms, proxy.ts: 3ms, render: 32ms)
+ GET /noise.png?1772356713826 404 in 48ms (compile: 13ms, proxy.ts: 6ms, render: 30ms)
+ GET /newsjack 200 in 62ms (compile: 19ms, proxy.ts: 9ms, render: 34ms)
+⚠ ./src/app/api/transcript/route.ts:73:30
+Module not found: Can't resolve '@distube/ytdl-core'
+[0m [90m 71 |[39m                 process[33m.[39menv[33m.[39m[33mYTDL_NO_UPDATE[39m [33m=[39m [32m'1'[39m[33m;[39m
+ [90m 72 |[39m                 [90m// eslint-disable-next-line @typescript-eslint/no-require-imports[39m
+[31m[1m>[22m[39m[90m 73 |[39m                 [36mconst[39m ytdl [33m=[39m require([32m'@distube/ytdl-core'[39m)[33m;[39m
+ [90m    |[39m                              [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 74 |[39m                 [36mconst[39m info [33m=[39m [36mawait[39m ytdl[33m.[39mgetInfo([32m`https://www.youtube.com/watch?v=${videoId}`[39m[33m,[39m {
+ [90m 75 |[39m                     requestOptions[33m:[39m {
+ [90m 76 |[39m                         headers[33m:[39m {[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⚠ ./src/app/api/transcript/route.ts:73:30
+Module not found: Can't resolve '@distube/ytdl-core'
+[0m [90m 71 |[39m                 process[33m.[39menv[33m.[39m[33mYTDL_NO_UPDATE[39m [33m=[39m [32m'1'[39m[33m;[39m
+ [90m 72 |[39m                 [90m// eslint-disable-next-line @typescript-eslint/no-require-imports[39m
+[31m[1m>[22m[39m[90m 73 |[39m                 [36mconst[39m ytdl [33m=[39m require([32m'@distube/ytdl-core'[39m)[33m;[39m
+ [90m    |[39m                              [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 74 |[39m                 [36mconst[39m info [33m=[39m [36mawait[39m ytdl[33m.[39mgetInfo([32m`https://www.youtube.com/watch?v=${videoId}`[39m[33m,[39m {
+ [90m 75 |[39m                     requestOptions[33m:[39m {
+ [90m 76 |[39m                         headers[33m:[39m {[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+Transcript API error: Error: Cannot find module '@distube/ytdl-core'
+    at <unknown> (.next/dev/server/chunks/[root-of-the-server]__f1afc237._.js:90:23)
+    at POST (.next/dev/server/chunks/[root-of-the-server]__f1afc237._.js:93:11) {
+  code: 'MODULE_NOT_FOUND'
+}
+ POST /api/transcript 500 in 115ms (compile: 16ms, render: 99ms)
+ GET /newsjack/e383f1ff-c4c6-4d82-90d5-ac661a7b20f9 200 in 28ms (compile: 12ms, proxy.ts: 5ms, render: 11ms)
+ GET /noise.png 404 in 46ms (compile: 12ms, proxy.ts: 4ms, render: 30ms)
+ GET /noise.png?1772430147969 404 in 40ms (compile: 12ms, proxy.ts: 5ms, render: 23ms)

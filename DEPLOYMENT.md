@@ -1,87 +1,66 @@
-# Deployment Guide for Executive Comms Ninja
+# Google Cloud Run + Vercel Deployment Guide
 
-This guide explains how to deploy the **Executive Comms Ninja** application for your internal team.
+このガイドは、本アプリケーション（Executive Comms Ninja）のバックエンド（Python/FastAPI）とフロントエンド（Next.js）のデプロイ手順を統合したものです。
 
-## Architecture
-The app consists of two parts:
-1.  **Frontend**: Next.js (React) app. Best hosted on **Vercel**.
-2.  **Backend**: Python FastAPI app. Best hosted on **Google Cloud Run** or **Render**.
-3.  **Database**: **Supabase** (PostgreSQL).
-
----
-
-## 1. Prerequisites
--   A **GitHub** account (to host the code).
--   A **Supabase** project (you strictly need the URL and ANON_KEY/SERVICE_ROLE_KEY).
--   A **Google Cloud** project (for Vertex AI/Gemini API).
+## アーキテクチャ構成
+1. **Frontend (Vercel)**: Next.jsアプリ。自動ビルド推奨。
+2. **Backend (Google Cloud Run)**: FastAPIアプリ。`ffmpeg` 等のコンテナ依存や長時間処理（動画解析）に最適で、オートスケールダウン（$0）が可能。
+3. **Database (Supabase)**: ユーザー＆データ管理。
 
 ---
 
-## 2. Deploying the Backend (API)
+## 🏗️ 1. Backend (Google Cloud Run) のデプロイ
 
-The backend handles video downloading and AI analysis. It requires a container environment.
+### 必須環境変数
+| 変数名 | 概要 | 取得方法 |
+| :--- | :--- | :--- |
+| `GCP_PROJECT_ID` | GCPプロジェクトID | Google Cloud Console |
+| `GCP_BUCKET_NAME` | GCPストレージバケット名 | Cloud Storage |
+| `SUPABASE_URL` | SupabaseのURL | Supabase > Project Settings > API |
+| `SUPABASE_SERVICE_ROLE_KEY`| Supabase管理者キー | 上記同画面 |
 
-### Option A: Google Cloud Run (Recommended)
-1.  **Install Google Cloud CLI** (`gcloud`) if you haven't.
-2.  **Authenticate**:
-    ```bash
-    gcloud auth login
-    gcloud config set project YOUR_PROJECT_ID
-    ```
-3.  **Deploy**:
-    Run this command from the `backend/` directory:
-    ```bash
-    gcloud run deploy executive-comms-backend \
-      --source . \
-      --platform managed \
-      --region us-central1 \
-      --allow-unauthenticated \
-      --set-env-vars "GCP_PROJECT_ID=YOUR_PROJECT_ID,GCP_BUCKET_NAME=YOUR_BUCKET_NAME,SUPABASE_URL=YOUR_SUPABASE_URL,SUPABASE_SERVICE_ROLE_KEY=YOUR_SUPABASE_SERVICE_KEY"
-    ```
-    *Note: Replace `YOUR_...` with your actual values.*
+### デプロイ手順 (CLI)
 
-4.  **Copy the URL**: Cloud Run will give you a URL (e.g., `https://executive-comms-backend-xyz.a.run.app`). You need this for the frontend.
-
-### Option B: Render.com
-1.  Create a **Web Service** on Render.
-2.  Connect your GitHub repo.
-3.  Set **Root Directory** to `backend`.
-4.  Set **Runtime** to `Docker`.
-5.  Add **Environment Variables**: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `GCP_PROJECT_ID`, `GCP_BUCKET_NAME`.
-    *   *Note: For Google Cloud Authentication on Render, you may need to provide the Service Account JSON key as a file or base64 env var.*
-
----
-
-## 3. Deploying the Frontend (UI)
-
-### Vercel (Recommended)
-1.  Go to [Vercel.com](https://vercel.com) and "Add New Project".
-2.  Import your GitHub repository.
-3.  **Configure Project**:
-    *   **Root Directory**: `frontend` (Important!)
-    *   **Framework Preset**: Next.js
-4.  **Environment Variables**:
-    Add the following:
-    *   `NEXT_PUBLIC_SUPABASE_URL`: Your Supabase URL.
-    *   `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Your Supabase Anon Key.
-    *   `NEXT_PUBLIC_API_URL`: The URL of your deployed Backend **PLUS `/api`**. 
-        *   Example: `https://executive-comms-backend-xyz.a.run.app/api` 
-        *   (Note: The backend routes are prefixed with `/api` in the code, so the frontend needs this to match).
-
-5.  **Secure Internal Sharing (Optional)**:
-    *   To password-protect your deployment (recommended for sharing), add these variables:
-        *   `BASIC_AUTH_USER`: A username (e.g. `admin`)
-        *   `BASIC_AUTH_PASSWORD`: A password (e.g. `secret123`)
-    *   The app will automatically prompt for this login.
+1. `gcloud` CLIをインストールし、ログインとプロジェクト設定を行います。
+   ```bash
+   gcloud auth login
+   gcloud config set project YOUR_PROJECT_ID
+   ```
+2. 必要なAPIを有効化します。
+   ```bash
+   gcloud services enable cloudbuild.googleapis.com run.googleapis.com artifactregistry.googleapis.com
+   ```
+3. `backend` フォルダに移動し、以下のデプロイコマンドを実行します（環境変数はご自身の値に書き換えてください）。
+   ```bash
+   cd backend
+   gcloud run deploy executive-comms-backend \
+     --source . \
+     --platform managed \
+     --region us-central1 \
+     --allow-unauthenticated \
+     --set-env-vars "GCP_PROJECT_ID=XXX,GCP_BUCKET_NAME=XXX,SUPABASE_URL=XXX,SUPABASE_SERVICE_ROLE_KEY=XXX"
+   ```
+4. デプロイ成功後、ターミナルに表示される `https://executive-comms-backend-xxxxx-uc.a.run.app` のようなURLをメモしてください。これがAPIエンドポイントのベースURLです。
 
 ---
 
-## 4. Security for Internal Sharing
-Since this is for internal use:
-1.  **Vercel Authentication**: Enable "Deployment Protection" (Vercel Authentication) in Settings > Deployment Protection. This requires a Vercel Pro plan or specific configuration.
-2.  **Alternative**: Add a simple "Shared Password" to the frontend using Middleware (advanced).
+## 🌐 2. Frontend (Vercel) のデプロイ
 
-## 5. Cost Warning
-*   **Gemini API**: Analysis costs money per token/second of video.
-*   **Cloud Run**: Costs for compute time while processing.
-*   **Storage**: Storing video files (temporarily) costs small amounts.
+1. GitHubにリポジトリをPushし、Vercelのダッシュボードから `Add New Project` でリポジトリを選択します。
+2. **【重要】Root Directory を `frontend` に設定してください。**
+3. 以下の **環境変数 (Environment Variables)** を設定します。
+
+### Vercel必須環境変数
+| 変数名 | 設定値 |
+| :--- | :--- |
+| `NEXT_PUBLIC_API_URL` | バックエンドURL **+ `/api`** (例: `https://...run.app/api`) |
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase Anon Key |
+
+4. 「Deploy」をクリックして完了です。
+
+---
+
+## 🔒 セキュリティと共有 (社内向け)
+
+本アプリを社内に共有する場合、Vercel側でBasic認証をかける（ProプランやMiddlewareの利用）、またはVercel Authenticationを利用して社外からのアクセスを遮断することを推奨します。Gemini APIによる動画解析にはトークン/秒ごとのコストが発生するため、不特定多数の利用にご注意ください。

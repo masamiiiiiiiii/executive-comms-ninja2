@@ -1,0 +1,100 @@
+{
+  "nav": {
+    "title": "ExecComms Ninja",
+    "pricing": "Pricing",
+    "terminalAccess": "Terminal Access",
+    "backToHome": "Back to Home"
+  },
+  "home": {
+    "badge": "AI-Powered Executive Coaching",
+    "title1": "Master Your",
+    "title2": "Executive Presence",
+    "subtitle": "Elevate your media presence and leadership communication with C-suite level AI precision. Analyze tone, conviction, and strategic message delivery instantly.",
+    "demoText": "Start with our interactive Jack Welch analysis — no credit card required.",
+    "founderTitle": "Designed by",
+    "founderP1": "This entire platform was engineered by a former Blue Bird PR professional operating out of the Far East.",
+    "founderP2": "Drawing upon a wealth of knowledge forged in the high-stakes crucible of corporate risk management and executive media training, this AI distills the exact methodologies used to prepare global executives for the world's most aggressive press interviews.",
+    "founderP3": "Our neural analysis acts as your personal, hyper-vigilant communications coach—detecting the subtle shifts in cadence, vocal authority, and emotional resonance that separate competent managers from legendary leaders."
+  },
+  "demoCta": {
+    "initializing": "Initializing Demo...",
+    "experience": "Experience Interactive Demo"
+  },
+  "pricing": {
+    "title1": "Invest in",
+    "title2": "Executive Authority",
+    "subtitle": "In high-stakes corporate communication, intuition is a liability. Equip yourself with military-grade neural telemetry. Choose the precise level of intelligence required for your next critical appearance.",
+    "tactical": {
+      "title": "Tactical Deep Dive",
+      "desc": "Immediate, surgical precision for a single upcoming high-stakes interview or keynote.",
+      "price": "$49",
+      "interval": "/ Report",
+      "badge": "Pay-As-You-Go",
+      "includes": "Included Intelligence:",
+      "f1": "One Comprehensive Analysis: Full neural breakdown of a single video asset.",
+      "f2": "Targeted Processing: Submit any public YouTube URL and analyze up to 5 minutes of focused footage.",
+      "f3": "No Subscription Required: Zero recurring commitments. Perfect for acute crisis management or isolated rehearsal.",
+      "button": "Unlock Single Report",
+      "buttonLoading": "Securing Intelligence..."
+    },
+    "pro": {
+      "title": "Executive Pro",
+      "desc": "Continuous mastery and reputation management for CEOs, Founders, and PR exact teams.",
+      "price": "$149",
+      "interval": "/ Month",
+      "badge": "Best Value",
+      "includes": "Included Intelligence:",
+      "f1": "5 Executive Analyses per Month: Continuous feedback loops across various media formats and media interviews. Support for YouTube URLs (analyze any 5-minute segment from videos of any length). ($245 Value)",
+      "f2": "Industry Benchmarking: Contextualize your performance against the Top 10% of Fortune 500 CEOs via the Strategic Radar.",
+      "f3": "Priority Processing: Jump the neural queue for lightning-fast results during time-sensitive media cycles.",
+      "button": "Subscribe to Pro",
+      "buttonLoading": "Establishing Uplink..."
+    }
+  },
+  "register": {
+    "title": "Account Activation",
+    "subtitle": "Secure Personnel Registration",
+    "credentials": "Security Credentials",
+    "credentialsDesc": "Establish your secure uplink parameters.",
+    "email": "Comm Address (Email)",
+    "emailPlaceholder": "executive@corp.com",
+    "password": "Access Cipher (Password)",
+    "passwordHint": "* Minimum 8 characters. Must include numbers, letters, and symbols.",
+    "passwordOk": "Cipher complexity acceptable.",
+    "humanVerif": "Human Verification Protocol",
+    "cleared": "Cleared",
+    "locked": "LOCKED",
+    "attemptLeft": "1 Attempt Remaining",
+    "tosPre": "By proceeding to checkout, you acknowledge that you have read and agree to our ",
+    "tos": "Terms of Service",
+    "and": " and ",
+    "privacy": "Privacy Policy",
+    "tosPost": ".",
+    "btnProcessing": "Establishing Secure Uplink...",
+    "btnProceed": "Proceed to Secure Checkout",
+    "abort": "← Abort Registration / Return to Tiers",
+    "toastVerificationFailed": "Please pass the human verification protocol.",
+    "toastEmailInvalid": "Please enter a valid email address.",
+    "toastUplinkFailed": "Secure Uplink Failed. Please try again.",
+    "questions": [
+      {
+        "q": "What is the most critical preparation document required before engaging in a high-stakes media interview?",
+        "o1": "Share of Voice (SOV) Analysis Model",
+        "o2": "Executive Briefing Document",
+        "o3": "Corporate Organizational Chart"
+      },
+      {
+        "q": "What is the primary strategic objective of achieving a successful tier-one media interview?",
+        "o1": "Earning the resentment of the marketing department",
+        "o2": "Triggering excessive conversational engagement from the CEO",
+        "o3": "Marginally strengthening the broader corporate reputation"
+      },
+      {
+        "q": "Which prominent tech executive notably struggled with relying heavily on vocal fillers during their early career?",
+        "o1": "Jack Dorsey",
+        "o2": "Sam Altman",
+        "o3": "David Sacks"
+      }
+    ]
+  }
+}

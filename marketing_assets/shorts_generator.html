@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shorts Generator - Executive Comms Ninja</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #efebdf;        /* Beige from attachments */
+            --primary-green: #8fa891;   /* Sage Green from attachments */
+            --text-dark: #3a3b36;       /* Dark Charocal for text */
+        }
+        body {
+            background-color: #1a1a1a;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            gap: 40px;
+        }
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 320px;
+        }
+        p.info {
+            font-size: 0.9rem;
+            color: #aaa;
+            line-height: 1.5;
+        }
+        button {
+            padding: 15px;
+            background: var(--primary-green);
+            color: #1a1a1a;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        .phone-wrapper {
+            position: relative;
+        }
+        .phone {
+            width: 360px;
+            height: 640px;
+            background-color: var(--bg-color);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            color: var(--text-dark);
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Scenes */
+        .scene {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+            box-sizing: border-box;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        /* Typography */
+        h1 { font-size: 2.6rem; line-height: 1.1; margin: 0 0 1rem 0; font-weight: 700; letter-spacing: -0.5px; }
+        h2 { font-size: 2rem; line-height: 1.2; margin: 0; font-weight: 400; }
+        .accent { color: var(--primary-green); font-style: italic; }
+        .bg-dark { background-color: var(--text-dark); color: var(--bg-color); }
+        
+        /* Graphics */
+        .logo-container { display: flex; flex-direction: column; align-items: center; gap: 15px; }
+        .logo-tri {
+            width: 60px; height: 60px;
+            background: var(--primary-green);
+            clip-path: polygon(0 0, 0 100%, 100% 50%);
+            display: flex; justify-content: center; align-items: center;
+            position: relative;
+        }
+        .logo-tri::after {
+            content: ''; position: absolute;
+            width: 48px; height: 48px;
+            background: var(--bg-color);
+            clip-path: polygon(5% 5%, 5% 95%, 90% 50%);
+        }
+        .logo-text { font-size: 1.6rem; font-weight: 600; line-height: 1.1; }
+        
+        /* Animations */
+        .fade-in { animation: fadeIn 0.1s forwards; }
+        .fade-out { animation: fadeOut 0.1s forwards; }
+        .pop-in { animation: popIn 0.05s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        .slide-up { animation: slideUp 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        
+        /* Strike */
+        .strike { position: relative; display: inline-block; font-style: italic;}
+        .strike::after {
+            content: ''; position: absolute;
+            top: 50%; left: -5%;
+            width: 0%; height: 4px;
+            background: var(--text-dark);
+            transform: rotate(-10deg);
+        }
+        .strike.active::after { animation: slashLine 0.1s forwards; }
+        
+        /* Glitch */
+        .glitch-text.active { animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite; color: var(--primary-green); }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+        @keyframes popIn { 
+            0% { opacity: 0; transform: scale(0.85); } 
+            100% { opacity: 1; transform: scale(1); } 
+        }
+        @keyframes slideUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slashLine { to { width: 110%; } }
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 3px) }
+            40% { transform: translate(-3px, -2px) }
+            60% { transform: translate(3px, 2px) }
+            80% { transform: translate(2px, -3px) }
+            100% { transform: translate(0) }
+        }
+        
+        /* Timer */
+        .timer { position: absolute; bottom: 0; left: 0; height: 5px; background: var(--primary-green); width: 0%; transition: width 0.1s linear; }
+    </style>
+</head>
+<body>
+
+    <div class="controls">
+        <h2 style="font-family:'Inter', sans-serif; font-size:1.5rem; color:#fff;">Shorts Generator</h2>
+        <p class="info">AIシステム上で直接mp4（音声付動画）を生成できないため、X投稿用のUIを構築しました。<br><br><b>使用方法：</b><br>1. Chromeの全画面で再生<br>2. Macの画面収録（Cmd+Shift+5）でキャプチャ<br>3. XやTikTok等のアプリ内で、著作権フリーの不協和音ジャズを追加して投稿！</p>
+        <button onclick="playPattern(1)">P1: コストの代償 ($10,000)</button>
+        <button onclick="playPattern(2)">P2: 嘘の安心感 (Confident)</button>
+        <button onclick="playPattern(3)">P3: 切り抜きの恐怖 (Stutter)</button>
+        <div style="font-size: 0.8rem; color: #888; margin-top:10px;">Duration: 6.0 seconds per video.</div>
+    </div>
+
+    <div class="phone-wrapper">
+        <div class="phone" id="screen">
+            <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column; opacity:0.3;">
+                <div class="logo-tri" style="opacity:0.5; margin-bottom: 20px;"></div>
+                <p>Waiting...</p>
+            </div>
+            <div class="timer" id="timer"></div>
+        </div>
+    </div>
+
+    <script>
+        const screen = document.getElementById('screen');
+        const timer = document.getElementById('timer');
+        let currentInterval = null;
+        let timerInterval = null;
+
+        function resetScreen() {
+            if(currentInterval) clearTimeout(currentInterval);
+            if(timerInterval) clearInterval(timerInterval);
+            Array.from(screen.children).forEach(child => { if(child.id !== 'timer') child.remove(); });
+            timer.style.width = '0%';
+        }
+        
+        function startTimer() {
+            let start = Date.now();
+            timerInterval = setInterval(() => {
+                let diff = Date.now() - start;
+                let pct = (diff / 6000) * 100;
+                if(pct > 100) pct = 100;
+                timer.style.width = pct + '%';
+                if(pct === 100) clearInterval(timerInterval);
+            }, 16);
+        }
+
+        async function wait(ms) {
+            return new Promise(resolve => { currentInterval = setTimeout(resolve, ms); });
+        }
+
+        async function playPattern(num) {
+            resetScreen();
+            startTimer();
+            if(num === 1) await playPatternOne();
+            else if(num === 2) await playPatternTwo();
+            else if(num === 3) await playPatternThree();
+        }
+
+        // P1: THE COST (添付画像のモチーフ)
+        async function playPatternOne() {
+            const scene1 = document.createElement('div');
+            scene1.className = 'scene fade-in';
+            scene1.innerHTML = `<h2>Skipped media training to save <br><br><span class="strike" id="p1-strike" style="font-size:3.5rem;">$10,000</span>?</h2>`;
+            screen.appendChild(scene1);
+            
+            await wait(1200); // 1.2s: Slash it abruptly (ジャズの不協和音ヒットを想定)
+            document.getElementById('p1-strike').classList.add('active');
+            
+            await wait(1300); // 2.5s 
+            scene1.className = 'scene fade-out';
+            await wait(100);
+            
+            const scene2 = document.createElement('div');
+            scene2.className = 'scene pop-in bg-dark';
+            scene2.innerHTML = `<h1 style="color:var(--bg-color)">Now you're losing <br><span class="accent" style="font-size:3rem">millions</span><br> in market cap.</h1>`;
+            screen.appendChild(scene2);
+            
+            await wait(1900); // 4.5s
+            scene2.className = 'scene fade-out';
+            await wait(100);
+            
+            const scene3 = document.createElement('div');
+            scene3.className = 'scene slide-up';
+            scene3.innerHTML = `
+                <div class="logo-container">
+                    <div class="logo-tri"></div>
+                    <div class="logo-text">Redefine<br>the cost.</div>
+                    <div style="font-family:'Inter',sans-serif; font-size:0.8rem; margin-top:10px; opacity:0.7;">EXECUTIVE COMMS NINJA</div>
+                </div>`;
+            screen.appendChild(scene3);
+        }
+
+        // P2: THE FALSE COMFORT
+        async function playPatternTwo() {
+            const scene1 = document.createElement('div');
+            scene1.className = 'scene fade-in';
+            scene1.innerHTML = `<h2>Your PR team said you sounded <br><br><span class="glitch-text" id="p2-glitch" style="font-size:3.2rem; font-style:italic">"confident"</span></h2>`;
+            screen.appendChild(scene1);
+            
+            await wait(1300); // 1.3s: Glitch starts (不協和音が乱れ始める想定)
+            document.getElementById('p2-glitch').classList.add('active');
+            
+            await wait(1200); // 2.5s
+            scene1.className = 'scene fade-out';
+            await wait(100);
+            
+            const scene2 = document.createElement('div');
+            scene2.className = 'scene pop-in';
+            scene2.innerHTML = `<h1 style="font-size:2.2rem; letter-spacing:-1px;">The data shows your vocal variance dropped by <br><br><span class="accent" style="font-size:4.5rem">25%</span><br><br> under pressure.</h1>`;
+            screen.appendChild(scene2);
+            
+            await wait(1900); // 4.5s
+            scene2.className = 'scene fade-out';
+            await wait(100);
+            
+            const scene3 = document.createElement('div');
+            scene3.className = 'scene slide-up bg-dark';
+            scene3.innerHTML = `
+                <div class="logo-container" style="color:var(--bg-color)">
+                    <h2 style="font-family:'Inter',sans-serif; font-weight:600; font-size:2rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:20px;">Observation<br>Over<br>Intuition.</h2>
+                    <div style="font-family:'Inter',sans-serif; font-size:0.8rem; opacity:0.7;">EXECUTIVE COMMS NINJA</div>
+                </div>`;
+            screen.appendChild(scene3);
+        }
+
+        // P3: THE VIRAL NIGHTMARE
+        async function playPatternThree() {
+            const scene1 = document.createElement('div');
+            scene1.className = 'scene fade-in bg-dark';
+            scene1.innerHTML = `<h2 style="color:var(--bg-color)">You thought you controlled the <span class="accent">narrative</span>.</h2>`;
+            screen.appendChild(scene1);
+            
+            await wait(2400); // 2.4s
+            scene1.className = 'scene fade-out';
+            await wait(100);
+            
+            const scene2 = document.createElement('div');
+            scene2.className = 'scene';
+            scene2.innerHTML = `<h1 id="p3-type" style="text-align:left; font-size:3rem; line-height: 1.1;"></h1>`;
+            screen.appendChild(scene2);
+            
+            // Abrupt word by word (不協和音のピアノの打鍵に合わせて文字が現れる想定)
+            const words = ["The", "internet", "just", "clipped", "your", "<span class='accent'>3-second</span>", "stutter."];
+            const typeContainer = document.getElementById('p3-type');
+            
+            for(let i=0; i<words.length; i++) {
+                typeContainer.innerHTML += words[i] + " ";
+                await wait(250); 
+            }
+            
+            await wait(350); // wait until 4.5s
+            scene2.className = 'scene fade-out';
+            await wait(100);
+            
+            const scene3 = document.createElement('div');
+            scene3.className = 'scene slide-up';
+            scene3.innerHTML = `
+                <div class="logo-container">
+                    <h2 style="font-style:italic">Data from Dialog.</h2>
+                    <div class="logo-tri" style="margin-top:20px; transform:scale(0.8);"></div>
+                    <div style="font-family:'Inter',sans-serif; font-size:0.8rem; margin-top:10px; opacity:0.7;">EXECUTIVE COMMS NINJA</div>
+                </div>`;
+            screen.appendChild(scene3);
+        }
+    </script>
+</body>
+</html>

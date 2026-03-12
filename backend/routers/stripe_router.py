@@ -16,7 +16,7 @@ from typing import Literal
 
 class CheckoutSessionRequest(BaseModel):
     user_id: str = "anonymous"
-    tier: Literal["one_time", "subscription"]
+    tier: Literal["one_time", "subscription", "one_time_ja", "subscription_ja"]
     success_url: str
     cancel_url: str
 
@@ -29,17 +29,29 @@ async def create_checkout_session(req: CheckoutSessionRequest):
         if stripe.api_key == "sk_test_dummy":
             logger.info("Using dummy Stripe key. Bypassing real Stripe API call.")
             sep = "&" if "?" in req.success_url else "?"
-            return {"checkout_url": f"{req.success_url}{sep}session_id=dummy_session_test_123"}
+            return {"checkout_url": f"{req.success_url}{sep}session_id=dummy_session_test_{req.tier}"}
             
         if req.tier == "subscription":
             line_items = [{
-                'price': 'price_1T4gGu2HCK38VhqueFDCkho8', # prod_U2loAa9CeE5gtz (Tactical Deep Dive / $149)
+                'price': 'price_1T4gGu2HCK38VhqueFDCkho8', # Executive Pro USD
                 'quantity': 1,
             }]
             mode = 'subscription'
-        else:
+        elif req.tier == "subscription_ja":
             line_items = [{
-                'price': 'price_1T4gGQ2HCK38Vhqu92JyrSsA', # prod_U2lo68paorrnM8 (Executive Pro / $49)
+                'price': os.getenv("STRIPE_PRICE_SUB_JA", "price_dummy_sub_ja"), # Executive Pro JPY
+                'quantity': 1,
+            }]
+            mode = 'subscription'
+        elif req.tier == "one_time_ja":
+            line_items = [{
+                'price': os.getenv("STRIPE_PRICE_ONETIME_JA", "price_dummy_onetime_ja"), # Tactical Deep Dive JPY
+                'quantity': 1,
+            }]
+            mode = 'payment'
+        else: # one_time
+            line_items = [{
+                'price': 'price_1T4gGQ2HCK38Vhqu92JyrSsA', # Tactical Deep Dive USD
                 'quantity': 1,
             }]
             mode = 'payment'

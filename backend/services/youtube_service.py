@@ -26,7 +26,7 @@ class YouTubeService:
                 return os.path.abspath(p)
         return None
 
-    def get_transcript(self, youtube_url: str) -> str:
+    def get_transcript(self, youtube_url: str, start_time: int = None, end_time: int = None) -> str:
         """
         Primary: youtube-transcript-api with cookies (handles auto-generated + manual captions).
         Fallback: yt-dlp with cookies.
@@ -77,11 +77,27 @@ class YouTubeService:
                 raise ValueError("No English or Japanese transcript found for this video.")
 
             fetched = transcript.fetch()
-            text = " ".join(snip.text for snip in fetched.snippets)
+            
+            # Filter by timeframe if provided
+            filtered_snippets = []
+            for snip in fetched:
+                snip_start = snip.get('start', 0)
+                snip_end = snip_start + snip.get('duration', 0)
+                
+                if start_time is not None and snip_end < start_time:
+                    continue
+                if end_time is not None and snip_start > end_time:
+                    continue
+                filtered_snippets.append(snip)
+                
+            if not filtered_snippets:
+                 raise ValueError(f"No transcript content found in the selected timeframe ({start_time}s - {end_time}s).")
+
+            text = " ".join(snip['text'] for snip in filtered_snippets)
             text = re.sub(r'<[^>]+>', '', text)
             text = text.replace('&nbsp;', ' ').replace('&#39;', "'").replace('&amp;', '&')
             text = re.sub(r'\s+', ' ', text).strip()
-            print(f"youtube-transcript-api SUCCESS: {len(text)} chars")
+            print(f"youtube-transcript-api SUCCESS: {len(text)} chars (Filtered by Timeframe: {start_time}-{end_time})")
             return text
 
         except Exception as e:
@@ -147,7 +163,7 @@ class YouTubeService:
                 lines.append(line)
         return ' '.join(lines)
 
-    def download_audio(self, youtube_url: str) -> str:
+    def download_audio(self, youtube_url: str, start_time: int = None, end_time: int = None) -> str:
         """
         Download only audio from YouTube using yt-dlp.
         Returns the path to the downloaded audio file.
@@ -178,6 +194,9 @@ class YouTubeService:
         
         if cookie_path:
             ydl_opts['cookiefile'] = cookie_path
+            
+        if start_time is not None and end_time is not None:
+             ydl_opts['download_ranges'] = lambda info, ydl: [{'start_time': start_time, 'end_time': end_time}]
             
         try:
             print(f"Attempting audio download with yt-dlp: {youtube_url}")
@@ -219,7 +238,7 @@ class YouTubeService:
                 print(f"pytubefix audio download failed: {e2}")
                 raise ValueError(f"Could not download audio via any method. Last error: {e2}")
 
-    def download_video(self, youtube_url: str) -> str:
+    def download_video(self, youtube_url: str, start_time: int = None, end_time: int = None) -> str:
         """
         Download standard resolution video (up to 720p to save time/bandwidth) using yt-dlp.
         Returns the path to the downloaded video file.
@@ -245,6 +264,9 @@ class YouTubeService:
         
         if cookie_path:
             ydl_opts['cookiefile'] = cookie_path
+            
+        if start_time is not None and end_time is not None:
+             ydl_opts['download_ranges'] = lambda info, ydl: [{'start_time': start_time, 'end_time': end_time}]
             
         try:
             print(f"Attempting video download with yt-dlp: {youtube_url}")

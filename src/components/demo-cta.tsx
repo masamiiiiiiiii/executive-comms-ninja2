@@ -8,7 +8,7 @@ import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
 import { NinjaIntelligenceIndicator } from "./v2/ninja-indicator";
 
-export function DemoCTA() {
+export function DemoCTA({ dict }: { dict: { initializing: string, experience: string } }) {
     const [loading, setLoading] = useState(false);
     const [isGlobalProcessing, setIsGlobalProcessing] = useState(false);
     const router = useRouter();
@@ -78,7 +78,7 @@ export function DemoCTA() {
                 className="h-14 px-8 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg rounded-xl shadow-[0_0_20px_rgba(16,185,129,0.4)] transition-all hover:scale-105"
             >
                 {loading ? <Loader2 className="mr-3 h-5 w-5 animate-spin" /> : <PlayCircle className="mr-3 h-5 w-5" />}
-                {loading ? "Initializing Demo..." : "Experience Interactive Demo"}
+                {loading ? dict.initializing : dict.experience}
             </Button>
         </>
     );

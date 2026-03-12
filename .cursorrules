@@ -1,0 +1,8 @@
+# Project AI Rules: Executive Comms Ninja
+
+## Visual Assets & Brand Guidelines
+Whenever the user asks to generate an image, illustration, or a data-driven graph (e.g., using matplotlib), you MUST first silently read the following file to ensure the output strictly matches the established corporate brand identity:
+
+**File Path:** `./marketing_assets/VISUAL_BRAND_GUIDELINES.md`
+
+Do not deviate from the color hex codes (creamy beige #F6F3EC, soft olive green #899B87, charcoal grey #333333) and the elegant, minimalist flat-vector style specified in that document. No bright colors, no harsh blacks, and no overly complex/messy networks.

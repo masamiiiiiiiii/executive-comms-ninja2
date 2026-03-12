@@ -31,123 +31,110 @@ class GeminiService:
         else:
              print("Warning: No Gemini Auth configured.")
 
-    def analyze_video(self, video_path: str, metadata: dict = None) -> dict:
+    def analyze_video(self, video_path: str, metadata: dict = None, target_person: str = None) -> dict:
         """
         Analyzes a video.
         If API Key is used, 'video_path' must be a local file path.
         If Vertex AI is used, 'video_path' should be a GCS URI (gs://...).
         """
-        prompt = """
-        You are an elite Executive Communication Coach for the AI era. Analyze this video with high precision to generate a comprehensive "Executive Dashboard" report.
+        target_instruction = ""
+        if target_person and target_person.lower() != "speaker":
+            target_instruction = f"\n\n**CRITICAL REQUIREMENT: IDENTIFY AND ANALYZE THE SPECIFIC PERSON NAMED '{target_person}'.**\nIf multiple people are present, you MUST focus your entire analysis exclusively on '{target_person}'. Do not analyze the interviewer or other participants.\n"
+
+        prompt = f"""
+        You are an elite Executive Communication Coach for the AI era. Analyze this video with high precision to generate a comprehensive "Executive Dashboard" report.{target_instruction}
 
         **Objective**: Evaluate the speaker's executive presence, credibility, and communication effectiveness against global C-suite standards.
 
-        **Output**: Return a strict JSON object with this EXACT structure (ensure all fields are present):
-        {
-            "analysis_reliability": {
-                "score": 90,
-                "notice": "High confidence analysis based on clear audio and video quality."
-            },
-            "video_metadata": {
-                "duration": "Duration Unknown",
+        **Output**: Return a strict JSON object matching this EXACT schema. YOU MUST REPLACE ALL PLACEHOLDER VALUES WITH YOUR ACTUAL ANALYSIS:
+        {{
+            "analysis_reliability": {{
+                "score": "[0-100 integer]",
+                "notice": "[Brief explanation of analysis confidence]"
+            }},
+            "video_metadata": {{
+                "duration": "[Duration if known, else 'Unknown']",
                 "published_date": "Unknown",
-                "extracted_interviewee_name": "Jon Lin"
-            },
-            "overall_performance": {
-                "score": 85,
-                "level": "Excellent",
-                "summary": "Comprehensive assessment of B2B communication effectiveness.",
-                "badge": "Top Performer"
-            },
-            "high_level_metrics": {
-                "confidence": {"score": 90, "label": "Confidence"},
-                "trustworthiness": {"score": 85, "label": "Trustworthiness"},
-                "engagement": {"score": 80, "label": "Engagement"},
-                "clarity": {"score": 85, "label": "Clarity"}
-            },
-            "detailed_analysis": {
-                "voice_analysis": {
-                    "speaking_rate": "Optimal Pace",
-                    "pause_frequency": "Appropriate",
-                    "volume_variation": "Dynamic",
-                    "clarity_rating": "Good",
-                    "observation": "Speaker maintains a steady 140wpm pace, ideal for comprehension."
-                },
-                "message_analysis": {
-                    "keyword_density": "Appropriate",
-                    "emotional_tone": "Positive",
-                    "structure_rating": "Logical",
-                    "logic_flow": "Well-organized",
-                    "observation": "Key themes are reinforced with clear signposting."
-                }
-            },
-            "emotion_radar": {
-                "confidence": 90,
-                "empathy": 70,
-                "authority": 85,
-                "composure": 80,
-                "enthusiasm": 75,
-                "trust": 88
-            },
+                "extracted_interviewee_name": "[Identify the main speaker from context]"
+            }},
+            "overall_performance": {{
+                "score": "[0-100 integer]",
+                "level": "[e.g., Excellent, Good, Average, Needs Improvement]",
+                "summary": "[Brief 1-sentence summary of overall performance]",
+                "badge": "[e.g., Top Performer, Trusted Advisor, Visionary]"
+            }},
+            "high_level_metrics": {{
+                "confidence": {{"score": "[0-100 integer]", "label": "Confidence"}},
+                "trustworthiness": {{"score": "[0-100 integer]", "label": "Trustworthiness"}},
+                "engagement": {{"score": "[0-100 integer]", "label": "Engagement"}},
+                "clarity": {{"score": "[0-100 integer]", "label": "Clarity"}}
+            }},
+            "detailed_analysis": {{
+                "voice_analysis": {{
+                    "speaking_rate": "[e.g., Optimal Pace, Fast, Slow]",
+                    "pause_frequency": "[e.g., Appropriate, Too Few, Too Many]",
+                    "volume_variation": "[e.g., Dynamic, Monotone]",
+                    "clarity_rating": "[e.g., Good, Fair, Poor]",
+                    "observation": "[1-sentence observation on vocal delivery]"
+                }},
+                "message_analysis": {{
+                    "keyword_density": "[e.g., Appropriate, High, Low]",
+                    "emotional_tone": "[e.g., Positive, Neutral, Serious, Passionate]",
+                    "structure_rating": "[e.g., Logical, Rambling, Structured]",
+                    "logic_flow": "[e.g., Well-organized, Hard to follow]",
+                    "observation": "[1-sentence observation on message structure]"
+                }}
+            }},
+            "emotion_radar": {{
+                "confidence": "[0-100 integer]",
+                "empathy": "[0-100 integer]",
+                "authority": "[0-100 integer]",
+                "composure": "[0-100 integer]",
+                "enthusiasm": "[0-100 integer]",
+                "trust": "[0-100 integer]"
+            }},
             "timeline_analysis": [
-                {
-                    "timestamp": "00:15",
-                    "event": "Strong opening",
-                    "sentiment": "positive",
-                    "emotion_label": "Confident",
-                    "confidence_score": 85,
-                    "engagement_score": 87,
-                    "insight": "Strong opening with market overview. Positive impact on audience engagement."
-                },
-                {
-                    "timestamp": "01:30",
-                    "event": "Technical explanation",
-                    "sentiment": "neutral",
-                    "emotion_label": "Focused",
-                    "confidence_score": 95,
-                    "engagement_score": 90,
-                    "insight": "Technical detail explanation becomes complex. Maintains baseline trust."
-                }
+                {{
+                    "timestamp": "[MM:SS]",
+                    "event": "[Short title of the event at this timestamp]",
+                    "sentiment": "[positive/neutral/negative]",
+                    "emotion_label": "[e.g., Confident, Focused, Hesitant]",
+                    "confidence_score": "[0-100 integer]",
+                    "engagement_score": "[0-100 integer]",
+                    "insight": "[Actionable insight about the speaker's delivery at this exact moment]"
+                }}
             ],
-            "benchmark_comparison": {
-                "your_score": 85,
+            "benchmark_comparison": {{
+                "your_score": "[Same as overall_performance.score]",
                 "industry_average": 72,
                 "top_ceos": 92,
                 "metrics": ["Confidence", "Trustworthiness", "Engagement", "Clarity", "Voice Stability"],
-                "emotion_radar_benchmark": {
+                "emotion_radar_benchmark": {{
                     "confidence": 85,
                     "empathy": 80,
                     "authority": 90,
                     "composure": 85,
                     "enthusiasm": 70,
                     "trust": 85
-                }
-            },
+                }}
+            }},
             "recommendations": [
-                {
-                    "title": "Include more relatable examples (PROVIDE 2-3 RECOMMENDATIONS)",
-                    "rationale": "Makes technical content more accessible.",
-                    "strategy": "Add industry-specific use cases and success stories.",
-                    "priority": "High",
-                    "timeframe": "Immediate",
-                    "expected_impact": "Significant"
-                },
-                {
-                    "title": "Utilize strategic pausing",
-                    "rationale": "Allows key points to resonate with the audience.",
-                    "strategy": "Count to three after delivering a critical metric or insight.",
-                    "priority": "Medium",
-                    "timeframe": "1-2 weeks",
-                    "expected_impact": "Moderate"
-                }
+                {{
+                    "title": "[Actionable recommendation title]",
+                    "rationale": "[Why this matters]",
+                    "strategy": "[How to achieve this]",
+                    "priority": "[High/Medium/Low]",
+                    "timeframe": "[e.g., Immediate, 1-2 weeks]",
+                    "expected_impact": "[e.g., Significant, Moderate]"
+                }}
             ],
             "key_takeaways": [
-                "Established strong credibility early with confident eye contact.",
-                "Effectively simplified complex technical pipeline for general audience.",
-                "Should rely more on silence rather than filler words during transitions."
+                "[Highlight 1]",
+                "[Highlight 2]",
+                "[Highlight 3]"
             ],
-            "summary": "WRITE A HIGHLY INSIGHTFUL, ELITE EXECUTIVE COACH'S NOTE HERE. Do not write a plain summary. Write 2-3 hard-hitting paragraphs analyzing their psychological presence, tactical communication strengths, and precise areas where they are leaking authority or engagement. Use professional consulting/executive coaching terminology (e.g., 'cognitive load', 'executive presence', 'strategic pausing'). Make the user feel they are receiving a $10,000/hour consultation."
-        }
+            "summary": "WRITE A HIGHLY INSIGHTFUL, ELITE EXECUTIVE COACH'S NOTE HERE based on the actual video. Do not write a plain summary. Write 2-3 hard-hitting paragraphs analyzing their psychological presence, tactical communication strengths, and precise areas where they are leaking authority or engagement. Use professional consulting terminology."
+        }}
         """
 
         if metadata and metadata.get("description"):
@@ -214,65 +201,65 @@ class GeminiService:
         3. **Clarity & Articulation**: Is the message easy to follow?
         4. **Pacing**: Is the speaking rate optimal for an executive audience?
 
-        **Output**: Return a strict JSON object with this EXACT structure (ensure all fields are present):
+        **Output**: Return a strict JSON object matching this EXACT schema. YOU MUST REPLACE ALL PLACEHOLDER VALUES WITH YOUR ACTUAL ANALYSIS:
         {
             "analysis_reliability": {
-                "score": 95,
-                "notice": "High confidence analysis based on direct audio observation."
+                "score": "[0-100 integer]",
+                "notice": "[Brief explanation of analysis confidence from audio]"
             },
             "video_metadata": {
-                "duration": "Detected from audio",
+                "duration": "[Estimated duration]",
                 "published_date": "Unknown"
             },
             "overall_performance": {
-                "score": 85,
-                "level": "Excellent",
-                "summary": "Detailed assessmet based on vocal delivery and content.",
-                "badge": "Authentic Leader"
+                "score": "[0-100 integer]",
+                "level": "[e.g., Excellent, Good, Average, Needs Improvement]",
+                "summary": "[Brief 1-sentence summary based on vocal delivery]",
+                "badge": "[e.g., Authentic Leader, Dynamic Speaker]"
             },
             "high_level_metrics": {
-                "confidence": {"score": 90, "label": "Confidence"},
-                "trustworthiness": {"score": 85, "label": "Trustworthiness"},
-                "engagement": {"score": 80, "label": "Engagement"},
-                "clarity": {"score": 85, "label": "Clarity"}
+                "confidence": {"score": "[0-100 integer]", "label": "Confidence"},
+                "trustworthiness": {"score": "[0-100 integer]", "label": "Trustworthiness"},
+                "engagement": {"score": "[0-100 integer]", "label": "Engagement"},
+                "clarity": {"score": "[0-100 integer]", "label": "Clarity"}
             },
             "detailed_analysis": {
                 "voice_analysis": {
-                    "speaking_rate": "Analyzed from audio",
-                    "pause_frequency": "Analyzed from audio",
-                    "volume_variation": "Analyzed from audio",
-                    "clarity_rating": "Analyzed from audio",
-                    "observation": "Provide a detailed observation based on what you HEAR."
+                    "speaking_rate": "[e.g., Optimal Pace, Fast, Slow]",
+                    "pause_frequency": "[e.g., Appropriate, Too Few, Too Many]",
+                    "volume_variation": "[e.g., Dynamic, Monotone]",
+                    "clarity_rating": "[e.g., Good, Fair, Poor]",
+                    "observation": "[1-sentence observation based on what you HEAR]"
                 },
                 "message_analysis": {
-                    "keyword_density": "Appropriate",
-                    "emotional_tone": "Analyzed from audio",
-                    "structure_rating": "Logical",
-                    "logic_flow": "Well-organized",
-                    "observation": "Identify key themes and structural effectiveness."
+                    "keyword_density": "[e.g., Appropriate, High, Low]",
+                    "emotional_tone": "[e.g., Positive, Neutral, Serious, Passionate]",
+                    "structure_rating": "[e.g., Logical, Rambling, Structured]",
+                    "logic_flow": "[e.g., Well-organized, Hard to follow]",
+                    "observation": "[1-sentence observation on structure and themes]"
                 }
             },
             "emotion_radar": {
-                "confidence": 90,
-                "empathy": 70,
-                "authority": 85,
-                "composure": 80,
-                "enthusiasm": 75,
-                "trust": 88
+                "confidence": "[0-100 integer]",
+                "empathy": "[0-100 integer]",
+                "authority": "[0-100 integer]",
+                "composure": "[0-100 integer]",
+                "enthusiasm": "[0-100 integer]",
+                "trust": "[0-100 integer]"
             },
             "timeline_analysis": [
                 {
-                    "timestamp": "00:05",
-                    "event": "Detected opening tone",
-                    "sentiment": "positive",
-                    "emotion_label": "Confident",
-                    "confidence_score": 90,
-                    "engagement_score": 85,
-                    "insight": "Observation from the audio start."
+                    "timestamp": "[MM:SS]",
+                    "event": "[Short title of the event at this timestamp]",
+                    "sentiment": "[positive/neutral/negative]",
+                    "emotion_label": "[e.g., Confident, Hesitant]",
+                    "confidence_score": "[0-100 integer]",
+                    "engagement_score": "[0-100 integer]",
+                    "insight": "[Observation from the audio at this moment]"
                 }
             ],
             "benchmark_comparison": {
-                "your_score": 85,
+                "your_score": "[Same as overall_performance.score]",
                 "industry_average": 72,
                 "top_ceos": 92,
                 "metrics": ["Confidence", "Voice Stability", "Articulation", "Tone"],
@@ -287,20 +274,20 @@ class GeminiService:
             },
             "recommendations": [
                 {
-                    "title": "Reduce filler words",
-                    "rationale": "Improves perceived authority.",
-                    "strategy": "Practice comfortable silence instead of 'um'.",
-                    "priority": "High",
-                    "timeframe": "Immediate",
-                    "expected_impact": "15%"
+                    "title": "[Actionable recommendation title]",
+                    "rationale": "[Why this matters]",
+                    "strategy": "[How to achieve this]",
+                    "priority": "[High/Medium/Low]",
+                    "timeframe": "[e.g., Immediate, 1-2 weeks]",
+                    "expected_impact": "[e.g., Significant, Moderate]"
                 }
             ],
             "key_takeaways": [
-                "Point 1",
-                "Point 2",
-                "Point 3"
+                "[Highlight 1]",
+                "[Highlight 2]",
+                "[Highlight 3]"
             ],
-            "summary": "Comprehensive narrative summary based on what you heard..."
+            "summary": "WRITE A HIGHLY INSIGHTFUL, ELITE EXECUTIVE COACH'S NOTE HERE based on the audio. Write 2-3 hard-hitting paragraphs analyzing vocal delivery, pacing, and perceived authority. Use professional consulting terminology."
         }
         """
 
@@ -353,114 +340,110 @@ class GeminiService:
             )
             return self._parse_response(response.text)
 
-    def analyze_full_transcript(self, transcript_text: str, metadata: dict) -> dict:
+    def analyze_full_transcript(self, transcript_text: str, metadata: dict, target_person: str = None) -> dict:
         """
         Analyzes a full video transcript as an alternative to analyzing the raw video file.
         This bypasses the need to download the video, avoiding YouTube bot blocking.
         """
-        prompt = """
-        You are an elite Executive Communication Coach for the AI era. You are analyzing a transcript of an executive's speech or presentation to generate a comprehensive "Executive Dashboard" report.
+        target_instruction = ""
+        if target_person and target_person.lower() != "speaker":
+            target_instruction = f"\n\n**CRITICAL REQUIREMENT: IDENTIFY AND ANALYZE THE SPECIFIC PERSON NAMED '{target_person}'.**\nIf multiple people are present, you MUST focus your entire analysis exclusively on '{target_person}'. Do not analyze the interviewer or other participants.\n"
+
+        prompt = f"""
+        You are an elite Executive Communication Coach for the AI era. You are analyzing a transcript of an executive's speech or presentation to generate a comprehensive "Executive Dashboard" report.{target_instruction}
         Even though you cannot see the video, evaluate their communication style based on the spoken text, structure, pacing (implied by content), and implicit tone.
 
         **Objective**: Evaluate the speaker's executive credibility, communication effectiveness, and structure against global C-suite standards based on this transcript.
 
-        **Output**: Return a strict JSON object with this EXACT structure (ensure all fields are present):
-        {
-            "analysis_reliability": {
-                "score": 85,
+        **Output**: Return a strict JSON object matching this EXACT schema. YOU MUST REPLACE ALL PLACEHOLDER VALUES WITH YOUR ACTUAL ANALYSIS:
+        {{
+            "analysis_reliability": {{
+                "score": "[0-100 integer]",
                 "notice": "Analysis is based on text transcript only. Visual and vocal nuances (like posture and exact tone) are inferred from content structure and language choice."
-            },
-            "video_metadata": {
-                "duration": "Duration Unknown",
+            }},
+            "video_metadata": {{
+                "duration": "[Duration if available, else 'Unknown']",
                 "published_date": "Unknown",
-                "extracted_interviewee_name": "Jon Lin"
-            },
-            "overall_performance": {
-                "score": 85,
-                "level": "Excellent",
-                "summary": "Comprehensive assessment based on transcript.",
-                "badge": "Top Performer"
-            },
-            "high_level_metrics": {
-                "confidence": {"score": 90, "label": "Confidence"},
-                "trustworthiness": {"score": 85, "label": "Trustworthiness"},
-                "engagement": {"score": 80, "label": "Engagement"},
-                "clarity": {"score": 85, "label": "Clarity"}
-            },
-            "detailed_analysis": {
-                "voice_analysis": {
+                "extracted_interviewee_name": "[Identify the main speaker from the text]"
+            }},
+            "overall_performance": {{
+                "score": "[0-100 integer]",
+                "level": "[e.g., Excellent, Good, Average, Needs Improvement]",
+                "summary": "[Brief 1-sentence summary based on transcript]",
+                "badge": "[e.g., Top Performer, Articulate Strategist]"
+            }},
+            "high_level_metrics": {{
+                "confidence": {{"score": "[0-100 integer]", "label": "Confidence"}},
+                "trustworthiness": {{"score": "[0-100 integer]", "label": "Trustworthiness"}},
+                "engagement": {{"score": "[0-100 integer]", "label": "Engagement"}},
+                "clarity": {{"score": "[0-100 integer]", "label": "Clarity"}}
+            }},
+            "detailed_analysis": {{
+                "voice_analysis": {{
                     "speaking_rate": "Not Evaluated",
                     "pause_frequency": "Not Evaluated",
                     "volume_variation": "Not Evaluated",
-                    "clarity_rating": "Good",
-                    "observation": "Voice metrics cannot be fully evaluated from transcript alone. Language suggests a confident delivery."
-                },
-                "message_analysis": {
-                    "keyword_density": "Appropriate",
-                    "emotional_tone": "Positive",
-                    "structure_rating": "Logical",
-                    "logic_flow": "Well-organized",
-                    "observation": "Key themes are reinforced with clear signposting."
-                }
-            },
-            "emotion_radar": {
-                "confidence": 90,
-                "empathy": 70,
-                "authority": 85,
-                "composure": 80,
-                "enthusiasm": 75,
-                "trust": 88
-            },
+                    "clarity_rating": "[e.g., Good, Fair, Poor (based on text clarity)]",
+                    "observation": "Voice metrics cannot be fully evaluated from transcript alone. Language suggests a [e.g., confident] delivery."
+                }},
+                "message_analysis": {{
+                    "keyword_density": "[e.g., Appropriate, High, Low]",
+                    "emotional_tone": "[e.g., Positive, Neutral, Serious, Passionate]",
+                    "structure_rating": "[e.g., Logical, Rambling, Structured]",
+                    "logic_flow": "[e.g., Well-organized, Hard to follow]",
+                    "observation": "[1-sentence observation on structure and themes]"
+                }}
+            }},
+            "emotion_radar": {{
+                "confidence": "[0-100 integer]",
+                "empathy": "[0-100 integer]",
+                "authority": "[0-100 integer]",
+                "composure": "[0-100 integer]",
+                "enthusiasm": "[0-100 integer]",
+                "trust": "[0-100 integer]"
+            }},
             "timeline_analysis": [
-                {
-                    "timestamp": "00:00",
-                    "event": "Opening",
-                    "sentiment": "positive",
-                    "emotion_label": "Confident",
-                    "confidence_score": 85,
-                    "engagement_score": 87,
-                    "insight": "Opening statement sets a strong tone."
-                }
+                {{
+                    "timestamp": "[MM:SS]",
+                    "event": "[Short title of the event at this timestamp]",
+                    "sentiment": "[positive/neutral/negative]",
+                    "emotion_label": "[e.g., Confident, Hesitant, Strategic]",
+                    "confidence_score": "[0-100 integer]",
+                    "engagement_score": "[0-100 integer]",
+                    "insight": "[Observation from the transcript at this moment]"
+                }}
             ],
-            "benchmark_comparison": {
-                "your_score": 85,
+            "benchmark_comparison": {{
+                "your_score": "[Same as overall_performance.score]",
                 "industry_average": 72,
                 "top_ceos": 92,
                 "metrics": ["Confidence", "Trustworthiness", "Engagement", "Clarity"],
-                "emotion_radar_benchmark": {
+                "emotion_radar_benchmark": {{
                     "confidence": 85,
                     "empathy": 80,
                     "authority": 90,
                     "composure": 85,
                     "enthusiasm": 70,
                     "trust": 85
-                }
-            },
+                }}
+            }},
             "recommendations": [
-                {
-                    "title": "Include more relatable examples (PROVIDE 2-3 RECOMMENDATIONS)",
-                    "rationale": "Makes technical content more accessible.",
-                    "strategy": "Add industry-specific use cases and success stories.",
-                    "priority": "High",
-                    "timeframe": "Immediate",
-                    "expected_impact": "Significant"
-                },
-                {
-                    "title": "Structure content with the Rule of Three",
-                    "rationale": "Improves audience retention of core arguments.",
-                    "strategy": "Group supporting points into three distinct categories.",
-                    "priority": "Medium",
-                    "timeframe": "1-2 weeks",
-                    "expected_impact": "Moderate"
-                }
+                {{
+                    "title": "[Actionable recommendation title]",
+                    "rationale": "[Why this matters]",
+                    "strategy": "[How to achieve this]",
+                    "priority": "[High/Medium/Low]",
+                    "timeframe": "[e.g., Immediate, 1-2 weeks]",
+                    "expected_impact": "[e.g., Significant, Moderate]"
+                }}
             ],
             "key_takeaways": [
-                "Point 1",
-                "Point 2",
-                "Point 3"
+                "[Highlight 1]",
+                "[Highlight 2]",
+                "[Highlight 3]"
             ],
-            "summary": "WRITE A HIGHLY INSIGHTFUL, ELITE EXECUTIVE COACH'S NOTE HERE. Do not write a plain summary. Write 2-3 hard-hitting paragraphs analyzing their psychological presence, tactical communication strengths, and precise areas where they are leaking authority or engagement. Use professional consulting/executive coaching terminology (e.g., 'cognitive load', 'executive presence', 'strategic pausing'). Make the user feel they are receiving a $10,000/hour consultation."
-        }
+            "summary": "WRITE A HIGHLY INSIGHTFUL, ELITE EXECUTIVE COACH'S NOTE HERE based purely on their word choices and structure. Write 2-3 hard-hitting paragraphs analyzing rhetorical devices, logical flow, and persuasive power. Use professional consulting terminology."
+        }}
         
         Analyze the following transcript:
         """ + transcript_text

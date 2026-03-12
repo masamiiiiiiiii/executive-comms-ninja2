@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException, BackgroundTasks
 from pydantic import BaseModel
+from typing import Optional
 from services.youtube_service import YouTubeService
 from services.gemini_service import GeminiService
 from supabase import create_client, Client
@@ -66,6 +67,8 @@ class AnalysisRequest(BaseModel):
     role: str
     target_person: str
     transcript_text: str = ""
+    start_time: Optional[int] = None
+    end_time: Optional[int] = None
 
 async def process_analysis(request: AnalysisRequest, analysis_id: str):
     youtube_service, gemini_service, supabase = get_services()
@@ -90,14 +93,18 @@ async def process_analysis(request: AnalysisRequest, analysis_id: str):
             # Fallback to backend extraction if not provided by frontend
             try:
                 print(f"Attempting transcript extraction for {request.youtube_url}")
-                transcript_text = youtube_service.get_transcript(request.youtube_url)
+                transcript_text = youtube_service.get_transcript(
+                    request.youtube_url, 
+                    start_time=request.start_time, 
+                    end_time=request.end_time
+                )
                 
                 # 3. Update status to 'analyzing'
                 supabase.table("video_analyses").update({"status": "analyzing"}).eq("id", analysis_id).execute()
                 
                 # 4. Analyze with Gemini (Transcript mode)
                 print(f"Starting Gemini transcript analysis")
-                analysis_result = gemini_service.analyze_full_transcript(transcript_text, metadata)
+                analysis_result = gemini_service.analyze_full_transcript(transcript_text, metadata, request.target_person)
                 
             except Exception as e:
                 print(f"Transcript extraction failed, falling back to VIDEO analysis: {e}")
@@ -106,14 +113,18 @@ async def process_analysis(request: AnalysisRequest, analysis_id: str):
                 supabase.table("video_analyses").update({"status": "downloading"}).eq("id", analysis_id).execute()
                 
                 # 1. Download Video (Audio + Vision)
-                video_path = youtube_service.download_video(request.youtube_url)
+                video_path = youtube_service.download_video(
+                    request.youtube_url,
+                    start_time=request.start_time,
+                    end_time=request.end_time
+                )
                 
                 # 2. Update status to 'analyzing'
                 supabase.table("video_analyses").update({"status": "analyzing"}).eq("id", analysis_id).execute()
                 
                 # 3. Run Multimodal Analysis (Includes facial expressions, eye contact)
                 print(f"Starting Gemini VIDEO analysis")
-                analysis_result = gemini_service.analyze_video(video_path, metadata)
+                analysis_result = gemini_service.analyze_video(video_path, metadata, request.target_person)
                 
                 # 4. Cleanup temp file
                 try:
@@ -124,7 +135,7 @@ async def process_analysis(request: AnalysisRequest, analysis_id: str):
         else:
              # Manual transcript provided
              supabase.table("video_analyses").update({"status": "analyzing"}).eq("id", analysis_id).execute()
-             analysis_result = gemini_service.analyze_full_transcript(transcript_text, metadata)
+             analysis_result = gemini_service.analyze_full_transcript(transcript_text, metadata, request.target_person)
 
         # 5. Inject real metadata into results for frontend display
         if metadata and analysis_result:

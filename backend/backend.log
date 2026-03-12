@@ -1,0 +1,2148 @@
+/Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+/Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/venv/lib/python3.9/site-packages/google/api_core/_python_version_support.py:246: FutureWarning: You are using a non-supported Python version (3.9.6). Google will not post any further updates to google.api_core supporting this Python version. Please upgrade to the latest Python version, or at least Python 3.10, and then update google.api_core.
+  warnings.warn(message, FutureWarning)
+/Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/venv/lib/python3.9/site-packages/google/auth/__init__.py:54: FutureWarning: You are using a Python version 3.9 past its end of life. Google will update google-auth with critical bug fixes on a best-effort basis, but not with any other fixes or features. Please upgrade your Python version, and then update google-auth.
+  warnings.warn(eol_message.format("3.9"), FutureWarning)
+/Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/venv/lib/python3.9/site-packages/google/oauth2/__init__.py:40: FutureWarning: You are using a Python version 3.9 past its end of life. Google will update google-auth with critical bug fixes on a best-effort basis, but not with any other fixes or features. Please upgrade your Python version, and then update google-auth.
+  warnings.warn(eol_message.format("3.9"), FutureWarning)
+/Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/venv/lib/python3.9/site-packages/google/api_core/_python_version_support.py:246: FutureWarning: You are using a non-supported Python version (3.9.6). Google will not post any further updates to google.cloud.aiplatform_v1beta1 supporting this Python version. Please upgrade to the latest Python version, or at least Python 3.10, and then update google.cloud.aiplatform_v1beta1.
+  warnings.warn(message, FutureWarning)
+/Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/venv/lib/python3.9/site-packages/google/api_core/_python_version_support.py:246: FutureWarning: You are using a non-supported Python version (3.9.6). Google will not post any further updates to google.cloud.aiplatform_v1 supporting this Python version. Please upgrade to the latest Python version, or at least Python 3.10, and then update google.cloud.aiplatform_v1.
+  warnings.warn(message, FutureWarning)
+/Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/venv/lib/python3.9/site-packages/google/api_core/_python_version_support.py:246: FutureWarning: You are using a non-supported Python version (3.9.6). Google will not post any further updates to google.cloud.resourcemanager_v3 supporting this Python version. Please upgrade to the latest Python version, or at least Python 3.10, and then update google.cloud.resourcemanager_v3.
+  warnings.warn(message, FutureWarning)
+/Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/venv/lib/python3.9/site-packages/google/api_core/_python_version_support.py:246: FutureWarning: You are using a non-supported Python version (3.9.6). Google will not post any further updates to google.cloud.aiplatform.v1.schema.predict.instance_v1 supporting this Python version. Please upgrade to the latest Python version, or at least Python 3.10, and then update google.cloud.aiplatform.v1.schema.predict.instance_v1.
+  warnings.warn(message, FutureWarning)
+/Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/venv/lib/python3.9/site-packages/google/api_core/_python_version_support.py:246: FutureWarning: You are using a non-supported Python version (3.9.6). Google will not post any further updates to google.cloud.aiplatform.v1.schema.predict.params_v1 supporting this Python version. Please upgrade to the latest Python version, or at least Python 3.10, and then update google.cloud.aiplatform.v1.schema.predict.params_v1.
+  warnings.warn(message, FutureWarning)
+/Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/venv/lib/python3.9/site-packages/google/api_core/_python_version_support.py:246: FutureWarning: You are using a non-supported Python version (3.9.6). Google will not post any further updates to google.cloud.aiplatform.v1.schema.predict.prediction_v1 supporting this Python version. Please upgrade to the latest Python version, or at least Python 3.10, and then update google.cloud.aiplatform.v1.schema.predict.prediction_v1.
+  warnings.warn(message, FutureWarning)
+/Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/venv/lib/python3.9/site-packages/google/api_core/_python_version_support.py:246: FutureWarning: You are using a non-supported Python version (3.9.6). Google will not post any further updates to google.cloud.aiplatform.v1.schema.trainingjob.definition_v1 supporting this Python version. Please upgrade to the latest Python version, or at least Python 3.10, and then update google.cloud.aiplatform.v1.schema.trainingjob.definition_v1.
+  warnings.warn(message, FutureWarning)
+/Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/venv/lib/python3.9/site-packages/google/api_core/_python_version_support.py:246: FutureWarning: You are using a non-supported Python version (3.9.6). Google will not post any further updates to google.cloud.aiplatform.v1beta1.schema.predict.instance_v1beta1 supporting this Python version. Please upgrade to the latest Python version, or at least Python 3.10, and then update google.cloud.aiplatform.v1beta1.schema.predict.instance_v1beta1.
+  warnings.warn(message, FutureWarning)
+/Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/venv/lib/python3.9/site-packages/google/api_core/_python_version_support.py:246: FutureWarning: You are using a non-supported Python version (3.9.6). Google will not post any further updates to google.cloud.aiplatform.v1beta1.schema.predict.params_v1beta1 supporting this Python version. Please upgrade to the latest Python version, or at least Python 3.10, and then update google.cloud.aiplatform.v1beta1.schema.predict.params_v1beta1.
+  warnings.warn(message, FutureWarning)
+/Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/venv/lib/python3.9/site-packages/google/api_core/_python_version_support.py:246: FutureWarning: You are using a non-supported Python version (3.9.6). Google will not post any further updates to google.cloud.aiplatform.v1beta1.schema.predict.prediction_v1beta1 supporting this Python version. Please upgrade to the latest Python version, or at least Python 3.10, and then update google.cloud.aiplatform.v1beta1.schema.predict.prediction_v1beta1.
+  warnings.warn(message, FutureWarning)
+/Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/venv/lib/python3.9/site-packages/google/api_core/_python_version_support.py:246: FutureWarning: You are using a non-supported Python version (3.9.6). Google will not post any further updates to google.cloud.aiplatform.v1beta1.schema.trainingjob.definition_v1beta1 supporting this Python version. Please upgrade to the latest Python version, or at least Python 3.10, and then update google.cloud.aiplatform.v1beta1.schema.trainingjob.definition_v1beta1.
+  warnings.warn(message, FutureWarning)
+/Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/services/gemini_service.py:5: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [52037]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:52620 - "POST /api/analysis/analyze HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:52784 - "POST /api/analyze HTTP/1.1" 422 Unprocessable Entity
+DEBUG: Processing analysis request for URL: https://www.youtube.com/watch?v=VM0AU-vPNeQ | User: 0d93271a-2865-458a-8191-7a3b5934b52c
+Current Working Directory: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend
+Using Gemini API Key Authentication (Local Mode)
+INFO:     127.0.0.1:52894 - "POST /api/analyze HTTP/1.1" 200 OK
+Deprecated Feature: Support for Python version 3.9 has been deprecated. Please update to Python 3.10 or above
+Deprecated Feature: Support for Python version 3.9 has been deprecated. Please update to Python 3.10 or above
+[youtube] Extracting URL: https://www.youtube.com/watch?v=VM0AU-vPNeQ
+Current Working Directory: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend
+Using Gemini API Key Authentication (Local Mode)
+Extracting transcript & metadata for https://www.youtube.com/watch?v=VM0AU-vPNeQ
+Attempting transcript extraction for https://www.youtube.com/watch?v=VM0AU-vPNeQ
+Fetching transcript for video: VM0AU-vPNeQ
+Cookie path: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/cookies.txt, exists: True
+youtube-transcript-api failed: __init__() missing 1 required positional argument: 'proxy_config'
+Falling back to yt-dlp with cookies...
+[youtube] VM0AU-vPNeQ: Downloading webpage
+[youtube] VM0AU-vPNeQ: Downloading tv client config
+[youtube] VM0AU-vPNeQ: Downloading tv player API JSON
+[youtube] VM0AU-vPNeQ: Downloading web safari player API JSON
+WARNING: [youtube] VM0AU-vPNeQ: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] VM0AU-vPNeQ: There are missing subtitles languages because a PO token was not provided. Automatic captions for 1 languages are missing.
+[info] VM0AU-vPNeQ: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+Deprecated Feature: Support for Python version 3.9 has been deprecated. Please update to Python 3.10 or above
+[youtube] Extracting URL: https://www.youtube.com/watch?v=VM0AU-vPNeQ
+Transcript extraction failed, falling back to VIDEO analysis: Could not retrieve transcripts for this video: No captions found via yt-dlp.
+Attempting video download with yt-dlp: https://www.youtube.com/watch?v=VM0AU-vPNeQ
+[youtube] VM0AU-vPNeQ: Downloading webpage
+[youtube] VM0AU-vPNeQ: Downloading tv client config
+[youtube] VM0AU-vPNeQ: Downloading tv player API JSON
+[youtube] VM0AU-vPNeQ: Downloading web safari player API JSON
+WARNING: [youtube] VM0AU-vPNeQ: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+[info] VM0AU-vPNeQ: Downloading 1 format(s): 18
+[info] VM0AU-vPNeQ: Downloading 1 time ranges: 0.0-180.0
+ERROR: You have requested downloading the video partially, but ffmpeg is not installed. Aborting
+yt-dlp video download failed: ERROR: You have requested downloading the video partially, but ffmpeg is not installed. Aborting. Trying pytubefix fallback...
+pytubefix video download success: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/services/temp/5de23814-cdb1-45e1-bbdc-36e096a34167/video_raw.mp4
+Starting Gemini VIDEO analysis
+Uploading file /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/services/temp/5de23814-cdb1-45e1-bbdc-36e096a34167/video_raw.mp4 to Gemini...
+Waiting for video processing: files/fjycnxxqpndf
+............Done.
+Generating analysis content...
+Analysis f4abb71f-07a3-41eb-8570-297fb53d742a completed successfully.
+Current Working Directory: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend
+Using Gemini API Key Authentication (Local Mode)
+INFO:     127.0.0.1:52904 - "GET /api/analyze/f4abb71f-07a3-41eb-8570-297fb53d742a HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55524 - "OPTIONS /api/analyze HTTP/1.1" 200 OK
+DEBUG: Processing analysis request for URL: https://www.youtube.com/watch?v=8-Eh9v9-FuM&t=4s | User: 0d93271a-2865-458a-8191-7a3b5934b52c
+Current Working Directory: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend
+Using Gemini API Key Authentication (Local Mode)
+INFO:     127.0.0.1:55524 - "POST /api/analyze HTTP/1.1" 200 OK
+Deprecated Feature: Support for Python version 3.9 has been deprecated. Please update to Python 3.10 or above
+Deprecated Feature: Support for Python version 3.9 has been deprecated. Please update to Python 3.10 or above
+[youtube] Extracting URL: https://www.youtube.com/watch?v=8-Eh9v9-FuM&t=4s
+Current Working Directory: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend
+Using Gemini API Key Authentication (Local Mode)
+Extracting transcript & metadata for https://www.youtube.com/watch?v=8-Eh9v9-FuM&t=4s
+Attempting transcript extraction for https://www.youtube.com/watch?v=8-Eh9v9-FuM&t=4s
+Fetching transcript for video: 8-Eh9v9-FuM
+Cookie path: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/cookies.txt, exists: True
+youtube-transcript-api failed: __init__() missing 1 required positional argument: 'proxy_config'
+Falling back to yt-dlp with cookies...
+[youtube] 8-Eh9v9-FuM: Downloading webpage
+[youtube] 8-Eh9v9-FuM: Downloading tv client config
+[youtube] 8-Eh9v9-FuM: Downloading tv player API JSON
+[youtube] 8-Eh9v9-FuM: Downloading web safari player API JSON
+WARNING: [youtube] 8-Eh9v9-FuM: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] 8-Eh9v9-FuM: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] 8-Eh9v9-FuM: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+Deprecated Feature: Support for Python version 3.9 has been deprecated. Please update to Python 3.10 or above
+[youtube] Extracting URL: https://www.youtube.com/watch?v=8-Eh9v9-FuM&t=4s
+Transcript extraction failed, falling back to VIDEO analysis: Could not retrieve transcripts for this video: No captions found via yt-dlp.
+Attempting video download with yt-dlp: https://www.youtube.com/watch?v=8-Eh9v9-FuM&t=4s
+[youtube] 8-Eh9v9-FuM: Downloading webpage
+[youtube] 8-Eh9v9-FuM: Downloading tv client config
+[youtube] 8-Eh9v9-FuM: Downloading tv player API JSON
+[youtube] 8-Eh9v9-FuM: Downloading web safari player API JSON
+WARNING: [youtube] 8-Eh9v9-FuM: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+[info] 8-Eh9v9-FuM: Downloading 1 format(s): 18
+[info] 8-Eh9v9-FuM: Downloading 1 time ranges: 10.0-300.0
+ERROR: You have requested downloading the video partially, but ffmpeg is not installed. Aborting
+yt-dlp video download failed: ERROR: You have requested downloading the video partially, but ffmpeg is not installed. Aborting. Trying pytubefix fallback...
+pytubefix video download success: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/services/temp/440cada1-86f4-4eee-965f-1bb4417c7c1b/video_raw.mp4
+Starting Gemini VIDEO analysis
+Uploading file /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/services/temp/440cada1-86f4-4eee-965f-1bb4417c7c1b/video_raw.mp4 to Gemini...
+Waiting for video processing: files/8rir0w00amxt
+....Done.
+Generating analysis content...
+Analysis 93b63ea7-7c26-4b40-876e-d871bcc30fb0 completed successfully.
+Current Working Directory: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend
+Using Gemini API Key Authentication (Local Mode)
+INFO:     127.0.0.1:55524 - "GET /api/analyze/93b63ea7-7c26-4b40-876e-d871bcc30fb0 HTTP/1.1" 200 OK
+Current Working Directory: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend
+Using Gemini API Key Authentication (Local Mode)
+INFO:     127.0.0.1:55526 - "GET /api/analyze/93b63ea7-7c26-4b40-876e-d871bcc30fb0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57007 - "OPTIONS /api/analyze HTTP/1.1" 200 OK
+DEBUG: Processing analysis request for URL: https://www.youtube.com/watch?v=fTXMHxALqKc | User: 0d93271a-2865-458a-8191-7a3b5934b52c
+Current Working Directory: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend
+Using Gemini API Key Authentication (Local Mode)
+INFO:     127.0.0.1:57007 - "POST /api/analyze HTTP/1.1" 200 OK
+Deprecated Feature: Support for Python version 3.9 has been deprecated. Please update to Python 3.10 or above
+Deprecated Feature: Support for Python version 3.9 has been deprecated. Please update to Python 3.10 or above
+[youtube] Extracting URL: https://www.youtube.com/watch?v=fTXMHxALqKc
+Current Working Directory: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend
+Using Gemini API Key Authentication (Local Mode)
+Extracting transcript & metadata for https://www.youtube.com/watch?v=fTXMHxALqKc
+Attempting transcript extraction for https://www.youtube.com/watch?v=fTXMHxALqKc
+Fetching transcript for video: fTXMHxALqKc
+Cookie path: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/cookies.txt, exists: True
+youtube-transcript-api failed: __init__() missing 1 required positional argument: 'proxy_config'
+Falling back to yt-dlp with cookies...
+[youtube] fTXMHxALqKc: Downloading webpage
+[youtube] fTXMHxALqKc: Downloading tv client config
+[youtube] fTXMHxALqKc: Downloading tv player API JSON
+[youtube] fTXMHxALqKc: Downloading web safari player API JSON
+WARNING: [youtube] fTXMHxALqKc: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] fTXMHxALqKc: There are missing subtitles languages because a PO token was not provided. Automatic captions for 1 languages are missing.
+[info] fTXMHxALqKc: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+Deprecated Feature: Support for Python version 3.9 has been deprecated. Please update to Python 3.10 or above
+[youtube] Extracting URL: https://www.youtube.com/watch?v=fTXMHxALqKc
+Transcript extraction failed, falling back to VIDEO analysis: Could not retrieve transcripts for this video: No captions found via yt-dlp.
+Attempting video download with yt-dlp: https://www.youtube.com/watch?v=fTXMHxALqKc
+[youtube] fTXMHxALqKc: Downloading webpage
+[youtube] fTXMHxALqKc: Downloading tv client config
+[youtube] fTXMHxALqKc: Downloading tv player API JSON
+[youtube] fTXMHxALqKc: Downloading web safari player API JSON
+WARNING: [youtube] fTXMHxALqKc: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+[info] fTXMHxALqKc: Downloading 1 format(s): 18
+[download] Sleeping 6.00 seconds as required by the site...
+ERROR: unable to download video data: HTTP Error 403: Forbidden
+yt-dlp video download failed: ERROR: unable to download video data: HTTP Error 403: Forbidden. Trying pytubefix fallback...
+pytubefix video download success: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/services/temp/4ed4567d-5e40-4410-a28a-7e95f4d41a9c/video_raw.mp4
+Starting Gemini VIDEO analysis
+Uploading file /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/services/temp/4ed4567d-5e40-4410-a28a-7e95f4d41a9c/video_raw.mp4 to Gemini...
+Waiting for video processing: files/10fsw7yp0x8n
+.....Done.
+Generating analysis content...
+Analysis e383f1ff-c4c6-4d82-90d5-ac661a7b20f9 completed successfully.
+Current Working Directory: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend
+Using Gemini API Key Authentication (Local Mode)
+INFO:     127.0.0.1:57007 - "GET /api/analyze/e383f1ff-c4c6-4d82-90d5-ac661a7b20f9 HTTP/1.1" 200 OK
+Current Working Directory: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend
+Using Gemini API Key Authentication (Local Mode)
+INFO:     127.0.0.1:57009 - "GET /api/analyze/e383f1ff-c4c6-4d82-90d5-ac661a7b20f9 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62559 - "OPTIONS /api/analyze HTTP/1.1" 200 OK
+DEBUG: Processing analysis request for URL: https://www.youtube.com/watch?v=LyCCEpRXkuY&list=PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR&index=24 | User: 0d93271a-2865-458a-8191-7a3b5934b52c
+Current Working Directory: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend
+Using Gemini API Key Authentication (Local Mode)
+INFO:     127.0.0.1:62559 - "POST /api/analyze HTTP/1.1" 200 OK
+Deprecated Feature: Support for Python version 3.9 has been deprecated. Please update to Python 3.10 or above
+Deprecated Feature: Support for Python version 3.9 has been deprecated. Please update to Python 3.10 or above
+[youtube:tab] Extracting URL: https://www.youtube.com/watch?v=LyCCEpRXkuY&list=PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR&index=24
+Current Working Directory: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend
+Using Gemini API Key Authentication (Local Mode)
+Extracting transcript & metadata for https://www.youtube.com/watch?v=LyCCEpRXkuY&list=PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR&index=24
+Attempting transcript extraction for https://www.youtube.com/watch?v=LyCCEpRXkuY&list=PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR&index=24
+Fetching transcript for video: LyCCEpRXkuY
+Cookie path: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/cookies.txt, exists: True
+youtube-transcript-api failed: __init__() missing 1 required positional argument: 'proxy_config'
+Falling back to yt-dlp with cookies...
+[youtube:tab] Downloading playlist PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR - add --no-playlist to download just the video LyCCEpRXkuY
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR: Downloading webpage
+[youtube:tab] Extracting URL: https://www.youtube.com/playlist?list=PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR: Downloading webpage
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR: Redownloading playlist API JSON with unavailable videos
+[download] Downloading playlist: Technology | CNBC
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 1: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 2: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 3: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 4: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 5: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 6: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 7: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 8: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 9: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 10: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 11: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 12: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 13: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 14: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 15: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 16: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 17: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 18: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 19: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 20: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 21: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 22: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 23: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 24: Downloading API JSON
+[youtube:tab] Playlist Technology | CNBC: Downloading 2416 items of 2416
+[download] Downloading item 1 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=Ecmlh607KeA
+[youtube] Ecmlh607KeA: Downloading webpage
+[youtube] Ecmlh607KeA: Downloading tv client config
+[youtube] Ecmlh607KeA: Downloading tv player API JSON
+[youtube] Ecmlh607KeA: Downloading web safari player API JSON
+WARNING: [youtube] Ecmlh607KeA: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] Ecmlh607KeA: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] Ecmlh607KeA: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 2 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=n_Ijppjd3Uc
+[youtube] n_Ijppjd3Uc: Downloading webpage
+[youtube] n_Ijppjd3Uc: Downloading tv client config
+[youtube] n_Ijppjd3Uc: Downloading tv player API JSON
+[youtube] n_Ijppjd3Uc: Downloading web safari player API JSON
+WARNING: [youtube] n_Ijppjd3Uc: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] n_Ijppjd3Uc: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] n_Ijppjd3Uc: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 3 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=ZkPU5GHDqkQ
+[youtube] ZkPU5GHDqkQ: Downloading webpage
+[youtube] ZkPU5GHDqkQ: Downloading tv client config
+[youtube] ZkPU5GHDqkQ: Downloading tv player API JSON
+[youtube] ZkPU5GHDqkQ: Downloading web safari player API JSON
+WARNING: [youtube] ZkPU5GHDqkQ: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] ZkPU5GHDqkQ: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] ZkPU5GHDqkQ: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 4 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=Q22hihy6qcw
+[youtube] Q22hihy6qcw: Downloading webpage
+[youtube] Q22hihy6qcw: Downloading tv client config
+[youtube] Q22hihy6qcw: Downloading tv player API JSON
+[youtube] Q22hihy6qcw: Downloading web safari player API JSON
+WARNING: [youtube] Q22hihy6qcw: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] Q22hihy6qcw: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] Q22hihy6qcw: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 5 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=wO9jYGKBJZw
+[youtube] wO9jYGKBJZw: Downloading webpage
+[youtube] wO9jYGKBJZw: Downloading tv client config
+[youtube] wO9jYGKBJZw: Downloading tv player API JSON
+[youtube] wO9jYGKBJZw: Downloading web safari player API JSON
+WARNING: [youtube] wO9jYGKBJZw: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] wO9jYGKBJZw: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] wO9jYGKBJZw: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 6 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=k_bHtx_e-SU
+[youtube] k_bHtx_e-SU: Downloading webpage
+[youtube] k_bHtx_e-SU: Downloading tv client config
+[youtube] k_bHtx_e-SU: Downloading tv player API JSON
+[youtube] k_bHtx_e-SU: Downloading web safari player API JSON
+WARNING: [youtube] k_bHtx_e-SU: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] k_bHtx_e-SU: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] k_bHtx_e-SU: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 7 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=Y3KLbc5DlRs
+[youtube] Y3KLbc5DlRs: Downloading webpage
+[youtube] Y3KLbc5DlRs: Downloading tv client config
+[youtube] Y3KLbc5DlRs: Downloading tv player API JSON
+[youtube] Y3KLbc5DlRs: Downloading web safari player API JSON
+WARNING: [youtube] Y3KLbc5DlRs: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] Y3KLbc5DlRs: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] Y3KLbc5DlRs: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 8 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=YFE0zNMqQyg
+[youtube] YFE0zNMqQyg: Downloading webpage
+[youtube] YFE0zNMqQyg: Downloading tv client config
+[youtube] YFE0zNMqQyg: Downloading tv player API JSON
+[youtube] YFE0zNMqQyg: Downloading web safari player API JSON
+WARNING: [youtube] YFE0zNMqQyg: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] YFE0zNMqQyg: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] YFE0zNMqQyg: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 9 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=vgEfyF9juOA
+[youtube] vgEfyF9juOA: Downloading webpage
+[youtube] vgEfyF9juOA: Downloading tv client config
+[youtube] vgEfyF9juOA: Downloading tv player API JSON
+[youtube] vgEfyF9juOA: Downloading web safari player API JSON
+WARNING: [youtube] vgEfyF9juOA: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] vgEfyF9juOA: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] vgEfyF9juOA: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 10 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=KU57CWWWc3g
+[youtube] KU57CWWWc3g: Downloading webpage
+[youtube] KU57CWWWc3g: Downloading tv client config
+[youtube] KU57CWWWc3g: Downloading tv player API JSON
+[youtube] KU57CWWWc3g: Downloading web safari player API JSON
+WARNING: [youtube] KU57CWWWc3g: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] KU57CWWWc3g: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] KU57CWWWc3g: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 11 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=Pz5XRyo5fiw
+[youtube] Pz5XRyo5fiw: Downloading webpage
+[youtube] Pz5XRyo5fiw: Downloading tv client config
+[youtube] Pz5XRyo5fiw: Downloading tv player API JSON
+[youtube] Pz5XRyo5fiw: Downloading web safari player API JSON
+WARNING: [youtube] Pz5XRyo5fiw: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] Pz5XRyo5fiw: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] Pz5XRyo5fiw: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 12 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=kQzBjvqLZFo
+[youtube] kQzBjvqLZFo: Downloading webpage
+[youtube] kQzBjvqLZFo: Downloading tv client config
+[youtube] kQzBjvqLZFo: Downloading tv player API JSON
+[youtube] kQzBjvqLZFo: Downloading web safari player API JSON
+WARNING: [youtube] kQzBjvqLZFo: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] kQzBjvqLZFo: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] kQzBjvqLZFo: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 13 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=FSbq0T7j77g
+[youtube] FSbq0T7j77g: Downloading webpage
+[youtube] FSbq0T7j77g: Downloading tv client config
+[youtube] FSbq0T7j77g: Downloading tv player API JSON
+[youtube] FSbq0T7j77g: Downloading web safari player API JSON
+WARNING: [youtube] FSbq0T7j77g: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] FSbq0T7j77g: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] FSbq0T7j77g: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 14 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=XUkGmqTQqFk
+[youtube] XUkGmqTQqFk: Downloading webpage
+[youtube] XUkGmqTQqFk: Downloading tv client config
+[youtube] XUkGmqTQqFk: Downloading tv player API JSON
+[youtube] XUkGmqTQqFk: Downloading web safari player API JSON
+WARNING: [youtube] XUkGmqTQqFk: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] XUkGmqTQqFk: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] XUkGmqTQqFk: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 15 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=RU6jKmcD-W0
+[youtube] RU6jKmcD-W0: Downloading webpage
+[youtube] RU6jKmcD-W0: Downloading tv client config
+[youtube] RU6jKmcD-W0: Downloading tv player API JSON
+[youtube] RU6jKmcD-W0: Downloading web safari player API JSON
+WARNING: [youtube] RU6jKmcD-W0: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] RU6jKmcD-W0: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] RU6jKmcD-W0: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 16 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=NdCSez0cyck
+[youtube] NdCSez0cyck: Downloading webpage
+[youtube] NdCSez0cyck: Downloading tv client config
+[youtube] NdCSez0cyck: Downloading tv player API JSON
+[youtube] NdCSez0cyck: Downloading web safari player API JSON
+WARNING: [youtube] NdCSez0cyck: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] NdCSez0cyck: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] NdCSez0cyck: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 17 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=lIRW8bfy4kE
+[youtube] lIRW8bfy4kE: Downloading webpage
+[youtube] lIRW8bfy4kE: Downloading tv client config
+[youtube] lIRW8bfy4kE: Downloading tv player API JSON
+[youtube] lIRW8bfy4kE: Downloading web safari player API JSON
+WARNING: [youtube] lIRW8bfy4kE: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] lIRW8bfy4kE: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] lIRW8bfy4kE: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 18 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=K4PY0k7_4Dk
+[youtube] K4PY0k7_4Dk: Downloading webpage
+[youtube] K4PY0k7_4Dk: Downloading tv client config
+[youtube] K4PY0k7_4Dk: Downloading tv player API JSON
+[youtube] K4PY0k7_4Dk: Downloading web safari player API JSON
+WARNING: [youtube] K4PY0k7_4Dk: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] K4PY0k7_4Dk: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] K4PY0k7_4Dk: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 19 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=L0dAroYsF8M
+[youtube] L0dAroYsF8M: Downloading webpage
+[youtube] L0dAroYsF8M: Downloading tv client config
+[youtube] L0dAroYsF8M: Downloading tv player API JSON
+[youtube] L0dAroYsF8M: Downloading web safari player API JSON
+WARNING: [youtube] L0dAroYsF8M: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] L0dAroYsF8M: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] L0dAroYsF8M: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 20 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=otAWu-bLv0Q
+[youtube] otAWu-bLv0Q: Downloading webpage
+[youtube] otAWu-bLv0Q: Downloading tv client config
+[youtube] otAWu-bLv0Q: Downloading tv player API JSON
+[youtube] otAWu-bLv0Q: Downloading web safari player API JSON
+WARNING: [youtube] otAWu-bLv0Q: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] otAWu-bLv0Q: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] otAWu-bLv0Q: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 21 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=sTGYE4d9UxI
+[youtube] sTGYE4d9UxI: Downloading webpage
+[youtube] sTGYE4d9UxI: Downloading tv client config
+[youtube] sTGYE4d9UxI: Downloading tv player API JSON
+[youtube] sTGYE4d9UxI: Downloading web safari player API JSON
+WARNING: [youtube] sTGYE4d9UxI: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] sTGYE4d9UxI: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] sTGYE4d9UxI: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 22 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=HRMZTup5TT0
+[youtube] HRMZTup5TT0: Downloading webpage
+[youtube] HRMZTup5TT0: Downloading tv client config
+[youtube] HRMZTup5TT0: Downloading tv player API JSON
+[youtube] HRMZTup5TT0: Downloading web safari player API JSON
+WARNING: [youtube] HRMZTup5TT0: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] HRMZTup5TT0: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] HRMZTup5TT0: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 23 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=zOnamzPC2Qk
+[youtube] zOnamzPC2Qk: Downloading webpage
+[youtube] zOnamzPC2Qk: Downloading tv client config
+[youtube] zOnamzPC2Qk: Downloading tv player API JSON
+[youtube] zOnamzPC2Qk: Downloading web safari player API JSON
+WARNING: [youtube] zOnamzPC2Qk: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] zOnamzPC2Qk: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] zOnamzPC2Qk: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 24 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=LyCCEpRXkuY
+[youtube] LyCCEpRXkuY: Downloading webpage
+[youtube] LyCCEpRXkuY: Downloading tv client config
+[youtube] LyCCEpRXkuY: Downloading tv player API JSON
+[youtube] LyCCEpRXkuY: Downloading web safari player API JSON
+WARNING: [youtube] LyCCEpRXkuY: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] LyCCEpRXkuY: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] LyCCEpRXkuY: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 25 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=nyEZrjWrMlM
+[youtube] nyEZrjWrMlM: Downloading webpage
+[youtube] nyEZrjWrMlM: Downloading tv client config
+[youtube] nyEZrjWrMlM: Downloading tv player API JSON
+[youtube] nyEZrjWrMlM: Downloading web safari player API JSON
+WARNING: [youtube] nyEZrjWrMlM: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] nyEZrjWrMlM: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] nyEZrjWrMlM: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 26 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=VWyS98TXqnQ
+[youtube] VWyS98TXqnQ: Downloading webpage
+[youtube] VWyS98TXqnQ: Downloading tv client config
+[youtube] VWyS98TXqnQ: Downloading tv player API JSON
+[youtube] VWyS98TXqnQ: Downloading web safari player API JSON
+WARNING: [youtube] VWyS98TXqnQ: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] VWyS98TXqnQ: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] VWyS98TXqnQ: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 27 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=oTW5VBuM-Gc
+[youtube] oTW5VBuM-Gc: Downloading webpage
+[youtube] oTW5VBuM-Gc: Downloading tv client config
+[youtube] oTW5VBuM-Gc: Downloading tv player API JSON
+[youtube] oTW5VBuM-Gc: Downloading web safari player API JSON
+WARNING: [youtube] oTW5VBuM-Gc: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] oTW5VBuM-Gc: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] oTW5VBuM-Gc: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 28 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=75caxICRDFA
+[youtube] 75caxICRDFA: Downloading webpage
+[youtube] 75caxICRDFA: Downloading tv client config
+[youtube] 75caxICRDFA: Downloading tv player API JSON
+[youtube] 75caxICRDFA: Downloading web safari player API JSON
+WARNING: [youtube] 75caxICRDFA: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] 75caxICRDFA: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] 75caxICRDFA: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 29 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=wsuD8UGWQSs
+[youtube] wsuD8UGWQSs: Downloading webpage
+[youtube] wsuD8UGWQSs: Downloading tv client config
+[youtube] wsuD8UGWQSs: Downloading tv player API JSON
+[youtube] wsuD8UGWQSs: Downloading web safari player API JSON
+WARNING: [youtube] wsuD8UGWQSs: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] wsuD8UGWQSs: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] wsuD8UGWQSs: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 30 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=jYzVeLyTPOc
+[youtube] jYzVeLyTPOc: Downloading webpage
+[youtube] jYzVeLyTPOc: Downloading tv client config
+[youtube] jYzVeLyTPOc: Downloading tv player API JSON
+[youtube] jYzVeLyTPOc: Downloading web safari player API JSON
+WARNING: [youtube] jYzVeLyTPOc: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] jYzVeLyTPOc: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] jYzVeLyTPOc: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 31 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=OlXDlmVjoYw
+[youtube] OlXDlmVjoYw: Downloading webpage
+[youtube] OlXDlmVjoYw: Downloading tv client config
+[youtube] OlXDlmVjoYw: Downloading tv player API JSON
+[youtube] OlXDlmVjoYw: Downloading web safari player API JSON
+WARNING: [youtube] OlXDlmVjoYw: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] OlXDlmVjoYw: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] OlXDlmVjoYw: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 32 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=LW89RaUW5BI
+[youtube] LW89RaUW5BI: Downloading webpage
+[youtube] LW89RaUW5BI: Downloading tv client config
+[youtube] LW89RaUW5BI: Downloading tv player API JSON
+[youtube] LW89RaUW5BI: Downloading web safari player API JSON
+WARNING: [youtube] LW89RaUW5BI: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] LW89RaUW5BI: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] LW89RaUW5BI: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 33 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=5xN8vlB2VR8
+[youtube] 5xN8vlB2VR8: Downloading webpage
+[youtube] 5xN8vlB2VR8: Downloading tv client config
+[youtube] 5xN8vlB2VR8: Downloading tv player API JSON
+[youtube] 5xN8vlB2VR8: Downloading web safari player API JSON
+WARNING: [youtube] 5xN8vlB2VR8: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] 5xN8vlB2VR8: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] 5xN8vlB2VR8: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 34 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=N12v9aj3WKI
+[youtube] N12v9aj3WKI: Downloading webpage
+[youtube] N12v9aj3WKI: Downloading tv client config
+[youtube] N12v9aj3WKI: Downloading tv player API JSON
+[youtube] N12v9aj3WKI: Downloading web safari player API JSON
+WARNING: [youtube] N12v9aj3WKI: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] N12v9aj3WKI: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] N12v9aj3WKI: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 35 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=QqDqNl6OJZE
+[youtube] QqDqNl6OJZE: Downloading webpage
+[youtube] QqDqNl6OJZE: Downloading tv client config
+[youtube] QqDqNl6OJZE: Downloading tv player API JSON
+[youtube] QqDqNl6OJZE: Downloading web safari player API JSON
+WARNING: [youtube] QqDqNl6OJZE: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] QqDqNl6OJZE: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] QqDqNl6OJZE: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 36 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=mmws6Oqtq9o
+[youtube] mmws6Oqtq9o: Downloading webpage
+[youtube] mmws6Oqtq9o: Downloading tv client config
+[youtube] mmws6Oqtq9o: Downloading tv player API JSON
+[youtube] mmws6Oqtq9o: Downloading web safari player API JSON
+WARNING: [youtube] mmws6Oqtq9o: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] mmws6Oqtq9o: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] mmws6Oqtq9o: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 37 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=XLFhfwVOPaI
+[youtube] XLFhfwVOPaI: Downloading webpage
+[youtube] XLFhfwVOPaI: Downloading tv client config
+[youtube] XLFhfwVOPaI: Downloading tv player API JSON
+[youtube] XLFhfwVOPaI: Downloading web safari player API JSON
+WARNING: [youtube] XLFhfwVOPaI: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] XLFhfwVOPaI: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] XLFhfwVOPaI: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 38 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=IkOicF8qBFU
+[youtube] IkOicF8qBFU: Downloading webpage
+[youtube] IkOicF8qBFU: Downloading tv client config
+[youtube] IkOicF8qBFU: Downloading tv player API JSON
+[youtube] IkOicF8qBFU: Downloading web safari player API JSON
+WARNING: [youtube] IkOicF8qBFU: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] IkOicF8qBFU: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] IkOicF8qBFU: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 39 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=nyn0HUqluVM
+[youtube] nyn0HUqluVM: Downloading webpage
+[youtube] nyn0HUqluVM: Downloading tv client config
+[youtube] nyn0HUqluVM: Downloading tv player API JSON
+[youtube] nyn0HUqluVM: Downloading web safari player API JSON
+WARNING: [youtube] nyn0HUqluVM: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] nyn0HUqluVM: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] nyn0HUqluVM: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 40 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=ZZTJ8idBFVw
+[youtube] ZZTJ8idBFVw: Downloading webpage
+[youtube] ZZTJ8idBFVw: Downloading tv client config
+[youtube] ZZTJ8idBFVw: Downloading tv player API JSON
+[youtube] ZZTJ8idBFVw: Downloading web safari player API JSON
+WARNING: [youtube] ZZTJ8idBFVw: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] ZZTJ8idBFVw: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] ZZTJ8idBFVw: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 41 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=n_J-SadyhJ4
+[youtube] n_J-SadyhJ4: Downloading webpage
+[youtube] n_J-SadyhJ4: Downloading tv client config
+[youtube] n_J-SadyhJ4: Downloading tv player API JSON
+[youtube] n_J-SadyhJ4: Downloading web safari player API JSON
+WARNING: [youtube] n_J-SadyhJ4: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] n_J-SadyhJ4: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] n_J-SadyhJ4: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 42 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=JIjJtyRjiOI
+[youtube] JIjJtyRjiOI: Downloading webpage
+[youtube] JIjJtyRjiOI: Downloading tv client config
+[youtube] JIjJtyRjiOI: Downloading tv player API JSON
+[youtube] JIjJtyRjiOI: Downloading web safari player API JSON
+WARNING: [youtube] JIjJtyRjiOI: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] JIjJtyRjiOI: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] JIjJtyRjiOI: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 43 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=BzgUOKFrHcA
+[youtube] BzgUOKFrHcA: Downloading webpage
+[youtube] BzgUOKFrHcA: Downloading tv client config
+[youtube] BzgUOKFrHcA: Downloading tv player API JSON
+[youtube] BzgUOKFrHcA: Downloading web safari player API JSON
+WARNING: [youtube] BzgUOKFrHcA: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] BzgUOKFrHcA: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] BzgUOKFrHcA: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 44 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=PKdL5NPbg7I
+[youtube] PKdL5NPbg7I: Downloading webpage
+[youtube] PKdL5NPbg7I: Downloading tv client config
+[youtube] PKdL5NPbg7I: Downloading tv player API JSON
+[youtube] PKdL5NPbg7I: Downloading web safari player API JSON
+WARNING: [youtube] PKdL5NPbg7I: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] PKdL5NPbg7I: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] PKdL5NPbg7I: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 45 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=0d-uc8p5GrE
+[youtube] 0d-uc8p5GrE: Downloading webpage
+[youtube] 0d-uc8p5GrE: Downloading tv client config
+[youtube] 0d-uc8p5GrE: Downloading tv player API JSON
+[youtube] 0d-uc8p5GrE: Downloading web safari player API JSON
+WARNING: [youtube] 0d-uc8p5GrE: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] 0d-uc8p5GrE: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] 0d-uc8p5GrE: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 46 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=WEBiebbeNCA
+[youtube] WEBiebbeNCA: Downloading webpage
+[youtube] WEBiebbeNCA: Downloading tv client config
+[youtube] WEBiebbeNCA: Downloading tv player API JSON
+[youtube] WEBiebbeNCA: Downloading web safari player API JSON
+WARNING: [youtube] WEBiebbeNCA: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] WEBiebbeNCA: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] WEBiebbeNCA: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 47 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=LryZ79zHUgs
+[youtube] LryZ79zHUgs: Downloading webpage
+[youtube] LryZ79zHUgs: Downloading tv client config
+[youtube] LryZ79zHUgs: Downloading tv player API JSON
+[youtube] LryZ79zHUgs: Downloading web safari player API JSON
+WARNING: [youtube] LryZ79zHUgs: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] LryZ79zHUgs: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] LryZ79zHUgs: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 48 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=Kbk1QyS0B_0
+[youtube] Kbk1QyS0B_0: Downloading webpage
+[youtube] Kbk1QyS0B_0: Downloading tv client config
+[youtube] Kbk1QyS0B_0: Downloading tv player API JSON
+[youtube] Kbk1QyS0B_0: Downloading web safari player API JSON
+WARNING: [youtube] Kbk1QyS0B_0: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] Kbk1QyS0B_0: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] Kbk1QyS0B_0: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 49 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=bk-oTa4p4Fc
+[youtube] bk-oTa4p4Fc: Downloading webpage
+[youtube] bk-oTa4p4Fc: Downloading tv client config
+[youtube] bk-oTa4p4Fc: Downloading tv player API JSON
+[youtube] bk-oTa4p4Fc: Downloading web safari player API JSON
+WARNING: [youtube] bk-oTa4p4Fc: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] bk-oTa4p4Fc: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] bk-oTa4p4Fc: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 50 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=6BZVucAbcQo
+[youtube] 6BZVucAbcQo: Downloading webpage
+[youtube] 6BZVucAbcQo: Downloading tv client config
+[youtube] 6BZVucAbcQo: Downloading tv player API JSON
+[youtube] 6BZVucAbcQo: Downloading web safari player API JSON
+WARNING: [youtube] 6BZVucAbcQo: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] 6BZVucAbcQo: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] 6BZVucAbcQo: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 51 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=58zHJL1dKtw
+[youtube] 58zHJL1dKtw: Downloading webpage
+[youtube] 58zHJL1dKtw: Downloading tv client config
+[youtube] 58zHJL1dKtw: Downloading tv player API JSON
+[youtube] 58zHJL1dKtw: Downloading web safari player API JSON
+WARNING: [youtube] 58zHJL1dKtw: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] 58zHJL1dKtw: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] 58zHJL1dKtw: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 52 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=UT6C93PM61I
+[youtube] UT6C93PM61I: Downloading webpage
+[youtube] UT6C93PM61I: Downloading tv client config
+[youtube] UT6C93PM61I: Downloading tv player API JSON
+[youtube] UT6C93PM61I: Downloading web safari player API JSON
+WARNING: [youtube] UT6C93PM61I: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] UT6C93PM61I: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] UT6C93PM61I: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 53 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=Dtdt8ZCTCFs
+[youtube] Dtdt8ZCTCFs: Downloading webpage
+[youtube] Dtdt8ZCTCFs: Downloading tv client config
+[youtube] Dtdt8ZCTCFs: Downloading tv player API JSON
+[youtube] Dtdt8ZCTCFs: Downloading web safari player API JSON
+WARNING: [youtube] Dtdt8ZCTCFs: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] Dtdt8ZCTCFs: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] Dtdt8ZCTCFs: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 54 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=WHat_LYrpQE
+[youtube] WHat_LYrpQE: Downloading webpage
+[youtube] WHat_LYrpQE: Downloading tv client config
+[youtube] WHat_LYrpQE: Downloading tv player API JSON
+[youtube] WHat_LYrpQE: Downloading web safari player API JSON
+WARNING: [youtube] WHat_LYrpQE: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] WHat_LYrpQE: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] WHat_LYrpQE: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 55 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=s36eG_ZHmGA
+[youtube] s36eG_ZHmGA: Downloading webpage
+[youtube] s36eG_ZHmGA: Downloading tv client config
+[youtube] s36eG_ZHmGA: Downloading tv player API JSON
+[youtube] s36eG_ZHmGA: Downloading web safari player API JSON
+WARNING: [youtube] s36eG_ZHmGA: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] s36eG_ZHmGA: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] s36eG_ZHmGA: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 56 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=BrNu2a9uhR0
+[youtube] BrNu2a9uhR0: Downloading webpage
+[youtube] BrNu2a9uhR0: Downloading tv client config
+[youtube] BrNu2a9uhR0: Downloading tv player API JSON
+[youtube] BrNu2a9uhR0: Downloading web safari player API JSON
+WARNING: [youtube] BrNu2a9uhR0: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] BrNu2a9uhR0: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] BrNu2a9uhR0: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 57 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=mXPMXVLs3-Q
+[youtube] mXPMXVLs3-Q: Downloading webpage
+[youtube] mXPMXVLs3-Q: Downloading tv client config
+[youtube] mXPMXVLs3-Q: Downloading tv player API JSON
+[youtube] mXPMXVLs3-Q: Downloading web safari player API JSON
+WARNING: [youtube] mXPMXVLs3-Q: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] mXPMXVLs3-Q: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] mXPMXVLs3-Q: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 58 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=P8ExkUxgYw0
+[youtube] P8ExkUxgYw0: Downloading webpage
+[youtube] P8ExkUxgYw0: Downloading tv client config
+[youtube] P8ExkUxgYw0: Downloading tv player API JSON
+[youtube] P8ExkUxgYw0: Downloading web safari player API JSON
+WARNING: [youtube] P8ExkUxgYw0: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] P8ExkUxgYw0: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] P8ExkUxgYw0: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 59 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=kt5s4thhRIg
+[youtube] kt5s4thhRIg: Downloading webpage
+[youtube] kt5s4thhRIg: Downloading tv client config
+[youtube] kt5s4thhRIg: Downloading tv player API JSON
+[youtube] kt5s4thhRIg: Downloading web safari player API JSON
+WARNING: [youtube] kt5s4thhRIg: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] kt5s4thhRIg: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] kt5s4thhRIg: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 60 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=95kcrgRhvK8
+[youtube] 95kcrgRhvK8: Downloading webpage
+[youtube] 95kcrgRhvK8: Downloading tv client config
+[youtube] 95kcrgRhvK8: Downloading tv player API JSON
+[youtube] 95kcrgRhvK8: Downloading web safari player API JSON
+WARNING: [youtube] 95kcrgRhvK8: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] 95kcrgRhvK8: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] 95kcrgRhvK8: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 61 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=KUt6ktzSEVc
+[youtube] KUt6ktzSEVc: Downloading webpage
+[youtube] KUt6ktzSEVc: Downloading tv client config
+[youtube] KUt6ktzSEVc: Downloading tv player API JSON
+[youtube] KUt6ktzSEVc: Downloading web safari player API JSON
+WARNING: [youtube] KUt6ktzSEVc: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] KUt6ktzSEVc: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] KUt6ktzSEVc: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 62 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=o_7XarmoDIw
+[youtube] o_7XarmoDIw: Downloading webpage
+[youtube] o_7XarmoDIw: Downloading tv client config
+[youtube] o_7XarmoDIw: Downloading tv player API JSON
+[youtube] o_7XarmoDIw: Downloading web safari player API JSON
+WARNING: [youtube] o_7XarmoDIw: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] o_7XarmoDIw: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] o_7XarmoDIw: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 63 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=Ym5pOLjsG-I
+[youtube] Ym5pOLjsG-I: Downloading webpage
+[youtube] Ym5pOLjsG-I: Downloading tv client config
+[youtube] Ym5pOLjsG-I: Downloading tv player API JSON
+[youtube] Ym5pOLjsG-I: Downloading web safari player API JSON
+WARNING: [youtube] Ym5pOLjsG-I: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] Ym5pOLjsG-I: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] Ym5pOLjsG-I: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 64 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=uvlJvqwNGuc
+[youtube] uvlJvqwNGuc: Downloading webpage
+[youtube] uvlJvqwNGuc: Downloading tv client config
+[youtube] uvlJvqwNGuc: Downloading tv player API JSON
+[youtube] uvlJvqwNGuc: Downloading web safari player API JSON
+WARNING: [youtube] uvlJvqwNGuc: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] uvlJvqwNGuc: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] uvlJvqwNGuc: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 65 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=8Sg4D4EWUUw
+[youtube] 8Sg4D4EWUUw: Downloading webpage
+[youtube] 8Sg4D4EWUUw: Downloading tv client config
+[youtube] 8Sg4D4EWUUw: Downloading tv player API JSON
+[youtube] 8Sg4D4EWUUw: Downloading web safari player API JSON
+WARNING: [youtube] 8Sg4D4EWUUw: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] 8Sg4D4EWUUw: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] 8Sg4D4EWUUw: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 66 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=l9zFZtymi-0
+[youtube] l9zFZtymi-0: Downloading webpage
+[youtube] l9zFZtymi-0: Downloading tv client config
+[youtube] l9zFZtymi-0: Downloading tv player API JSON
+[youtube] l9zFZtymi-0: Downloading web safari player API JSON
+WARNING: [youtube] l9zFZtymi-0: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] l9zFZtymi-0: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] l9zFZtymi-0: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 67 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=bgusip5nlGg
+[youtube] bgusip5nlGg: Downloading webpage
+[youtube] bgusip5nlGg: Downloading tv client config
+[youtube] bgusip5nlGg: Downloading tv player API JSON
+[youtube] bgusip5nlGg: Downloading web safari player API JSON
+WARNING: [youtube] bgusip5nlGg: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] bgusip5nlGg: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] bgusip5nlGg: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 68 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=9jwXZhXi-TA
+[youtube] 9jwXZhXi-TA: Downloading webpage
+[youtube] 9jwXZhXi-TA: Downloading tv client config
+[youtube] 9jwXZhXi-TA: Downloading tv player API JSON
+[youtube] 9jwXZhXi-TA: Downloading web safari player API JSON
+WARNING: [youtube] 9jwXZhXi-TA: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] 9jwXZhXi-TA: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] 9jwXZhXi-TA: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 69 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=MucuOtJtqnM
+[youtube] MucuOtJtqnM: Downloading webpage
+[youtube] MucuOtJtqnM: Downloading tv client config
+[youtube] MucuOtJtqnM: Downloading tv player API JSON
+[youtube] MucuOtJtqnM: Downloading web safari player API JSON
+WARNING: [youtube] MucuOtJtqnM: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] MucuOtJtqnM: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] MucuOtJtqnM: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 70 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=VdACzw_D6pY
+[youtube] VdACzw_D6pY: Downloading webpage
+[youtube] VdACzw_D6pY: Downloading tv client config
+[youtube] VdACzw_D6pY: Downloading tv player API JSON
+[youtube] VdACzw_D6pY: Downloading web safari player API JSON
+WARNING: [youtube] VdACzw_D6pY: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] VdACzw_D6pY: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] VdACzw_D6pY: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 71 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=MJQIQJYxey4
+[youtube] MJQIQJYxey4: Downloading webpage
+[youtube] MJQIQJYxey4: Downloading tv client config
+[youtube] MJQIQJYxey4: Downloading tv player API JSON
+[youtube] MJQIQJYxey4: Downloading web safari player API JSON
+WARNING: [youtube] MJQIQJYxey4: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] MJQIQJYxey4: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] MJQIQJYxey4: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 72 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=FGeM6jLsC5g
+[youtube] FGeM6jLsC5g: Downloading webpage
+[youtube] FGeM6jLsC5g: Downloading tv client config
+[youtube] FGeM6jLsC5g: Downloading tv player API JSON
+[youtube] FGeM6jLsC5g: Downloading web safari player API JSON
+WARNING: [youtube] FGeM6jLsC5g: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] FGeM6jLsC5g: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] FGeM6jLsC5g: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 73 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=GqWw8-TdjXU
+[youtube] GqWw8-TdjXU: Downloading webpage
+[youtube] GqWw8-TdjXU: Downloading tv client config
+[youtube] GqWw8-TdjXU: Downloading tv player API JSON
+[youtube] GqWw8-TdjXU: Downloading web safari player API JSON
+WARNING: [youtube] GqWw8-TdjXU: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] GqWw8-TdjXU: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] GqWw8-TdjXU: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 74 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=pfB32FkAxh0
+[youtube] pfB32FkAxh0: Downloading webpage
+[youtube] pfB32FkAxh0: Downloading tv client config
+[youtube] pfB32FkAxh0: Downloading tv player API JSON
+[youtube] pfB32FkAxh0: Downloading web safari player API JSON
+WARNING: [youtube] pfB32FkAxh0: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] pfB32FkAxh0: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] pfB32FkAxh0: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 75 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=v0uKLCZocjs
+[youtube] v0uKLCZocjs: Downloading webpage
+[youtube] v0uKLCZocjs: Downloading tv client config
+[youtube] v0uKLCZocjs: Downloading tv player API JSON
+[youtube] v0uKLCZocjs: Downloading web safari player API JSON
+WARNING: [youtube] v0uKLCZocjs: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] v0uKLCZocjs: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] v0uKLCZocjs: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 76 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=ZFmapxYBafY
+[youtube] ZFmapxYBafY: Downloading webpage
+[youtube] ZFmapxYBafY: Downloading tv client config
+[youtube] ZFmapxYBafY: Downloading tv player API JSON
+[youtube] ZFmapxYBafY: Downloading web safari player API JSON
+WARNING: [youtube] ZFmapxYBafY: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] ZFmapxYBafY: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] ZFmapxYBafY: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 77 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=Q4_YTXhq7no
+[youtube] Q4_YTXhq7no: Downloading webpage
+[youtube] Q4_YTXhq7no: Downloading tv client config
+[youtube] Q4_YTXhq7no: Downloading tv player API JSON
+[youtube] Q4_YTXhq7no: Downloading web safari player API JSON
+WARNING: [youtube] Q4_YTXhq7no: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] Q4_YTXhq7no: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] Q4_YTXhq7no: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 78 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=7s4QX2H-3GI
+[youtube] 7s4QX2H-3GI: Downloading webpage
+[youtube] 7s4QX2H-3GI: Downloading tv client config
+[youtube] 7s4QX2H-3GI: Downloading tv player API JSON
+[youtube] 7s4QX2H-3GI: Downloading web safari player API JSON
+WARNING: [youtube] 7s4QX2H-3GI: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] 7s4QX2H-3GI: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] 7s4QX2H-3GI: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 79 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=C4o_Jx4UZi0
+[youtube] C4o_Jx4UZi0: Downloading webpage
+[youtube] C4o_Jx4UZi0: Downloading tv client config
+[youtube] C4o_Jx4UZi0: Downloading tv player API JSON
+[youtube] C4o_Jx4UZi0: Downloading web safari player API JSON
+WARNING: [youtube] C4o_Jx4UZi0: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] C4o_Jx4UZi0: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] C4o_Jx4UZi0: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 80 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=gXPRCnPJYbY
+[youtube] gXPRCnPJYbY: Downloading webpage
+[youtube] gXPRCnPJYbY: Downloading tv client config
+[youtube] gXPRCnPJYbY: Downloading tv player API JSON
+[youtube] gXPRCnPJYbY: Downloading web safari player API JSON
+WARNING: [youtube] gXPRCnPJYbY: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] gXPRCnPJYbY: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] gXPRCnPJYbY: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 81 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=otCYl7_uU8Y
+[youtube] otCYl7_uU8Y: Downloading webpage
+[youtube] otCYl7_uU8Y: Downloading tv client config
+[youtube] otCYl7_uU8Y: Downloading tv player API JSON
+[youtube] otCYl7_uU8Y: Downloading web safari player API JSON
+WARNING: [youtube] otCYl7_uU8Y: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] otCYl7_uU8Y: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] otCYl7_uU8Y: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 82 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=ybl8IvhGAJ4
+[youtube] ybl8IvhGAJ4: Downloading webpage
+[youtube] ybl8IvhGAJ4: Downloading tv client config
+[youtube] ybl8IvhGAJ4: Downloading tv player API JSON
+[youtube] ybl8IvhGAJ4: Downloading web safari player API JSON
+WARNING: [youtube] ybl8IvhGAJ4: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] ybl8IvhGAJ4: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] ybl8IvhGAJ4: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 83 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=xkRv2M--uzs
+[youtube] xkRv2M--uzs: Downloading webpage
+[youtube] xkRv2M--uzs: Downloading tv client config
+[youtube] xkRv2M--uzs: Downloading tv player API JSON
+[youtube] xkRv2M--uzs: Downloading web safari player API JSON
+WARNING: [youtube] xkRv2M--uzs: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] xkRv2M--uzs: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] xkRv2M--uzs: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 84 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=PqCo85OJLpc
+[youtube] PqCo85OJLpc: Downloading webpage
+[youtube] PqCo85OJLpc: Downloading tv client config
+[youtube] PqCo85OJLpc: Downloading tv player API JSON
+[youtube] PqCo85OJLpc: Downloading web safari player API JSON
+WARNING: [youtube] PqCo85OJLpc: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] PqCo85OJLpc: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] PqCo85OJLpc: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 85 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=Ef0eOk9ZgEk
+[youtube] Ef0eOk9ZgEk: Downloading webpage
+[youtube] Ef0eOk9ZgEk: Downloading tv client config
+[youtube] Ef0eOk9ZgEk: Downloading tv player API JSON
+[youtube] Ef0eOk9ZgEk: Downloading web safari player API JSON
+WARNING: [youtube] Ef0eOk9ZgEk: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] Ef0eOk9ZgEk: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] Ef0eOk9ZgEk: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 86 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=R5DbRyeZNRk
+[youtube] R5DbRyeZNRk: Downloading webpage
+[youtube] R5DbRyeZNRk: Downloading tv client config
+[youtube] R5DbRyeZNRk: Downloading tv player API JSON
+[youtube] R5DbRyeZNRk: Downloading web safari player API JSON
+WARNING: [youtube] R5DbRyeZNRk: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] R5DbRyeZNRk: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] R5DbRyeZNRk: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 87 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=Pzg7aN0SOVM
+[youtube] Pzg7aN0SOVM: Downloading webpage
+[youtube] Pzg7aN0SOVM: Downloading tv client config
+[youtube] Pzg7aN0SOVM: Downloading tv player API JSON
+[youtube] Pzg7aN0SOVM: Downloading web safari player API JSON
+ERROR: [youtube] Pzg7aN0SOVM: The uploader has not made this video available in your country
+This video is available in United States.
+You might want to use a VPN or a proxy server (with --proxy) to workaround.
+Deprecated Feature: Support for Python version 3.9 has been deprecated. Please update to Python 3.10 or above
+[youtube:tab] Extracting URL: https://www.youtube.com/watch?v=LyCCEpRXkuY&list=PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR&index=24
+Transcript extraction failed, falling back to VIDEO analysis: Could not retrieve transcripts for this video: ERROR: [youtube] Pzg7aN0SOVM: The uploader has not made this video available in your country
+This video is available in United States.
+You might want to use a VPN or a proxy server (with --proxy) to workaround.
+Attempting video download with yt-dlp: https://www.youtube.com/watch?v=LyCCEpRXkuY&list=PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR&index=24
+[youtube:tab] Downloading playlist PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR - add --no-playlist to download just the video LyCCEpRXkuY
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR: Downloading webpage
+[youtube:tab] Extracting URL: https://www.youtube.com/playlist?list=PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR: Downloading webpage
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR: Redownloading playlist API JSON with unavailable videos
+[download] Downloading playlist: Technology | CNBC
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 1: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 2: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 3: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 4: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 5: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 6: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 7: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 8: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 9: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 10: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 11: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 12: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 13: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 14: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 15: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 16: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 17: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 18: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 19: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 20: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 21: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 22: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 23: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 24: Downloading API JSON
+[youtube:tab] Playlist Technology | CNBC: Downloading 2416 items of 2416
+[download] Downloading item 1 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=Ecmlh607KeA
+[youtube] Ecmlh607KeA: Downloading webpage
+[youtube] Ecmlh607KeA: Downloading tv client config
+[youtube] Ecmlh607KeA: Downloading tv player API JSON
+[youtube] Ecmlh607KeA: Downloading web safari player API JSON
+WARNING: [youtube] Ecmlh607KeA: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+[info] Ecmlh607KeA: Downloading 1 format(s): 18
+[download] Sleeping 6.00 seconds as required by the site...
+ERROR: unable to download video data: HTTP Error 403: Forbidden
+yt-dlp video download failed: ERROR: unable to download video data: HTTP Error 403: Forbidden. Trying pytubefix fallback...
+pytubefix video download success: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/services/temp/c30c300a-8913-4d75-a242-72f48b838cbd/video_raw.mp4
+Starting Gemini VIDEO analysis
+Uploading file /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/services/temp/c30c300a-8913-4d75-a242-72f48b838cbd/video_raw.mp4 to Gemini...
+Waiting for video processing: files/x3da95xjrzm3
+.......Done.
+Generating analysis content...
+Analysis 02765998-3917-424c-a3df-f5bfdb2d8d62 completed successfully.
+Current Working Directory: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend
+Using Gemini API Key Authentication (Local Mode)
+INFO:     127.0.0.1:62559 - "GET /api/analyze/02765998-3917-424c-a3df-f5bfdb2d8d62 HTTP/1.1" 200 OK
+Current Working Directory: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend
+Using Gemini API Key Authentication (Local Mode)
+INFO:     127.0.0.1:62561 - "GET /api/analyze/02765998-3917-424c-a3df-f5bfdb2d8d62 HTTP/1.1" 200 OK
+DEBUG: Processing analysis request for URL: https://www.youtube.com/watch?v=LyCCEpRXkuY&list=PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR&index=24 | User: 0d93271a-2865-458a-8191-7a3b5934b52c
+Current Working Directory: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend
+Using Gemini API Key Authentication (Local Mode)
+INFO:     127.0.0.1:63733 - "POST /api/analyze HTTP/1.1" 200 OK
+Deprecated Feature: Support for Python version 3.9 has been deprecated. Please update to Python 3.10 or above
+Deprecated Feature: Support for Python version 3.9 has been deprecated. Please update to Python 3.10 or above
+[youtube:tab] Extracting URL: https://www.youtube.com/watch?v=LyCCEpRXkuY&list=PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR&index=24
+Current Working Directory: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend
+Using Gemini API Key Authentication (Local Mode)
+Extracting transcript & metadata for https://www.youtube.com/watch?v=LyCCEpRXkuY&list=PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR&index=24
+Attempting transcript extraction for https://www.youtube.com/watch?v=LyCCEpRXkuY&list=PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR&index=24
+Fetching transcript for video: LyCCEpRXkuY
+Cookie path: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/cookies.txt, exists: True
+youtube-transcript-api failed: __init__() missing 1 required positional argument: 'proxy_config'
+Falling back to yt-dlp with cookies...
+[youtube:tab] Downloading playlist PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR - add --no-playlist to download just the video LyCCEpRXkuY
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR: Downloading webpage
+[youtube:tab] Extracting URL: https://www.youtube.com/playlist?list=PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR: Downloading webpage
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR: Redownloading playlist API JSON with unavailable videos
+[download] Downloading playlist: Technology | CNBC
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 1: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 2: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 3: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 4: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 5: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 6: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 7: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 8: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 9: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 10: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 11: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 12: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 13: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 14: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 15: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 16: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 17: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 18: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 19: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 20: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 21: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 22: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 23: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 24: Downloading API JSON
+[youtube:tab] Playlist Technology | CNBC: Downloading 2416 items of 2416
+[download] Downloading item 1 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=Ecmlh607KeA
+[youtube] Ecmlh607KeA: Downloading webpage
+[youtube] Ecmlh607KeA: Downloading tv client config
+[youtube] Ecmlh607KeA: Downloading tv player API JSON
+[youtube] Ecmlh607KeA: Downloading web safari player API JSON
+WARNING: [youtube] Ecmlh607KeA: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] Ecmlh607KeA: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] Ecmlh607KeA: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 2 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=n_Ijppjd3Uc
+[youtube] n_Ijppjd3Uc: Downloading webpage
+[youtube] n_Ijppjd3Uc: Downloading tv client config
+[youtube] n_Ijppjd3Uc: Downloading tv player API JSON
+[youtube] n_Ijppjd3Uc: Downloading web safari player API JSON
+WARNING: [youtube] n_Ijppjd3Uc: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] n_Ijppjd3Uc: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] n_Ijppjd3Uc: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 3 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=ZkPU5GHDqkQ
+[youtube] ZkPU5GHDqkQ: Downloading webpage
+[youtube] ZkPU5GHDqkQ: Downloading tv client config
+[youtube] ZkPU5GHDqkQ: Downloading tv player API JSON
+[youtube] ZkPU5GHDqkQ: Downloading web safari player API JSON
+WARNING: [youtube] ZkPU5GHDqkQ: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] ZkPU5GHDqkQ: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] ZkPU5GHDqkQ: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 4 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=Q22hihy6qcw
+[youtube] Q22hihy6qcw: Downloading webpage
+[youtube] Q22hihy6qcw: Downloading tv client config
+[youtube] Q22hihy6qcw: Downloading tv player API JSON
+[youtube] Q22hihy6qcw: Downloading web safari player API JSON
+WARNING: [youtube] Q22hihy6qcw: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] Q22hihy6qcw: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] Q22hihy6qcw: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 5 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=wO9jYGKBJZw
+[youtube] wO9jYGKBJZw: Downloading webpage
+[youtube] wO9jYGKBJZw: Downloading tv client config
+[youtube] wO9jYGKBJZw: Downloading tv player API JSON
+[youtube] wO9jYGKBJZw: Downloading web safari player API JSON
+WARNING: [youtube] wO9jYGKBJZw: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] wO9jYGKBJZw: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] wO9jYGKBJZw: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 6 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=k_bHtx_e-SU
+[youtube] k_bHtx_e-SU: Downloading webpage
+[youtube] k_bHtx_e-SU: Downloading tv client config
+[youtube] k_bHtx_e-SU: Downloading tv player API JSON
+[youtube] k_bHtx_e-SU: Downloading web safari player API JSON
+WARNING: [youtube] k_bHtx_e-SU: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] k_bHtx_e-SU: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] k_bHtx_e-SU: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 7 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=Y3KLbc5DlRs
+[youtube] Y3KLbc5DlRs: Downloading webpage
+[youtube] Y3KLbc5DlRs: Downloading tv client config
+[youtube] Y3KLbc5DlRs: Downloading tv player API JSON
+[youtube] Y3KLbc5DlRs: Downloading web safari player API JSON
+WARNING: [youtube] Y3KLbc5DlRs: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] Y3KLbc5DlRs: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] Y3KLbc5DlRs: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 8 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=YFE0zNMqQyg
+[youtube] YFE0zNMqQyg: Downloading webpage
+[youtube] YFE0zNMqQyg: Downloading tv client config
+[youtube] YFE0zNMqQyg: Downloading tv player API JSON
+[youtube] YFE0zNMqQyg: Downloading web safari player API JSON
+WARNING: [youtube] YFE0zNMqQyg: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] YFE0zNMqQyg: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] YFE0zNMqQyg: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 9 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=vgEfyF9juOA
+[youtube] vgEfyF9juOA: Downloading webpage
+[youtube] vgEfyF9juOA: Downloading tv client config
+[youtube] vgEfyF9juOA: Downloading tv player API JSON
+[youtube] vgEfyF9juOA: Downloading web safari player API JSON
+WARNING: [youtube] vgEfyF9juOA: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] vgEfyF9juOA: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] vgEfyF9juOA: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 10 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=KU57CWWWc3g
+[youtube] KU57CWWWc3g: Downloading webpage
+[youtube] KU57CWWWc3g: Downloading tv client config
+[youtube] KU57CWWWc3g: Downloading tv player API JSON
+[youtube] KU57CWWWc3g: Downloading web safari player API JSON
+WARNING: [youtube] KU57CWWWc3g: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] KU57CWWWc3g: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] KU57CWWWc3g: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 11 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=Pz5XRyo5fiw
+[youtube] Pz5XRyo5fiw: Downloading webpage
+[youtube] Pz5XRyo5fiw: Downloading tv client config
+[youtube] Pz5XRyo5fiw: Downloading tv player API JSON
+[youtube] Pz5XRyo5fiw: Downloading web safari player API JSON
+WARNING: [youtube] Pz5XRyo5fiw: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] Pz5XRyo5fiw: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] Pz5XRyo5fiw: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 12 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=kQzBjvqLZFo
+[youtube] kQzBjvqLZFo: Downloading webpage
+[youtube] kQzBjvqLZFo: Downloading tv client config
+[youtube] kQzBjvqLZFo: Downloading tv player API JSON
+[youtube] kQzBjvqLZFo: Downloading web safari player API JSON
+WARNING: [youtube] kQzBjvqLZFo: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] kQzBjvqLZFo: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] kQzBjvqLZFo: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 13 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=FSbq0T7j77g
+[youtube] FSbq0T7j77g: Downloading webpage
+[youtube] FSbq0T7j77g: Downloading tv client config
+[youtube] FSbq0T7j77g: Downloading tv player API JSON
+[youtube] FSbq0T7j77g: Downloading web safari player API JSON
+WARNING: [youtube] FSbq0T7j77g: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] FSbq0T7j77g: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] FSbq0T7j77g: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 14 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=XUkGmqTQqFk
+[youtube] XUkGmqTQqFk: Downloading webpage
+[youtube] XUkGmqTQqFk: Downloading tv client config
+[youtube] XUkGmqTQqFk: Downloading tv player API JSON
+[youtube] XUkGmqTQqFk: Downloading web safari player API JSON
+WARNING: [youtube] XUkGmqTQqFk: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] XUkGmqTQqFk: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] XUkGmqTQqFk: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 15 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=RU6jKmcD-W0
+[youtube] RU6jKmcD-W0: Downloading webpage
+[youtube] RU6jKmcD-W0: Downloading tv client config
+[youtube] RU6jKmcD-W0: Downloading tv player API JSON
+[youtube] RU6jKmcD-W0: Downloading web safari player API JSON
+WARNING: [youtube] RU6jKmcD-W0: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] RU6jKmcD-W0: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] RU6jKmcD-W0: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 16 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=NdCSez0cyck
+[youtube] NdCSez0cyck: Downloading webpage
+[youtube] NdCSez0cyck: Downloading tv client config
+[youtube] NdCSez0cyck: Downloading tv player API JSON
+[youtube] NdCSez0cyck: Downloading web safari player API JSON
+WARNING: [youtube] NdCSez0cyck: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] NdCSez0cyck: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] NdCSez0cyck: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 17 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=lIRW8bfy4kE
+[youtube] lIRW8bfy4kE: Downloading webpage
+[youtube] lIRW8bfy4kE: Downloading tv client config
+[youtube] lIRW8bfy4kE: Downloading tv player API JSON
+[youtube] lIRW8bfy4kE: Downloading web safari player API JSON
+WARNING: [youtube] lIRW8bfy4kE: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] lIRW8bfy4kE: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] lIRW8bfy4kE: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 18 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=K4PY0k7_4Dk
+[youtube] K4PY0k7_4Dk: Downloading webpage
+[youtube] K4PY0k7_4Dk: Downloading tv client config
+[youtube] K4PY0k7_4Dk: Downloading tv player API JSON
+[youtube] K4PY0k7_4Dk: Downloading web safari player API JSON
+WARNING: [youtube] K4PY0k7_4Dk: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] K4PY0k7_4Dk: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] K4PY0k7_4Dk: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 19 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=L0dAroYsF8M
+[youtube] L0dAroYsF8M: Downloading webpage
+[youtube] L0dAroYsF8M: Downloading tv client config
+[youtube] L0dAroYsF8M: Downloading tv player API JSON
+[youtube] L0dAroYsF8M: Downloading web safari player API JSON
+WARNING: [youtube] L0dAroYsF8M: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] L0dAroYsF8M: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] L0dAroYsF8M: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 20 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=otAWu-bLv0Q
+[youtube] otAWu-bLv0Q: Downloading webpage
+[youtube] otAWu-bLv0Q: Downloading tv client config
+[youtube] otAWu-bLv0Q: Downloading tv player API JSON
+[youtube] otAWu-bLv0Q: Downloading web safari player API JSON
+WARNING: [youtube] otAWu-bLv0Q: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] otAWu-bLv0Q: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] otAWu-bLv0Q: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 21 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=sTGYE4d9UxI
+[youtube] sTGYE4d9UxI: Downloading webpage
+[youtube] sTGYE4d9UxI: Downloading tv client config
+[youtube] sTGYE4d9UxI: Downloading tv player API JSON
+[youtube] sTGYE4d9UxI: Downloading web safari player API JSON
+WARNING: [youtube] sTGYE4d9UxI: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] sTGYE4d9UxI: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] sTGYE4d9UxI: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 22 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=HRMZTup5TT0
+[youtube] HRMZTup5TT0: Downloading webpage
+[youtube] HRMZTup5TT0: Downloading tv client config
+[youtube] HRMZTup5TT0: Downloading tv player API JSON
+[youtube] HRMZTup5TT0: Downloading web safari player API JSON
+WARNING: [youtube] HRMZTup5TT0: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] HRMZTup5TT0: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] HRMZTup5TT0: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 23 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=zOnamzPC2Qk
+[youtube] zOnamzPC2Qk: Downloading webpage
+[youtube] zOnamzPC2Qk: Downloading tv client config
+[youtube] zOnamzPC2Qk: Downloading tv player API JSON
+[youtube] zOnamzPC2Qk: Downloading web safari player API JSON
+WARNING: [youtube] zOnamzPC2Qk: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] zOnamzPC2Qk: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] zOnamzPC2Qk: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 24 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=LyCCEpRXkuY
+[youtube] LyCCEpRXkuY: Downloading webpage
+[youtube] LyCCEpRXkuY: Downloading tv client config
+[youtube] LyCCEpRXkuY: Downloading tv player API JSON
+[youtube] LyCCEpRXkuY: Downloading web safari player API JSON
+WARNING: [youtube] LyCCEpRXkuY: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] LyCCEpRXkuY: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] LyCCEpRXkuY: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 25 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=nyEZrjWrMlM
+[youtube] nyEZrjWrMlM: Downloading webpage
+[youtube] nyEZrjWrMlM: Downloading tv client config
+[youtube] nyEZrjWrMlM: Downloading tv player API JSON
+[youtube] nyEZrjWrMlM: Downloading web safari player API JSON
+WARNING: [youtube] nyEZrjWrMlM: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] nyEZrjWrMlM: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] nyEZrjWrMlM: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 26 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=VWyS98TXqnQ
+[youtube] VWyS98TXqnQ: Downloading webpage
+[youtube] VWyS98TXqnQ: Downloading tv client config
+[youtube] VWyS98TXqnQ: Downloading tv player API JSON
+[youtube] VWyS98TXqnQ: Downloading web safari player API JSON
+WARNING: [youtube] VWyS98TXqnQ: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] VWyS98TXqnQ: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] VWyS98TXqnQ: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 27 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=oTW5VBuM-Gc
+[youtube] oTW5VBuM-Gc: Downloading webpage
+[youtube] oTW5VBuM-Gc: Downloading tv client config
+[youtube] oTW5VBuM-Gc: Downloading tv player API JSON
+[youtube] oTW5VBuM-Gc: Downloading web safari player API JSON
+WARNING: [youtube] oTW5VBuM-Gc: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] oTW5VBuM-Gc: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] oTW5VBuM-Gc: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 28 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=75caxICRDFA
+[youtube] 75caxICRDFA: Downloading webpage
+[youtube] 75caxICRDFA: Downloading tv client config
+[youtube] 75caxICRDFA: Downloading tv player API JSON
+[youtube] 75caxICRDFA: Downloading web safari player API JSON
+WARNING: [youtube] 75caxICRDFA: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] 75caxICRDFA: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] 75caxICRDFA: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 29 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=wsuD8UGWQSs
+[youtube] wsuD8UGWQSs: Downloading webpage
+[youtube] wsuD8UGWQSs: Downloading tv client config
+[youtube] wsuD8UGWQSs: Downloading tv player API JSON
+[youtube] wsuD8UGWQSs: Downloading web safari player API JSON
+WARNING: [youtube] wsuD8UGWQSs: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] wsuD8UGWQSs: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] wsuD8UGWQSs: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 30 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=jYzVeLyTPOc
+[youtube] jYzVeLyTPOc: Downloading webpage
+[youtube] jYzVeLyTPOc: Downloading tv client config
+[youtube] jYzVeLyTPOc: Downloading tv player API JSON
+[youtube] jYzVeLyTPOc: Downloading web safari player API JSON
+WARNING: [youtube] jYzVeLyTPOc: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] jYzVeLyTPOc: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] jYzVeLyTPOc: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 31 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=OlXDlmVjoYw
+[youtube] OlXDlmVjoYw: Downloading webpage
+[youtube] OlXDlmVjoYw: Downloading tv client config
+[youtube] OlXDlmVjoYw: Downloading tv player API JSON
+[youtube] OlXDlmVjoYw: Downloading web safari player API JSON
+WARNING: [youtube] OlXDlmVjoYw: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] OlXDlmVjoYw: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] OlXDlmVjoYw: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 32 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=LW89RaUW5BI
+[youtube] LW89RaUW5BI: Downloading webpage
+[youtube] LW89RaUW5BI: Downloading tv client config
+[youtube] LW89RaUW5BI: Downloading tv player API JSON
+[youtube] LW89RaUW5BI: Downloading web safari player API JSON
+WARNING: [youtube] LW89RaUW5BI: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] LW89RaUW5BI: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] LW89RaUW5BI: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 33 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=5xN8vlB2VR8
+[youtube] 5xN8vlB2VR8: Downloading webpage
+[youtube] 5xN8vlB2VR8: Downloading tv client config
+[youtube] 5xN8vlB2VR8: Downloading tv player API JSON
+[youtube] 5xN8vlB2VR8: Downloading web safari player API JSON
+WARNING: [youtube] 5xN8vlB2VR8: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] 5xN8vlB2VR8: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] 5xN8vlB2VR8: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 34 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=N12v9aj3WKI
+[youtube] N12v9aj3WKI: Downloading webpage
+[youtube] N12v9aj3WKI: Downloading tv client config
+[youtube] N12v9aj3WKI: Downloading tv player API JSON
+[youtube] N12v9aj3WKI: Downloading web safari player API JSON
+WARNING: [youtube] N12v9aj3WKI: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] N12v9aj3WKI: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] N12v9aj3WKI: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 35 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=QqDqNl6OJZE
+[youtube] QqDqNl6OJZE: Downloading webpage
+[youtube] QqDqNl6OJZE: Downloading tv client config
+[youtube] QqDqNl6OJZE: Downloading tv player API JSON
+[youtube] QqDqNl6OJZE: Downloading web safari player API JSON
+WARNING: [youtube] QqDqNl6OJZE: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] QqDqNl6OJZE: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] QqDqNl6OJZE: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 36 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=mmws6Oqtq9o
+[youtube] mmws6Oqtq9o: Downloading webpage
+[youtube] mmws6Oqtq9o: Downloading tv client config
+[youtube] mmws6Oqtq9o: Downloading tv player API JSON
+[youtube] mmws6Oqtq9o: Downloading web safari player API JSON
+WARNING: [youtube] mmws6Oqtq9o: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] mmws6Oqtq9o: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] mmws6Oqtq9o: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 37 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=XLFhfwVOPaI
+[youtube] XLFhfwVOPaI: Downloading webpage
+[youtube] XLFhfwVOPaI: Downloading tv client config
+[youtube] XLFhfwVOPaI: Downloading tv player API JSON
+[youtube] XLFhfwVOPaI: Downloading web safari player API JSON
+WARNING: [youtube] XLFhfwVOPaI: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] XLFhfwVOPaI: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] XLFhfwVOPaI: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 38 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=IkOicF8qBFU
+[youtube] IkOicF8qBFU: Downloading webpage
+[youtube] IkOicF8qBFU: Downloading tv client config
+[youtube] IkOicF8qBFU: Downloading tv player API JSON
+[youtube] IkOicF8qBFU: Downloading web safari player API JSON
+WARNING: [youtube] IkOicF8qBFU: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] IkOicF8qBFU: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] IkOicF8qBFU: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 39 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=nyn0HUqluVM
+[youtube] nyn0HUqluVM: Downloading webpage
+[youtube] nyn0HUqluVM: Downloading tv client config
+[youtube] nyn0HUqluVM: Downloading tv player API JSON
+[youtube] nyn0HUqluVM: Downloading web safari player API JSON
+WARNING: [youtube] nyn0HUqluVM: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] nyn0HUqluVM: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] nyn0HUqluVM: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 40 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=ZZTJ8idBFVw
+[youtube] ZZTJ8idBFVw: Downloading webpage
+[youtube] ZZTJ8idBFVw: Downloading tv client config
+[youtube] ZZTJ8idBFVw: Downloading tv player API JSON
+[youtube] ZZTJ8idBFVw: Downloading web safari player API JSON
+WARNING: [youtube] ZZTJ8idBFVw: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] ZZTJ8idBFVw: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] ZZTJ8idBFVw: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 41 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=n_J-SadyhJ4
+[youtube] n_J-SadyhJ4: Downloading webpage
+[youtube] n_J-SadyhJ4: Downloading tv client config
+[youtube] n_J-SadyhJ4: Downloading tv player API JSON
+[youtube] n_J-SadyhJ4: Downloading web safari player API JSON
+WARNING: [youtube] n_J-SadyhJ4: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] n_J-SadyhJ4: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] n_J-SadyhJ4: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 42 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=JIjJtyRjiOI
+[youtube] JIjJtyRjiOI: Downloading webpage
+[youtube] JIjJtyRjiOI: Downloading tv client config
+[youtube] JIjJtyRjiOI: Downloading tv player API JSON
+[youtube] JIjJtyRjiOI: Downloading web safari player API JSON
+WARNING: [youtube] JIjJtyRjiOI: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] JIjJtyRjiOI: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] JIjJtyRjiOI: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 43 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=BzgUOKFrHcA
+[youtube] BzgUOKFrHcA: Downloading webpage
+[youtube] BzgUOKFrHcA: Downloading tv client config
+[youtube] BzgUOKFrHcA: Downloading tv player API JSON
+[youtube] BzgUOKFrHcA: Downloading web safari player API JSON
+WARNING: [youtube] BzgUOKFrHcA: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] BzgUOKFrHcA: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] BzgUOKFrHcA: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 44 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=PKdL5NPbg7I
+[youtube] PKdL5NPbg7I: Downloading webpage
+[youtube] PKdL5NPbg7I: Downloading tv client config
+[youtube] PKdL5NPbg7I: Downloading tv player API JSON
+[youtube] PKdL5NPbg7I: Downloading web safari player API JSON
+WARNING: [youtube] PKdL5NPbg7I: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] PKdL5NPbg7I: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] PKdL5NPbg7I: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 45 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=0d-uc8p5GrE
+[youtube] 0d-uc8p5GrE: Downloading webpage
+[youtube] 0d-uc8p5GrE: Downloading tv client config
+[youtube] 0d-uc8p5GrE: Downloading tv player API JSON
+[youtube] 0d-uc8p5GrE: Downloading web safari player API JSON
+WARNING: [youtube] 0d-uc8p5GrE: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] 0d-uc8p5GrE: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] 0d-uc8p5GrE: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 46 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=WEBiebbeNCA
+[youtube] WEBiebbeNCA: Downloading webpage
+[youtube] WEBiebbeNCA: Downloading tv client config
+[youtube] WEBiebbeNCA: Downloading tv player API JSON
+[youtube] WEBiebbeNCA: Downloading web safari player API JSON
+WARNING: [youtube] WEBiebbeNCA: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] WEBiebbeNCA: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] WEBiebbeNCA: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 47 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=LryZ79zHUgs
+[youtube] LryZ79zHUgs: Downloading webpage
+[youtube] LryZ79zHUgs: Downloading tv client config
+[youtube] LryZ79zHUgs: Downloading tv player API JSON
+[youtube] LryZ79zHUgs: Downloading web safari player API JSON
+WARNING: [youtube] LryZ79zHUgs: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] LryZ79zHUgs: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] LryZ79zHUgs: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 48 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=Kbk1QyS0B_0
+[youtube] Kbk1QyS0B_0: Downloading webpage
+[youtube] Kbk1QyS0B_0: Downloading tv client config
+[youtube] Kbk1QyS0B_0: Downloading tv player API JSON
+[youtube] Kbk1QyS0B_0: Downloading web safari player API JSON
+WARNING: [youtube] Kbk1QyS0B_0: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] Kbk1QyS0B_0: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] Kbk1QyS0B_0: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 49 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=bk-oTa4p4Fc
+[youtube] bk-oTa4p4Fc: Downloading webpage
+[youtube] bk-oTa4p4Fc: Downloading tv client config
+[youtube] bk-oTa4p4Fc: Downloading tv player API JSON
+[youtube] bk-oTa4p4Fc: Downloading web safari player API JSON
+WARNING: [youtube] bk-oTa4p4Fc: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] bk-oTa4p4Fc: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] bk-oTa4p4Fc: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 50 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=6BZVucAbcQo
+[youtube] 6BZVucAbcQo: Downloading webpage
+[youtube] 6BZVucAbcQo: Downloading tv client config
+[youtube] 6BZVucAbcQo: Downloading tv player API JSON
+[youtube] 6BZVucAbcQo: Downloading web safari player API JSON
+WARNING: [youtube] 6BZVucAbcQo: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] 6BZVucAbcQo: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] 6BZVucAbcQo: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 51 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=58zHJL1dKtw
+[youtube] 58zHJL1dKtw: Downloading webpage
+[youtube] 58zHJL1dKtw: Downloading tv client config
+[youtube] 58zHJL1dKtw: Downloading tv player API JSON
+[youtube] 58zHJL1dKtw: Downloading web safari player API JSON
+WARNING: [youtube] 58zHJL1dKtw: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] 58zHJL1dKtw: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] 58zHJL1dKtw: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 52 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=UT6C93PM61I
+[youtube] UT6C93PM61I: Downloading webpage
+[youtube] UT6C93PM61I: Downloading tv client config
+[youtube] UT6C93PM61I: Downloading tv player API JSON
+[youtube] UT6C93PM61I: Downloading web safari player API JSON
+WARNING: [youtube] UT6C93PM61I: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] UT6C93PM61I: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] UT6C93PM61I: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 53 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=Dtdt8ZCTCFs
+[youtube] Dtdt8ZCTCFs: Downloading webpage
+[youtube] Dtdt8ZCTCFs: Downloading tv client config
+[youtube] Dtdt8ZCTCFs: Downloading tv player API JSON
+[youtube] Dtdt8ZCTCFs: Downloading web safari player API JSON
+WARNING: [youtube] Dtdt8ZCTCFs: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] Dtdt8ZCTCFs: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] Dtdt8ZCTCFs: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 54 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=WHat_LYrpQE
+[youtube] WHat_LYrpQE: Downloading webpage
+[youtube] WHat_LYrpQE: Downloading tv client config
+[youtube] WHat_LYrpQE: Downloading tv player API JSON
+[youtube] WHat_LYrpQE: Downloading web safari player API JSON
+WARNING: [youtube] WHat_LYrpQE: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] WHat_LYrpQE: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] WHat_LYrpQE: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 55 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=s36eG_ZHmGA
+[youtube] s36eG_ZHmGA: Downloading webpage
+[youtube] s36eG_ZHmGA: Downloading tv client config
+[youtube] s36eG_ZHmGA: Downloading tv player API JSON
+[youtube] s36eG_ZHmGA: Downloading web safari player API JSON
+WARNING: [youtube] s36eG_ZHmGA: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] s36eG_ZHmGA: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] s36eG_ZHmGA: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 56 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=BrNu2a9uhR0
+[youtube] BrNu2a9uhR0: Downloading webpage
+[youtube] BrNu2a9uhR0: Downloading tv client config
+[youtube] BrNu2a9uhR0: Downloading tv player API JSON
+[youtube] BrNu2a9uhR0: Downloading web safari player API JSON
+WARNING: [youtube] BrNu2a9uhR0: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] BrNu2a9uhR0: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] BrNu2a9uhR0: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 57 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=mXPMXVLs3-Q
+[youtube] mXPMXVLs3-Q: Downloading webpage
+[youtube] mXPMXVLs3-Q: Downloading tv client config
+[youtube] mXPMXVLs3-Q: Downloading tv player API JSON
+[youtube] mXPMXVLs3-Q: Downloading web safari player API JSON
+WARNING: [youtube] mXPMXVLs3-Q: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] mXPMXVLs3-Q: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] mXPMXVLs3-Q: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 58 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=P8ExkUxgYw0
+[youtube] P8ExkUxgYw0: Downloading webpage
+[youtube] P8ExkUxgYw0: Downloading tv client config
+[youtube] P8ExkUxgYw0: Downloading tv player API JSON
+[youtube] P8ExkUxgYw0: Downloading web safari player API JSON
+WARNING: [youtube] P8ExkUxgYw0: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] P8ExkUxgYw0: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] P8ExkUxgYw0: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 59 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=kt5s4thhRIg
+[youtube] kt5s4thhRIg: Downloading webpage
+[youtube] kt5s4thhRIg: Downloading tv client config
+[youtube] kt5s4thhRIg: Downloading tv player API JSON
+[youtube] kt5s4thhRIg: Downloading web safari player API JSON
+WARNING: [youtube] kt5s4thhRIg: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] kt5s4thhRIg: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] kt5s4thhRIg: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 60 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=95kcrgRhvK8
+[youtube] 95kcrgRhvK8: Downloading webpage
+[youtube] 95kcrgRhvK8: Downloading tv client config
+[youtube] 95kcrgRhvK8: Downloading tv player API JSON
+[youtube] 95kcrgRhvK8: Downloading web safari player API JSON
+WARNING: [youtube] 95kcrgRhvK8: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] 95kcrgRhvK8: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] 95kcrgRhvK8: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 61 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=KUt6ktzSEVc
+[youtube] KUt6ktzSEVc: Downloading webpage
+[youtube] KUt6ktzSEVc: Downloading tv client config
+[youtube] KUt6ktzSEVc: Downloading tv player API JSON
+[youtube] KUt6ktzSEVc: Downloading web safari player API JSON
+WARNING: [youtube] KUt6ktzSEVc: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] KUt6ktzSEVc: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] KUt6ktzSEVc: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 62 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=o_7XarmoDIw
+[youtube] o_7XarmoDIw: Downloading webpage
+[youtube] o_7XarmoDIw: Downloading tv client config
+[youtube] o_7XarmoDIw: Downloading tv player API JSON
+[youtube] o_7XarmoDIw: Downloading web safari player API JSON
+WARNING: [youtube] o_7XarmoDIw: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] o_7XarmoDIw: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] o_7XarmoDIw: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 63 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=Ym5pOLjsG-I
+[youtube] Ym5pOLjsG-I: Downloading webpage
+[youtube] Ym5pOLjsG-I: Downloading tv client config
+[youtube] Ym5pOLjsG-I: Downloading tv player API JSON
+[youtube] Ym5pOLjsG-I: Downloading web safari player API JSON
+WARNING: [youtube] Ym5pOLjsG-I: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] Ym5pOLjsG-I: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] Ym5pOLjsG-I: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 64 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=uvlJvqwNGuc
+[youtube] uvlJvqwNGuc: Downloading webpage
+[youtube] uvlJvqwNGuc: Downloading tv client config
+[youtube] uvlJvqwNGuc: Downloading tv player API JSON
+[youtube] uvlJvqwNGuc: Downloading web safari player API JSON
+WARNING: [youtube] uvlJvqwNGuc: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] uvlJvqwNGuc: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] uvlJvqwNGuc: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 65 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=8Sg4D4EWUUw
+[youtube] 8Sg4D4EWUUw: Downloading webpage
+[youtube] 8Sg4D4EWUUw: Downloading tv client config
+[youtube] 8Sg4D4EWUUw: Downloading tv player API JSON
+[youtube] 8Sg4D4EWUUw: Downloading web safari player API JSON
+WARNING: [youtube] 8Sg4D4EWUUw: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] 8Sg4D4EWUUw: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] 8Sg4D4EWUUw: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 66 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=l9zFZtymi-0
+[youtube] l9zFZtymi-0: Downloading webpage
+[youtube] l9zFZtymi-0: Downloading tv client config
+[youtube] l9zFZtymi-0: Downloading tv player API JSON
+[youtube] l9zFZtymi-0: Downloading web safari player API JSON
+WARNING: [youtube] l9zFZtymi-0: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] l9zFZtymi-0: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] l9zFZtymi-0: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 67 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=bgusip5nlGg
+[youtube] bgusip5nlGg: Downloading webpage
+[youtube] bgusip5nlGg: Downloading tv client config
+[youtube] bgusip5nlGg: Downloading tv player API JSON
+[youtube] bgusip5nlGg: Downloading web safari player API JSON
+WARNING: [youtube] bgusip5nlGg: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] bgusip5nlGg: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] bgusip5nlGg: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 68 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=9jwXZhXi-TA
+[youtube] 9jwXZhXi-TA: Downloading webpage
+[youtube] 9jwXZhXi-TA: Downloading tv client config
+[youtube] 9jwXZhXi-TA: Downloading tv player API JSON
+[youtube] 9jwXZhXi-TA: Downloading web safari player API JSON
+WARNING: [youtube] 9jwXZhXi-TA: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] 9jwXZhXi-TA: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] 9jwXZhXi-TA: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 69 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=MucuOtJtqnM
+[youtube] MucuOtJtqnM: Downloading webpage
+[youtube] MucuOtJtqnM: Downloading tv client config
+[youtube] MucuOtJtqnM: Downloading tv player API JSON
+[youtube] MucuOtJtqnM: Downloading web safari player API JSON
+WARNING: [youtube] MucuOtJtqnM: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] MucuOtJtqnM: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] MucuOtJtqnM: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 70 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=VdACzw_D6pY
+[youtube] VdACzw_D6pY: Downloading webpage
+[youtube] VdACzw_D6pY: Downloading tv client config
+[youtube] VdACzw_D6pY: Downloading tv player API JSON
+[youtube] VdACzw_D6pY: Downloading web safari player API JSON
+WARNING: [youtube] VdACzw_D6pY: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] VdACzw_D6pY: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] VdACzw_D6pY: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 71 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=MJQIQJYxey4
+[youtube] MJQIQJYxey4: Downloading webpage
+[youtube] MJQIQJYxey4: Downloading tv client config
+[youtube] MJQIQJYxey4: Downloading tv player API JSON
+[youtube] MJQIQJYxey4: Downloading web safari player API JSON
+WARNING: [youtube] MJQIQJYxey4: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] MJQIQJYxey4: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] MJQIQJYxey4: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 72 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=FGeM6jLsC5g
+[youtube] FGeM6jLsC5g: Downloading webpage
+[youtube] FGeM6jLsC5g: Downloading tv client config
+[youtube] FGeM6jLsC5g: Downloading tv player API JSON
+[youtube] FGeM6jLsC5g: Downloading web safari player API JSON
+WARNING: [youtube] FGeM6jLsC5g: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] FGeM6jLsC5g: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] FGeM6jLsC5g: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 73 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=GqWw8-TdjXU
+[youtube] GqWw8-TdjXU: Downloading webpage
+[youtube] GqWw8-TdjXU: Downloading tv client config
+[youtube] GqWw8-TdjXU: Downloading tv player API JSON
+[youtube] GqWw8-TdjXU: Downloading web safari player API JSON
+WARNING: [youtube] GqWw8-TdjXU: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] GqWw8-TdjXU: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] GqWw8-TdjXU: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 74 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=pfB32FkAxh0
+[youtube] pfB32FkAxh0: Downloading webpage
+[youtube] pfB32FkAxh0: Downloading tv client config
+[youtube] pfB32FkAxh0: Downloading tv player API JSON
+[youtube] pfB32FkAxh0: Downloading web safari player API JSON
+WARNING: [youtube] pfB32FkAxh0: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] pfB32FkAxh0: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] pfB32FkAxh0: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 75 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=v0uKLCZocjs
+[youtube] v0uKLCZocjs: Downloading webpage
+[youtube] v0uKLCZocjs: Downloading tv client config
+[youtube] v0uKLCZocjs: Downloading tv player API JSON
+[youtube] v0uKLCZocjs: Downloading web safari player API JSON
+WARNING: [youtube] v0uKLCZocjs: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] v0uKLCZocjs: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] v0uKLCZocjs: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 76 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=ZFmapxYBafY
+[youtube] ZFmapxYBafY: Downloading webpage
+[youtube] ZFmapxYBafY: Downloading tv client config
+[youtube] ZFmapxYBafY: Downloading tv player API JSON
+[youtube] ZFmapxYBafY: Downloading web safari player API JSON
+WARNING: [youtube] ZFmapxYBafY: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] ZFmapxYBafY: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] ZFmapxYBafY: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 77 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=Q4_YTXhq7no
+[youtube] Q4_YTXhq7no: Downloading webpage
+[youtube] Q4_YTXhq7no: Downloading tv client config
+[youtube] Q4_YTXhq7no: Downloading tv player API JSON
+[youtube] Q4_YTXhq7no: Downloading web safari player API JSON
+WARNING: [youtube] Q4_YTXhq7no: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] Q4_YTXhq7no: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] Q4_YTXhq7no: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 78 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=7s4QX2H-3GI
+[youtube] 7s4QX2H-3GI: Downloading webpage
+[youtube] 7s4QX2H-3GI: Downloading tv client config
+[youtube] 7s4QX2H-3GI: Downloading tv player API JSON
+[youtube] 7s4QX2H-3GI: Downloading web safari player API JSON
+WARNING: [youtube] 7s4QX2H-3GI: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] 7s4QX2H-3GI: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] 7s4QX2H-3GI: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 79 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=C4o_Jx4UZi0
+[youtube] C4o_Jx4UZi0: Downloading webpage
+[youtube] C4o_Jx4UZi0: Downloading tv client config
+[youtube] C4o_Jx4UZi0: Downloading tv player API JSON
+[youtube] C4o_Jx4UZi0: Downloading web safari player API JSON
+WARNING: [youtube] C4o_Jx4UZi0: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] C4o_Jx4UZi0: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] C4o_Jx4UZi0: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 80 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=gXPRCnPJYbY
+[youtube] gXPRCnPJYbY: Downloading webpage
+[youtube] gXPRCnPJYbY: Downloading tv client config
+[youtube] gXPRCnPJYbY: Downloading tv player API JSON
+[youtube] gXPRCnPJYbY: Downloading web safari player API JSON
+WARNING: [youtube] gXPRCnPJYbY: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] gXPRCnPJYbY: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] gXPRCnPJYbY: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 81 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=otCYl7_uU8Y
+[youtube] otCYl7_uU8Y: Downloading webpage
+[youtube] otCYl7_uU8Y: Downloading tv client config
+[youtube] otCYl7_uU8Y: Downloading tv player API JSON
+[youtube] otCYl7_uU8Y: Downloading web safari player API JSON
+WARNING: [youtube] otCYl7_uU8Y: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] otCYl7_uU8Y: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] otCYl7_uU8Y: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 82 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=ybl8IvhGAJ4
+[youtube] ybl8IvhGAJ4: Downloading webpage
+[youtube] ybl8IvhGAJ4: Downloading tv client config
+[youtube] ybl8IvhGAJ4: Downloading tv player API JSON
+[youtube] ybl8IvhGAJ4: Downloading web safari player API JSON
+WARNING: [youtube] ybl8IvhGAJ4: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] ybl8IvhGAJ4: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] ybl8IvhGAJ4: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 83 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=xkRv2M--uzs
+[youtube] xkRv2M--uzs: Downloading webpage
+[youtube] xkRv2M--uzs: Downloading tv client config
+[youtube] xkRv2M--uzs: Downloading tv player API JSON
+[youtube] xkRv2M--uzs: Downloading web safari player API JSON
+WARNING: [youtube] xkRv2M--uzs: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] xkRv2M--uzs: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] xkRv2M--uzs: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 84 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=PqCo85OJLpc
+[youtube] PqCo85OJLpc: Downloading webpage
+[youtube] PqCo85OJLpc: Downloading tv client config
+[youtube] PqCo85OJLpc: Downloading tv player API JSON
+[youtube] PqCo85OJLpc: Downloading web safari player API JSON
+WARNING: [youtube] PqCo85OJLpc: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] PqCo85OJLpc: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] PqCo85OJLpc: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 85 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=Ef0eOk9ZgEk
+[youtube] Ef0eOk9ZgEk: Downloading webpage
+[youtube] Ef0eOk9ZgEk: Downloading tv client config
+[youtube] Ef0eOk9ZgEk: Downloading tv player API JSON
+[youtube] Ef0eOk9ZgEk: Downloading web safari player API JSON
+WARNING: [youtube] Ef0eOk9ZgEk: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] Ef0eOk9ZgEk: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] Ef0eOk9ZgEk: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 86 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=R5DbRyeZNRk
+[youtube] R5DbRyeZNRk: Downloading webpage
+[youtube] R5DbRyeZNRk: Downloading tv client config
+[youtube] R5DbRyeZNRk: Downloading tv player API JSON
+[youtube] R5DbRyeZNRk: Downloading web safari player API JSON
+WARNING: [youtube] R5DbRyeZNRk: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+WARNING: [youtube] R5DbRyeZNRk: There are missing subtitles languages because a PO token was not provided. Subtitles for these languages are missing: en. Automatic captions for 1 languages are missing.
+[info] R5DbRyeZNRk: Downloading 1 format(s): 18
+[info] There are no subtitles for the requested languages
+[download] Downloading item 87 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=Pzg7aN0SOVM
+[youtube] Pzg7aN0SOVM: Downloading webpage
+[youtube] Pzg7aN0SOVM: Downloading tv client config
+[youtube] Pzg7aN0SOVM: Downloading tv player API JSON
+[youtube] Pzg7aN0SOVM: Downloading web safari player API JSON
+ERROR: [youtube] Pzg7aN0SOVM: The uploader has not made this video available in your country
+This video is available in United States.
+You might want to use a VPN or a proxy server (with --proxy) to workaround.
+Deprecated Feature: Support for Python version 3.9 has been deprecated. Please update to Python 3.10 or above
+[youtube:tab] Extracting URL: https://www.youtube.com/watch?v=LyCCEpRXkuY&list=PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR&index=24
+Transcript extraction failed, falling back to VIDEO analysis: Could not retrieve transcripts for this video: ERROR: [youtube] Pzg7aN0SOVM: The uploader has not made this video available in your country
+This video is available in United States.
+You might want to use a VPN or a proxy server (with --proxy) to workaround.
+Attempting video download with yt-dlp: https://www.youtube.com/watch?v=LyCCEpRXkuY&list=PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR&index=24
+[youtube:tab] Downloading playlist PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR - add --no-playlist to download just the video LyCCEpRXkuY
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR: Downloading webpage
+[youtube:tab] Extracting URL: https://www.youtube.com/playlist?list=PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR: Downloading webpage
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR: Redownloading playlist API JSON with unavailable videos
+[download] Downloading playlist: Technology | CNBC
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 1: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 2: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 3: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 4: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 5: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 6: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 7: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 8: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 9: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 10: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 11: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 12: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 13: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 14: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 15: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 16: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 17: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 18: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 19: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 20: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 21: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 22: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 23: Downloading API JSON
+[youtube:tab] PLDt0J62yU45tZEUloDABVG1HqTXUN8MPR page 24: Downloading API JSON
+[youtube:tab] Playlist Technology | CNBC: Downloading 2416 items of 2416
+[download] Downloading item 1 of 2416
+[youtube] Extracting URL: https://www.youtube.com/watch?v=Ecmlh607KeA
+[youtube] Ecmlh607KeA: Downloading webpage
+[youtube] Ecmlh607KeA: Downloading tv client config
+[youtube] Ecmlh607KeA: Downloading tv player API JSON
+[youtube] Ecmlh607KeA: Downloading web safari player API JSON
+WARNING: [youtube] Ecmlh607KeA: Some web client https formats have been skipped as they are missing a url. YouTube is forcing SABR streaming for this client. See  https://github.com/yt-dlp/yt-dlp/issues/12482  for more details
+[info] Ecmlh607KeA: Downloading 1 format(s): 18
+[download] Sleeping 6.00 seconds as required by the site...
+ERROR: unable to download video data: HTTP Error 403: Forbidden
+yt-dlp video download failed: ERROR: unable to download video data: HTTP Error 403: Forbidden. Trying pytubefix fallback...
+pytubefix video download success: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/services/temp/3b058bb7-3be2-4c9a-ab5e-7ac2bfc54540/video_raw.mp4
+Starting Gemini VIDEO analysis
+Uploading file /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend/services/temp/3b058bb7-3be2-4c9a-ab5e-7ac2bfc54540/video_raw.mp4 to Gemini...
+Waiting for video processing: files/896voecqllfa
+......Done.
+Generating analysis content...
+Analysis da662bc0-442c-4ec0-b5bc-45df410ab2a8 completed successfully.
+Current Working Directory: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend
+Using Gemini API Key Authentication (Local Mode)
+INFO:     127.0.0.1:63733 - "GET /api/analyze/da662bc0-442c-4ec0-b5bc-45df410ab2a8 HTTP/1.1" 200 OK
+Current Working Directory: /Users/mkito/Desktop/Antigravity/executive-comms-ninja/backend
+Using Gemini API Key Authentication (Local Mode)
+INFO:     127.0.0.1:63739 - "GET /api/analyze/da662bc0-442c-4ec0-b5bc-45df410ab2a8 HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [52037]
