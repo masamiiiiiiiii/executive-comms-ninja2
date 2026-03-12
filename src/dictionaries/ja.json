@@ -164,6 +164,20 @@
        "timeframe": "時間枠",
        "impact": "期待される効果"
     },
+    "labels": {
+      "speakingRate": "話すスピード",
+      "pauseFrequency": "間の取り方",
+      "volumeVariation": "声量の変化",
+      "clarity": "明瞭さ",
+      "keywordDensity": "キーワード密度",
+      "emotionalTone": "感情のトーン",
+      "structure": "構造",
+      "logicFlow": "論理の展開",
+      "pauseObservation": "間の効果的な使用が期待感を生み出しています。",
+      "volumeObservation": "ダイナミックな声量変化により、聴衆の注意を引き付けています。",
+      "keywordObservation": "重要な用語が適切に使用されており、反復過多になっていません。",
+      "structureObservation": "序論、本論、結論の構成が明確です。"
+    },
     "cta": {
       "runSweep": "独自のインテリジェンス分析を実行",
       "runSweepDesc": "あなたは予測機能の一部を目の当たりにしました。完全なニューラルスイートをアンロックし、あなた自身の重要なエンゲージメントを分析してください。",

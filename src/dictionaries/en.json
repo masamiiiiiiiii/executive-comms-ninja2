@@ -164,6 +164,20 @@
        "timeframe": "Timeframe",
        "impact": "Expected Impact"
     },
+    "labels": {
+      "speakingRate": "Speaking Rate",
+      "pauseFrequency": "Pause Frequency",
+      "volumeVariation": "Volume Variation",
+      "clarity": "Clarity",
+      "keywordDensity": "Keyword Density",
+      "emotionalTone": "Emotional Tone",
+      "structure": "Structure",
+      "logicFlow": "Logic Flow",
+      "pauseObservation": "Effective use of pauses creates anticipation.",
+      "volumeObservation": "Dynamic volume keeps audience attentive.",
+      "keywordObservation": "Key terms are used frequently but not repetitively.",
+      "structureObservation": "Clear beginning, middle, and end structure."
+    },
     "cta": {
       "runSweep": "Run Your Own Intelligence Sweep",
       "runSweepDesc": "You have just witnessed a fraction of the predictive capability. Unlock the full neural suite and analyze your own high-stakes engagements.",
