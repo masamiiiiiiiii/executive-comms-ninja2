@@ -83,6 +83,8 @@ export default async function Dashboard({ params }: { params: Promise<{ lang: 'e
             {dict.home.title1} <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500 line-clamp-2 pb-2">
               {dict.home.title2}
+              {lang === 'ja' && <br className="hidden md:block" />}
+              {dict.home.title3}
             </span>
           </h1>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
@@ -102,7 +104,7 @@ export default async function Dashboard({ params }: { params: Promise<{ lang: 'e
           <h2 className="text-3xl font-bold text-slate-900 mb-6 flex items-center justify-center flex-wrap gap-y-2 gap-x-3">
             <span>{dict.home.founderTitle}</span>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo.png" alt="Executive Comms Ninja Logo" className="h-8 w-auto inline-block relative -top-0.5" />
+            <img src="/logo.png" alt="Executive Comms Ninja Logo" className="h-[22px] md:h-8 w-auto inline-block relative -top-0.5 object-contain" />
           </h2>
           <div className="space-y-4 text-lg text-slate-700 leading-relaxed max-w-3xl mx-auto text-left">
             <p>{dict.home.founderP1}</p>

@@ -8,7 +8,8 @@
   "home": {
     "badge": "AI-Powered Executive Coaching",
     "title1": "Master Your",
-    "title2": "Executive Presence",
+    "title2": "Executive ",
+    "title3": "Presence",
     "subtitle": "Elevate your media presence and leadership communication with C-suite level AI precision. Analyze tone, conviction, and strategic message delivery instantly.",
     "demoText": "Start with our interactive Jack Welch analysis — no credit card required.",
     "founderTitle": "Designed by",
@@ -96,5 +97,82 @@
         "o3": "David Sacks"
       }
     ]
+  },
+  "analysis": {
+    "reliabilityNotice": "Analysis Reliability Notice",
+    "reliabilityDesc": "Analysis accuracy may vary depending on video format (camera angle, lighting, audio quality).",
+    "metricUnavailable": "Metric definition unavailable.",
+    "states": {
+      "queuedTitle": "Analysis Queued",
+      "queuedDesc": "Your analysis is waiting to be processed. This will start shortly...",
+      "downloadingTitle": "Downloading Audio Content",
+      "downloadingDesc": "YouTube transcript is unavailable. We are downloading the audio for an AI multimodal analysis (voice & tone).",
+      "analyzingTitle": "Analyzing Executive Presence",
+      "analyzingDesc": "Gemini AI is analyzing communication patterns, vocal dynamics, and leadership presence. This usually takes 15–30 seconds.",
+      "backToHome": "Back to Home",
+      "failedTitle": "Analysis Could Not Be Completed",
+      "failedDesc": "Something went wrong during the analysis process.",
+      "tryAnother": "Try Another Video"
+    },
+    "header": {
+      "backToDashboard": "Back to Dashboard",
+      "backToHome": "Back to Home",
+      "exportPdf": "PDF Export",
+      "exportCsv": "Export CSV",
+      "title": "Analysis Results",
+      "who": "Who:",
+      "media": "Media:",
+      "published": "Published:"
+    },
+    "scoreBoard": {
+      "title": "Neural Verification Score",
+      "level": "LEVEL",
+      "threshold": "Executive Threshold: 85+",
+      "syncAccuracy": "Sync Accuracy",
+      "highFidelity": "High Fidelity"
+    },
+    "tabs": {
+      "overview": "Overview",
+      "detailed": "Detailed Analysis",
+      "emotion": "Strategic Radar",
+      "timeline": "Timeline",
+      "recommendations": "Recommendations"
+    },
+    "overview": {
+      "coachNote": "Executive Coach's Note",
+      "noSummary": "No executive summary available yet."
+    },
+    "detailed": {
+      "voiceTitle": "Voice Analysis",
+      "voiceDesc": "Evaluation of pacing, tone, and vocal delivery.",
+      "messageTitle": "Message Analysis",
+      "messageDesc": "Assessment of content structure and emotional resonance."
+    },
+    "radar": {
+      "title": "Strategic Radar: You vs Industry Standard",
+      "desc": "Comparison against top performing executives in similar roles.",
+      "insights": "Benchmark Insights",
+      "elite": "Elite Leaders",
+      "average": "Industry Average",
+      "eliteDesc": "Your performance is exceptional, placing you among the elite tier of executive communicators. You have exceeded all standard industry benchmarks.",
+      "averageDesc": "Your performance is solid compared to the industry average, but there is still room to grow to reach the Elite Leaders benchmark (92+)."
+    },
+    "recommendations": {
+       "priority": "Priority",
+       "rationale": "Rationale",
+       "strategy": "Strategy",
+       "timeframe": "Timeframe",
+       "impact": "Expected Impact"
+    },
+    "cta": {
+      "runSweep": "Run Your Own Intelligence Sweep",
+      "runSweepDesc": "You have just witnessed a fraction of the predictive capability. Unlock the full neural suite and analyze your own high-stakes engagements.",
+      "unlock": "Unlock Executive Pro",
+      "complete": "Analysis Complete",
+      "queueAnother": "You can return to the dashboard to queue another observation phase.",
+      "returnNewSession": "Return to Dashboard (New Session)",
+      "endSession": "End Session (Return to Home)",
+      "stored": "Your tactical deep dive report is safely stored. Returning to base."
+    }
   }
 }
