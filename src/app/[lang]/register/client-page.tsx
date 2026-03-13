@@ -132,7 +132,7 @@ export function RegisterClient({ lang, dict }: { lang: string, dict: any }) {
                 body: JSON.stringify({
                     user_id: email, // Passing email as reference for now
                     tier: tier,
-                    success_url: `${window.location.origin}/?payment_success=true`,
+                    success_url: `${window.location.origin}/${lang}/dashboard?payment_success=true`,
                     cancel_url: `${window.location.origin}/${lang}/pricing`
                 })
             });

@@ -89,14 +89,14 @@ export function NewAnalysisForm({ currentLang }: { currentLang: string }) {
 
         // Quota Check
         const tier = sessionStorage.getItem("selected_pricing_tier");
-        if (tier === "subscription") {
+        if (tier === "subscription" || tier === "subscription_ja") {
             const usage = parseInt(sessionStorage.getItem("ninja_sub_usage_count") || "0");
             if (usage >= 5) {
                 toast.error("Monthly quota exhausted. You have used your 5 neural links.");
                 router.push('/');
                 return;
             }
-        } else if (tier === "one_time") {
+        } else if (tier === "one_time" || tier === "one_time_ja") {
             const usage = parseInt(sessionStorage.getItem("ninja_onetime_usage_count") || "0");
             if (usage >= 1) {
                 toast.error("Your Tactical Deep Dive has already been consumed. Please upgrade to Pro.");
@@ -165,11 +165,11 @@ export function NewAnalysisForm({ currentLang }: { currentLang: string }) {
             sessionStorage.setItem("last_analysis_id", data.analysis_id);
 
             // Update Quota for Subscription & One-Time users
-            const tier = sessionStorage.getItem("selected_pricing_tier");
-            if (tier === "subscription") {
+            const currentTier = sessionStorage.getItem("selected_pricing_tier");
+            if (currentTier === "subscription" || currentTier === "subscription_ja") {
                 const currentUsage = parseInt(sessionStorage.getItem("ninja_sub_usage_count") || "0");
                 sessionStorage.setItem("ninja_sub_usage_count", (currentUsage + 1).toString());
-            } else if (tier === "one_time") {
+            } else if (currentTier === "one_time" || currentTier === "one_time_ja") {
                 const currentUsage = parseInt(sessionStorage.getItem("ninja_onetime_usage_count") || "0");
                 sessionStorage.setItem("ninja_onetime_usage_count", (currentUsage + 1).toString());
             }
