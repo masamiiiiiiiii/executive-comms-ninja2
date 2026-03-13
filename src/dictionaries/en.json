@@ -48,6 +48,7 @@
       "f1": "5 Executive Analyses per Month: Continuous feedback loops across various media formats and media interviews. Support for YouTube URLs (analyze any 5-minute segment from videos of any length). ($245 Value)",
       "f2": "Industry Benchmarking: Contextualize your performance against the Top 10% of Fortune 500 CEOs via the Strategic Radar.",
       "f3": "Priority Processing: Jump the neural queue for lightning-fast results during time-sensitive media cycles.",
+      "f4": "PDF & CSV Export: Instantly share analysis results with your team or PR agency using high-fidelity data exports.",
       "button": "Subscribe to Pro",
       "buttonLoading": "Establishing Uplink..."
     }
@@ -125,6 +126,7 @@
       "backToHome": "Back to Home",
       "exportPdf": "PDF Export",
       "exportCsv": "Export CSV",
+      "proOnlyExport": "This feature is exclusive to Executive Pro. Upgrade your plan to export full analysis reports.",
       "title": "Analysis Results",
       "who": "Who:",
       "media": "Media:",

@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { loadStripe } from "@stripe/stripe-js";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
-import { Check, ShieldAlert, Sparkles, Target, Zap, Activity } from "lucide-react";
+import { Check, ShieldAlert, Sparkles, Target, Zap, Activity, Download } from "lucide-react";
 import { GlobalFooter } from "@/components/global-footer";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "pk_test_dummy");
@@ -157,6 +157,10 @@ export function PricingClient({ lang, dict }: { lang: string, dict: any }) {
                                 <li className="flex items-start text-slate-300 text-sm">
                                     <Activity className="h-5 w-5 text-emerald-400 mr-3 shrink-0 mt-0.5" />
                                     <span>{dict.pricing.pro.f3}</span>
+                                </li>
+                                <li className="flex items-start text-slate-300 text-sm">
+                                    <Download className="h-5 w-5 text-emerald-400 mr-3 shrink-0 mt-0.5" />
+                                    <span>{dict.pricing.pro.f4}</span>
                                 </li>
                             </ul>
                         </CardContent>

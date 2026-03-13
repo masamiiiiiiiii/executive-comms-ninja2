@@ -277,7 +277,15 @@ export default function AnalysisClientPage({ id, currentLang, dict }: { id: stri
                         variant="outline"
                         size="sm"
                         className="h-8 gap-2 text-xs"
-                        onClick={() => generatePDFExport(analysis, "exportable-analysis-results")}
+                        onClick={() => {
+                            if (pricingTier === "subscription" || pricingTier === "subscription_ja") {
+                                generatePDFExport(analysis, "exportable-analysis-results");
+                            } else {
+                                toast.error(dict.analysis.header.proOnlyExport, {
+                                    icon: <AlertTriangle className="h-4 w-4 text-amber-500" />
+                                });
+                            }
+                        }}
                     >
                         <FileText className="h-3 w-3" /> {dict.analysis.header.exportPdf}
                     </Button>
@@ -285,7 +293,15 @@ export default function AnalysisClientPage({ id, currentLang, dict }: { id: stri
                         variant="outline"
                         size="sm"
                         className="h-8 gap-2 text-xs"
-                        onClick={() => generateCSVExport(analysis)}
+                        onClick={() => {
+                            if (pricingTier === "subscription" || pricingTier === "subscription_ja") {
+                                generateCSVExport(analysis);
+                            } else {
+                                toast.error(dict.analysis.header.proOnlyExport, {
+                                    icon: <AlertTriangle className="h-4 w-4 text-amber-500" />
+                                });
+                            }
+                        }}
                     >
                         <Download className="h-3 w-3" /> {dict.analysis.header.exportCsv}
                     </Button>
