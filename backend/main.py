@@ -3,7 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv() # Load backend/.env for Supabase/GCP
+env_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env.local")
+load_dotenv(env_path) # Load root/.env.local for Stripe IDs
 
 app = FastAPI(title="Executive Comms Ninja API")
 
