@@ -390,8 +390,7 @@ async def start_analysis(request: AnalysisRequest, background_tasks: BackgroundT
             ],
             "summary": "経営層の在り方として見事な権威的プレゼンスを示しています。ジャック・ウェルチ氏は極めて率直かつエネルギーに満ちた姿勢でインタビューを牽引し、複雑な経営哲学を万人に響く力強い真理へと昇華させました。最大の特徴は、洗練されたコーポレート・スピークの完全な排除にあります。代わりに、純粋な信念とエネルギーによってその場を掌握するアプローチは、真のリーダーシップとは何かを我々に明白に示しています。"
         }
-
-        final_mock_results = mock_results_ja if request.lang == "ja" else mock_results
+        final_mock_results = mock_results_ja if request.lang and request.lang.startswith("ja") else mock_results
         
         try:
             supabase.table("video_analyses").insert({

@@ -73,9 +73,9 @@ function MetricCard({ title, score, icon: Icon, colorClass = "bg-primary", defin
 
 function DetailedMetricRow({ label, value, rating, observation }: { label: string, value: string, rating?: string, observation?: string }) {
     let ratingColor = "bg-slate-100 text-slate-600";
-    if (rating === "Good" || rating === "Excellent" || rating === "Positive" || rating === "Appropriate" || rating === "Logical" || rating === "Optimal Pace" || rating === "Dynamic") ratingColor = "bg-emerald-100 text-emerald-700";
-    if (rating === "Fair" || rating === "Neutral") ratingColor = "bg-amber-100 text-amber-700";
-    if (rating === "Poor" || rating === "Negative") ratingColor = "bg-red-100 text-red-700";
+    if (rating === "Good" || rating === "Excellent" || rating === "Positive" || rating === "Appropriate" || rating === "Logical" || rating === "Optimal Pace" || rating === "Dynamic" || rating === "良好" || rating === "優秀" || rating === "ポジティブ" || rating === "適切" || rating === "論理的" || rating === "最適なペース" || rating === "ダイナミック") ratingColor = "bg-emerald-100 text-emerald-700";
+    if (rating === "Fair" || rating === "Neutral" || rating === "普通" || rating === "ニュートラル") ratingColor = "bg-amber-100 text-amber-700";
+    if (rating === "Poor" || rating === "Negative" || rating === "ネガティブ" || rating === "改善が必要") ratingColor = "bg-red-100 text-red-700";
 
     return (
         <div className="group py-4 border-b border-border/40 last:border-0 hover:bg-slate-50/50 px-3 rounded-sm transition-colors">
@@ -167,6 +167,9 @@ export default function AnalysisClientPage({ id, currentLang, dict }: { id: stri
     const [analysis, setAnalysis] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    
+    // Force fast refresh for translation updates
+    console.log("Rendering AnalysisClientPage with language:", currentLang);
 
     const [isUnlocked, setIsUnlocked] = useState(false);
     const [pricingTier, setPricingTier] = useState<string | null>(null);
@@ -252,10 +255,10 @@ export default function AnalysisClientPage({ id, currentLang, dict }: { id: stri
     const messageAnalysis = results.detailed_analysis?.message_analysis || {};
 
     const metricDefinitions = {
-        Confidence: dict.analysis.metricUnavailable,
-        Trustworthiness: dict.analysis.metricUnavailable,
-        Engagement: dict.analysis.metricUnavailable,
-        Clarity: dict.analysis.metricUnavailable
+        Confidence: dict.analysis.metricDefinitions?.confidence || dict.analysis.metricUnavailable,
+        Trustworthiness: dict.analysis.metricDefinitions?.trustworthiness || dict.analysis.metricUnavailable,
+        Engagement: dict.analysis.metricDefinitions?.engagement || dict.analysis.metricUnavailable,
+        Clarity: dict.analysis.metricDefinitions?.clarity || dict.analysis.metricUnavailable
     };
 
     return (
@@ -414,10 +417,10 @@ export default function AnalysisClientPage({ id, currentLang, dict }: { id: stri
                                 </CardHeader>
                                 <CardContent className="p-0">
                                     <div className="p-4 space-y-1">
-                                        <DetailedMetricRow label={dict.analysis.labels?.speakingRate || "Speaking Rate"} value={voiceAnalysis.speaking_rate || "N/A"} rating={voiceAnalysis.speaking_rate === "Optimal Pace" ? "Positive" : "Neutral"} observation={voiceAnalysis.observation} />
-                                        <DetailedMetricRow label={dict.analysis.labels?.pauseFrequency || "Pause Frequency"} value={voiceAnalysis.pause_frequency || "N/A"} rating="Positive" observation={dict.analysis.labels?.pauseObservation || "Effective use of pauses creates anticipation."} />
-                                        <DetailedMetricRow label={dict.analysis.labels?.volumeVariation || "Volume Variation"} value={voiceAnalysis.volume_variation || "N/A"} rating="Positive" observation={dict.analysis.labels?.volumeObservation || "Dynamic volume keeps audience attentive."} />
-                                        <DetailedMetricRow label={dict.analysis.labels?.clarity || "Clarity"} value={voiceAnalysis.clarity_rating || "N/A"} rating="Good" />
+                                        <DetailedMetricRow label={dict.analysis.labels?.speakingRate || "Speaking Rate"} value={voiceAnalysis.speaking_rate || "N/A"} rating={voiceAnalysis.speaking_rate === "Optimal Pace" || voiceAnalysis.speaking_rate === "最適なペース" ? (dict.analysis.ratings?.positive || "Positive") : (dict.analysis.ratings?.neutral || "Neutral")} observation={voiceAnalysis.observation} />
+                                        <DetailedMetricRow label={dict.analysis.labels?.pauseFrequency || "Pause Frequency"} value={voiceAnalysis.pause_frequency || "N/A"} rating={dict.analysis.ratings?.positive || "Positive"} observation={dict.analysis.labels?.pauseObservation || "Effective use of pauses creates anticipation."} />
+                                        <DetailedMetricRow label={dict.analysis.labels?.volumeVariation || "Volume Variation"} value={voiceAnalysis.volume_variation || "N/A"} rating={dict.analysis.ratings?.positive || "Positive"} observation={dict.analysis.labels?.volumeObservation || "Dynamic volume keeps audience attentive."} />
+                                        <DetailedMetricRow label={dict.analysis.labels?.clarity || "Clarity"} value={voiceAnalysis.clarity_rating || "N/A"} rating={dict.analysis.ratings?.good || "Good"} observation={dict.analysis.labels?.clarityObservation || "Clear and articulate delivery."} />
                                     </div>
                                 </CardContent>
                             </Card>
@@ -432,10 +435,10 @@ export default function AnalysisClientPage({ id, currentLang, dict }: { id: stri
                                 </CardHeader>
                                 <CardContent className="p-0">
                                     <div className="p-4 space-y-1">
-                                        <DetailedMetricRow label={dict.analysis.labels?.keywordDensity || "Keyword Density"} value={messageAnalysis.keyword_density || "N/A"} rating="Appropriate" observation={dict.analysis.labels?.keywordObservation || "Key terms are used frequently but not repetitively."} />
-                                        <DetailedMetricRow label={dict.analysis.labels?.emotionalTone || "Emotional Tone"} value={messageAnalysis.emotional_tone || "N/A"} rating="Positive" observation={messageAnalysis.observation} />
-                                        <DetailedMetricRow label={dict.analysis.labels?.structure || "Structure"} value={messageAnalysis.structure_rating || "N/A"} rating="Logical" observation={dict.analysis.labels?.structureObservation || "Clear beginning, middle, and end structure."} />
-                                        <DetailedMetricRow label={dict.analysis.labels?.logicFlow || "Logic Flow"} value={messageAnalysis.logic_flow || "N/A"} rating="Logical" />
+                                        <DetailedMetricRow label={dict.analysis.labels?.keywordDensity || "Keyword Density"} value={messageAnalysis.keyword_density || "N/A"} rating={dict.analysis.ratings?.appropriate || "Appropriate"} observation={dict.analysis.labels?.keywordObservation || "Key terms are used frequently but not repetitively."} />
+                                        <DetailedMetricRow label={dict.analysis.labels?.emotionalTone || "Emotional Tone"} value={messageAnalysis.emotional_tone || "N/A"} rating={dict.analysis.ratings?.positive || "Positive"} observation={messageAnalysis.observation} />
+                                        <DetailedMetricRow label={dict.analysis.labels?.structure || "Structure"} value={messageAnalysis.structure_rating || "N/A"} rating={dict.analysis.ratings?.logical || "Logical"} observation={dict.analysis.labels?.structureObservation || "Clear beginning, middle, and end structure."} />
+                                        <DetailedMetricRow label={dict.analysis.labels?.logicFlow || "Logic Flow"} value={messageAnalysis.logic_flow || "N/A"} rating={dict.analysis.ratings?.logical || "Logical"} observation={dict.analysis.labels?.logicObservation || "Arguments are well-connected and easy to follow."}/>
                                     </div>
                                 </CardContent>
                             </Card>
@@ -551,7 +554,7 @@ export default function AnalysisClientPage({ id, currentLang, dict }: { id: stri
                             <div className="relative z-10 space-y-6">
                                 <ShieldAlert className="w-12 h-12 text-emerald-400 mx-auto mb-2 opacity-80" />
                                 <h3 className="text-3xl font-extrabold text-white tracking-tight">{dict.analysis.cta.runSweep}</h3>
-                                <p className="text-emerald-100/70 text-lg max-w-xl mx-auto leading-relaxed font-medium">
+                                <p className="text-emerald-100/70 text-lg max-w-xl mx-auto leading-relaxed font-medium whitespace-pre-wrap">
                                     {dict.analysis.cta.runSweepDesc}
                                 </p>
                                 <Button

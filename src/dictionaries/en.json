@@ -102,6 +102,12 @@
     "reliabilityNotice": "Analysis Reliability Notice",
     "reliabilityDesc": "Analysis accuracy may vary depending on video format (camera angle, lighting, audio quality).",
     "metricUnavailable": "Metric definition unavailable.",
+    "metricDefinitions": {
+      "confidence": "Confidence: The degree of self-assurance and belief in the message, reflected in vocal stability.",
+      "trustworthiness": "Trustworthiness: The level of authenticity and consistency that fosters listener trust.",
+      "engagement": "Engagement: The energy and emotional resonance that captures and holds audience attention.",
+      "clarity": "Clarity: The articulate and clear delivery of the message and vocal qualities."
+    },
     "states": {
       "queuedTitle": "Analysis Queued",
       "queuedDesc": "Your analysis is waiting to be processed. This will start shortly...",
@@ -176,7 +182,18 @@
       "pauseObservation": "Effective use of pauses creates anticipation.",
       "volumeObservation": "Dynamic volume keeps audience attentive.",
       "keywordObservation": "Key terms are used frequently but not repetitively.",
-      "structureObservation": "Clear beginning, middle, and end structure."
+      "structureObservation": "Clear beginning, middle, and end structure.",
+      "clarityObservation": "Clear and articulate delivery.",
+      "logicObservation": "Arguments are well-connected and easy to follow."
+    },
+    "ratings": {
+      "positive": "Positive",
+      "neutral": "Neutral",
+      "negative": "Negative",
+      "good": "Good",
+      "excellent": "Excellent",
+      "appropriate": "Appropriate",
+      "logical": "Logical"
     },
     "cta": {
       "runSweep": "Run Your Own Intelligence Sweep",

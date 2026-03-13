@@ -102,6 +102,12 @@
     "reliabilityNotice": "分析信頼性通知",
     "reliabilityDesc": "動画のフォーマット（カメラアングル、照明、音声品質）によって分析の精度が変動する場合があります。",
     "metricUnavailable": "指標の定義が利用できません",
+    "metricDefinitions": {
+      "confidence": "自信と確信：発言内容を自ら強く信じている度合い。声の安定感や張りに表れます。",
+      "trustworthiness": "信頼性：飾らない本音のトーンや一貫した表現による、聞き手からの信頼度の高さ。",
+      "engagement": "説得力と求心力：聞き手の関心を惹きつけ、強く巻き込むためのエネルギーや感情表現の豊かさ。",
+      "clarity": "明瞭さ：声の聞き取りやすさや、メッセージが明確に伝わる発声の品質。"
+    },
     "states": {
       "queuedTitle": "分析待機中",
       "queuedDesc": "分析処理の順番待ちです。まもなく開始されます...",
@@ -176,11 +182,22 @@
       "pauseObservation": "間の効果的な使用が期待感を生み出しています。",
       "volumeObservation": "ダイナミックな声量変化により、聴衆の注意を引き付けています。",
       "keywordObservation": "重要な用語が適切に使用されており、反復過多になっていません。",
-      "structureObservation": "序論、本論、結論の構成が明確です。"
+      "structureObservation": "序論、本論、結論の構成が明確です。",
+      "clarityObservation": "明瞭かつはっきりとした発声で伝えられています。",
+      "logicObservation": "論理構成がしっかりとつながっており、非常に理解しやすいです。"
+    },
+    "ratings": {
+      "positive": "ポジティブ",
+      "neutral": "ニュートラル",
+      "negative": "ネガティブ",
+      "good": "良好",
+      "excellent": "優秀",
+      "appropriate": "適切",
+      "logical": "論理的"
     },
     "cta": {
       "runSweep": "独自のインテリジェンス分析を実行",
-      "runSweepDesc": "あなたは予測機能の一部を目の当たりにしました。完全なニューラルスイートをアンロックし、あなた自身の重要なエンゲージメントを分析してください。",
+      "runSweepDesc": "今回の結果は、当分析の価値の一部にすぎません。定性評価に加え、業界平均に基づく定量指標で、あなたのインタビュー表現を客観的に可視化できます。\n全機能を解放して、コミュニケーション力を次のレベルへ。",
       "unlock": "Executive Proをアンロック",
       "complete": "分析完了",
       "queueAnother": "ダッシュボードに戻り、別の観察フェーズを予約できます。",
