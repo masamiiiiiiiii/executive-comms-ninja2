@@ -31,7 +31,7 @@ export default function TokushohoPage() {
                                     </tr>
                                     <tr className="hover:bg-slate-50/50 transition-colors">
                                         <th className="py-4 pr-4 font-bold text-slate-800 align-top">運営統括責任者</th>
-                                        <td className="py-4 text-slate-700">Masami Kito</td>
+                                        <td className="py-4 text-slate-700">Mikihisa Azuma</td>
                                     </tr>
                                     <tr className="hover:bg-slate-50/50 transition-colors">
                                         <th className="py-4 pr-4 font-bold text-slate-800 align-top">所在地</th>
