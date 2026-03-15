@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { PlayCircle, Loader2 } from "lucide-react";
+import { PlayCircle, Loader2, ArrowRight } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
 import { NinjaIntelligenceIndicator } from "./v2/ninja-indicator";
@@ -40,7 +40,7 @@ export function DemoCTA({ dict, currentLang }: { dict: { initializing: string, e
             });
 
             // Run the fetch and a 5-second timer concurrently
-            const [response, _] = await Promise.all([
+            const [response] = await Promise.all([
                 fetchPromise,
                 new Promise(resolve => setTimeout(resolve, 5000))
             ]);
@@ -72,15 +72,25 @@ export function DemoCTA({ dict, currentLang }: { dict: { initializing: string, e
                     </div>
                 </div>
             )}
-            <Button
-                size="lg"
-                onClick={handleDemo}
-                disabled={loading}
-                className="h-14 px-8 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-lg rounded-xl shadow-[0_0_20px_rgba(16,185,129,0.4)] transition-all hover:scale-105"
-            >
-                {loading ? <Loader2 className="mr-3 h-5 w-5 animate-spin" /> : <PlayCircle className="mr-3 h-5 w-5" />}
-                {loading ? dict.initializing : dict.experience}
-            </Button>
+            <div className="relative inline-flex items-center justify-center">
+                {/* Pulsing ring animations behind the button */}
+                {!loading && (
+                    <>
+                        <span className="absolute inline-flex h-full w-full rounded-2xl bg-emerald-500 opacity-25 animate-ping" />
+                        <span className="absolute inline-flex h-[115%] w-[115%] rounded-2xl bg-emerald-400 opacity-10 animate-pulse" />
+                    </>
+                )}
+                <Button
+                    size="lg"
+                    onClick={handleDemo}
+                    disabled={loading}
+                    className="relative h-16 px-10 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xl rounded-2xl shadow-[0_0_40px_rgba(16,185,129,0.55)] hover:shadow-[0_0_60px_rgba(16,185,129,0.8)] transition-all duration-300 hover:scale-105 gap-3"
+                >
+                    {loading ? <Loader2 className="h-6 w-6 animate-spin" /> : <PlayCircle className="h-6 w-6" />}
+                    {loading ? dict.initializing : dict.experience}
+                    {!loading && <ArrowRight className="h-5 w-5 ml-1" />}
+                </Button>
+            </div>
         </>
     );
 }
