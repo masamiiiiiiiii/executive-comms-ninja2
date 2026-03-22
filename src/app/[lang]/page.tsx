@@ -59,15 +59,15 @@ export default async function Dashboard({ params }: { params: Promise<{ lang: 'e
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-200/40 blur-[100px] rounded-full" />
       </div>
 
-      <nav className="absolute top-0 w-full flex justify-between items-center p-6 z-50 pointer-events-auto">
-        <div className="flex items-center gap-2">
-          <div className="h-8 w-8 bg-emerald-600 rounded-lg flex items-center justify-center text-white shadow-sm">
+      <nav className="absolute top-0 w-full flex justify-between items-center px-3 py-4 sm:px-6 sm:py-6 z-50 pointer-events-auto">
+        <div className="flex items-center gap-2 shrink-0">
+          <div className="h-8 w-8 bg-emerald-600 rounded-lg flex items-center justify-center text-white shadow-sm shrink-0">
             <Video className="h-5 w-5" />
           </div>
-          <span className="font-bold text-slate-800 tracking-tight">{dict.nav.title}</span>
+          <span className="font-bold text-slate-800 tracking-tight hidden sm:block">{dict.nav.title}</span>
         </div>
-        <div className="flex items-center gap-6">
-          <Suspense fallback={<div className="w-20 h-8 animate-pulse bg-slate-200 rounded-full" />}>
+        <div className="flex items-center gap-2 sm:gap-4">
+          <Suspense fallback={<div className="w-16 h-8 animate-pulse bg-slate-200 rounded-full" />}>
             <NavActions currentLang={lang} dict={dict.nav} />
           </Suspense>
         </div>
