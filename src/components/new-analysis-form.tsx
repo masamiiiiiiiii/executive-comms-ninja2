@@ -10,7 +10,48 @@ import { toast } from "sonner";
 import { WatchInterface } from "./v2/watch-interface";
 import { NinjaIntelligenceIndicator } from "./v2/ninja-indicator";
 
+const formText: Record<string, Record<string, string>> = {
+    en: {
+        labelTarget: "Target Source Video",
+        btnEstablish: "Establish Link",
+        supportedTargets: "Supported targets: Public YouTube uniform resource locators (URLs).",
+        coWatchTitle: "Co-Watching Session",
+        coWatchDesc: "Observation Mode: Active. Ensure the designated segment is watched.",
+        abortReset: "Abort & Reset",
+        initNeural: "Initializing Neural Link",
+        connectingGrid: "Establishing connection to observation grid...",
+        toastUnlocked: "Transaction Secure. Executive Pro unlocked.",
+        toastNeuralReady: "Neural Link ready. Awaiting your observation command.",
+        toastLoaded: "Video Loaded. Ninja is ready to observe.",
+        toastInvalidUrl: "Invalid YouTube URL",
+        toastQuotaSub: "Monthly quota exhausted. You have used your 5 neural links.",
+        toastQuotaOne: "Your Tactical Deep Dive has already been consumed. Please upgrade to Pro.",
+        toastAnalysis: "Deep Analysis Initiated!",
+        toastFailed: "Analysis failed.",
+    },
+    ja: {
+        labelTarget: "分析対象ビデオ",
+        btnEstablish: "リンクを確立",
+        supportedTargets: "対象: 公開されているYouTube URLのみ対応しています。",
+        coWatchTitle: "共同視聴セッション",
+        coWatchDesc: "観察モード: アクティブ。指定セグメントを視聴してください。",
+        abortReset: "中止 & リセット",
+        initNeural: "ニューラルリンクを初期化中",
+        connectingGrid: "観察グリッドへの接続を確立中...",
+        toastUnlocked: "決済完了。Executive Proがアンロックされました。",
+        toastNeuralReady: "ニューラルリンク準備完了。観察コマンドを待機中。",
+        toastLoaded: "動画読み込み完了。Ninjaが観察準備完了。",
+        toastInvalidUrl: "無効なYouTube URLです",
+        toastQuotaSub: "月間クォータ上限に達しました。今月の5回分を使用済みです。",
+        toastQuotaOne: "タクティカル・ディープダイブは消費済みです。Proにアップグレードしてください。",
+        toastAnalysis: "ディープ分析を開始しました！",
+        toastFailed: "分析に失敗しました。",
+    },
+};
+
 export function NewAnalysisForm({ currentLang }: { currentLang: string }) {
+    const t = formText[currentLang] || formText["en"];
+
     const [url, setUrl] = useState(() => {
         if (typeof window !== "undefined") {
             return sessionStorage.getItem("pendingAnalysisUrl") || "";
@@ -31,7 +72,7 @@ export function NewAnalysisForm({ currentLang }: { currentLang: string }) {
         if (searchParams?.get("payment_success") === "true") {
             if (typeof window !== "undefined") {
                 sessionStorage.setItem("ninja_pro_unlocked", "true");
-                toast.success("Transaction Secure. Executive Pro unlocked.", { duration: 5000 });
+                toast.success(t.toastUnlocked, { duration: 5000 });
 
                 // Clean the URL so the query param doesn't linger
                 window.history.replaceState({}, document.title, window.location.pathname);
@@ -40,19 +81,18 @@ export function NewAnalysisForm({ currentLang }: { currentLang: string }) {
                 const pendingUrl = sessionStorage.getItem("pendingAnalysisUrl");
                 if (pendingUrl) {
                     setUrl(pendingUrl);
-                    // Slight delay to ensure state updates before triggering the load
                     setTimeout(() => {
                         const id = extractVideoId(pendingUrl);
                         if (id) {
                             setVideoId(id);
                             setWatchMode(true);
-                            toast.success("Neural Link ready. Awaiting your observation command.", { duration: 4000 });
+                            toast.success(t.toastNeuralReady, { duration: 4000 });
                         }
                     }, 100);
                 }
             }
         }
-    }, [searchParams]);
+    }, [searchParams, t.toastUnlocked, t.toastNeuralReady]);
 
     const extractVideoId = (url: string) => {
         const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
@@ -63,44 +103,41 @@ export function NewAnalysisForm({ currentLang }: { currentLang: string }) {
     const handleLoadForWatch = () => {
         if (!url) return;
 
-        // --- Premium Paywall Redirect Logic ---
         const isUnlocked = typeof window !== "undefined" && sessionStorage.getItem("ninja_pro_unlocked") === "true";
         if (!isUnlocked) {
             if (typeof window !== "undefined") {
                 sessionStorage.setItem("pendingAnalysisUrl", url);
             }
-            router.push("/pricing");
+            router.push(`/${currentLang}/pricing`);
             return;
         }
-        // --------------------------------------
 
         const id = extractVideoId(url);
         if (!id) {
-            toast.error("Invalid YouTube URL");
+            toast.error(t.toastInvalidUrl);
             return;
         }
         setVideoId(id);
         setWatchMode(true);
-        toast.success("Video Loaded. Ninja is ready to observe.");
+        toast.success(t.toastLoaded);
     };
 
     const handleAnalyze = async () => {
         if (!url) return;
 
-        // Quota Check
         const tier = sessionStorage.getItem("selected_pricing_tier");
         if (tier === "subscription" || tier === "subscription_ja") {
             const usage = parseInt(sessionStorage.getItem("ninja_sub_usage_count") || "0");
             if (usage >= 5) {
-                toast.error("Monthly quota exhausted. You have used your 5 neural links.");
-                router.push('/');
+                toast.error(t.toastQuotaSub);
+                router.push(`/${currentLang}`);
                 return;
             }
         } else if (tier === "one_time" || tier === "one_time_ja") {
             const usage = parseInt(sessionStorage.getItem("ninja_onetime_usage_count") || "0");
             if (usage >= 1) {
-                toast.error("Your Tactical Deep Dive has already been consumed. Please upgrade to Pro.");
-                router.push('/pricing');
+                toast.error(t.toastQuotaOne);
+                router.push(`/${currentLang}/pricing`);
                 return;
             }
         }
@@ -114,7 +151,6 @@ export function NewAnalysisForm({ currentLang }: { currentLang: string }) {
 
             let transcript = "";
 
-            // Start a minimum 5-second timer immediately.
             const timerPromise = new Promise(resolve => setTimeout(resolve, 5000));
 
             const performAnalysis = async () => {
@@ -156,15 +192,13 @@ export function NewAnalysisForm({ currentLang }: { currentLang: string }) {
                 timerPromise
             ]);
 
-            if (!response.ok) throw new Error("Failed to start analysis");
+            if (!response.ok) throw new Error(t.toastFailed);
 
             const data = await response.json();
 
-            // Re-hydrate session storage with latest analysis id for the dashboard loop
             sessionStorage.removeItem("pendingAnalysisUrl");
             sessionStorage.setItem("last_analysis_id", data.analysis_id);
 
-            // Update Quota for Subscription & One-Time users
             const currentTier = sessionStorage.getItem("selected_pricing_tier");
             if (currentTier === "subscription" || currentTier === "subscription_ja") {
                 const currentUsage = parseInt(sessionStorage.getItem("ninja_sub_usage_count") || "0");
@@ -174,18 +208,16 @@ export function NewAnalysisForm({ currentLang }: { currentLang: string }) {
                 sessionStorage.setItem("ninja_onetime_usage_count", (currentUsage + 1).toString());
             }
 
-            toast.success("Deep Analysis Initiated!", { id: "analysis" });
+            toast.success(t.toastAnalysis, { id: "analysis" });
             router.push(`/${currentLang}/analysis/${data.analysis_id}`);
 
         } catch (error: any) {
             console.error(error);
-            toast.error(error.message || "Analysis failed.", { id: "analysis" });
+            toast.error(error.message || t.toastFailed, { id: "analysis" });
         } finally {
             setLoading(false);
         }
     };
-
-
 
     if (watchMode && videoId) {
         return (
@@ -196,19 +228,19 @@ export function NewAnalysisForm({ currentLang }: { currentLang: string }) {
                             <NinjaIntelligenceIndicator isObserving={true} />
                         </div>
                         <div className="relative z-10 text-center">
-                            <h2 className="text-xl font-mono text-emerald-400 mb-2 tracking-widest uppercase">Initializing Neural Link</h2>
-                            <p className="text-slate-400 text-sm font-mono opacity-80 animate-pulse">Establishing connection to observation grid...</p>
+                            <h2 className="text-xl font-mono text-emerald-400 mb-2 tracking-widest uppercase">{t.initNeural}</h2>
+                            <p className="text-slate-400 text-sm font-mono opacity-80 animate-pulse">{t.connectingGrid}</p>
                         </div>
                     </div>
                 )}
                 <div className={`w-full max-w-5xl mx-auto animate-in fade-in zoom-in duration-500 ${isGlobalProcessing ? "opacity-0 blur-md transition-all duration-700 pointer-events-none" : ""}`}>
                     <div className="mb-6 flex items-center justify-between border-b border-emerald-500/20 pb-4">
                         <div>
-                            <h2 className="text-xl font-bold text-emerald-400 tracking-widest uppercase mb-1">Co-Watching Session</h2>
-                            <p className="text-xs text-slate-400 uppercase tracking-widest">Observation Mode: Active. Ensure the designated segment is watched.</p>
+                            <h2 className="text-xl font-bold text-emerald-400 tracking-widest uppercase mb-1">{t.coWatchTitle}</h2>
+                            <p className="text-xs text-slate-400 uppercase tracking-widest">{t.coWatchDesc}</p>
                         </div>
                         <Button variant="outline" className="text-xs border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/10 hover:text-emerald-300 font-bold tracking-widest uppercase h-8" onClick={() => setWatchMode(false)}>
-                            Abort & Reset
+                            {t.abortReset}
                         </Button>
                     </div>
                     <WatchInterface
@@ -229,8 +261,8 @@ export function NewAnalysisForm({ currentLang }: { currentLang: string }) {
                         <NinjaIntelligenceIndicator isObserving={true} />
                     </div>
                     <div className="relative z-10 text-center">
-                        <h2 className="text-xl font-mono text-emerald-400 mb-2 tracking-widest uppercase">Initializing Neural Link</h2>
-                        <p className="text-slate-400 text-sm font-mono opacity-80 animate-pulse">Establishing connection to observation grid...</p>
+                        <h2 className="text-xl font-mono text-emerald-400 mb-2 tracking-widest uppercase">{t.initNeural}</h2>
+                        <p className="text-slate-400 text-sm font-mono opacity-80 animate-pulse">{t.connectingGrid}</p>
                     </div>
                 </div>
             )}
@@ -239,7 +271,7 @@ export function NewAnalysisForm({ currentLang }: { currentLang: string }) {
 
                     <div className="space-y-3">
                         <label htmlFor="url-input" className="text-sm font-semibold text-emerald-400 uppercase tracking-widest block">
-                            Target Source Video
+                            {t.labelTarget}
                         </label>
                         <div className="flex flex-col md:flex-row gap-3">
                             <Input
@@ -257,11 +289,11 @@ export function NewAnalysisForm({ currentLang }: { currentLang: string }) {
                                 disabled={loading || !url}
                             >
                                 {loading ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : <PlayCircle className="mr-2 h-5 w-5" />}
-                                Establish Link
+                                {t.btnEstablish}
                             </Button>
                         </div>
                         <p className="text-xs text-slate-500 font-sans italic opacity-80 pl-1">
-                            Supported targets: Public YouTube uniform resource locators (URLs).
+                            {t.supportedTargets}
                         </p>
                     </div>
 

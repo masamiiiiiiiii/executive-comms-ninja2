@@ -45,7 +45,7 @@ const dashboardText: Record<string, Record<string, string>> = {
         loading: "セキュアアーカイブにアクセス中...",
         title: "コマンドセンター",
         welcomeTitle: "セキュアリンク確立済み",
-        welcomeDesc: "エグゼクティブ・コムズ・コマンドセンターへようこそ。新しいニューラルスコアカードを開始するか、過去の分析履歴をご確認ください。",
+        welcomeDesc: "Executive-Comms コマンドセンターへようこそ。新しいニューラルスコアカードを開始するか、過去の分析履歴をご確認ください。",
         newAnalysis: "新規分析を開始",
         archives: "分析アーカイブ",
         noData: "分析履歴がありません。上から最初の分析を開始してください。",
