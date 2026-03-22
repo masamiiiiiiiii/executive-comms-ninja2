@@ -349,11 +349,13 @@ export function NewAnalysisForm({ currentLang }: { currentLang: string }) {
                                     {currentLang === "ja" ? "サンプル動画（クリックで入力）" : "Sample Videos (click to fill)"}
                                 </p>
                                 {(currentLang === "ja" ? [
-                                    { label: "孫正義 — リーダーシップ (SoftBank World)", url: "https://www.youtube.com/watch?v=8vKFMnNUmQ8" },
-                                    { label: "Satya Nadella — Microsoft CEO Interview (Bloomberg)", url: "https://www.youtube.com/watch?v=2Wd_HVmGPrA" },
+                                    { label: "Jensen Huang — NVIDIA CEO (スタンフォード大学)", url: "https://www.youtube.com/watch?v=lXLBTBBil2U" },
+                                    { label: "Dario Amodei — Anthropic CEO (Lex Fridman Podcast)", url: "https://www.youtube.com/watch?v=ugvHCXCOmm4" },
+                                    { label: "Sundar Pichai — Google CEO (Bloomberg)", url: "https://www.youtube.com/watch?v=MGr_mcrnB0M" },
                                 ] : [
-                                    { label: "Satya Nadella — Microsoft CEO (Bloomberg)", url: "https://www.youtube.com/watch?v=2Wd_HVmGPrA" },
-                                    { label: "Indra Nooyi — Former PepsiCo CEO (Stanford)", url: "https://www.youtube.com/watch?v=4T2oAjFaKQI" },
+                                    { label: "Jensen Huang — NVIDIA CEO (Stanford GSB)", url: "https://www.youtube.com/watch?v=lXLBTBBil2U" },
+                                    { label: "Dario Amodei — Anthropic CEO (Lex Fridman Podcast)", url: "https://www.youtube.com/watch?v=ugvHCXCOmm4" },
+                                    { label: "Sundar Pichai — Google CEO (Bloomberg)", url: "https://www.youtube.com/watch?v=MGr_mcrnB0M" },
                                 ]).map((ex) => (
                                     <button
                                         key={ex.url}
