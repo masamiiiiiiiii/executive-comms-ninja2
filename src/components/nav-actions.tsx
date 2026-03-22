@@ -20,11 +20,23 @@ export function NavActions({
     const pricingShort = currentLang === "ja" ? "料金" : "Pricing";
 
     useEffect(() => {
-        supabase.auth.getUser().then(({ data: { user } }) => {
-            setIsLoggedIn(!!user);
+        // Check current session — sign out if refresh token is stale
+        supabase.auth.getUser().then(({ data: { user }, error }) => {
+            if (error) {
+                // Invalid/expired refresh token — clear stale session
+                supabase.auth.signOut();
+                setIsLoggedIn(false);
+            } else {
+                setIsLoggedIn(!!user);
+            }
         });
-        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-            setIsLoggedIn(!!session?.user);
+
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+            if (event === "SIGNED_OUT") {
+                setIsLoggedIn(false);
+            } else if (session?.user) {
+                setIsLoggedIn(true);
+            }
         });
         return () => subscription.unsubscribe();
     }, []);
