@@ -162,10 +162,10 @@ function FailedState({ error, onRetry, dict }: { error?: string, onRetry: () => 
 
 // --- Main Page ---
 
-export default function AnalysisClientPage({ id, currentLang, dict }: { id: string, currentLang: string, dict: any }) {
+export default function AnalysisClientPage({ id, currentLang, dict, initialData }: { id: string, currentLang: string, dict: any, initialData?: any }) {
     const router = useRouter();
-    const [analysis, setAnalysis] = useState<any>(null);
-    const [loading, setLoading] = useState(true);
+    const [analysis, setAnalysis] = useState<any>(initialData || null);
+    const [loading, setLoading] = useState(!initialData);
     const [error, setError] = useState<string | null>(null);
     
     // Force fast refresh for translation updates
@@ -189,6 +189,7 @@ export default function AnalysisClientPage({ id, currentLang, dict }: { id: stri
     }, []);
 
     const fetchAnalysis = useCallback(async () => {
+        if (initialData) return; // skip fetch when static data provided
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/analyze/${id}`, { cache: "no-store" });
             if (!res.ok) {

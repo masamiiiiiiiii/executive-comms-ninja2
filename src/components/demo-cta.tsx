@@ -4,59 +4,20 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { PlayCircle, Loader2, ArrowRight } from "lucide-react";
-import { createClient } from "@/lib/supabase/client";
-import { toast } from "sonner";
 import { NinjaIntelligenceIndicator } from "./v2/ninja-indicator";
 
 export function DemoCTA({ dict, currentLang }: { dict: { initializing: string, experience: string }, currentLang: string }) {
     const [loading, setLoading] = useState(false);
     const [isGlobalProcessing, setIsGlobalProcessing] = useState(false);
     const router = useRouter();
-    const supabase = createClient();
 
-    const handleDemo = async () => {
+    const handleDemo = () => {
         setLoading(true);
         setIsGlobalProcessing(true);
-        try {
-            const { data: { user } } = await supabase.auth.getUser();
-            let userId = user?.id;
-
-            if (!userId) {
-                userId = "0d93271a-2865-458a-8191-7a3b5934b52c"; // Default guest ID
-            }
-
-            const fetchPromise = fetch(`${process.env.NEXT_PUBLIC_API_URL}/analyze`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    youtube_url: "DEMO_MODE",
-                    user_id: userId,
-                    video_title: "Jack Welch Leadership Interview",
-                    company: "General Electric",
-                    role: "Legendary CEO",
-                    target_person: "Jack Welch",
-                    lang: currentLang
-                }),
-            });
-
-            // Run the fetch and a 5-second timer concurrently
-            const [response] = await Promise.all([
-                fetchPromise,
-                new Promise(resolve => setTimeout(resolve, 5000))
-            ]);
-
-            if (!response.ok) throw new Error("Failed to start demo");
-
-            const data = await response.json();
-            toast.success("Demo Analysis Loaded!");
-            router.push(`/${currentLang}/analysis/${data.analysis_id}`);
-
-        } catch (error) {
-            console.error(error);
-            toast.error("Failed to load demo.");
-        } finally {
-            setLoading(false);
-        }
+        // Brief animation, then navigate directly to static demo page — no API call
+        setTimeout(() => {
+            router.push(`/${currentLang}/demo`);
+        }, 400);
     };
 
     return (
@@ -67,8 +28,12 @@ export function DemoCTA({ dict, currentLang }: { dict: { initializing: string, e
                         <NinjaIntelligenceIndicator isObserving={true} />
                     </div>
                     <div className="relative z-50 text-center mt-32">
-                        <h2 className="text-xl font-mono text-emerald-400 mb-2 tracking-widest uppercase bg-slate-950/80 px-4 py-2 rounded">Initializing Neural Link</h2>
-                        <p className="text-slate-400 text-sm font-mono opacity-80 animate-pulse bg-slate-950/80 px-4 py-2 rounded inline-block">Establishing connection to observation grid...</p>
+                        <h2 className="text-xl font-mono text-emerald-400 mb-2 tracking-widest uppercase bg-slate-950/80 px-4 py-2 rounded">
+                            {currentLang === "ja" ? "デモを初期化中" : "Initializing Demo"}
+                        </h2>
+                        <p className="text-slate-400 text-sm font-mono opacity-80 animate-pulse bg-slate-950/80 px-4 py-2 rounded inline-block">
+                            {currentLang === "ja" ? "分析結果を読み込んでいます..." : "Loading analysis results..."}
+                        </p>
                     </div>
                 </div>
             )}
