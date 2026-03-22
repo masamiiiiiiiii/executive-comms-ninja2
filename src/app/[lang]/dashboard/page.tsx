@@ -45,15 +45,20 @@ export default function DashboardPage() {
     };
 
     useEffect(() => {
+        // If redirected from successful Stripe payment, unlock access
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get("payment_success") === "true") {
+            sessionStorage.setItem("ninja_pro_unlocked", "true");
+        }
         // Simple client-side auth check
         const unlocked = sessionStorage.getItem("ninja_pro_unlocked") === "true";
         if (!unlocked) {
-            router.push("/pricing");
+            router.push(`/${lang}/pricing`);
         } else {
             setIsAuthorized(true);
             fetchAnalyses();
         }
-    }, [router]);
+    }, [router, lang]);
 
     const fetchAnalyses = async () => {
         try {
