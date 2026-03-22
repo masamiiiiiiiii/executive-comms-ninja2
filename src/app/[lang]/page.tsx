@@ -75,26 +75,26 @@ export default async function Dashboard({ params }: { params: Promise<{ lang: 'e
 
       <main className="w-full max-w-5xl px-6 relative z-10 flex flex-col items-center justify-center pt-24">
         {/* Hero Section */}
-        <div className="w-full text-center space-y-8 mb-16 relative z-10 pt-10">
-          <Badge variant="outline" className="bg-white/50 backdrop-blur border-emerald-200 text-emerald-700 px-4 py-1.5 text-sm font-bold uppercase tracking-widest shadow-sm">
+        <div className="w-full text-center space-y-6 mb-16 relative z-10 pt-6 md:pt-10">
+          <Badge variant="outline" className="bg-white/50 backdrop-blur border-emerald-200 text-emerald-700 px-4 py-1.5 text-xs sm:text-sm font-bold uppercase tracking-widest shadow-sm">
             {dict.home.badge}
           </Badge>
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.1] max-w-4xl mx-auto">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.1] max-w-4xl mx-auto px-2">
             {dict.home.title1} <br className="hidden md:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500 line-clamp-2 pb-2">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500 pb-2 block md:inline">
               {dict.home.title2}
               {lang === 'ja' && <br className="hidden md:block" />}
               {dict.home.title3}
             </span>
           </h1>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed px-4">
             {dict.home.subtitle}
           </p>
 
-          <div className="pt-6 pb-2">
+          <div className="pt-4 pb-2">
             <DemoCTA dict={dict.demoCta} currentLang={lang} />
           </div>
-          <p className="text-sm font-medium text-slate-500">
+          <p className="text-xs sm:text-sm font-medium text-slate-500 px-4">
             {dict.home.demoText}
           </p>
         </div>

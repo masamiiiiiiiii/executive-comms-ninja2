@@ -265,6 +265,27 @@ export default function AnalysisClientPage({ id, currentLang, dict, initialData 
     return (
         <div className="min-h-screen bg-slate-50/50 text-slate-900 font-sans pb-20">
 
+            {/* Sticky mobile purchase CTA — only shown on demo page */}
+            {id === "demo" && (
+                <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-gradient-to-r from-emerald-700 to-emerald-600 px-4 py-3 flex items-center justify-between shadow-[0_-4px_20px_rgba(16,185,129,0.35)] border-t border-emerald-500/40">
+                    <div className="text-white">
+                        <p className="text-[10px] font-bold uppercase tracking-widest opacity-70">
+                            {currentLang === "ja" ? "独自分析を開始する" : "Analyze Your Video"}
+                        </p>
+                        <p className="text-sm font-extrabold leading-tight">
+                            {currentLang === "ja" ? "今すぐアンロック ¥5,000〜" : "Unlock from ¥5,000"}
+                        </p>
+                    </div>
+                    <Button
+                        className="bg-white text-emerald-700 font-black h-11 px-5 rounded-xl hover:bg-emerald-50 shrink-0 text-sm"
+                        onClick={() => router.push(`/${currentLang}/pricing`)}
+                    >
+                        <Zap className="mr-1.5 h-4 w-4" />
+                        {currentLang === "ja" ? "購入する" : "Get Started"}
+                    </Button>
+                </div>
+            )}
+
             {/* Top Navigation */}
             <div className="bg-white/90 backdrop-blur-md border-b border-border sticky top-0 z-50 px-4 sm:px-6 py-3 flex items-center justify-between shadow-sm">
                 <Button variant="ghost" asChild className="flex items-center text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors p-2 sm:p-0 min-h-[44px]">
@@ -277,7 +298,7 @@ export default function AnalysisClientPage({ id, currentLang, dict, initialData 
                     <Button
                         variant="outline"
                         size="sm"
-                        className="h-8 gap-2 text-xs"
+                        className="h-10 sm:h-8 gap-1.5 text-xs px-2.5"
                         onClick={() => {
                             if (pricingTier === "subscription" || pricingTier === "subscription_ja") {
                                 generatePDFExport(analysis, "exportable-analysis-results");
@@ -288,12 +309,12 @@ export default function AnalysisClientPage({ id, currentLang, dict, initialData 
                             }
                         }}
                     >
-                        <FileText className="h-3 w-3" /> {dict.analysis.header.exportPdf}
+                        <FileText className="h-3 w-3" /> <span className="hidden sm:inline">{dict.analysis.header.exportPdf}</span><span className="sm:hidden">PDF</span>
                     </Button>
                     <Button
                         variant="outline"
                         size="sm"
-                        className="h-8 gap-2 text-xs"
+                        className="h-10 sm:h-8 gap-1.5 text-xs px-2.5"
                         onClick={() => {
                             if (pricingTier === "subscription" || pricingTier === "subscription_ja") {
                                 generateCSVExport(analysis);
@@ -304,7 +325,7 @@ export default function AnalysisClientPage({ id, currentLang, dict, initialData 
                             }
                         }}
                     >
-                        <Download className="h-3 w-3" /> {dict.analysis.header.exportCsv}
+                        <Download className="h-3 w-3" /> <span className="hidden sm:inline">{dict.analysis.header.exportCsv}</span><span className="sm:hidden">CSV</span>
                     </Button>
                 </div>
             </div>
@@ -340,7 +361,7 @@ export default function AnalysisClientPage({ id, currentLang, dict, initialData 
                 </div>
 
                 {/* Overall Score Card */}
-                <div className="bg-slate-950 rounded-2xl border border-emerald-500/20 shadow-2xl p-10 relative overflow-hidden">
+                <div className="bg-slate-950 rounded-2xl border border-emerald-500/20 shadow-2xl p-5 sm:p-8 md:p-10 relative overflow-hidden">
                     <div className="absolute inset-0 opacity-40">
                         <ElegantWaveform />
                     </div>
