@@ -156,7 +156,45 @@ async def process_analysis(request: AnalysisRequest, analysis_id: str):
             "status": "completed",
             "analysis_results": analysis_result,
         }).eq("id", analysis_id).execute()
-        
+
+        # 7. Increment monthly_usage_count for the user (subscription tier)
+        try:
+            from datetime import date
+            # Fetch current profile
+            profile_resp = supabase.table("profiles").select(
+                "tier, monthly_usage_count, monthly_period_start"
+            ).eq("id", request.user_id).execute()
+
+            if profile_resp.data:
+                prof = profile_resp.data[0]
+                tier = prof.get("tier", "")
+                # Only track for paid tiers
+                if tier:
+                    today = date.today()
+                    period_start = prof.get("monthly_period_start")
+                    count = prof.get("monthly_usage_count", 0) or 0
+
+                    # Reset if we're in a new month
+                    if period_start:
+                        ps = date.fromisoformat(str(period_start))
+                        if today.year != ps.year or today.month != ps.month:
+                            count = 0
+                            supabase.table("profiles").update({
+                                "monthly_usage_count": 1,
+                                "monthly_period_start": today.replace(day=1).isoformat()
+                            }).eq("id", request.user_id).execute()
+                        else:
+                            supabase.table("profiles").update({
+                                "monthly_usage_count": count + 1
+                            }).eq("id", request.user_id).execute()
+                    else:
+                        supabase.table("profiles").update({
+                            "monthly_usage_count": 1,
+                            "monthly_period_start": today.replace(day=1).isoformat()
+                        }).eq("id", request.user_id).execute()
+        except Exception as e:
+            print(f"Warning: Could not update monthly_usage_count: {e}")
+
         print(f"Analysis {analysis_id} completed successfully.")
         
     except Exception as e:
