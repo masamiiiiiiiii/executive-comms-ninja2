@@ -295,6 +295,78 @@ export function NewAnalysisForm({ currentLang }: { currentLang: string }) {
                         <p className="text-xs text-slate-500 font-sans italic opacity-80 pl-1">
                             {t.supportedTargets}
                         </p>
+
+                        {/* Recommended content section */}
+                        <div className="mt-2 space-y-3">
+                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest pl-1">
+                                {currentLang === "ja" ? "ベストな分析結果のために — 推奨コンテンツ" : "For Best Results — Recommended Content"}
+                            </p>
+
+                            {/* Content type badges */}
+                            <div className="flex flex-wrap gap-2 pl-1">
+                                {(currentLang === "ja" ? [
+                                    { label: "1対1インタビュー", badge: "BEST", color: "text-emerald-400 bg-emerald-500/10 border-emerald-500/30" },
+                                    { label: "記者会見・スピーチ", badge: "GOOD", color: "text-blue-400 bg-blue-500/10 border-blue-500/30" },
+                                    { label: "パネルディスカッション", badge: "OK", color: "text-slate-400 bg-slate-500/10 border-slate-500/30" },
+                                ] : [
+                                    { label: "1-on-1 Interview", badge: "BEST", color: "text-emerald-400 bg-emerald-500/10 border-emerald-500/30" },
+                                    { label: "Press Conference / Speech", badge: "GOOD", color: "text-blue-400 bg-blue-500/10 border-blue-500/30" },
+                                    { label: "Panel Discussion", badge: "OK", color: "text-slate-400 bg-slate-500/10 border-slate-500/30" },
+                                ]).map((item) => (
+                                    <span key={item.label} className={`inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full border ${item.color}`}>
+                                        <span className="text-[9px] font-black tracking-widest opacity-70">{item.badge}</span>
+                                        {item.label}
+                                    </span>
+                                ))}
+                            </div>
+
+                            {/* Tips */}
+                            <div className="bg-slate-800/40 rounded-xl p-3.5 space-y-1.5 border border-white/5">
+                                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">
+                                    {currentLang === "ja" ? "推奨条件" : "Ideal Conditions"}
+                                </p>
+                                {(currentLang === "ja" ? [
+                                    "対象者が主要な話者である動画（他者の発言が少ない）",
+                                    "10分〜60分程度の長さが最適",
+                                    "音声が明瞭で英語または日本語のインタビュー",
+                                    "例：CEOインタビュー、経営者の講演、記者会見など",
+                                ] : [
+                                    "Subject is the primary speaker (minimal other voices)",
+                                    "Optimal length: 10 to 60 minutes",
+                                    "Clear audio — English or Japanese interviews",
+                                    "e.g. CEO interview, keynote speech, press conference",
+                                ]).map((tip) => (
+                                    <p key={tip} className="text-xs text-slate-400 font-sans flex items-start gap-2">
+                                        <span className="text-emerald-500 mt-0.5 shrink-0">✓</span>
+                                        {tip}
+                                    </p>
+                                ))}
+                            </div>
+
+                            {/* Clickable example URLs */}
+                            <div className="space-y-1.5 pl-1">
+                                <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
+                                    {currentLang === "ja" ? "サンプル動画（クリックで入力）" : "Sample Videos (click to fill)"}
+                                </p>
+                                {(currentLang === "ja" ? [
+                                    { label: "孫正義 — リーダーシップ (SoftBank World)", url: "https://www.youtube.com/watch?v=8vKFMnNUmQ8" },
+                                    { label: "Satya Nadella — Microsoft CEO Interview (Bloomberg)", url: "https://www.youtube.com/watch?v=2Wd_HVmGPrA" },
+                                ] : [
+                                    { label: "Satya Nadella — Microsoft CEO (Bloomberg)", url: "https://www.youtube.com/watch?v=2Wd_HVmGPrA" },
+                                    { label: "Indra Nooyi — Former PepsiCo CEO (Stanford)", url: "https://www.youtube.com/watch?v=4T2oAjFaKQI" },
+                                ]).map((ex) => (
+                                    <button
+                                        key={ex.url}
+                                        type="button"
+                                        onClick={() => setUrl(ex.url)}
+                                        className="w-full text-left text-xs text-slate-400 hover:text-emerald-400 font-mono truncate transition-colors flex items-center gap-2 group py-1"
+                                    >
+                                        <PlayCircle className="w-3 h-3 shrink-0 text-slate-600 group-hover:text-emerald-500 transition-colors" />
+                                        {ex.label}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
                     </div>
 
                 </div>
