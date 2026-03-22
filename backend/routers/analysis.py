@@ -157,28 +157,27 @@ async def process_analysis(request: AnalysisRequest, analysis_id: str):
             "analysis_results": analysis_result,
         }).eq("id", analysis_id).execute()
 
-        # 7. Increment monthly_usage_count for the user (subscription tier)
+        # 7. Increment monthly_usage_count for the user (skip for master users)
         try:
             from datetime import date
-            # Fetch current profile
             profile_resp = supabase.table("profiles").select(
-                "tier, monthly_usage_count, monthly_period_start"
+                "tier, monthly_usage_count, monthly_period_start, is_master"
             ).eq("id", request.user_id).execute()
 
             if profile_resp.data:
                 prof = profile_resp.data[0]
                 tier = prof.get("tier", "")
-                # Only track for paid tiers
-                if tier:
+                is_master = prof.get("is_master", False)
+
+                # Master users are exempt from usage counting
+                if tier and not is_master:
                     today = date.today()
                     period_start = prof.get("monthly_period_start")
                     count = prof.get("monthly_usage_count", 0) or 0
 
-                    # Reset if we're in a new month
                     if period_start:
                         ps = date.fromisoformat(str(period_start))
                         if today.year != ps.year or today.month != ps.month:
-                            count = 0
                             supabase.table("profiles").update({
                                 "monthly_usage_count": 1,
                                 "monthly_period_start": today.replace(day=1).isoformat()

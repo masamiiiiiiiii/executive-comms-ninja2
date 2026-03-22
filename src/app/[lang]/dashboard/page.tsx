@@ -29,6 +29,7 @@ interface Profile {
     monthly_usage_count: number;
     monthly_period_start: string | null;
     payment_date: string | null;
+    is_master: boolean;
 }
 
 const MONTHLY_LIMIT = 5;
@@ -115,7 +116,7 @@ export default function DashboardPage() {
             // Fetch profile
             const { data: profileData } = await supabase
                 .from("profiles")
-                .select("tier, monthly_usage_count, monthly_period_start, payment_date")
+                .select("tier, monthly_usage_count, monthly_period_start, payment_date, is_master")
                 .eq("id", user.id)
                 .single();
 
@@ -157,10 +158,10 @@ export default function DashboardPage() {
         );
     }
 
-    const isSubscription = profile?.tier === "subscription" || profile?.tier === "subscription_ja";
-    const isOneTime = profile?.tier === "one_time" || profile?.tier === "one_time_ja";
-    const remaining = MONTHLY_LIMIT - (profile?.monthly_usage_count || 0);
-    const retentionDays = RETENTION_DAYS[profile?.tier || "one_time_ja"];
+    const isSubscription = profile?.tier === "subscription" || profile?.tier === "subscription_ja" || profile?.is_master;
+    const isOneTime = (profile?.tier === "one_time" || profile?.tier === "one_time_ja") && !profile?.is_master;
+    const remaining = profile?.is_master ? "∞" : MONTHLY_LIMIT - (profile?.monthly_usage_count || 0);
+    const retentionDays = profile?.is_master ? 365 : RETENTION_DAYS[profile?.tier || "one_time_ja"];
 
     // One-time: show new analysis form only if no completed analysis exists
     const hasCompletedAnalysis = analyses.some(a => a.status === "completed");
