@@ -132,7 +132,7 @@ export default function DashboardPage() {
                                 const subjectName = record.analysis_results?.video_metadata?.extracted_interviewee_name || record.target_person || "Speaker";
 
                                 return (
-                                    <Link href={`/analysis/${record.id}`} key={record.id}>
+                                    <Link href={`/${lang}/analysis/${record.id}`} key={record.id}>
                                         <motion.div
                                             initial={{ opacity: 0, y: 10 }}
                                             animate={{ opacity: 1, y: 0 }}

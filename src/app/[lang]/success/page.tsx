@@ -1,26 +1,50 @@
 "use client";
 
 import { Suspense, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, ArrowRight, Activity, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
+const successText: Record<string, Record<string, string>> = {
+    en: {
+        title: "Intelligence Unlocked",
+        desc: "Your transaction was successful. You now have full access to high-fidelity neural analysis and executive-ready export capabilities.",
+        detailsLabel: "Transaction Details",
+        statusLabel: "Status",
+        sessionLabel: "Session ID",
+        btnLabel: "Return to Command Center",
+        tagline: "Uplink established. Connection encrypted.",
+    },
+    ja: {
+        title: "インテリジェンス解放完了",
+        desc: "お支払いが完了しました。高精度ニューラル分析とエグゼクティブ用エクスポート機能へのフルアクセスが開始されました。",
+        detailsLabel: "取引情報",
+        statusLabel: "ステータス",
+        sessionLabel: "セッション ID",
+        btnLabel: "コマンドセンターへ戻る",
+        tagline: "アップリンクを確立済み。接続は暗号化されています。",
+    },
+};
+
 function SuccessContent() {
     const searchParams = useSearchParams();
+    const params = useParams();
+    const lang = (params?.lang as string) || "en";
     const sessionId = searchParams?.get("session_id");
+    const t = successText[lang] || successText["en"];
 
     useEffect(() => {
         if (typeof window !== "undefined") {
             sessionStorage.setItem("ninja_pro_unlocked", "true");
             // Fire Google Ads Conversion Tracking Event
-            if (typeof window.gtag === 'function') {
-                window.gtag('event', 'conversion', {
-                    'send_to': 'AW-17979887612/jvSACIGP3v8bEPyfvf1C',
-                    'value': 49.0,
-                    'currency': 'USD',
-                    'transaction_id': sessionId || ''
+            if (typeof window.gtag === "function") {
+                window.gtag("event", "conversion", {
+                    send_to: "AW-17979887612/jvSACIGP3v8bEPyfvf1C",
+                    value: 49.0,
+                    currency: "USD",
+                    transaction_id: sessionId || "",
                 });
             }
         }
@@ -39,40 +63,40 @@ function SuccessContent() {
 
             <div className="space-y-4">
                 <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
-                    Intelligence Unlocked
+                    {t.title}
                 </h1>
                 <p className="text-slate-600 text-lg leading-relaxed max-w-xl mx-auto">
-                    Your transaction was successful. You now have full access to high-fidelity neural analysis and executive-ready export capabilities.
+                    {t.desc}
                 </p>
             </div>
 
             <div className="bg-white/60 backdrop-blur-sm border border-slate-200 rounded-xl p-6 shadow-sm text-left max-w-md mx-auto">
-                <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">Transaction Details</p>
+                <p className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-4">{t.detailsLabel}</p>
                 <div className="space-y-3">
                     <div className="flex items-center justify-between text-sm">
-                        <span className="text-slate-600">Status</span>
+                        <span className="text-slate-600">{t.statusLabel}</span>
                         <span className="font-semibold text-emerald-600 flex items-center gap-1">
                             <ShieldCheck className="h-4 w-4" /> SECURE
                         </span>
                     </div>
                     <div className="flex items-center justify-between text-sm border-t border-slate-100 pt-3">
-                        <span className="text-slate-600">Session ID</span>
+                        <span className="text-slate-600">{t.sessionLabel}</span>
                         <span className="font-mono text-slate-400 text-xs">{sessionId || "demo_checkout_verification"}</span>
                     </div>
                 </div>
             </div>
 
             <div className="pt-8">
-                <Link href="/">
+                <Link href={`/${lang}/dashboard`}>
                     <Button className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-8 py-6 h-auto text-base rounded-full shadow-[0_4px_14px_0_rgba(16,185,129,0.39)] hover:shadow-[0_6px_20px_rgba(16,185,129,0.23)] hover:-translate-y-0.5 transition-all">
-                        Return to Command Center <ArrowRight className="ml-2 h-5 w-5" />
+                        {t.btnLabel} <ArrowRight className="ml-2 h-5 w-5" />
                     </Button>
                 </Link>
             </div>
 
             <div className="flex items-center justify-center gap-2 text-xs font-mono text-slate-400 pt-8 mt-8 border-t border-slate-200/50">
                 <Activity className="h-3 w-3" />
-                <span>Uplink established. Connection encrypted.</span>
+                <span>{t.tagline}</span>
             </div>
         </div>
     );
