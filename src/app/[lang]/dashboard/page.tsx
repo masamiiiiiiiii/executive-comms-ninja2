@@ -29,16 +29,42 @@ interface AnalysisRecord {
     };
 }
 
+const dashboardText: Record<string, Record<string, string>> = {
+    en: {
+        loading: "Accessing Secure Archives...",
+        title: "Command Center",
+        welcomeTitle: "Secure Link Established",
+        welcomeDesc: "Welcome to your Executive Comms Command Center. Initiate a new neural scorecard below, or review your historical analysis archives.",
+        newAnalysis: "Initiate New Analysis",
+        archives: "Analysis Archives",
+        noData: "No historical data found. Initiate your first analysis above.",
+        viewReport: "View Report",
+        untitled: "Untitled Analysis",
+    },
+    ja: {
+        loading: "セキュアアーカイブにアクセス中...",
+        title: "コマンドセンター",
+        welcomeTitle: "セキュアリンク確立済み",
+        welcomeDesc: "エグゼクティブ・コムズ・コマンドセンターへようこそ。新しいニューラルスコアカードを開始するか、過去の分析履歴をご確認ください。",
+        newAnalysis: "新規分析を開始",
+        archives: "分析アーカイブ",
+        noData: "分析履歴がありません。上から最初の分析を開始してください。",
+        viewReport: "レポートを見る",
+        untitled: "タイトルなし分析",
+    },
+};
+
 export default function DashboardPage() {
     const router = useRouter();
     const params = useParams();
     const lang = (params?.lang as string) || "en";
+    const t = dashboardText[lang] || dashboardText["en"];
     const [isAuthorized, setIsAuthorized] = useState<boolean | null>(null);
     const [analyses, setAnalyses] = useState<AnalysisRecord[]>([]);
     const [loadingData, setLoadingData] = useState(true);
 
     const summarizeVideoTitle = (title: string) => {
-        if (!title) return "Untitled Analysis";
+        if (!title) return t.untitled;
         let clean = title.split(' | ')[0].split(' - ')[0].trim();
         if (clean.length > 55) return clean.substring(0, 55) + "...";
         return clean;
@@ -84,7 +110,7 @@ export default function DashboardPage() {
         return (
             <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center">
                 <Loader2 className="w-8 h-8 text-emerald-500 animate-spin mb-4" />
-                <p className="text-emerald-500/70 font-mono text-sm uppercase tracking-widest">Accessing Secure Archives...</p>
+                <p className="text-emerald-500/70 font-mono text-sm uppercase tracking-widest">{t.loading}</p>
             </div>
         );
     }
@@ -94,20 +120,20 @@ export default function DashboardPage() {
             <div className="relative z-10 w-full max-w-5xl">
                 <div className="flex items-center gap-3 mb-8">
                     <ShieldCheck className="w-8 h-8 text-emerald-400" />
-                    <h1 className="text-3xl font-bold text-white tracking-widest uppercase">Command Center</h1>
+                    <h1 className="text-3xl font-bold text-white tracking-widest uppercase">{t.title}</h1>
                 </div>
 
                 <div className="bg-emerald-950/20 border border-emerald-500/20 rounded-xl p-6 mb-12 flex flex-col gap-2">
-                    <h2 className="text-emerald-400 font-bold uppercase tracking-widest text-sm">Secure Link Established</h2>
+                    <h2 className="text-emerald-400 font-bold uppercase tracking-widest text-sm">{t.welcomeTitle}</h2>
                     <p className="text-slate-400 leading-relaxed font-sans text-sm">
-                        Welcome to your Executive Comms Command Center. Initiate a new neural scorecard below, or review your historical analysis archives.
+                        {t.welcomeDesc}
                     </p>
                 </div>
 
                 <div className="mb-16">
                     <h2 className="text-xl font-bold text-white tracking-widest uppercase mb-6 flex items-center gap-2">
                         <PlaySquare className="w-5 h-5 text-emerald-500" />
-                        Initiate New Analysis
+                        {t.newAnalysis}
                     </h2>
                     <div className="max-w-4xl">
                         <NewAnalysisForm currentLang={lang} />
@@ -117,12 +143,12 @@ export default function DashboardPage() {
                 <div>
                     <h2 className="text-xl font-bold text-white tracking-widest uppercase mb-6 flex items-center gap-2">
                         <Calendar className="w-5 h-5 text-emerald-500" />
-                        Analysis Archives
+                        {t.archives}
                     </h2>
 
                     {analyses.length === 0 ? (
                         <div className="text-center py-12 border border-dashed border-slate-800 rounded-xl bg-slate-900/50">
-                            <p className="text-slate-500 font-sans">No historical data found. Initiate your first analysis above.</p>
+                            <p className="text-slate-500 font-sans">{t.noData}</p>
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -166,7 +192,7 @@ export default function DashboardPage() {
                                             </div>
 
                                             <div className="mt-4 pt-4 border-t border-slate-800 flex justify-end items-center text-emerald-500 text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity translate-x-[-10px] group-hover:translate-x-0 duration-300">
-                                                View Report <ArrowRight className="w-4 h-4 ml-1" />
+                                                {t.viewReport} <ArrowRight className="w-4 h-4 ml-1" />
                                             </div>
                                         </motion.div>
                                     </Link>
