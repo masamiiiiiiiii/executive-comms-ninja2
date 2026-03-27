@@ -511,3 +511,24 @@ async def get_analysis(analysis_id: str):
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+@router.delete("/analyze/{analysis_id}")
+async def delete_analysis(analysis_id: str, user_id: str):
+    """Delete an analysis record. Uses service role key to bypass RLS."""
+    youtube_service, gemini_service, supabase = get_services()
+    
+    try:
+        # Verify the record belongs to this user before deleting
+        check = supabase.table("video_analyses").select("id, user_id").eq("id", analysis_id).execute()
+        if not check.data:
+            raise HTTPException(status_code=404, detail="Analysis not found")
+        if check.data[0]["user_id"] != user_id:
+            raise HTTPException(status_code=403, detail="Not authorized to delete this analysis")
+        
+        supabase.table("video_analyses").delete().eq("id", analysis_id).execute()
+        return {"success": True}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

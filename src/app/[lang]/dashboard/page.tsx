@@ -114,8 +114,18 @@ export default function DashboardPage() {
         e.stopPropagation();
         if (!window.confirm(tx.deleteConfirm)) return;
         setDeletingId(id);
-        await supabase.from("video_analyses").delete().eq("id", id);
-        setAnalyses(prev => prev.filter(a => a.id !== id));
+        try {
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+            const res = await fetch(`${apiUrl}/analyze/${id}?user_id=${userId}`, { method: "DELETE" });
+            if (res.ok) {
+                setAnalyses(prev => prev.filter(a => a.id !== id));
+            } else {
+                const err = await res.json().catch(() => ({}));
+                alert(err.detail || "削除に失敗しました");
+            }
+        } catch (e) {
+            alert("ネットワークエラーが発生しました");
+        }
         setDeletingId(null);
     };
 
