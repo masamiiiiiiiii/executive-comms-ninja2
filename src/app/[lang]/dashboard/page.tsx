@@ -145,6 +145,9 @@ export default function DashboardPage() {
             // Sync sessionStorage for components that still rely on it
             sessionStorage.setItem("ninja_pro_unlocked", "true");
             sessionStorage.setItem("selected_pricing_tier", profileData.tier);
+            if (profileData.is_master) {
+                sessionStorage.setItem("ninja_is_master", "true");
+            }
 
             // Fetch analyses within retention window
             const retentionDays = RETENTION_DAYS[profileData.tier] || 90;

@@ -188,16 +188,8 @@ export default function AnalysisClientPage({ id, currentLang, dict, initialData 
         if (typeof window !== "undefined") {
             setIsUnlocked(sessionStorage.getItem("ninja_pro_unlocked") === "true");
             setPricingTier(sessionStorage.getItem("selected_pricing_tier"));
+            setIsMaster(sessionStorage.getItem("ninja_is_master") === "true");
         }
-        // Check master status from Supabase
-        const checkMaster = async () => {
-            const { data: { user } } = await supabase.auth.getUser();
-            if (user) {
-                const { data } = await supabase.from("profiles").select("is_master").eq("id", user.id).single();
-                if (data?.is_master) setIsMaster(true);
-            }
-        };
-        checkMaster();
     }, []);
 
     const fetchAnalysis = useCallback(async () => {
