@@ -43,7 +43,29 @@ class GeminiService:
 
         lang_instruction = ""
         if lang == "ja":
-            lang_instruction = "\n\n**CRITICAL LANGUAGE REQUIREMENT: YOU MUST OUTPUT THE ENTIRE JSON (ALL SUMMARIES, OBSERVATIONS, LABELS, RATIONALES) IN BEAUTIFUL, POLISHED, FORMAL BUSINESS JAPANESE (teinei na bunsho).**\n"
+            lang_instruction = """
+
+**CRITICAL LANGUAGE REQUIREMENT – JAPANESE OUTPUT:**
+Write ALL text fields in the JSON in refined, natural, sophisticated Japanese business prose (格調ある自然な日本語).
+- Do NOT translate from English. Think and compose directly in Japanese.
+- Use the register of a senior management consultant or elite PR advisor. Confident, incisive, and elegant.
+- Avoid stiff, mechanical, or machine-translated phrasing. Every sentence must flow naturally.
+- Observations, summaries, and recommendations must read as if written by a seasoned Japanese executive coach.
+- The `summary` field must be especially compelling: 3-4 polished, hard-hitting paragraphs in professional Japanese.
+- Metric labels such as "Confidence", "Trustworthiness" must also be written in Japanese (例: "自信", "信頼性").
+
+"""
+        else:
+            lang_instruction = """
+
+**CRITICAL LANGUAGE REQUIREMENT – ENGLISH OUTPUT:**
+Write ALL text fields in the JSON in polished, sophisticated, consultant-grade English.
+- Use the voice of a top-tier executive communications advisor with impeccable command of business English.
+- Avoid generic, repetitive, or formulaic phrases. Every observation must feel precisely calibrated and authoritative.
+- Summaries and recommendations must be insightful and direct—think McKinsey-level communications coaching.
+- The `summary` field must be especially compelling: 3-4 hard-hitting paragraphs with sharp analytical prose.
+
+"""
 
         prompt = f"""
         You are an elite Executive Communication Coach for the AI era. Analyze this video with high precision to generate a comprehensive "Executive Dashboard" report.{target_instruction}{lang_instruction}
@@ -145,7 +167,16 @@ class GeminiService:
             prompt += f"\n\n**Additional Context (Video Description)**:\n{metadata['description']}\n\n*Use the above description to help identify the true name of the speaker if possible.*"
 
         if self.use_api_key:
-            # --- API Key Mode (Local File) ---
+            # --- Direct YouTube URL Mode (no download, no bot detection) ---
+            if video_path.startswith("https://www.youtube.com") or video_path.startswith("https://youtu.be"):
+                print(f"Sending YouTube URL directly to Gemini (no download): {video_path}")
+                response = self.model.generate_content(
+                    [{"file_data": {"file_uri": video_path}}, prompt],
+                    generation_config={"response_mime_type": "application/json"}
+                )
+                return self._parse_response(response.text)
+
+            # --- API Key Mode (Local File Upload) ---
             print(f"Uploading file {video_path} to Gemini...")
             
             if not os.path.exists(video_path):
@@ -355,7 +386,29 @@ class GeminiService:
 
         lang_instruction = ""
         if lang == "ja":
-            lang_instruction = "\n\n**CRITICAL LANGUAGE REQUIREMENT: YOU MUST OUTPUT THE ENTIRE JSON (ALL SUMMARIES, OBSERVATIONS, LABELS, RATIONALES) IN BEAUTIFUL, POLISHED, FORMAL BUSINESS JAPANESE (teinei na bunsho).**\n"
+            lang_instruction = """
+
+**CRITICAL LANGUAGE REQUIREMENT – JAPANESE OUTPUT:**
+Write ALL text fields in the JSON in refined, natural, sophisticated Japanese business prose (格調ある自然な日本語).
+- Do NOT translate from English. Think and compose directly in Japanese.
+- Use the register of a senior management consultant or elite PR advisor. Confident, incisive, and elegant.
+- Avoid stiff, mechanical, or machine-translated phrasing. Every sentence must flow naturally.
+- Observations, summaries, and recommendations must read as if written by a seasoned Japanese executive coach.
+- The `summary` field must be especially compelling: 3-4 polished, hard-hitting paragraphs in professional Japanese.
+- Metric labels such as "Confidence", "Trustworthiness" must also be written in Japanese (例: "自信", "信頼性").
+
+"""
+        else:
+            lang_instruction = """
+
+**CRITICAL LANGUAGE REQUIREMENT – ENGLISH OUTPUT:**
+Write ALL text fields in the JSON in polished, sophisticated, consultant-grade English.
+- Use the voice of a top-tier executive communications advisor with impeccable command of business English.
+- Avoid generic, repetitive, or formulaic phrases. Every observation must feel precisely calibrated and authoritative.
+- Summaries and recommendations must be insightful and direct—think McKinsey-level communications coaching.
+- The `summary` field must be especially compelling: 3-4 hard-hitting paragraphs with sharp analytical prose.
+
+"""
 
         prompt = f"""
         You are an elite Executive Communication Coach for the AI era. You are analyzing a transcript of an executive's speech or presentation to generate a comprehensive "Executive Dashboard" report.{target_instruction}{lang_instruction}

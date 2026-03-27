@@ -75,68 +75,85 @@ async def process_analysis(request: AnalysisRequest, analysis_id: str):
     youtube_service, gemini_service, supabase = get_services()
     
     try:
-        # 1. Update status to 'processing_download'
-        supabase.table("video_analyses").update({"status": "downloading"}).eq("id", analysis_id).execute()
+        # 1. Update status to 'analyzing'
+        supabase.table("video_analyses").update({"status": "analyzing"}).eq("id", analysis_id).execute()
         
-        # 2. Extract Transcript and Metadata
-        print(f"Extracting transcript & metadata for {request.youtube_url}")
-        
+        # 2. Extract Metadata (lightweight, no bot risk)
+        print(f"Extracting metadata for {request.youtube_url}")
         try:
             metadata = youtube_service.get_metadata(request.youtube_url)
         except Exception as e:
             print(f"Metadata extraction warning: {e}")
             metadata = {}
             
-        transcript_text = request.transcript_text
         analysis_result = None
         
-        if not transcript_text:
-            # Fallback to backend extraction if not provided by frontend
+        # ── STRATEGY 1: Direct YouTube URL → Gemini (preferred, no download, no bot risk) ──
+        if gemini_service.use_api_key:
             try:
-                print(f"Attempting transcript extraction for {request.youtube_url}")
-                transcript_text = youtube_service.get_transcript(
-                    request.youtube_url, 
-                    start_time=request.start_time, 
-                    end_time=request.end_time
+                print(f"Strategy 1: Direct YouTube URL analysis via Gemini for {request.youtube_url}")
+                analysis_result = gemini_service.analyze_video(
+                    request.youtube_url, metadata, request.target_person, lang=request.lang
                 )
-                
-                # 3. Update status to 'analyzing'
-                supabase.table("video_analyses").update({"status": "analyzing"}).eq("id", analysis_id).execute()
-                
-                # 4. Analyze with Gemini (Transcript mode)
-                print(f"Starting Gemini transcript analysis")
-                analysis_result = gemini_service.analyze_full_transcript(transcript_text, metadata, request.target_person, lang=request.lang)
-                
+                print("Strategy 1 succeeded.")
             except Exception as e:
-                print(f"Transcript extraction failed, falling back to VIDEO analysis: {e}")
-                
-                # Update status to 'downloading'
+                print(f"Strategy 1 (direct YouTube) failed: {e}")
+                analysis_result = None
+
+        # ── STRATEGY 2: Transcript-based analysis ──
+        if not analysis_result:
+            transcript_text = request.transcript_text
+            
+            if not transcript_text:
+                try:
+                    print(f"Strategy 2a: Fetching transcript for {request.youtube_url}")
+                    transcript_text = youtube_service.get_transcript(
+                        request.youtube_url,
+                        start_time=request.start_time,
+                        end_time=request.end_time
+                    )
+                except Exception as e:
+                    print(f"Strategy 2a transcript fetch failed: {e}")
+                    transcript_text = ""
+
+            if transcript_text and len(transcript_text) > 100:
+                try:
+                    print("Strategy 2b: Transcript-based Gemini analysis")
+                    analysis_result = gemini_service.analyze_full_transcript(
+                        transcript_text, metadata, request.target_person, lang=request.lang
+                    )
+                    print("Strategy 2 succeeded.")
+                except Exception as e:
+                    print(f"Strategy 2 transcript analysis failed: {e}")
+                    analysis_result = None
+
+        # ── STRATEGY 3: Download video and upload to Gemini (last resort) ──
+        if not analysis_result:
+            try:
+                print(f"Strategy 3: Downloading video for {request.youtube_url}")
                 supabase.table("video_analyses").update({"status": "downloading"}).eq("id", analysis_id).execute()
                 
-                # 1. Download Video (Audio + Vision)
                 video_path = youtube_service.download_video(
                     request.youtube_url,
                     start_time=request.start_time,
                     end_time=request.end_time
                 )
                 
-                # 2. Update status to 'analyzing'
                 supabase.table("video_analyses").update({"status": "analyzing"}).eq("id", analysis_id).execute()
                 
-                # 3. Run Multimodal Analysis (Includes facial expressions, eye contact)
-                print(f"Starting Gemini VIDEO analysis")
+                print("Strategy 3: Starting Gemini VIDEO analysis")
                 analysis_result = gemini_service.analyze_video(video_path, metadata, request.target_person, lang=request.lang)
                 
-                # 4. Cleanup temp file
                 try:
                     import shutil
                     shutil.rmtree(os.path.dirname(video_path))
                 except:
                     pass
-        else:
-             # Manual transcript provided
-             supabase.table("video_analyses").update({"status": "analyzing"}).eq("id", analysis_id).execute()
-             analysis_result = gemini_service.analyze_full_transcript(transcript_text, metadata, request.target_person, lang=request.lang)
+                    
+                print("Strategy 3 succeeded.")
+            except Exception as e:
+                raise ValueError(f"All analysis strategies failed. Last error: {e}")
+
 
         # 5. Inject real metadata into results for frontend display
         if metadata and analysis_result:
