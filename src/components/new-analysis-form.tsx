@@ -15,11 +15,11 @@ const formText: Record<string, Record<string, string>> = {
         labelTarget: "Target Source Video",
         btnEstablish: "Establish Link",
         supportedTargets: "Supported targets: Public YouTube uniform resource locators (URLs).",
-        coWatchTitle: "Co-Watching Session",
-        coWatchDesc: "Observation Mode: Active. Ensure the designated segment is watched.",
+        coWatchTitle: "5-Minute Observation Required",
+        coWatchDesc: "Please play and watch the video for at least 5 minutes to enable analysis.",
         abortReset: "Abort & Reset",
-        initNeural: "Initializing Neural Link",
-        connectingGrid: "Establishing connection to observation grid...",
+        initNeural: "Fetching Analysis Results",
+        connectingGrid: "Deep analysis in progress. This may take a minute...",
         toastUnlocked: "Transaction Secure. Executive Pro unlocked.",
         toastNeuralReady: "Neural Link ready. Awaiting your observation command.",
         toastLoaded: "Video Loaded. Ninja is ready to observe.",
@@ -33,11 +33,11 @@ const formText: Record<string, Record<string, string>> = {
         labelTarget: "分析対象ビデオ",
         btnEstablish: "リンクを確立",
         supportedTargets: "対象: 公開されているYouTube URLのみ対応しています。",
-        coWatchTitle: "共同視聴セッション",
-        coWatchDesc: "観察モード: アクティブ。指定セグメントを視聴してください。",
+        coWatchTitle: "5分間の視聴が必要です",
+        coWatchDesc: "分析を開始するには、動画を最低5分間再生・視聴してください。",
         abortReset: "中止 & リセット",
-        initNeural: "ニューラルリンクを初期化中",
-        connectingGrid: "観察グリッドへの接続を確立中...",
+        initNeural: "分析結果取得中",
+        connectingGrid: "分析を実行中です。しばらくお待ちください...",
         toastUnlocked: "決済完了。Executive Proがアンロックされました。",
         toastNeuralReady: "ニューラルリンク準備完了。観察コマンドを待機中。",
         toastLoaded: "動画読み込み完了。Ninjaが観察準備完了。",
@@ -247,6 +247,7 @@ export function NewAnalysisForm({ currentLang }: { currentLang: string }) {
                         videoId={videoId}
                         onReadyToAnalyze={handleAnalyze}
                         title={url}
+                        lang={currentLang}
                     />
                 </div>
             </>

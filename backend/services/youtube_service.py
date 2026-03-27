@@ -119,6 +119,7 @@ class YouTubeService:
             'writeautomaticsub': True,
             'subtitleslangs': ['en', 'ja'],
             'outtmpl': out_path,
+            'noplaylist': True,
         }
         if cookie_path:
             ydl_opts['cookiefile'] = cookie_path
@@ -190,6 +191,7 @@ class YouTubeService:
             }],
             'outtmpl': out_path,
             'quiet': False,
+            'noplaylist': True,
         }
         
         if cookie_path:
@@ -260,6 +262,7 @@ class YouTubeService:
             'outtmpl': out_path,
             'quiet': False,
             'merge_output_format': 'mp4',
+            'noplaylist': True,
         }
         
         if cookie_path:

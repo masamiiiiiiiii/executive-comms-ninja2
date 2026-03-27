@@ -14,12 +14,14 @@ interface WatchInterfaceProps {
     videoId: string;
     onReadyToAnalyze: () => void;
     title?: string;
+    lang?: string;
 }
 
 export const WatchInterface: React.FC<WatchInterfaceProps> = ({
     videoId,
     onReadyToAnalyze,
-    title = "Analyzing Executive Presence..."
+    title = "Analyzing Executive Presence...",
+    lang = "en"
 }) => {
     const [player, setPlayer] = useState<any>(null);
     const [duration, setDuration] = useState(0);
@@ -159,7 +161,7 @@ export const WatchInterface: React.FC<WatchInterfaceProps> = ({
                         <div className="flex items-center gap-4">
                             {!isShort && (
                                 <div className="flex items-center gap-2 bg-slate-900/50 border border-white/5 rounded-full px-3 py-1">
-                                    <span className="text-[9px] uppercase tracking-widest text-slate-400 font-mono">Jump to Start (s):</span>
+                                    <span className="text-[9px] uppercase tracking-widest text-slate-400 font-mono">{lang === 'ja' ? '開始位置（秒）:' : 'Jump to Start (s):'}</span>
                                     <input
                                         type="number"
                                         min="0"
@@ -244,12 +246,12 @@ export const WatchInterface: React.FC<WatchInterfaceProps> = ({
                         {isTransitioning ? (
                             <div className="flex items-center gap-3">
                                 <Loader2 className="w-4 h-4 animate-spin" />
-                                Generating Report...
+                                {lang === 'ja' ? '生成中...' : 'Generating Report...'}
                             </div>
                         ) : (
                             <div className="flex items-center gap-3">
                                 <Zap className={`w-4 h-4 ${isRequirementMet ? "animate-pulse" : ""}`} />
-                                Generate Report
+                                {lang === 'ja' ? 'レポートを生成' : 'Generate Report'}
                             </div>
                         )}
                     </Button>
