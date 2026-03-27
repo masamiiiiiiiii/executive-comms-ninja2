@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import {
     ShieldCheck, Loader2, PlaySquare, Calendar, Target,
-    Trophy, ArrowRight, RefreshCw, Zap, Clock
+    Trophy, ArrowRight, RefreshCw, Zap, Clock, Trash2
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
@@ -53,6 +53,8 @@ const t: Record<string, Record<string, string>> = {
         archives: "Analysis Archives",
         noData: "No archived analyses found. Initiate your first analysis above.",
         viewReport: "View Report",
+        deleteReport: "Delete",
+        deleteConfirm: "Are you sure you want to delete this analysis? This cannot be undone.",
         untitled: "Untitled Analysis",
         remaining: "Analyses remaining this month",
         retentionNote: "Reports stored for",
@@ -70,6 +72,8 @@ const t: Record<string, Record<string, string>> = {
         archives: "分析アーカイブ",
         noData: "分析履歴がありません。上から最初の分析を開始してください。",
         viewReport: "レポートを見る",
+        deleteReport: "削除",
+        deleteConfirm: "この分析を削除しますか？この操作は元に戻せません。",
         untitled: "タイトルなし分析",
         remaining: "今月の残り分析回数",
         retentionNote: "レポート保存期間",
@@ -89,6 +93,7 @@ export default function DashboardPage() {
     const [analyses, setAnalyses] = useState<AnalysisRecord[]>([]);
     const [loadingData, setLoadingData] = useState(true);
     const [userId, setUserId] = useState<string | null>(null);
+    const [deletingId, setDeletingId] = useState<string | null>(null);
 
     const supabase = createClient();
 
@@ -102,6 +107,16 @@ export default function DashboardPage() {
     const handleSignOut = async () => {
         await supabase.auth.signOut();
         router.push(`/${lang}`);
+    };
+
+    const handleDelete = async (e: React.MouseEvent, id: string) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (!window.confirm(tx.deleteConfirm)) return;
+        setDeletingId(id);
+        await supabase.from("video_analyses").delete().eq("id", id);
+        setAnalyses(prev => prev.filter(a => a.id !== id));
+        setDeletingId(null);
     };
 
     useEffect(() => {
@@ -254,15 +269,29 @@ export default function DashboardPage() {
                                                     <span className="text-xs text-slate-500 bg-slate-950 px-2 py-1 rounded">
                                                         {new Date(record.created_at).toLocaleDateString()}
                                                     </span>
-                                                    {isCompleted ? (
-                                                        <span className="flex items-center gap-1.5 text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded">
-                                                            <Trophy className="w-3 h-3" /> {score}
-                                                        </span>
-                                                    ) : (
-                                                        <span className="flex items-center gap-1.5 text-xs text-amber-400 bg-amber-500/10 px-2 py-1 rounded">
-                                                            <Loader2 className="w-3 h-3 animate-spin" /> Processing
-                                                        </span>
-                                                    )}
+                                                    <div className="flex items-center gap-2">
+                                                        {isCompleted ? (
+                                                            <span className="flex items-center gap-1.5 text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded">
+                                                                <Trophy className="w-3 h-3" /> {score}
+                                                            </span>
+                                                        ) : (
+                                                            <span className="flex items-center gap-1.5 text-xs text-amber-400 bg-amber-500/10 px-2 py-1 rounded">
+                                                                <Loader2 className="w-3 h-3 animate-spin" /> Processing
+                                                            </span>
+                                                        )}
+                                                        {profile?.is_master && (
+                                                            <button
+                                                                onClick={(e) => handleDelete(e, record.id)}
+                                                                disabled={deletingId === record.id}
+                                                                className="text-slate-600 hover:text-red-400 transition-colors p-1 rounded hover:bg-red-400/10"
+                                                                title={tx.deleteReport}
+                                                            >
+                                                                {deletingId === record.id
+                                                                    ? <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                                                                    : <Trash2 className="w-3.5 h-3.5" />}
+                                                            </button>
+                                                        )}
+                                                    </div>
                                                 </div>
                                                 <h3 className="text-sm sm:text-base font-bold text-white font-sans leading-snug mb-2 group-hover:text-emerald-400 transition-colors">
                                                     {summarizeVideoTitle(record.video_title)}

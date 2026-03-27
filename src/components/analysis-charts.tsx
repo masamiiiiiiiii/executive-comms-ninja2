@@ -7,10 +7,21 @@ interface AnalysisChartsProps {
     data: Record<string, number>;
     benchmarkData?: Record<string, number>;
     isEliteBenchmark?: boolean;
+    lang?: string;
 }
 
-export function AnalysisCharts({ data, benchmarkData, isEliteBenchmark = false }: AnalysisChartsProps) {
+const JP_RADAR_LABELS: Record<string, string> = {
+    confidence: "自信",
+    empathy: "共感力",
+    authority: "権威感",
+    composure: "冷静さ",
+    enthusiasm: "熱量",
+    trust: "信頼性",
+};
+
+export function AnalysisCharts({ data, benchmarkData, isEliteBenchmark = false, lang = "en" }: AnalysisChartsProps) {
     if (!data) return <div className="text-sm text-muted-foreground">No metrics available.</div>;
+
 
     const subjects = Object.keys(data);
     const numPoints = subjects.length;
@@ -157,7 +168,7 @@ export function AnalysisCharts({ data, benchmarkData, isEliteBenchmark = false }
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.3 + i * 0.1 }}
                         >
-                            {subj}
+                            {lang === 'ja' ? (JP_RADAR_LABELS[subj.toLowerCase()] || subj) : subj}
                         </motion.text>
                     );
                 })}
@@ -175,14 +186,17 @@ export function AnalysisCharts({ data, benchmarkData, isEliteBenchmark = false }
             <div className="absolute bottom-[-10px] left-0 right-0 flex justify-center gap-6 text-[10px] uppercase tracking-wider font-bold">
                 <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-sm bg-emerald-500/20 border-2 border-emerald-500"></div>
-                    <span className="text-emerald-700">Your Score</span>
+                    <span className="text-emerald-700">{lang === 'ja' ? 'あなたのスコア' : 'Your Score'}</span>
                 </div>
                 {benchmarkData && (
                     <div className="flex items-center gap-2">
                         <div className={`w-3 h-3 rounded-sm border-2 border-dashed ${isEliteBenchmark ? "bg-amber-500/10 border-amber-500" : "bg-slate-400/10 border-slate-400"
                             }`}></div>
                         <span className={isEliteBenchmark ? "text-amber-600" : "text-slate-500"}>
-                            {isEliteBenchmark ? "Elite Leaders" : "Industry Avg"}
+                            {lang === 'ja'
+                                ? (isEliteBenchmark ? 'エリートリーダー' : '業界平均')
+                                : (isEliteBenchmark ? 'Elite Leaders' : 'Industry Avg')
+                            }
                         </span>
                     </div>
                 )}

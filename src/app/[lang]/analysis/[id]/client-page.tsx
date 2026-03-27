@@ -21,6 +21,7 @@ import { GlobalFooter } from "@/components/global-footer";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { generatePDFExport, generateCSVExport } from "@/lib/export-utils";
+import { createClient } from "@/lib/supabase/client";
 
 // --- Components ---
 
@@ -173,6 +174,8 @@ export default function AnalysisClientPage({ id, currentLang, dict, initialData 
 
     const [isUnlocked, setIsUnlocked] = useState(false);
     const [pricingTier, setPricingTier] = useState<string | null>(null);
+    const [isMaster, setIsMaster] = useState(false);
+    const supabase = createClient();
 
     const summarizeVideoTitle = (title: string) => {
         if (!title) return "Untitled Analysis";
@@ -186,6 +189,15 @@ export default function AnalysisClientPage({ id, currentLang, dict, initialData 
             setIsUnlocked(sessionStorage.getItem("ninja_pro_unlocked") === "true");
             setPricingTier(sessionStorage.getItem("selected_pricing_tier"));
         }
+        // Check master status from Supabase
+        const checkMaster = async () => {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (user) {
+                const { data } = await supabase.from("profiles").select("is_master").eq("id", user.id).single();
+                if (data?.is_master) setIsMaster(true);
+            }
+        };
+        checkMaster();
     }, []);
 
     const fetchAnalysis = useCallback(async () => {
@@ -300,7 +312,7 @@ export default function AnalysisClientPage({ id, currentLang, dict, initialData 
                         size="sm"
                         className="h-10 sm:h-8 gap-1.5 text-xs px-2.5"
                         onClick={() => {
-                            if (pricingTier === "subscription" || pricingTier === "subscription_ja") {
+                            if (isMaster || pricingTier === "subscription" || pricingTier === "subscription_ja") {
                                 generatePDFExport(analysis, "exportable-analysis-results");
                             } else {
                                 toast.error(dict.analysis.header.proOnlyExport, {
@@ -316,7 +328,7 @@ export default function AnalysisClientPage({ id, currentLang, dict, initialData 
                         size="sm"
                         className="h-10 sm:h-8 gap-1.5 text-xs px-2.5"
                         onClick={() => {
-                            if (pricingTier === "subscription" || pricingTier === "subscription_ja") {
+                            if (isMaster || pricingTier === "subscription" || pricingTier === "subscription_ja") {
                                 generateCSVExport(analysis);
                             } else {
                                 toast.error(dict.analysis.header.proOnlyExport, {
@@ -545,6 +557,7 @@ export default function AnalysisClientPage({ id, currentLang, dict, initialData 
                                             data={results.emotion_radar || metrics}
                                             benchmarkData={results.benchmark_comparison?.emotion_radar_benchmark}
                                             isEliteBenchmark={overallScore >= 92}
+                                            lang={currentLang}
                                         />
                                     </div>
                                 </CardContent>
