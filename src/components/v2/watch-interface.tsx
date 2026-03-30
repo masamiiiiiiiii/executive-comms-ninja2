@@ -38,9 +38,9 @@ export const WatchInterface: React.FC<WatchInterfaceProps> = ({
 
     // Requirement:
     // - If < 5m (300s): Watch 90% (to handle end-slop)
-    // - If >= 5m: Watch 180s (3m) total unique seconds
+    // - If >= 5m: Watch 300s (5m) total unique seconds
     const isShort = duration > 0 && duration < 300;
-    const threshold = isShort ? Math.floor(duration * 0.9) : 180;
+    const threshold = isShort ? Math.floor(duration * 0.9) : 300;
 
     const handleFinalInitiate = () => {
         setIsTransitioning(true);
@@ -176,7 +176,7 @@ export const WatchInterface: React.FC<WatchInterfaceProps> = ({
                                 </div>
                             )}
                             <Badge variant="outline" className="bg-slate-900/50 border-white/10 text-slate-500 font-mono text-[9px] px-3 py-1 uppercase tracking-tighter flex-shrink-0">
-                                {isShort ? "CLIP_MODE_90P" : "DEEP_OBS_180S"}
+                                {isShort ? "CLIP_MODE_90P" : "DEEP_OBS_300S"}
                             </Badge>
                         </div>
                     </div>
@@ -216,7 +216,7 @@ export const WatchInterface: React.FC<WatchInterfaceProps> = ({
                                         <p className="opacity-80">
                                             {isShort
                                                 ? "OBSERVE REMAINING SEQUENCE DATA."
-                                                : `MIN 180S OBSERVATION. (${watchedSeconds.size}/${threshold}s)`}
+                                                : `MIN 300S OBSERVATION. (${watchedSeconds.size}/${threshold}s)`}
                                         </p>
                                     </div>
                                 )}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { VideoPlayer } from "@/components/video-player";
 import { TimelineChart } from "@/components/timeline-chart";
@@ -109,16 +109,50 @@ function TimelineIcon({ label }: { label?: string }) {
 function ProcessingState({ status, currentLang, dict }: { status: string, currentLang: string, dict: any }) {
     const isQueued = status === "queued";
     const isDownloading = status === "downloading";
+    const [elapsed, setElapsed] = React.useState(0);
+    const [msgIdx, setMsgIdx] = React.useState(0);
 
-    let title = dict?.analysis?.states?.analyzingTitle || "Analyzing Executive Presence";
-    let description = dict?.analysis?.states?.analyzingDesc || "Gemini AI is analyzing communication patterns, vocal dynamics, and leadership presence. This usually takes 15–30 seconds.";
+    const analyzingMessages = currentLang === "ja" ? [
+        "AIがコミュニケーションパターンを解析中...",
+        "声のダイナミクスを評価中...",
+        "リーダーシップのプレゼンスを測定中...",
+        "感情レーダーを構築中...",
+        "ベンチマーク比較を実行中...",
+        "推奨事項を生成中...",
+        "レポートを仕上げています...",
+    ] : [
+        "Analyzing communication patterns...",
+        "Evaluating vocal dynamics & delivery...",
+        "Measuring leadership presence...",
+        "Building emotional radar profile...",
+        "Running benchmark comparison...",
+        "Generating strategic recommendations...",
+        "Finalizing your executive report...",
+    ];
+
+    React.useEffect(() => {
+        const t = setInterval(() => setElapsed(s => s + 1), 1000);
+        return () => clearInterval(t);
+    }, []);
+
+    React.useEffect(() => {
+        if (!isQueued && !isDownloading) {
+            const t = setInterval(() => setMsgIdx(i => (i + 1) % analyzingMessages.length), 4000);
+            return () => clearInterval(t);
+        }
+    }, [isQueued, isDownloading]);
+
+    const fmt = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+
+    let title = dict?.analysis?.states?.analyzingTitle || (currentLang === "ja" ? "エグゼクティブ・プレゼンスを分析中" : "Analyzing Executive Presence");
+    let description = analyzingMessages[msgIdx];
 
     if (isQueued) {
-        title = dict?.analysis?.states?.queuedTitle || "Analysis Queued";
-        description = dict?.analysis?.states?.queuedDesc || "Your analysis is waiting to be processed. This will start shortly...";
+        title = dict?.analysis?.states?.queuedTitle || (currentLang === "ja" ? "分析待機中" : "Analysis Queued");
+        description = dict?.analysis?.states?.queuedDesc || (currentLang === "ja" ? "まもなく開始されます..." : "Your analysis is waiting to be processed. This will start shortly...");
     } else if (isDownloading) {
-        title = dict?.analysis?.states?.downloadingTitle || "Downloading Audio Content";
-        description = dict?.analysis?.states?.downloadingDesc || "YouTube transcript is unavailable. We are downloading the audio for an AI multimodal analysis (voice & tone).";
+        title = dict?.analysis?.states?.downloadingTitle || (currentLang === "ja" ? "音声コンテンツをダウンロード中" : "Downloading Audio Content");
+        description = dict?.analysis?.states?.downloadingDesc || (currentLang === "ja" ? "高精度AIマルチモーダル分析のために音声データを取得しています。" : "Downloading audio for AI multimodal analysis.");
     }
 
     return (
@@ -126,15 +160,22 @@ function ProcessingState({ status, currentLang, dict }: { status: string, curren
             <div className="absolute top-0 w-full p-6 flex justify-start z-50">
                 <Button variant="ghost" className="bg-slate-900/50 hover:bg-slate-800 backdrop-blur-md flex items-center text-sm font-medium text-slate-300 hover:text-white transition-colors shadow-sm rounded-full px-4 border border-slate-700/50" onClick={() => window.location.href = `/${currentLang}`}>
                     <ArrowLeft className="mr-2 h-4 w-4" />
-                    {dict?.analysis?.states?.backToHome || "Back to Home"}
+                    {dict?.analysis?.states?.backToHome || (currentLang === "ja" ? "ホームに戻る" : "Back to Home")}
                 </Button>
             </div>
             <div className="scale-150 mb-16 opacity-60 pointer-events-none">
                 <NinjaIntelligenceIndicator isObserving={true} />
             </div>
             <div className="text-center max-w-sm mx-auto p-8 rounded-2xl relative z-10 border border-emerald-500/20 bg-slate-950/60 backdrop-blur-md shadow-[0_0_50px_rgba(16,185,129,0.1)]">
-                <h2 className="text-base font-mono text-emerald-400 mb-2 tracking-widest uppercase">{title}</h2>
-                <p className="text-slate-400 text-xs leading-relaxed font-mono opacity-80">{description}</p>
+                <h2 className="text-base font-mono text-emerald-400 mb-3 tracking-widest uppercase">{title}</h2>
+                <p className="text-slate-400 text-xs leading-relaxed font-mono opacity-80 min-h-[2.5rem] transition-all duration-700">{description}</p>
+                {!isQueued && (
+                    <div className="mt-4 flex items-center justify-center gap-2">
+                        <div className="h-px flex-1 bg-emerald-500/20" />
+                        <span className="text-[10px] font-mono text-emerald-500/50 tracking-widest tabular-nums">{fmt(elapsed)}</span>
+                        <div className="h-px flex-1 bg-emerald-500/20" />
+                    </div>
+                )}
             </div>
         </div>
     );
@@ -236,10 +277,10 @@ export default function AnalysisClientPage({ id, currentLang, dict, initialData 
             const data = await fetchAnalysis();
             const status = data?.status;
 
-            // Keep polling if still processing/queued (max 2 minutes)
-            if ((status === "processing" || status === "queued") && pollCount < 24) {
+            // Keep polling while processing/queued (max 5 minutes = 100 × 3s)
+            if ((status === "processing" || status === "queued" || status === "analyzing" || status === "downloading") && pollCount < 100) {
                 pollCount++;
-                timer = setTimeout(poll, 5000); // poll every 5s
+                timer = setTimeout(poll, 3000); // poll every 3s
             }
         };
 
@@ -256,7 +297,7 @@ export default function AnalysisClientPage({ id, currentLang, dict, initialData 
     }
 
     const status = analysis.status;
-    if (status === "processing" || status === "queued") {
+    if (status === "processing" || status === "queued" || status === "analyzing" || status === "downloading") {
         return <ProcessingState status={status} currentLang={currentLang} dict={dict} />;
     }
     if (status === "failed") {
