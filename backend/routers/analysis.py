@@ -70,6 +70,7 @@ class AnalysisRequest(BaseModel):
     start_time: Optional[int] = None
     end_time: Optional[int] = None
     lang: Optional[str] = "en"
+    context_type: Optional[str] = "interview"  # "interview" | "crisis"
 
 async def process_analysis(request: AnalysisRequest, analysis_id: str):
     youtube_service, gemini_service, supabase = get_services()
@@ -93,7 +94,7 @@ async def process_analysis(request: AnalysisRequest, analysis_id: str):
             try:
                 print(f"Strategy 1: Direct YouTube URL analysis via Gemini for {request.youtube_url}")
                 analysis_result = gemini_service.analyze_video(
-                    request.youtube_url, metadata, request.target_person, lang=request.lang
+                    request.youtube_url, metadata, request.target_person, lang=request.lang, context_type=request.context_type
                 )
                 print("Strategy 1 succeeded.")
             except Exception as e:
@@ -120,7 +121,7 @@ async def process_analysis(request: AnalysisRequest, analysis_id: str):
                 try:
                     print("Strategy 2b: Transcript-based Gemini analysis")
                     analysis_result = gemini_service.analyze_full_transcript(
-                        transcript_text, metadata, request.target_person, lang=request.lang
+                        transcript_text, metadata, request.target_person, lang=request.lang, context_type=request.context_type
                     )
                     print("Strategy 2 succeeded.")
                 except Exception as e:
@@ -142,7 +143,7 @@ async def process_analysis(request: AnalysisRequest, analysis_id: str):
                 supabase.table("video_analyses").update({"status": "analyzing"}).eq("id", analysis_id).execute()
                 
                 print("Strategy 3: Starting Gemini VIDEO analysis")
-                analysis_result = gemini_service.analyze_video(video_path, metadata, request.target_person, lang=request.lang)
+                analysis_result = gemini_service.analyze_video(video_path, metadata, request.target_person, lang=request.lang, context_type=request.context_type)
                 
                 try:
                     import shutil

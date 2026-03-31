@@ -31,7 +31,91 @@ class GeminiService:
         else:
              print("Warning: No Gemini Auth configured.")
 
-    def analyze_video(self, video_path: str, metadata: dict = None, target_person: str = None, lang: str = "en") -> dict:
+    def _build_crisis_prompt_injection(self, lang: str) -> str:
+        """Returns the specialized crisis/risk communication rubric block."""
+        if lang == "ja":
+            return """
+
+**【危機リスクコミュニケーション分析モード】**
+これは通常のインタビューや講演ではなく、**危機・不祥事・リスク対応の記者会見または声明**です。
+評価基準を以下の危機コミュニケーション専門フレームワークに完全に切り替えてください。
+
+## 危機コミュニケーション評価の原則
+危機会見において「熱量」「エンゲージメント」「感情的な盛り上がり」は不適切です。
+評価すべきは、以下の6つの軸です：
+
+1. **説明責任の表明（Accountability）**: 責任の所在を明確に認め、言い訳や責任回避がないか
+2. **透明性と事実の正確性（Transparency）**: 既知の事実を誠実に開示し、隠蔽や誤魔化しがないか
+3. **プレッシャー下の冷静さ（Composure under pressure）**: 敵対的な質問や感情的な場面でも動揺せず、品位を保てているか
+4. **ステークホルダーへの共感（Stakeholder empathy）**: 被害者・顧客・社会への誠実な謝意と配慮が伝わるか
+5. **メッセージコントロール（Message control）**: 言うべきことと言うべきでないことを正確に判断できているか
+6. **再発防止の具体性（Remediation commitment）**: 再発防止策・対応策が具体的・実行可能として提示されているか
+
+## スコアリング基準の変更
+`high_level_metrics` は以下に差し替えてください（ラベルも日本語で）：
+- `accountability`: 説明責任の表明度（スコア: 0-100）
+- `transparency`: 情報開示の透明性（スコア: 0-100）
+- `composure`: プレッシャー下での冷静さ（スコア: 0-100）
+- `credibility`: 発言の信頼性・説得力（スコア: 0-100）
+
+`emotion_radar` は以下に差し替えてください：
+- `accountability`: 説明責任
+- `transparency`: 透明性
+- `composure`: 冷静さ
+- `empathy`: ステークホルダー共感
+- `message_control`: メッセージ制御力
+- `remediation`: 再発防止への具体的コミットメント
+
+## 推奨事項の視点
+「もっと熱量を」「エンゲージメントを高めよ」などの通常インタビュー向けアドバイスは不要です。
+代わりに、危機対応の質（謝罪の深度・法的リスクの回避・メディアとの信頼構築）に関する専門的アドバイスを提供してください。
+
+## タイムライン分析の視点
+各段階で「説明責任の表現」「敵対的質問への対応」「具体的コミットメントの発言」「感情的な動揺」に着目してください。
+
+"""
+        else:
+            return """
+
+**[CRISIS / RISK COMMUNICATION ANALYSIS MODE]**
+This is NOT a standard interview or keynote. This is a **crisis press conference, incident response statement, or risk communication event**.
+Switch the evaluation framework entirely to the specialized crisis communication rubric below.
+
+## Crisis Communication Evaluation Principles
+In a crisis press conference, "enthusiasm", "emotional engagement", and "energy" are NOT relevant metrics — they are inappropriate.
+The six critical evaluation axes are:
+
+1. **Accountability Expression**: Does the speaker clearly own the problem without deflection or minimization?
+2. **Transparency & Factual Accuracy**: Are known facts disclosed honestly? Is there evidence of spin or concealment?
+3. **Composure Under Pressure**: Does the speaker maintain calm and dignity when facing hostile or emotional questioning?
+4. **Stakeholder Empathy**: Is there genuine, appropriate remorse for victims, customers, and society?
+5. **Message Control**: Does the speaker stay on-point, disclosing what they should without over-sharing legal risk?
+6. **Remediation Commitment**: Are concrete, credible action plans stated for prevention and recovery?
+
+## Scoring Recalibration
+Replace `high_level_metrics` with these crisis-specific dimensions:
+- `accountability`: Accountability Expression (score: 0-100)
+- `transparency`: Transparency & Disclosure (score: 0-100)
+- `composure`: Composure Under Adversity (score: 0-100)
+- `credibility`: Message Credibility & Believability (score: 0-100)
+
+Replace `emotion_radar` with:
+- `accountability`: Accountability ownership
+- `transparency`: Transparency
+- `composure`: Composure
+- `empathy`: Stakeholder / victim empathy
+- `message_control`: Message discipline
+- `remediation`: Concrete remediation commitment
+
+## Recommendations
+Do NOT advise "increase enthusiasm" or "show more energy". Instead, provide expert crisis communications guidance: depth of apology, legal risk avoidance, media trust-building, and long-term reputational recovery.
+
+## Timeline Focus
+For each timeline event, focus on accountability statements, hostile Q&A handling, specific commitment moments, and any emotional composure breaks.
+
+"""
+
+    def analyze_video(self, video_path: str, metadata: dict = None, target_person: str = None, lang: str = "en", context_type: str = "interview") -> dict:
         """
         Analyzes a video.
         If API Key is used, 'video_path' must be a local file path.
@@ -67,8 +151,10 @@ Write ALL text fields in the JSON in polished, sophisticated, consultant-grade E
 
 """
 
+        crisis_injection = self._build_crisis_prompt_injection(lang) if context_type == "crisis" else ""
+
         prompt = f"""
-        You are an elite Executive Communication Coach for the AI era. Analyze this video with high precision to generate a comprehensive "Executive Dashboard" report.{target_instruction}{lang_instruction}
+        You are an elite Executive Communication Coach for the AI era. Analyze this video with high precision to generate a comprehensive "Executive Dashboard" report.{target_instruction}{lang_instruction}{crisis_injection}
 
         **Objective**: Evaluate the speaker's executive presence, credibility, and communication effectiveness against global C-suite standards.
 
@@ -375,7 +461,7 @@ Write ALL text fields in the JSON in polished, sophisticated, consultant-grade E
             )
             return self._parse_response(response.text)
 
-    def analyze_full_transcript(self, transcript_text: str, metadata: dict, target_person: str = None, lang: str = "en") -> dict:
+    def analyze_full_transcript(self, transcript_text: str, metadata: dict, target_person: str = None, lang: str = "en", context_type: str = "interview") -> dict:
         """
         Analyzes a full video transcript as an alternative to analyzing the raw video file.
         This bypasses the need to download the video, avoiding YouTube bot blocking.
@@ -410,8 +496,10 @@ Write ALL text fields in the JSON in polished, sophisticated, consultant-grade E
 
 """
 
+        crisis_injection = self._build_crisis_prompt_injection(lang) if context_type == "crisis" else ""
+
         prompt = f"""
-        You are an elite Executive Communication Coach for the AI era. You are analyzing a transcript of an executive's speech or presentation to generate a comprehensive "Executive Dashboard" report.{target_instruction}{lang_instruction}
+        You are an elite Executive Communication Coach for the AI era. You are analyzing a transcript of an executive's speech or presentation to generate a comprehensive "Executive Dashboard" report.{target_instruction}{lang_instruction}{crisis_injection}
         Even though you cannot see the video, evaluate their communication style based on the spoken text, structure, pacing (implied by content), and implicit tone.
 
         **Objective**: Evaluate the speaker's executive credibility, communication effectiveness, and structure against global C-suite standards based on this transcript.

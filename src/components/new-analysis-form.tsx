@@ -28,6 +28,10 @@ const formText: Record<string, Record<string, string>> = {
         toastQuotaOne: "Your Tactical Deep Dive has already been consumed. Please upgrade to Pro.",
         toastAnalysis: "Deep Analysis Initiated!",
         toastFailed: "Analysis failed.",
+        contextLabel: "Analysis Mode",
+        contextInterview: "Interview / Keynote",
+        contextCrisis: "Crisis / Risk Comms",
+        contextCrisisNote: "Crisis Mode — Evaluates accountability, transparency, composure & remediation commitment.",
     },
     ja: {
         labelTarget: "分析対象ビデオ",
@@ -46,6 +50,10 @@ const formText: Record<string, Record<string, string>> = {
         toastQuotaOne: "タクティカル・ディープダイブは消費済みです。Proにアップグレードしてください。",
         toastAnalysis: "ディープ分析を開始しました！",
         toastFailed: "分析に失敗しました。",
+        contextLabel: "分析モード",
+        contextInterview: "インタビュー / 講演",
+        contextCrisis: "危機 / リスクコミュニケーション",
+        contextCrisisNote: "危機モード — 説明責任・透明性・冷静さ・再発防止の具体性を評価します。",
     },
 };
 
@@ -62,6 +70,7 @@ export function NewAnalysisForm({ currentLang }: { currentLang: string }) {
     const [isGlobalProcessing, setIsGlobalProcessing] = useState(false);
     const [watchMode, setWatchMode] = useState(false);
     const [videoId, setVideoId] = useState<string | null>(null);
+    const [contextType, setContextType] = useState<"interview" | "crisis">("interview");
 
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -182,7 +191,8 @@ export function NewAnalysisForm({ currentLang }: { currentLang: string }) {
                         role: "Executive",
                         target_person: "Speaker",
                         transcript_text: transcript,
-                        lang: currentLang
+                        lang: currentLang,
+                        context_type: contextType,
                     }),
                 });
             };
@@ -296,6 +306,40 @@ export function NewAnalysisForm({ currentLang }: { currentLang: string }) {
                         <p className="text-xs text-slate-500 font-sans italic opacity-80 pl-1">
                             {t.supportedTargets}
                         </p>
+
+                        {/* Context Type Toggle */}
+                        <div className="mt-1 space-y-2">
+                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest pl-1 block">{t.contextLabel}</span>
+                            <div className="flex gap-2">
+                                <button
+                                    type="button"
+                                    onClick={() => setContextType("interview")}
+                                    className={`flex-1 h-9 rounded-xl text-[10px] font-bold tracking-widest uppercase transition-all border ${
+                                        contextType === "interview"
+                                            ? "bg-emerald-500/20 border-emerald-500/60 text-emerald-400"
+                                            : "bg-slate-900/40 border-white/10 text-slate-500 hover:border-white/20"
+                                    }`}
+                                >
+                                    {t.contextInterview}
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => setContextType("crisis")}
+                                    className={`flex-1 h-9 rounded-xl text-[10px] font-bold tracking-widest uppercase transition-all border ${
+                                        contextType === "crisis"
+                                            ? "bg-amber-500/20 border-amber-500/60 text-amber-400"
+                                            : "bg-slate-900/40 border-white/10 text-slate-500 hover:border-white/20"
+                                    }`}
+                                >
+                                    {t.contextCrisis}
+                                </button>
+                            </div>
+                            {contextType === "crisis" && (
+                                <p className="text-[10px] text-amber-400/80 font-mono pl-1 leading-relaxed">
+                                    ⚠ {t.contextCrisisNote}
+                                </p>
+                            )}
+                        </div>
 
                         {/* Recommended content section */}
                         <div className="mt-2 space-y-3">
