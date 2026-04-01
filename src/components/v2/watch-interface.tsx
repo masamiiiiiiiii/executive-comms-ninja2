@@ -161,18 +161,37 @@ export const WatchInterface: React.FC<WatchInterfaceProps> = ({
                         <div className="flex items-center gap-4">
                             {!isShort && (
                                 <div className="flex items-center gap-2 bg-slate-900/50 border border-white/5 rounded-full px-3 py-1">
-                                    <span className="text-[9px] uppercase tracking-widest text-slate-400 font-mono">{lang === 'ja' ? '開始位置（秒）:' : 'Jump to Start (s):'}</span>
+                                    <span className="text-[9px] uppercase tracking-widest text-slate-400 font-mono flex-shrink-0">
+                                        {lang === 'ja' ? '開始位置:' : 'Jump to:'}
+                                    </span>
                                     <input
+                                        id="jump-minutes"
                                         type="number"
                                         min="0"
-                                        max={duration}
-                                        className="w-16 bg-transparent text-[10px] text-emerald-400 font-mono focus:outline-none placeholder:text-slate-600"
+                                        max="999"
+                                        className="w-10 bg-transparent text-[10px] text-emerald-400 font-mono focus:outline-none placeholder:text-slate-600 text-right"
                                         placeholder="0"
                                         onChange={(e) => {
-                                            const val = parseInt(e.target.value);
-                                            if (!isNaN(val) && player) player.seekTo(val);
+                                            const m = parseInt(e.target.value) || 0;
+                                            const s = parseInt((document.getElementById('jump-seconds') as HTMLInputElement)?.value) || 0;
+                                            if (player) player.seekTo(m * 60 + s);
                                         }}
                                     />
+                                    <span className="text-[9px] text-slate-500 font-mono">{lang === 'ja' ? '分' : 'm'}</span>
+                                    <input
+                                        id="jump-seconds"
+                                        type="number"
+                                        min="0"
+                                        max="59"
+                                        className="w-10 bg-transparent text-[10px] text-emerald-400 font-mono focus:outline-none placeholder:text-slate-600 text-right"
+                                        placeholder="0"
+                                        onChange={(e) => {
+                                            const s = Math.min(parseInt(e.target.value) || 0, 59);
+                                            const m = parseInt((document.getElementById('jump-minutes') as HTMLInputElement)?.value) || 0;
+                                            if (player) player.seekTo(m * 60 + s);
+                                        }}
+                                    />
+                                    <span className="text-[9px] text-slate-500 font-mono">{lang === 'ja' ? '秒' : 's'}</span>
                                 </div>
                             )}
                             <Badge variant="outline" className="bg-slate-900/50 border-white/10 text-slate-500 font-mono text-[9px] px-3 py-1 uppercase tracking-tighter flex-shrink-0">
