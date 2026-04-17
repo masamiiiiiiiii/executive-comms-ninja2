@@ -62,13 +62,21 @@ export default async function RootLayout({
         <GoogleAnalytics gaId="AW-17979887612" />
 
         {/* X conversion tracking event code */}
+        <Script id="x-conversion-tracking-base" strategy="afterInteractive">
+          {`
+            !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+            },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+            a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+            twq('config','r6z76');
+          `}
+        </Script>
         <Script id="x-conversion-tracking" strategy="afterInteractive">
           {`
             // Insert X Event ID
             window.twq = window.twq || function() {
               (window.twq.queue = window.twq.queue || []).push(arguments);
             };
-            window.twq('event', 'tw-r6z76-r81bl', {});
+            window.twq('event', 'tw-r6z76-r9i02', {});
           `}
         </Script>
       </body>
